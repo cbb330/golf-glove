@@ -3,7 +3,7 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
 	 height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
 <g id="Header_x2F_BG" display="none">
-	<rect x="-402" y="-270" display="inline" fill="#F1F1F2" width="520" height="520"/>
+	<rect x="-402" y="-270" display="inline" fill="#606c76" width="520" height="520"/>
 </g>
 <g id="Bounding_Boxes">
 	<g id="ui_x5F_spec_x5F_header_copy_3">
@@ -13,7 +13,7 @@
 <g id="Rounded">
 	<g id="ui_x5F_spec_x5F_header_copy_5">
 	</g>
-	<path d="M14.59,2.59C14.21,2.21,13.7,2,13.17,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.89,2,1.99,2H18c1.1,0,2-0.9,2-2V8.83
+	<path fill="#606c76" d="M14.59,2.59C14.21,2.21,13.7,2,13.17,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.89,2,1.99,2H18c1.1,0,2-0.9,2-2V8.83
 		c0-0.53-0.21-1.04-0.59-1.41L14.59,2.59z M15,18H9c-0.55,0-1-0.45-1-1v0c0-0.55,0.45-1,1-1h6c0.55,0,1,0.45,1,1v0
 		C16,17.55,15.55,18,15,18z M15,14H9c-0.55,0-1-0.45-1-1v0c0-0.55,0.45-1,1-1h6c0.55,0,1,0.45,1,1v0C16,13.55,15.55,14,15,14z M13,8
 		V3.5L18.5,9H14C13.45,9,13,8.55,13,8z"/>
