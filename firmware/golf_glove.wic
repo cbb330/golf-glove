@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<BLE_Smart_Designer>
+    <Chip>20719-B1</Chip>
+    <Designer>WICED 20719-B1</Designer>
+    <DeviceSettings>
+        <Name>golf-glove</Name>
+        <Appearance>Watch: Sports Watch</Appearance>
+        <BluetoothMode>Single Mode LE</BluetoothMode>
+        <Button>false</Button>
+        <UART>false</UART>
+        <Timer1Sec>false</Timer1Sec>
+        <LED>false</LED>
+        <SPI>false</SPI>
+        <Buzzer>false</Buzzer>
+        <Battery>false</Battery>
+        <GattConfig>
+            <GattDatabase>Enabled</GattDatabase>
+        </GattConfig>
+        <ClassOfDevice>
+            <ServiceClass>
+                <LimitedDiscoverableMode>false</LimitedDiscoverableMode>
+                <Positioning>false</Positioning>
+                <Networking>false</Networking>
+                <Rendering>false</Rendering>
+                <Capturing>false</Capturing>
+                <ObjectTransfer>false</ObjectTransfer>
+                <Audio>false</Audio>
+                <Telephony>false</Telephony>
+                <Information>false</Information>
+            </ServiceClass>
+            <MajorClass>Wearable</MajorClass>
+            <MinorClass>Wristwatch</MinorClass>
+        </ClassOfDevice>
+    </DeviceSettings>
+    <Service predefined="true" primary="true">
+        <Name>Generic Attribute</Name>
+        <Uuid>1801</Uuid>
+        <Description>Generic Attribute</Description>
+    </Service>
+    <Service predefined="true" primary="true">
+        <Name>Generic Access</Name>
+        <Uuid>1800</Uuid>
+        <Description>The generic_access service contains generic information about the device. All available Characteristics are readonly.</Description>
+        <Characteristic mandatory="true" predefined="true">
+            <Name>Device Name</Name>
+            <Uuid>2A00</Uuid>
+            <Description/>
+            <DataType>org.bluetooth.characteristic.gap.device_name</DataType>
+            <Size>10</Size>
+            <InitialValue>golf-glove</InitialValue>
+            <Properties>
+                <Read type="Mandatory">true</Read>
+                <Write type="Optional">false</Write>
+                <WriteWithoutResponse type="Excluded">false</WriteWithoutResponse>
+                <SignedWrite type="Excluded">false</SignedWrite>
+                <ReliableWrite type="Excluded">false</ReliableWrite>
+                <Notify type="Excluded">false</Notify>
+                <Indicate type="Excluded">false</Indicate>
+                <WritableAuxiliaries type="Excluded">false</WritableAuxiliaries>
+                <Broadcast type="Excluded">false</Broadcast>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="true" predefined="true">
+            <Name>Appearance</Name>
+            <Uuid>2A01</Uuid>
+            <Description>The external appearance of this device. The values are composed of a category (10-bits) and sub-categories (6-bits).</Description>
+            <DataType>org.bluetooth.characteristic.gap.appearance</DataType>
+            <Size>2</Size>
+            <InitialValue>c1 00</InitialValue>
+            <Properties>
+                <Read type="Mandatory">true</Read>
+                <Write type="Excluded">false</Write>
+                <WriteWithoutResponse type="Excluded">false</WriteWithoutResponse>
+                <SignedWrite type="Excluded">false</SignedWrite>
+                <ReliableWrite type="Excluded">false</ReliableWrite>
+                <Notify type="Excluded">false</Notify>
+                <Indicate type="Excluded">false</Indicate>
+                <WritableAuxiliaries type="Excluded">false</WritableAuxiliaries>
+                <Broadcast type="Excluded">false</Broadcast>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+    </Service>
+    <Service predefined="false" primary="true">
+        <Name>golf-glove</Name>
+        <Uuid>3a c5 98 d6 1b 7e 42 2e b5 f1 34 fe 48 89 83 7c</Uuid>
+        <Description>Vendor Specific Service: golf-glove</Description>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Accelerometer X (Wrist)</Name>
+            <Uuid>71 49 60 ad 75 92 4c 7f 98 69 1b fb 9a 06 6f a8</Uuid>
+            <Description>Acclerometer located on the wrist device.</Description>
+            <DataType/>
+            <Size>2</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+            <PresentationFormat>
+                <Format>sint16</Format>
+                <Exponent>0</Exponent>
+                <Unit>metres per second squared</Unit>
+                <Description>upper</Description>
+                <InitialValue/>
+                <Namespace>bluetooth</Namespace>
+            </PresentationFormat>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Accelerometer Y (Wrist)</Name>
+            <Uuid>8e bd f6 cc c8 4a 4b f4 80 14 95 bd dc 42 b3 97</Uuid>
+            <Description>Acclerometer located on the wrist device.</Description>
+            <DataType/>
+            <Size>2</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+            <PresentationFormat>
+                <Format>sint16</Format>
+                <Exponent>0</Exponent>
+                <Unit>metres per second squared</Unit>
+                <Description>upper</Description>
+                <InitialValue/>
+                <Namespace>bluetooth</Namespace>
+            </PresentationFormat>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Accelerometer Z (Wrist)</Name>
+            <Uuid>ca d2 83 84 89 bd 47 87 bf e3 40 6e 23 45 50 73</Uuid>
+            <Description>Acclerometer located on the wrist device.</Description>
+            <DataType/>
+            <Size>2</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+            <PresentationFormat>
+                <Format>sint16</Format>
+                <Exponent>0</Exponent>
+                <Unit>metres per second squared</Unit>
+                <Description>upper</Description>
+                <InitialValue/>
+                <Namespace>bluetooth</Namespace>
+            </PresentationFormat>
+        </Characteristic>
+    </Service>
+</BLE_Smart_Designer>
