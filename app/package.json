@@ -2,7 +2,7 @@
   "name": "gg-coachapp",
   "version": "1.0.0",
   "description": "Coaching application for golf glove. Built with Electron runtime.",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
