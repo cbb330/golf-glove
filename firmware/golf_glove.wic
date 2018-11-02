@@ -192,5 +192,467 @@
                 <Namespace>bluetooth</Namespace>
             </PresentationFormat>
         </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Magnetometer X (Wrist)</Name>
+            <Uuid>c0 fa 35 01 df 6f 4e af 93 c6 1a 48 88 ad b1 a8</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Magnetometer Y (Wrist)</Name>
+            <Uuid>f5 a2 3a e0 15 1f 44 fd a4 d9 ab af be 8a 0b 72</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Magnetometer Z (Wrist)</Name>
+            <Uuid>19 d9 10 83 d7 a6 4f ab 84 b1 90 c8 8d b2 f7 0d</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Gyrometer X (Wrist)</Name>
+            <Uuid>e6 bf 13 1d f0 86 43 40 93 19 3b e0 8f 10 25 8c</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Gyrometer Y (Wrist)</Name>
+            <Uuid>93 ca 23 b8 ac 99 44 69 b0 f3 3e 65 11 8c 20 b8</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Gyrometer Z (Wrist)</Name>
+            <Uuid>4c db 09 59 19 d4 45 5a a8 22 e3 4b f8 5e 1f 69</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Flexion (Wrist)</Name>
+            <Uuid>c4 57 39 c1 63 81 4b c4 a3 8c b3 1d 1c 51 c1 0c</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Extension (Wrist)</Name>
+            <Uuid>ee 1a fb 18 d4 98 46 f8 b3 f9 1d 4e 02 05 99 c7</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Radial Deviation (Wrist)</Name>
+            <Uuid>f7 c1 0e 5b 29 2e 49 91 a2 19 67 ec 14 70 1f af</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Ulnar Deviation (Wrist)</Name>
+            <Uuid>c9 0b 8d 95 56 3c 41 94 89 93 a5 b9 d5 58 39 8e</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Pressure 1 (Top Palm)</Name>
+            <Uuid>bc b7 57 59 18 a6 40 a3 9b 9d 0f c5 0f 3e f4 79</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Pressure 2 (Bottom Palm)</Name>
+            <Uuid>a7 86 40 44 9d 4f 44 6d a1 35 dc 36 91 82 15 be</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Accelerometer X (Hand)</Name>
+            <Uuid>04 34 57 b6 5c 8a 4c eb 95 a1 a1 0e fe fc a3 ea</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Accelerometer Y (Hand)</Name>
+            <Uuid>23 ff 3b c0 b9 b9 4f 30 a4 d8 05 e5 6e 6f 17 a7</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove(1)</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Accelerometer Z (Hand)</Name>
+            <Uuid>9f 17 d4 30 c1 1c 4a 4e 9c 3f 55 77 d3 02 02 89</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove(2)</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Magnetometer X (Hand)</Name>
+            <Uuid>6a 66 fd 6b 01 1d 44 8e b6 f3 34 0e 18 40 08 b8</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove(3)</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Magnetometer Y (Hand)</Name>
+            <Uuid>31 25 9b 99 57 06 46 80 9c 6f 33 0c 44 c2 e2 50</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove(4)</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Magnetometer Z (Hand)</Name>
+            <Uuid>c5 03 71 e4 11 32 4f c3 b3 67 28 04 b9 4e 83 8d</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove(5)</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Gyrometer X (Hand)</Name>
+            <Uuid>e0 9d 81 ba 40 7b 40 7c 96 50 ac 64 c6 51 b3 a2</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove(6)</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Gyrometer Y (Hand)</Name>
+            <Uuid>f8 ee 30 91 d3 2c 4d e4 82 a6 fa 05 f6 ba 1b b7</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove(7)</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>Gyrometer Z (Hand)</Name>
+            <Uuid>5b 01 b7 26 8d 16 4d 4d 9a c1 90 98 82 99 bc 20</Uuid>
+            <Description>Vendor Specific Characteristic: golf-glove(8)</Description>
+            <DataType/>
+            <Size>0</Size>
+            <InitialValue/>
+            <Properties>
+                <Read>true</Read>
+                <Notify>true</Notify>
+                <Indicate>true</Indicate>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>false</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+        </Characteristic>
     </Service>
 </BLE_Smart_Designer>
