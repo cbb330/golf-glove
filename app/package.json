@@ -1,30 +1,31 @@
 {
   "name": "gg-coachapp",
   "version": "1.0.0",
-  "description": "Coaching application for golf glove. Built with Electron runtime.",
-  "main": "main.js",
+  "description": "Coaching application for golf glove. Built with nodejs interfacing across HTTP API to reactjs.",
+  "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cbb330/golf-glove.git"
+    "url": "https://github.com/cbb330/golf-glove"
   },
   "keywords": [
-    "iot",
+    "wearable",
     "ble",
-    "wearable"
+    "noble",
+    "rest"
   ],
-  "authors": [
+  "author": [
     "Christian Bush",
     "Jack Fletcher"
   ],
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cbb330/golf-glove/issues"
-  },
-  "homepage": "https://github.com/cbb330/golf-glove#readme",
-  "devDependencies": {
-    "electron": "^3.0.6"
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "noble": "^1.9.1",
+    "nodemon": "^1.18.5"
   }
 }
