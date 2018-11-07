@@ -18,7 +18,7 @@
 #include "wiced_bt_cfg.h"
 
 /* Null-Terminated Local Device Name */
-uint8_t BT_LOCAL_NAME[] = { 'g','o','l','f','-','g','l','o','v','e','\0' };
+uint8_t BT_LOCAL_NAME[] = { 'g','o','l','f','_','g','l','o','v','e','\0' };
 const uint16_t BT_LOCAL_NAME_CAPACITY = sizeof(BT_LOCAL_NAME);
 
 
@@ -159,5 +159,5 @@ const wiced_bt_cfg_buf_pool_t wiced_bt_cfg_buf_pools[WICED_BT_CFG_NUM_BUF_POOLS]
     { 64,       12,        }, /* Small Buffer Pool */
     { 360,      4,         }, /* Medium Buffer Pool (used for HCI & RFCOMM control messages, min recommended size is 360) */
     { 512,      4,         }, /* Large Buffer Pool  (used for HCI ACL messages) */
-    { 1024,     2,         }, /* Extra Large Buffer Pool (used for AVDT media packets and miscellaneous; if not needed, set buf_count to 0) */
+    { 1500,     3,         }, /* Extra Large Buffer Pool (used for AVDT media packets and miscellaneous; if not needed, set buf_count to 0) */
 };

@@ -93,17 +93,80 @@ wiced_transport_cfg_t transport_cfg =
 /*******************************************************************
  * GATT Initial Value Arrays
  ******************************************************************/
-uint8_t golf_glove_generic_access_device_name[]                               = {'g','o','l','f',0x2d,'g','l','o','v','e'};
+uint8_t golf_glove_generic_access_device_name[]                               = {'g','o','l','f','_','g','l','o','v','e'};
 uint8_t golf_glove_generic_access_appearance[]                                = {BIT16_TO_8(APPEARANCE_WATCH_SPORTS)};
-uint8_t golf_glove_golf_glove_accelerometer_x__wrist_[]                       = {0x00,0x00};
+uint8_t golf_glove_golf_glove_accelerometer_x__wrist_[]                       = {'a','b'};
+uint8_t golf_glove_golf_glove_accelerometer_x__wrist__user_description[]      = {'A','c','c','e','l','e','r','o','m','e','t','e','r',' ',0x28,'X',0x29};
 uint8_t golf_glove_golf_glove_accelerometer_x__wrist__client_configuration[]  = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
-uint8_t golf_glove_golf_glove_accelerometer_x__wrist__presentation_format_0[] = {0x0E, 0, BIT16_TO_8(0x2713), 0x01, BIT16_TO_8(0x0104)};
 uint8_t golf_glove_golf_glove_accelerometer_y__wrist_[]                       = {0x00,0x00};
+uint8_t golf_glove_golf_glove_accelerometer_y__wrist__user_description[]      = {'A','c','c','e','l','e','r','o','m','e','t','e','r',' ','Y',' ',0x28,'W','r','i','s','t',0x29};
 uint8_t golf_glove_golf_glove_accelerometer_y__wrist__client_configuration[]  = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
-uint8_t golf_glove_golf_glove_accelerometer_y__wrist__presentation_format_0[] = {0x0E, 0, BIT16_TO_8(0x2713), 0x01, BIT16_TO_8(0x0104)};
 uint8_t golf_glove_golf_glove_accelerometer_z__wrist_[]                       = {0x00,0x00};
+uint8_t golf_glove_golf_glove_accelerometer_z__wrist__user_description[]      = {'A','c','c','e','l','e','r','o','m','e','t','e','r',' ','Z',' ',0x28,'W','r','i','s','t',0x29};
 uint8_t golf_glove_golf_glove_accelerometer_z__wrist__client_configuration[]  = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
-uint8_t golf_glove_golf_glove_accelerometer_z__wrist__presentation_format_0[] = {0x0E, 0, BIT16_TO_8(0x2713), 0x01, BIT16_TO_8(0x0104)};
+uint8_t golf_glove_golf_glove_magnetometer_x__wrist_[]                        = {0x00,0x00};
+uint8_t golf_glove_golf_glove_magnetometer_x__wrist__user_description[]       = {'M','a','g','n','e','t','o','m','e','t','e','r',' ','X',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_magnetometer_x__wrist__client_configuration[]   = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_magnetometer_y__wrist_[]                        = {0x00,0x00};
+uint8_t golf_glove_golf_glove_magnetometer_y__wrist__user_description[]       = {'M','a','g','n','e','t','o','m','e','t','e','r',' ','Y',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_magnetometer_y__wrist__client_configuration[]   = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_magnetometer_z__wrist_[]                        = {0x00,0x00};
+uint8_t golf_glove_golf_glove_magnetometer_z__wrist__user_description[]       = {'M','a','g','n','e','t','o','m','e','t','e','r',' ','Z',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_magnetometer_z__wrist__client_configuration[]   = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_gyroscope_x__wrist_[]                           = {0x00,0x00};
+uint8_t golf_glove_golf_glove_gyroscope_x__wrist__user_description[]          = {'G','y','r','o','s','c','o','p','e',' ','X',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_gyroscope_x__wrist__client_configuration[]      = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_gyroscope_y__wrist_[]                           = {0x00,0x00};
+uint8_t golf_glove_golf_glove_gyroscope_y__wrist__user_description[]          = {'G','y','r','o','s','c','o','p','e',' ','Y',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_gyroscope_y__wrist__client_configuration[]      = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_gyroscope_z__wrist_[]                           = {0x00,0x00};
+uint8_t golf_glove_golf_glove_gyroscope_z__wrist__user_description[]          = {'G','y','r','o','s','c','o','p','e',' ','Z',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_gyroscope_z__wrist__client_configuration[]      = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_flexion__wrist_[]                               = {0x00,0x00};
+uint8_t golf_glove_golf_glove_flexion__wrist__user_description[]              = {'F','l','e','x','i','o','n',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_flexion__wrist__client_configuration[]          = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_extension__wrist_[]                             = {0x00,0x00};
+uint8_t golf_glove_golf_glove_extension__wrist__user_description[]            = {'E','x','t','e','n','s','i','o','n',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_extension__wrist__client_configuration[]        = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_radial_deviation__wrist_[]                      = {0x00,0x00};
+uint8_t golf_glove_golf_glove_radial_deviation__wrist__user_description[]     = {'R','a','d','i','a','l',' ','D','e','v','i','a','t','i','o','n',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_radial_deviation__wrist__client_configuration[] = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_ulnar_deviation__wrist_[]                       = {0x00,0x00};
+uint8_t golf_glove_golf_glove_ulnar_deviation__wrist__user_description[]      = {'U','l','n','a','r',' ','D','e','v','i','a','t','i','o','n',' ',0x28,'W','r','i','s','t',0x29};
+uint8_t golf_glove_golf_glove_ulnar_deviation__wrist__client_configuration[]  = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_pressure_1__top_palm_[]                         = {0x00,0x00};
+uint8_t golf_glove_golf_glove_pressure_1__top_palm__user_description[]        = {'P','r','e','s','s','u','r','e',' ','1',' ',0x28,'T','o','p',' ','P','a','l','m',0x29};
+uint8_t golf_glove_golf_glove_pressure_1__top_palm__client_configuration[]    = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_pressure_2__bottom_palm_[]                      = {0x00,0x00};
+uint8_t golf_glove_golf_glove_pressure_2__bottom_palm__user_description[]     = {'P','r','e','s','s','u','r','e',' ','2',' ',0x28,'B','o','t','t','o','m',' ','P','a','l','m',0x29};
+uint8_t golf_glove_golf_glove_pressure_2__bottom_palm__client_configuration[] = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_accelerometer_x__hand_[]                        = {0x00,0x00};
+uint8_t golf_glove_golf_glove_accelerometer_x__hand__user_description[]       = {'A','c','c','e','l','e','r','o','m','e','t','e','r',' ','X',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_accelerometer_x__hand__client_configuration[]   = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_accelerometer_y__hand_[]                        = {0x00,0x00};
+uint8_t golf_glove_golf_glove_accelerometer_y__hand__user_description[]       = {'A','c','c','e','l','e','r','o','m','e','t','e','r',' ','Y',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_accelerometer_y__hand__client_configuration[]   = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_accelerometer_z__hand_[]                        = {0x00,0x00};
+uint8_t golf_glove_golf_glove_accelerometer_z__hand__user_description[]       = {'A','c','c','e','l','e','r','o','m','e','t','e','r',' ','Z',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_accelerometer_z__hand__client_configuration[]   = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_magnetometer_x__hand_[]                         = {0x00,0x00};
+uint8_t golf_glove_golf_glove_magnetometer_x__hand__user_description[]        = {'M','a','g','n','e','t','o','m','e','t','e','r',' ','X',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_magnetometer_x__hand__client_configuration[]    = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_magnetometer_y__hand_[]                         = {0x00,0x00};
+uint8_t golf_glove_golf_glove_magnetometer_y__hand__user_description[]        = {'M','a','g','n','e','t','o','m','e','t','e','r',' ','Y',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_magnetometer_y__hand__client_configuration[]    = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_magnetometer_z__hand_[]                         = {0x00,0x00};
+uint8_t golf_glove_golf_glove_magnetometer_z__hand__user_description[]        = {'M','a','g','n','e','t','o','m','e','t','e','r',' ','Z',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_magnetometer_z__hand__client_configuration[]    = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_gyroscope_x__hand_[]                            = {0x00,0x00};
+uint8_t golf_glove_golf_glove_gyroscope_x__hand__user_description[]           = {'G','y','r','o','s','c','o','p','e',' ','X',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_gyroscope_x__hand__client_configuration[]       = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_gyroscope_y__hand_[]                            = {0x00,0x00};
+uint8_t golf_glove_golf_glove_gyroscope_y__hand__user_description[]           = {'G','y','r','o','s','c','o','p','e',' ','Y',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_gyroscope_y__hand__client_configuration[]       = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_gyroscope_z__hand_[]                            = {0x00,0x00};
+uint8_t golf_glove_golf_glove_gyroscope_z__hand__user_description[]           = {'G','y','r','o','s','c','o','p','e',' ','Z',' ',0x28,'H','a','n','d',0x29};
+uint8_t golf_glove_golf_glove_gyroscope_z__hand__client_configuration[]       = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
 
 /*******************************************************************
  * GATT Lookup Table
@@ -113,18 +176,81 @@ uint8_t golf_glove_golf_glove_accelerometer_z__wrist__presentation_format_0[] = 
 /* (attributes externally referenced by GATT server database) */
 gatt_db_lookup_table golf_glove_gatt_db_ext_attr_tbl[] =
 {
-    /* { attribute handle,                                          maxlen, curlen, attribute data } */
-    {HDLC_GENERIC_ACCESS_DEVICE_NAME_VALUE,                         10,     10,     golf_glove_generic_access_device_name},
-    {HDLC_GENERIC_ACCESS_APPEARANCE_VALUE,                          2,      2,      golf_glove_generic_access_appearance},
-    {HDLC_GOLF_GLOVE_ACCELEROMETER_X__WRIST__VALUE,                 2,      2,      golf_glove_golf_glove_accelerometer_x__wrist_},
-    {HDLD_GOLF_GLOVE_ACCELEROMETER_X__WRIST__CLIENT_CONFIGURATION,  2,      2,      golf_glove_golf_glove_accelerometer_x__wrist__client_configuration},
-    {HDLD_GOLF_GLOVE_ACCELEROMETER_X__WRIST__PRESENTATION_FORMAT_0, 7,      7,      golf_glove_golf_glove_accelerometer_x__wrist__presentation_format_0},
-    {HDLC_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__VALUE,                 2,      2,      golf_glove_golf_glove_accelerometer_y__wrist_},
-    {HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__CLIENT_CONFIGURATION,  2,      2,      golf_glove_golf_glove_accelerometer_y__wrist__client_configuration},
-    {HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__PRESENTATION_FORMAT_0, 7,      7,      golf_glove_golf_glove_accelerometer_y__wrist__presentation_format_0},
-    {HDLC_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__VALUE,                 2,      2,      golf_glove_golf_glove_accelerometer_z__wrist_},
-    {HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__CLIENT_CONFIGURATION,  2,      2,      golf_glove_golf_glove_accelerometer_z__wrist__client_configuration},
-    {HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__PRESENTATION_FORMAT_0, 7,      7,      golf_glove_golf_glove_accelerometer_z__wrist__presentation_format_0},
+    /* { attribute handle,                                          maxlen,                                                                  curlen,                                                                  attribute data } */
+    {HDLC_GENERIC_ACCESS_DEVICE_NAME_VALUE,                         10,                                                                      10,                                                                      golf_glove_generic_access_device_name},
+    {HDLC_GENERIC_ACCESS_APPEARANCE_VALUE,                          2,                                                                       2,                                                                       golf_glove_generic_access_appearance},
+    {HDLC_GOLF_GLOVE_ACCELEROMETER_X__WRIST__VALUE,                 sizeof(golf_glove_golf_glove_accelerometer_x__wrist_),                   sizeof(golf_glove_golf_glove_accelerometer_x__wrist_),                   golf_glove_golf_glove_accelerometer_x__wrist_},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_X__WRIST__USER_DESCRIPTION,      sizeof(golf_glove_golf_glove_accelerometer_x__wrist__user_description),  sizeof(golf_glove_golf_glove_accelerometer_x__wrist__user_description),  golf_glove_golf_glove_accelerometer_x__wrist__user_description},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_X__WRIST__CLIENT_CONFIGURATION,  2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_x__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__VALUE,                 2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_y__wrist_},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__USER_DESCRIPTION,      sizeof(golf_glove_golf_glove_accelerometer_y__wrist__user_description),  sizeof(golf_glove_golf_glove_accelerometer_y__wrist__user_description),  golf_glove_golf_glove_accelerometer_y__wrist__user_description},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__CLIENT_CONFIGURATION,  2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_y__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__VALUE,                 2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_z__wrist_},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__USER_DESCRIPTION,      sizeof(golf_glove_golf_glove_accelerometer_z__wrist__user_description),  sizeof(golf_glove_golf_glove_accelerometer_z__wrist__user_description),  golf_glove_golf_glove_accelerometer_z__wrist__user_description},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__CLIENT_CONFIGURATION,  2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_z__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_MAGNETOMETER_X__WRIST__VALUE,                  2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_x__wrist_},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_X__WRIST__USER_DESCRIPTION,       sizeof(golf_glove_golf_glove_magnetometer_x__wrist__user_description),   sizeof(golf_glove_golf_glove_magnetometer_x__wrist__user_description),   golf_glove_golf_glove_magnetometer_x__wrist__user_description},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_X__WRIST__CLIENT_CONFIGURATION,   2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_x__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__VALUE,                  2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_y__wrist_},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__USER_DESCRIPTION,       sizeof(golf_glove_golf_glove_magnetometer_y__wrist__user_description),   sizeof(golf_glove_golf_glove_magnetometer_y__wrist__user_description),   golf_glove_golf_glove_magnetometer_y__wrist__user_description},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__CLIENT_CONFIGURATION,   2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_y__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__VALUE,                  2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_z__wrist_},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__USER_DESCRIPTION,       sizeof(golf_glove_golf_glove_magnetometer_z__wrist__user_description),   sizeof(golf_glove_golf_glove_magnetometer_z__wrist__user_description),   golf_glove_golf_glove_magnetometer_z__wrist__user_description},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__CLIENT_CONFIGURATION,   2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_z__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_GYROSCOPE_X__WRIST__VALUE,                     2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_x__wrist_},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_X__WRIST__USER_DESCRIPTION,          sizeof(golf_glove_golf_glove_gyroscope_x__wrist__user_description),      sizeof(golf_glove_golf_glove_gyroscope_x__wrist__user_description),      golf_glove_golf_glove_gyroscope_x__wrist__user_description},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_X__WRIST__CLIENT_CONFIGURATION,      2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_x__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_GYROSCOPE_Y__WRIST__VALUE,                     2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_y__wrist_},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_Y__WRIST__USER_DESCRIPTION,          sizeof(golf_glove_golf_glove_gyroscope_y__wrist__user_description),      sizeof(golf_glove_golf_glove_gyroscope_y__wrist__user_description),      golf_glove_golf_glove_gyroscope_y__wrist__user_description},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_Y__WRIST__CLIENT_CONFIGURATION,      2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_y__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_GYROSCOPE_Z__WRIST__VALUE,                     2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_z__wrist_},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_Z__WRIST__USER_DESCRIPTION,          sizeof(golf_glove_golf_glove_gyroscope_z__wrist__user_description),      sizeof(golf_glove_golf_glove_gyroscope_z__wrist__user_description),      golf_glove_golf_glove_gyroscope_z__wrist__user_description},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_Z__WRIST__CLIENT_CONFIGURATION,      2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_z__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_FLEXION__WRIST__VALUE,                         2,                                                                       2,                                                                       golf_glove_golf_glove_flexion__wrist_},
+    {HDLD_GOLF_GLOVE_FLEXION__WRIST__USER_DESCRIPTION,              sizeof(golf_glove_golf_glove_flexion__wrist__user_description),          sizeof(golf_glove_golf_glove_flexion__wrist__user_description),          golf_glove_golf_glove_flexion__wrist__user_description},
+    {HDLD_GOLF_GLOVE_FLEXION__WRIST__CLIENT_CONFIGURATION,          2,                                                                       2,                                                                       golf_glove_golf_glove_flexion__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_EXTENSION__WRIST__VALUE,                       2,                                                                       2,                                                                       golf_glove_golf_glove_extension__wrist_},
+    {HDLD_GOLF_GLOVE_EXTENSION__WRIST__USER_DESCRIPTION,            sizeof(golf_glove_golf_glove_extension__wrist__user_description),        sizeof(golf_glove_golf_glove_extension__wrist__user_description),        golf_glove_golf_glove_extension__wrist__user_description},
+    {HDLD_GOLF_GLOVE_EXTENSION__WRIST__CLIENT_CONFIGURATION,        2,                                                                       2,                                                                       golf_glove_golf_glove_extension__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__VALUE,                2,                                                                       2,                                                                       golf_glove_golf_glove_radial_deviation__wrist_},
+    {HDLD_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__USER_DESCRIPTION,     sizeof(golf_glove_golf_glove_radial_deviation__wrist__user_description), sizeof(golf_glove_golf_glove_radial_deviation__wrist__user_description), golf_glove_golf_glove_radial_deviation__wrist__user_description},
+    {HDLD_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__CLIENT_CONFIGURATION, 2,                                                                       2,                                                                       golf_glove_golf_glove_radial_deviation__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__VALUE,                 2,                                                                       2,                                                                       golf_glove_golf_glove_ulnar_deviation__wrist_},
+    {HDLD_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__USER_DESCRIPTION,      sizeof(golf_glove_golf_glove_ulnar_deviation__wrist__user_description),  sizeof(golf_glove_golf_glove_ulnar_deviation__wrist__user_description),  golf_glove_golf_glove_ulnar_deviation__wrist__user_description},
+    {HDLD_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__CLIENT_CONFIGURATION,  2,                                                                       2,                                                                       golf_glove_golf_glove_ulnar_deviation__wrist__client_configuration},
+    {HDLC_GOLF_GLOVE_PRESSURE_1__TOP_PALM__VALUE,                   2,                                                                       2,                                                                       golf_glove_golf_glove_pressure_1__top_palm_},
+    {HDLD_GOLF_GLOVE_PRESSURE_1__TOP_PALM__USER_DESCRIPTION,        sizeof(golf_glove_golf_glove_pressure_1__top_palm__user_description),    sizeof(golf_glove_golf_glove_pressure_1__top_palm__user_description),    golf_glove_golf_glove_pressure_1__top_palm__user_description},
+    {HDLD_GOLF_GLOVE_PRESSURE_1__TOP_PALM__CLIENT_CONFIGURATION,    2,                                                                       2,                                                                       golf_glove_golf_glove_pressure_1__top_palm__client_configuration},
+    {HDLC_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__VALUE,                2,                                                                       2,                                                                       golf_glove_golf_glove_pressure_2__bottom_palm_},
+    {HDLD_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__USER_DESCRIPTION,     sizeof(golf_glove_golf_glove_pressure_2__bottom_palm__user_description), sizeof(golf_glove_golf_glove_pressure_2__bottom_palm__user_description), golf_glove_golf_glove_pressure_2__bottom_palm__user_description},
+    {HDLD_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__CLIENT_CONFIGURATION, 2,                                                                       2,                                                                       golf_glove_golf_glove_pressure_2__bottom_palm__client_configuration},
+    {HDLC_GOLF_GLOVE_ACCELEROMETER_X__HAND__VALUE,                  2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_x__hand_},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_X__HAND__USER_DESCRIPTION,       sizeof(golf_glove_golf_glove_accelerometer_x__hand__user_description),   sizeof(golf_glove_golf_glove_accelerometer_x__hand__user_description),   golf_glove_golf_glove_accelerometer_x__hand__user_description},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_X__HAND__CLIENT_CONFIGURATION,   2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_x__hand__client_configuration},
+    {HDLC_GOLF_GLOVE_ACCELEROMETER_Y__HAND__VALUE,                  2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_y__hand_},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_Y__HAND__USER_DESCRIPTION,       sizeof(golf_glove_golf_glove_accelerometer_y__hand__user_description),   sizeof(golf_glove_golf_glove_accelerometer_y__hand__user_description),   golf_glove_golf_glove_accelerometer_y__hand__user_description},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_Y__HAND__CLIENT_CONFIGURATION,   2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_y__hand__client_configuration},
+    {HDLC_GOLF_GLOVE_ACCELEROMETER_Z__HAND__VALUE,                  2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_z__hand_},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_Z__HAND__USER_DESCRIPTION,       sizeof(golf_glove_golf_glove_accelerometer_z__hand__user_description),   sizeof(golf_glove_golf_glove_accelerometer_z__hand__user_description),   golf_glove_golf_glove_accelerometer_z__hand__user_description},
+    {HDLD_GOLF_GLOVE_ACCELEROMETER_Z__HAND__CLIENT_CONFIGURATION,   2,                                                                       2,                                                                       golf_glove_golf_glove_accelerometer_z__hand__client_configuration},
+    {HDLC_GOLF_GLOVE_MAGNETOMETER_X__HAND__VALUE,                   2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_x__hand_},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_X__HAND__USER_DESCRIPTION,        sizeof(golf_glove_golf_glove_magnetometer_x__hand__user_description),    sizeof(golf_glove_golf_glove_magnetometer_x__hand__user_description),    golf_glove_golf_glove_magnetometer_x__hand__user_description},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_X__HAND__CLIENT_CONFIGURATION,    2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_x__hand__client_configuration},
+    {HDLC_GOLF_GLOVE_MAGNETOMETER_Y__HAND__VALUE,                   2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_y__hand_},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_Y__HAND__USER_DESCRIPTION,        sizeof(golf_glove_golf_glove_magnetometer_y__hand__user_description),    sizeof(golf_glove_golf_glove_magnetometer_y__hand__user_description),    golf_glove_golf_glove_magnetometer_y__hand__user_description},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_Y__HAND__CLIENT_CONFIGURATION,    2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_y__hand__client_configuration},
+    {HDLC_GOLF_GLOVE_MAGNETOMETER_Z__HAND__VALUE,                   2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_z__hand_},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_Z__HAND__USER_DESCRIPTION,        sizeof(golf_glove_golf_glove_magnetometer_z__hand__user_description),    sizeof(golf_glove_golf_glove_magnetometer_z__hand__user_description),    golf_glove_golf_glove_magnetometer_z__hand__user_description},
+    {HDLD_GOLF_GLOVE_MAGNETOMETER_Z__HAND__CLIENT_CONFIGURATION,    2,                                                                       2,                                                                       golf_glove_golf_glove_magnetometer_z__hand__client_configuration},
+    {HDLC_GOLF_GLOVE_GYROSCOPE_X__HAND__VALUE,                      2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_x__hand_},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_X__HAND__USER_DESCRIPTION,           sizeof(golf_glove_golf_glove_gyroscope_x__hand__user_description),       sizeof(golf_glove_golf_glove_gyroscope_x__hand__user_description),       golf_glove_golf_glove_gyroscope_x__hand__user_description},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_X__HAND__CLIENT_CONFIGURATION,       2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_x__hand__client_configuration},
+    {HDLC_GOLF_GLOVE_GYROSCOPE_Y__HAND__VALUE,                      2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_y__hand_},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_Y__HAND__USER_DESCRIPTION,           sizeof(golf_glove_golf_glove_gyroscope_y__hand__user_description),       sizeof(golf_glove_golf_glove_gyroscope_y__hand__user_description),       golf_glove_golf_glove_gyroscope_y__hand__user_description},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_Y__HAND__CLIENT_CONFIGURATION,       2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_y__hand__client_configuration},
+    {HDLC_GOLF_GLOVE_GYROSCOPE_Z__HAND__VALUE,                      2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_z__hand_},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_Z__HAND__USER_DESCRIPTION,           sizeof(golf_glove_golf_glove_gyroscope_z__hand__user_description),       sizeof(golf_glove_golf_glove_gyroscope_z__hand__user_description),       golf_glove_golf_glove_gyroscope_z__hand__user_description},
+    {HDLD_GOLF_GLOVE_GYROSCOPE_Z__HAND__CLIENT_CONFIGURATION,       2,                                                                       2,                                                                       golf_glove_golf_glove_gyroscope_z__hand__client_configuration},
 };
 
 // Number of Lookup Table Entries
@@ -377,6 +503,90 @@ wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn
                     break;
                 case HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__CLIENT_CONFIGURATION:
                     break;
+                case HDLC_GOLF_GLOVE_MAGNETOMETER_X__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_X__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_GYROSCOPE_X__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_X__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_GYROSCOPE_Y__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_Y__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_GYROSCOPE_Z__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_Z__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_FLEXION__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_FLEXION__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_EXTENSION__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_EXTENSION__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_PRESSURE_1__TOP_PALM__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_PRESSURE_1__TOP_PALM__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_ACCELEROMETER_X__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_ACCELEROMETER_X__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_ACCELEROMETER_Y__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_ACCELEROMETER_Y__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_ACCELEROMETER_Z__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_ACCELEROMETER_Z__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_MAGNETOMETER_X__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_X__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_MAGNETOMETER_Y__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_Y__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_MAGNETOMETER_Z__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_Z__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_GYROSCOPE_X__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_X__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_GYROSCOPE_Y__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_Y__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_GYROSCOPE_Z__HAND__VALUE:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_Z__HAND__CLIENT_CONFIGURATION:
+                    break;
                 }
             }
             else
@@ -440,6 +650,48 @@ wiced_bt_gatt_status_t golf_glove_set_value( uint16_t attr_handle, uint16_t conn
                 case HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__CLIENT_CONFIGURATION:
                     break;
                 case HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_X__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_X__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_Y__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_Z__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_FLEXION__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_EXTENSION__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_PRESSURE_1__TOP_PALM__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_ACCELEROMETER_X__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_ACCELEROMETER_Y__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_ACCELEROMETER_Z__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_X__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_Y__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_MAGNETOMETER_Z__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_X__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_Y__HAND__CLIENT_CONFIGURATION:
+                    break;
+                case HDLD_GOLF_GLOVE_GYROSCOPE_Z__HAND__CLIENT_CONFIGURATION:
                     break;
                 }
             }

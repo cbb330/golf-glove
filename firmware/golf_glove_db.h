@@ -14,6 +14,27 @@
 #define __UUID_GOLF_GLOVE_ACCELEROMETER_X__WRIST_                     0x71, 0x49, 0x60, 0xad, 0x75, 0x92, 0x4c, 0x7f, 0x98, 0x69, 0x1b, 0xfb, 0x9a, 0x06, 0x6f, 0xa8
 #define __UUID_GOLF_GLOVE_ACCELEROMETER_Y__WRIST_                     0x8e, 0xbd, 0xf6, 0xcc, 0xc8, 0x4a, 0x4b, 0xf4, 0x80, 0x14, 0x95, 0xbd, 0xdc, 0x42, 0xb3, 0x97
 #define __UUID_GOLF_GLOVE_ACCELEROMETER_Z__WRIST_                     0xca, 0xd2, 0x83, 0x84, 0x89, 0xbd, 0x47, 0x87, 0xbf, 0xe3, 0x40, 0x6e, 0x23, 0x45, 0x50, 0x73
+#define __UUID_GOLF_GLOVE_MAGNETOMETER_X__WRIST_                      0xc0, 0xfa, 0x35, 0x01, 0xdf, 0x6f, 0x4e, 0xaf, 0x93, 0xc6, 0x1a, 0x48, 0x88, 0xad, 0xb1, 0xa8
+#define __UUID_GOLF_GLOVE_MAGNETOMETER_Y__WRIST_                      0xf5, 0xa2, 0x3a, 0xe0, 0x15, 0x1f, 0x44, 0xfd, 0xa4, 0xd9, 0xab, 0xaf, 0xbe, 0x8a, 0x0b, 0x72
+#define __UUID_GOLF_GLOVE_MAGNETOMETER_Z__WRIST_                      0x19, 0xd9, 0x10, 0x83, 0xd7, 0xa6, 0x4f, 0xab, 0x84, 0xb1, 0x90, 0xc8, 0x8d, 0xb2, 0xf7, 0x0d
+#define __UUID_GOLF_GLOVE_GYROSCOPE_X__WRIST_                         0xe6, 0xbf, 0x13, 0x1d, 0xf0, 0x86, 0x43, 0x40, 0x93, 0x19, 0x3b, 0xe0, 0x8f, 0x10, 0x25, 0x8c
+#define __UUID_GOLF_GLOVE_GYROSCOPE_Y__WRIST_                         0x93, 0xca, 0x23, 0xb8, 0xac, 0x99, 0x44, 0x69, 0xb0, 0xf3, 0x3e, 0x65, 0x11, 0x8c, 0x20, 0xb8
+#define __UUID_GOLF_GLOVE_GYROSCOPE_Z__WRIST_                         0x4c, 0xdb, 0x09, 0x59, 0x19, 0xd4, 0x45, 0x5a, 0xa8, 0x22, 0xe3, 0x4b, 0xf8, 0x5e, 0x1f, 0x69
+#define __UUID_GOLF_GLOVE_FLEXION__WRIST_                             0xc4, 0x57, 0x39, 0xc1, 0x63, 0x81, 0x4b, 0xc4, 0xa3, 0x8c, 0xb3, 0x1d, 0x1c, 0x51, 0xc1, 0x0c
+#define __UUID_GOLF_GLOVE_EXTENSION__WRIST_                           0xee, 0x1a, 0xfb, 0x18, 0xd4, 0x98, 0x46, 0xf8, 0xb3, 0xf9, 0x1d, 0x4e, 0x02, 0x05, 0x99, 0xc7
+#define __UUID_GOLF_GLOVE_RADIAL_DEVIATION__WRIST_                    0xf7, 0xc1, 0x0e, 0x5b, 0x29, 0x2e, 0x49, 0x91, 0xa2, 0x19, 0x67, 0xec, 0x14, 0x70, 0x1f, 0xaf
+#define __UUID_GOLF_GLOVE_ULNAR_DEVIATION__WRIST_                     0xc9, 0x0b, 0x8d, 0x95, 0x56, 0x3c, 0x41, 0x94, 0x89, 0x93, 0xa5, 0xb9, 0xd5, 0x58, 0x39, 0x8e
+#define __UUID_GOLF_GLOVE_PRESSURE_1__TOP_PALM_                       0xbc, 0xb7, 0x57, 0x59, 0x18, 0xa6, 0x40, 0xa3, 0x9b, 0x9d, 0x0f, 0xc5, 0x0f, 0x3e, 0xf4, 0x79
+#define __UUID_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM_                    0xa7, 0x86, 0x40, 0x44, 0x9d, 0x4f, 0x44, 0x6d, 0xa1, 0x35, 0xdc, 0x36, 0x91, 0x82, 0x15, 0xbe
+#define __UUID_GOLF_GLOVE_ACCELEROMETER_X__HAND_                      0x04, 0x34, 0x57, 0xb6, 0x5c, 0x8a, 0x4c, 0xeb, 0x95, 0xa1, 0xa1, 0x0e, 0xfe, 0xfc, 0xa3, 0xea
+#define __UUID_GOLF_GLOVE_ACCELEROMETER_Y__HAND_                      0x23, 0xff, 0x3b, 0xc0, 0xb9, 0xb9, 0x4f, 0x30, 0xa4, 0xd8, 0x05, 0xe5, 0x6e, 0x6f, 0x17, 0xa7
+#define __UUID_GOLF_GLOVE_ACCELEROMETER_Z__HAND_                      0x9f, 0x17, 0xd4, 0x30, 0xc1, 0x1c, 0x4a, 0x4e, 0x9c, 0x3f, 0x55, 0x77, 0xd3, 0x02, 0x02, 0x89
+#define __UUID_GOLF_GLOVE_MAGNETOMETER_X__HAND_                       0x6a, 0x66, 0xfd, 0x6b, 0x01, 0x1d, 0x44, 0x8e, 0xb6, 0xf3, 0x34, 0x0e, 0x18, 0x40, 0x08, 0xb8
+#define __UUID_GOLF_GLOVE_MAGNETOMETER_Y__HAND_                       0x31, 0x25, 0x9b, 0x99, 0x57, 0x06, 0x46, 0x80, 0x9c, 0x6f, 0x33, 0x0c, 0x44, 0xc2, 0xe2, 0x50
+#define __UUID_GOLF_GLOVE_MAGNETOMETER_Z__HAND_                       0xc5, 0x03, 0x71, 0xe4, 0x11, 0x32, 0x4f, 0xc3, 0xb3, 0x67, 0x28, 0x04, 0xb9, 0x4e, 0x83, 0x8d
+#define __UUID_GOLF_GLOVE_GYROSCOPE_X__HAND_                          0xe0, 0x9d, 0x81, 0xba, 0x40, 0x7b, 0x40, 0x7c, 0x96, 0x50, 0xac, 0x64, 0xc6, 0x51, 0xb3, 0xa2
+#define __UUID_GOLF_GLOVE_GYROSCOPE_Y__HAND_                          0xf8, 0xee, 0x30, 0x91, 0xd3, 0x2c, 0x4d, 0xe4, 0x82, 0xa6, 0xfa, 0x05, 0xf6, 0xba, 0x1b, 0xb7
+#define __UUID_GOLF_GLOVE_GYROSCOPE_Z__HAND_                          0x5b, 0x01, 0xb7, 0x26, 0x8d, 0x16, 0x4d, 0x4d, 0x9a, 0xc1, 0x90, 0x98, 0x82, 0x99, 0xbc, 0x20
 
 // ***** Primary Service 'Generic Attribute'
 #define HDLS_GENERIC_ATTRIBUTE                                        0x0001
@@ -27,29 +48,176 @@
 #define HDLC_GENERIC_ACCESS_APPEARANCE                                0x0017
 #define HDLC_GENERIC_ACCESS_APPEARANCE_VALUE                          0x0018
 
-// ***** Primary Service 'golf-glove'
+// ***** Primary Service 'golf_glove'
 #define HDLS_GOLF_GLOVE                                               0x0028
 // ----- Characteristic 'Accelerometer X (Wrist)'
 #define HDLC_GOLF_GLOVE_ACCELEROMETER_X__WRIST_                       0x0029
 #define HDLC_GOLF_GLOVE_ACCELEROMETER_X__WRIST__VALUE                 0x002A
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_X__WRIST__USER_DESCRIPTION      0x002B
 // ===== Descriptor 'Client Configuration'
-#define HDLD_GOLF_GLOVE_ACCELEROMETER_X__WRIST__CLIENT_CONFIGURATION  0x002B
-// ===== Descriptor 'Presentation Format'
-#define HDLD_GOLF_GLOVE_ACCELEROMETER_X__WRIST__PRESENTATION_FORMAT_0 0x002C
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_X__WRIST__CLIENT_CONFIGURATION  0x002C
 // ----- Characteristic 'Accelerometer Y (Wrist)'
 #define HDLC_GOLF_GLOVE_ACCELEROMETER_Y__WRIST_                       0x002D
 #define HDLC_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__VALUE                 0x002E
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__USER_DESCRIPTION      0x002F
 // ===== Descriptor 'Client Configuration'
-#define HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__CLIENT_CONFIGURATION  0x002F
-// ===== Descriptor 'Presentation Format'
-#define HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__PRESENTATION_FORMAT_0 0x0030
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_Y__WRIST__CLIENT_CONFIGURATION  0x0030
 // ----- Characteristic 'Accelerometer Z (Wrist)'
 #define HDLC_GOLF_GLOVE_ACCELEROMETER_Z__WRIST_                       0x0031
 #define HDLC_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__VALUE                 0x0032
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__USER_DESCRIPTION      0x0033
 // ===== Descriptor 'Client Configuration'
-#define HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__CLIENT_CONFIGURATION  0x0033
-// ===== Descriptor 'Presentation Format'
-#define HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__PRESENTATION_FORMAT_0 0x0034
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_Z__WRIST__CLIENT_CONFIGURATION  0x0034
+// ----- Characteristic 'Magnetometer X (Wrist)'
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_X__WRIST_                        0x0035
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_X__WRIST__VALUE                  0x0036
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_X__WRIST__USER_DESCRIPTION       0x0037
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_X__WRIST__CLIENT_CONFIGURATION   0x0038
+// ----- Characteristic 'Magnetometer Y (Wrist)'
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_Y__WRIST_                        0x0039
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__VALUE                  0x003A
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__USER_DESCRIPTION       0x003B
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_Y__WRIST__CLIENT_CONFIGURATION   0x003C
+// ----- Characteristic 'Magnetometer Z (Wrist)'
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_Z__WRIST_                        0x003D
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__VALUE                  0x003E
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__USER_DESCRIPTION       0x003F
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_Z__WRIST__CLIENT_CONFIGURATION   0x0040
+// ----- Characteristic 'Gyroscope X (Wrist)'
+#define HDLC_GOLF_GLOVE_GYROSCOPE_X__WRIST_                           0x0041
+#define HDLC_GOLF_GLOVE_GYROSCOPE_X__WRIST__VALUE                     0x0042
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_X__WRIST__USER_DESCRIPTION          0x0043
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_X__WRIST__CLIENT_CONFIGURATION      0x0044
+// ----- Characteristic 'Gyroscope Y (Wrist)'
+#define HDLC_GOLF_GLOVE_GYROSCOPE_Y__WRIST_                           0x0045
+#define HDLC_GOLF_GLOVE_GYROSCOPE_Y__WRIST__VALUE                     0x0046
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_Y__WRIST__USER_DESCRIPTION          0x0047
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_Y__WRIST__CLIENT_CONFIGURATION      0x0048
+// ----- Characteristic 'Gyroscope Z (Wrist)'
+#define HDLC_GOLF_GLOVE_GYROSCOPE_Z__WRIST_                           0x0049
+#define HDLC_GOLF_GLOVE_GYROSCOPE_Z__WRIST__VALUE                     0x004A
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_Z__WRIST__USER_DESCRIPTION          0x004B
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_Z__WRIST__CLIENT_CONFIGURATION      0x004C
+// ----- Characteristic 'Flexion (Wrist)'
+#define HDLC_GOLF_GLOVE_FLEXION__WRIST_                               0x004D
+#define HDLC_GOLF_GLOVE_FLEXION__WRIST__VALUE                         0x004E
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_FLEXION__WRIST__USER_DESCRIPTION              0x004F
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_FLEXION__WRIST__CLIENT_CONFIGURATION          0x0050
+// ----- Characteristic 'Extension (Wrist)'
+#define HDLC_GOLF_GLOVE_EXTENSION__WRIST_                             0x0051
+#define HDLC_GOLF_GLOVE_EXTENSION__WRIST__VALUE                       0x0052
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_EXTENSION__WRIST__USER_DESCRIPTION            0x0053
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_EXTENSION__WRIST__CLIENT_CONFIGURATION        0x0054
+// ----- Characteristic 'Radial Deviation (Wrist)'
+#define HDLC_GOLF_GLOVE_RADIAL_DEVIATION__WRIST_                      0x0055
+#define HDLC_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__VALUE                0x0056
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__USER_DESCRIPTION     0x0057
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_RADIAL_DEVIATION__WRIST__CLIENT_CONFIGURATION 0x0058
+// ----- Characteristic 'Ulnar Deviation (Wrist)'
+#define HDLC_GOLF_GLOVE_ULNAR_DEVIATION__WRIST_                       0x0059
+#define HDLC_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__VALUE                 0x005A
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__USER_DESCRIPTION      0x005B
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_ULNAR_DEVIATION__WRIST__CLIENT_CONFIGURATION  0x005C
+// ----- Characteristic 'Pressure 1 (Top Palm)'
+#define HDLC_GOLF_GLOVE_PRESSURE_1__TOP_PALM_                         0x005D
+#define HDLC_GOLF_GLOVE_PRESSURE_1__TOP_PALM__VALUE                   0x005E
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_PRESSURE_1__TOP_PALM__USER_DESCRIPTION        0x005F
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_PRESSURE_1__TOP_PALM__CLIENT_CONFIGURATION    0x0060
+// ----- Characteristic 'Pressure 2 (Bottom Palm)'
+#define HDLC_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM_                      0x0061
+#define HDLC_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__VALUE                0x0062
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__USER_DESCRIPTION     0x0063
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_PRESSURE_2__BOTTOM_PALM__CLIENT_CONFIGURATION 0x0064
+// ----- Characteristic 'Accelerometer X (Hand)'
+#define HDLC_GOLF_GLOVE_ACCELEROMETER_X__HAND_                        0x0065
+#define HDLC_GOLF_GLOVE_ACCELEROMETER_X__HAND__VALUE                  0x0066
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_X__HAND__USER_DESCRIPTION       0x0067
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_X__HAND__CLIENT_CONFIGURATION   0x0068
+// ----- Characteristic 'Accelerometer Y (Hand)'
+#define HDLC_GOLF_GLOVE_ACCELEROMETER_Y__HAND_                        0x0069
+#define HDLC_GOLF_GLOVE_ACCELEROMETER_Y__HAND__VALUE                  0x006A
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_Y__HAND__USER_DESCRIPTION       0x006B
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_Y__HAND__CLIENT_CONFIGURATION   0x006C
+// ----- Characteristic 'Accelerometer Z (Hand)'
+#define HDLC_GOLF_GLOVE_ACCELEROMETER_Z__HAND_                        0x006D
+#define HDLC_GOLF_GLOVE_ACCELEROMETER_Z__HAND__VALUE                  0x006E
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_Z__HAND__USER_DESCRIPTION       0x006F
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_ACCELEROMETER_Z__HAND__CLIENT_CONFIGURATION   0x0070
+// ----- Characteristic 'Magnetometer X (Hand)'
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_X__HAND_                         0x0071
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_X__HAND__VALUE                   0x0072
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_X__HAND__USER_DESCRIPTION        0x0073
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_X__HAND__CLIENT_CONFIGURATION    0x0074
+// ----- Characteristic 'Magnetometer Y (Hand)'
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_Y__HAND_                         0x0075
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_Y__HAND__VALUE                   0x0076
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_Y__HAND__USER_DESCRIPTION        0x0077
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_Y__HAND__CLIENT_CONFIGURATION    0x0078
+// ----- Characteristic 'Magnetometer Z (Hand)'
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_Z__HAND_                         0x0079
+#define HDLC_GOLF_GLOVE_MAGNETOMETER_Z__HAND__VALUE                   0x007A
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_Z__HAND__USER_DESCRIPTION        0x007B
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_MAGNETOMETER_Z__HAND__CLIENT_CONFIGURATION    0x007C
+// ----- Characteristic 'Gyroscope X (Hand)'
+#define HDLC_GOLF_GLOVE_GYROSCOPE_X__HAND_                            0x007D
+#define HDLC_GOLF_GLOVE_GYROSCOPE_X__HAND__VALUE                      0x007E
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_X__HAND__USER_DESCRIPTION           0x007F
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_X__HAND__CLIENT_CONFIGURATION       0x0080
+// ----- Characteristic 'Gyroscope Y (Hand)'
+#define HDLC_GOLF_GLOVE_GYROSCOPE_Y__HAND_                            0x0081
+#define HDLC_GOLF_GLOVE_GYROSCOPE_Y__HAND__VALUE                      0x0082
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_Y__HAND__USER_DESCRIPTION           0x0083
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_Y__HAND__CLIENT_CONFIGURATION       0x0084
+// ----- Characteristic 'Gyroscope Z (Hand)'
+#define HDLC_GOLF_GLOVE_GYROSCOPE_Z__HAND_                            0x0085
+#define HDLC_GOLF_GLOVE_GYROSCOPE_Z__HAND__VALUE                      0x0086
+// ===== Descriptor 'User Description'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_Z__HAND__USER_DESCRIPTION           0x0087
+// ===== Descriptor 'Client Configuration'
+#define HDLD_GOLF_GLOVE_GYROSCOPE_Z__HAND__CLIENT_CONFIGURATION       0x0088
 
 // External Lookup Table Entry
 typedef struct
