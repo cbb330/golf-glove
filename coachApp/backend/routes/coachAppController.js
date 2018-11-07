@@ -1,10 +1,17 @@
 var noble = require('noble');
 
-exports.getDeviceInfo = function(req, res) {
-  noble.on('stateChange', scan);
-  noble.on('discover', foundPeripheral);
-  res.json({ message: 'It happened' });
+exports.hello = function(req, res) {
+  res.send({ express: 'Hello from express' });
 };
+
+exports.getDiscovers= function(ws) {
+  noble.on('stateChange', scan);
+  // TODO: figure out how to res.send the return from FOUNDPERIPHERAL
+  noble.on('discover', function(peripheral) {
+    ws.send(JSON.stringify(foundPeripheral(peripheral)));
+  });
+ };
+
 
 function scan(state) {
   if (state === 'poweredOn') {
@@ -16,19 +23,23 @@ function scan(state) {
   }
 }
 
-// for every peripheral we discover, run this callback function
-noble.on('discover', foundPeripheral);
 
 function foundPeripheral(peripheral) {
+
+  var periphObj = {};
 
   //uncomment the line below if you want to see all data provided.
   //console.log(peripheral);
 
+
   //here we output the some data to the console.
+  periphObj['uuid'] = peripheral.uuid;
   console.log('\n Discovered new peripheral with UUID ' + peripheral.uuid+ ':');
+  periphObj['address'] = peripheral.address;
   console.log('\t Peripheral Bluetooth address:' + peripheral.address);
   
   if(peripheral.advertisement.localName){
+    periphObj['name'] = peripheral.advertisement.localName;
     console.log('\t Peripheral local name:' + peripheral.advertisement.localName);
   }
   if(peripheral.rssi) {
@@ -55,4 +66,6 @@ function foundPeripheral(peripheral) {
     console.log('\t TX power level: ' + peripheral.advertisement.txPowerLevel);
   }
 
-};
+  // not sure how this will serialize
+  return periphObj;
+}
