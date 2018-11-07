@@ -1,14 +1,14 @@
 var noble = require('noble');
 
 exports.hello = function(req, res) {
-  res.send({ express: 'Hello from express' });
+  res.send({ time: 'Hello from express' });
 };
 
-exports.getDiscovers= function(ws) {
+exports.getDiscovers = function(client) {
   noble.on('stateChange', scan);
   // TODO: figure out how to res.send the return from FOUNDPERIPHERAL
   noble.on('discover', function(peripheral) {
-    ws.send(JSON.stringify(foundPeripheral(peripheral)));
+    client.send(JSON.stringify(foundPeripheral(peripheral)));
   });
  };
 

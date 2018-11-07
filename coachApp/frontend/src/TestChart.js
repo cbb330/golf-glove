@@ -11,8 +11,8 @@ class TestChart extends Component {
     testData.forEach(point => {
       point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
       // point.time = new Date(2018, 10, 6, 17, 34, 59, 256);
-      console.log(point)
-      console.log(point.time.getMilliseconds())
+      // console.log(point)
+      // console.log(point.time.getMilliseconds())
     });
     return (
       <VictoryChart

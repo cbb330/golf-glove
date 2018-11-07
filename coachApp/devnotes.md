@@ -7,7 +7,7 @@ After,
 > npm run start
 
 And in another terminal run this,
-> curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/scan
+> curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:4000/hello
 
 And then see if the server has handled your adapter properly.
 
