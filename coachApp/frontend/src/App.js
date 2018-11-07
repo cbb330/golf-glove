@@ -25,7 +25,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{height: 500, width: 800}}>
         <h1>Coach App</h1>
         <TestChart />
       </div>
