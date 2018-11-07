@@ -12,7 +12,7 @@ class App extends Component {
       post: '',
       responseToPost: '',
       socket: undefined,
-      socketEndpoint: 'ws://localhost:4000'
+      socketEndpoint: 'http://localhost:4000'
     };
   }
 
@@ -36,9 +36,14 @@ class App extends Component {
   }
 
   getSocket() {
-    const { socketEndpoint } = this.state;
-    const socket = socketIOClient(socketEndpoint);
-    socket.on("connection", data => this.setState({ socket: data }));
+    const { socketEndpoint } = this.state
+    const socket = socketIOClient(socketEndpoint)
+    socket.on("serverNews", data => this.setState({ socket: data.testNews }))
+    // socket.on("serverNews", function (data) {
+    //   // console.log(data);
+    //   this.setState({ socket: data.testNews })
+    //   socket.emit('clientNews', {my: 'data'})
+    // })
   }
 
   // setSocket(e) {
@@ -63,14 +68,13 @@ class App extends Component {
     }
     else {
       return (
-        <div style={{height: 500, width: 800}}>
+        <div style={{height: 600, width: 1000}}>
           <h1>{this.state.response}</h1>
           <h2>{this.state.socket}</h2>
           <TestChart />
         </div>
       )
     }
-
   }
 }
 
