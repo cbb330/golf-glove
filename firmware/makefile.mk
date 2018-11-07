@@ -3,6 +3,7 @@
 #
 
 APP_SRC = golf_glove.c
+APP_SRC += sensor_polling.c
 APP_SRC += golf_glove_db.c
 APP_SRC += wiced_bt_cfg.c
 

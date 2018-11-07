@@ -159,5 +159,5 @@ const wiced_bt_cfg_buf_pool_t wiced_bt_cfg_buf_pools[WICED_BT_CFG_NUM_BUF_POOLS]
     { 64,       12,        }, /* Small Buffer Pool */
     { 360,      4,         }, /* Medium Buffer Pool (used for HCI & RFCOMM control messages, min recommended size is 360) */
     { 512,      4,         }, /* Large Buffer Pool  (used for HCI ACL messages) */
-    { 1500,     3,         }, /* Extra Large Buffer Pool (used for AVDT media packets and miscellaneous; if not needed, set buf_count to 0) */
+    { 1024,     2,         }, /* Extra Large Buffer Pool (used for AVDT media packets and miscellaneous; if not needed, set buf_count to 0) */
 };
