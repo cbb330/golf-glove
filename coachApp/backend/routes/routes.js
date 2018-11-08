@@ -1,11 +1,13 @@
 'use strict';
-// these are in this file since they are specific to the route that controls websockets
-var controller = require('./coachAppController');
 
 module.exports = function(app) {
+  const controller = require('./coachAppController');
+  const wss = app.get('wss');
+  
   // coachApp Routes
-  app.route('/')
-      .get(controller.getDiscovers);
+  wss.on('connection', function(socket) {
+    controller.getDiscovers(socket);
+  });
 
   app.route('/hello')
       .get(controller.hello);
