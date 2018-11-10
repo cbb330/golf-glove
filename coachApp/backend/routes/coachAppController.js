@@ -1,4 +1,4 @@
-var noble = require('noble');
+const noble = require('noble');
 
 exports.hello = function(req, res) {
   res.send({ express: 'Hello from express' });

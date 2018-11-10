@@ -31,12 +31,20 @@
     "ws": "^6.1.0"
   },
   "eslintConfig": {
-    "extends": "react-app",
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true,
+      "es6": true
+    },
     "rules": {
+      "no-console": 0,
       "semi": [
-        1,
+        2,
         "always"
       ]
     }
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0"
   }
 }
