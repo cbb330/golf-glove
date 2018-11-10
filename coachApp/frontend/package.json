@@ -19,7 +19,13 @@
     "proxy": "http://localhost:3000"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "semi": [
+        1,
+        "always"
+      ]
+    }
   },
   "browserslist": [
     ">0.2%",

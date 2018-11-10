@@ -29,5 +29,22 @@
     "noble": "^1.9.1",
     "nodemon": "^1.18.5",
     "ws": "^6.1.0"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "rules": {
+      "no-console": 0,
+      "semi": [
+        2,
+        "always"
+      ]
+    }
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0"
   }
 }

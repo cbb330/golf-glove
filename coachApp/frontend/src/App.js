@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 
-import TestChart from './TestChart.js'
+import TestChart from './TestChart.js';
 import testData from './data/test-data.json';
 
 const ws = new WebSocket("ws://170.253.147.206:8080"); //to access Christian Bush's rsbpi
@@ -23,16 +23,16 @@ class App extends Component {
   getHello() {
     axios.get('http://170.253.147.206:4000/hello') //to access Christian Bush's rsbpi
       .then((response) => {
-        this.setHello(response.data.time)
+        this.setHello(response.data.time);
         // console.log(response.data)
-      })
+      });
   }
 
   // TODO: fix this
   setHello(e) {
     this.setState({
       response: e
-    })
+    });
   }
 
   getSocket() {
@@ -66,7 +66,7 @@ class App extends Component {
           }
           <TestChart data={testData} />
         </div>
-    )
+    );
   }
 }
 
