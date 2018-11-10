@@ -1,18 +1,19 @@
 const app = require('express')();
+const cors = require('cors');
 const WebSocket = require('ws');
+const bodyParser = require('body-parser');
 
-const port = 3000;
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.options('*', cors());
+app.use(cors());
+
+const port = 4000;
 const sockport = 8080;
 const server = app.listen(process.env.port || port);
 
 const wss = new WebSocket.Server({ port: sockport });
 app.set('wss', wss);
-
-const bodyParser = require('body-parser');
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 
 const routes = require('./routes/routes')(app);
 
