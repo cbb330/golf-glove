@@ -29,5 +29,14 @@
     "noble": "^1.9.1",
     "nodemon": "^1.18.5",
     "ws": "^6.1.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "rules": {
+      "semi": [
+        1,
+        "always"
+      ]
+    }
   }
 }

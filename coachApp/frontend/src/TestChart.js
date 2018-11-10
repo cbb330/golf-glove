@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { VictoryChart, VictoryAxis, VictoryLine, VictoryTheme, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
+import React, { Component } from 'react';
+import { VictoryChart, VictoryAxis, VictoryLine, VictoryTheme, VictoryTooltip, VictoryVoronoiContainer } from 'victory';
 // import moment from 'moment'
 
 
 
 class TestChart extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       data: props.data,
       allData: [],
@@ -19,10 +19,10 @@ class TestChart extends Component {
 
     this.testData.forEach(point => {
       point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
-      this.state.allData.push({time: point.time, x: point.accel_x, y: point.accel_y, z: point.accel_z, type: "all"})
-      this.state.xData.push({time: point.time, data: point.accel_x, type: "x"})
-      this.state.yData.push({time: point.time, data: point.accel_y, type: "y"})
-      this.state.zData.push({time: point.time, data: point.accel_z, type: "z"})
+      this.state.allData.push({time: point.time, x: point.accel_x, y: point.accel_y, z: point.accel_z, type: "all"});
+      this.state.xData.push({time: point.time, data: point.accel_x, type: "x"});
+      this.state.yData.push({time: point.time, data: point.accel_y, type: "y"});
+      this.state.zData.push({time: point.time, data: point.accel_z, type: "z"});
 
       // this.setState({ allData: [...this.state.allData, {time: point.time, x: point.accel_x, y: point.accel_y, z: point.accel_z, type: "all"}]})
       // this.setState({ xData: [...this.state.xData, {time: point.time, data: point.accel_x, type: "x"}]})
@@ -31,7 +31,7 @@ class TestChart extends Component {
       // xData.push({time: point.time, data: point.accel_x, type: "x"})
       // yData.push({time: point.time, data: parseFloat((point.accel_y + k).toFixed(2)), type: "y"})
       // zData.push({time: point.time, data: point.accel_z, type: "z"})
-    })
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -71,10 +71,10 @@ class TestChart extends Component {
           <VictoryVoronoiContainer voronoiDimension='x'
             labels={function (d) {
               // console.log(d)
-              let s = ""
+              let s = "";
               if (d.type === "x")
-                s = `t: ${d._x.getMinutes()}:${d._x.getSeconds().toString().padStart(2, '0')}:${d._x.getMilliseconds().toString().padStart(3, '0')}\n`
-              return `${s}${d.type}: ${d._y}`
+                s = `t: ${d._x.getMinutes()}:${d._x.getSeconds().toString().padStart(2, '0')}:${d._x.getMilliseconds().toString().padStart(3, '0')}\n`;
+              return `${s}${d.type}: ${d._y}`;
             }}
             labelComponent={<VictoryTooltip cornerRadius={0} flyoutStyle={{fill: "white"}}/>}
           />
@@ -125,8 +125,8 @@ class TestChart extends Component {
           style={{data: { stroke: "#7030a0" }}}
         />
       </VictoryChart>
-      )
+      );
   }
 }
 
-export default TestChart
+export default TestChart;
