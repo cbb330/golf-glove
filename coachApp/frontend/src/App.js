@@ -2,33 +2,31 @@ import React, { Component } from 'react';
 import TestChart from './TestChart.js'
 
 import axios from 'axios'
-import socketIOClient from "socket.io-client";
+const ws = new WebSocket("ws://170.253.147.206:8080"); //to access Christian Bush's rsbpi
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       response: undefined,
-      post: '',
-      responseToPost: '',
-      socket: undefined,
-      socketEndpoint: 'http://localhost:4000'
+      socket: undefined
     };
   }
 
   componentDidMount() {
-    this.getHello()
-    this.getSocket()
+    this.getHello();
+    this.getSocket();
   }
 
   getHello() {
-    axios.get('http://localhost:4000/hello')
+    axios.get('http://170.253.147.206:4000/hello') //to access Christian Bush's rsbpi
       .then((response) => {
         this.setHello(response.data.time)
         // console.log(response.data)
       })
   }
 
+  // TODO: fix this
   setHello(e) {
     this.setState({
       response: e
@@ -36,43 +34,30 @@ class App extends Component {
   }
 
   getSocket() {
-    const { socketEndpoint } = this.state
-    const socket = socketIOClient(socketEndpoint)
-    socket.on("serverNews", data => this.setState({ socket: data.testNews }))
-    // socket.on("serverNews", function (data) {
-    //   // console.log(data);
-    //   this.setState({ socket: data.testNews })
-    //   socket.emit('clientNews', {my: 'data'})
-    // })
-  }
+    ws.onmessage = event => {
+      this.setState({ socket: JSON.parse(event.data) });
+      console.log(this.state.socket);
+    };
+  };
 
-  // setSocket(e) {
-  //   this.setState({
-  //     socket: e
-  //   })
-  // }
-
-  // callApi = async () => {
-  //   const response = await fetch('/api/hello');
-  //   const body = await response.json();
-
-  //   if (response.status !== 200) throw Error(body.message);
-
-  //   return body;
-  // };
 
   render() {
-    if ((this.state.response === undefined) &&
-      (this.state.socket === undefined)) {
-      return (<div>Still fetching data</div>)
+
+    if ((this.state.response === undefined) && (this.state.socket === undefined)) {
+      return (
+          <div style={{height: 600, width: 1000}}>
+            <h1>Still fetching data</h1>
+            <TestChart/>
+          </div>
+      )
     }
     else {
       return (
-        <div style={{height: 600, width: 1000}}>
-          <h1>{this.state.response}</h1>
-          <h2>{this.state.socket}</h2>
-          <TestChart />
-        </div>
+          <div style={{height: 600, width: 1000}}>
+            <h1>{this.state.response}</h1>
+            <h1>{this.state.socket["name"]}</h1> {/* name is conditionally set in backend */}
+            <h2>{this.state.socket.uuid}</h2>
+          </div>
       )
     }
   }
