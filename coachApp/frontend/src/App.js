@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import TestChart from './TestChart.js'
-
 import axios from 'axios'
+
+import TestChart from './TestChart.js'
+import testData from './data/test-data.json';
+
 const ws = new WebSocket("ws://170.253.147.206:8080"); //to access Christian Bush's rsbpi
 
 class App extends Component {
@@ -43,23 +45,28 @@ class App extends Component {
 
   render() {
 
-    if ((this.state.response === undefined) && (this.state.socket === undefined)) {
-      return (
-          <div style={{height: 600, width: 1000}}>
-            <h1>Still fetching data</h1>
-            <TestChart/>
-          </div>
-      )
-    }
-    else {
-      return (
-          <div style={{height: 600, width: 1000}}>
-            <h1>{this.state.response}</h1>
-            <h1>{this.state.socket["name"]}</h1> {/* name is conditionally set in backend */}
-            <h2>{this.state.socket.uuid}</h2>
-          </div>
-      )
-    }
+    // if ((this.state.response === undefined) && (this.state.socket === undefined)) {
+    //   return (
+    //       <div style={{height: 600, width: 1000}}>
+    //         <h1>Still fetching data</h1>
+    //         <TestChart data={testData} />
+    //       </div>
+    //   )
+    // }
+    // else {
+    return (
+        <div style={{height: 600, width: 1000}}>
+          {this.state.response === undefined && this.state.socket === undefined ?
+            <h1>Still fetching data</h1> :
+            <div>
+              <h1>{this.state.response}</h1>
+              <h1>{this.state.socket["name"]}</h1> {/* name is conditionally set in backend */}
+              <h2>{this.state.socket.uuid}</h2>
+            </div>
+          }
+          <TestChart data={testData} />
+        </div>
+    )
   }
 }
 

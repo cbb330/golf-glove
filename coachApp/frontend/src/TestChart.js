@@ -2,20 +2,22 @@ import React, { Component } from 'react'
 import { VictoryChart, VictoryAxis, VictoryLine, VictoryTheme, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
 // import moment from 'moment'
 
-import testData from './data/test-data.json'
 
 
 class TestChart extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      data: props.data,
       allData: [],
       xData: [],
       yData: [],
       zData: []
     };
 
-    testData.forEach(point => {
+    this.testData = this.state.data;
+
+    this.testData.forEach(point => {
       point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
       this.state.allData.push({time: point.time, x: point.accel_x, y: point.accel_y, z: point.accel_z, type: "all"})
       this.state.xData.push({time: point.time, data: point.accel_x, type: "x"})
@@ -32,13 +34,19 @@ class TestChart extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      data: nextProps.data
+    });
+  }
+
   render() {
     // let xData = []
     // let yData = []
     // let zData = []
     // let k = 0
 
-    // testData.forEach(point => {
+    // this.testData.forEach(point => {
     //   // console.log(point)
     //   // point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
     //   xData.push({time: point.time, data: point.accel_x, type: "x"})
