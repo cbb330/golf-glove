@@ -25,7 +25,7 @@ wiced_queue_t* _frame_buffer;
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error or timeout occurred
  */
-wiced_result_t frame_buffer_init( void );
+wiced_result_t frame_buffer_init(void);
 
 /**
  * Returns 1 if the frame buffer has data available
@@ -33,7 +33,7 @@ wiced_result_t frame_buffer_init( void );
  * @return  0 : no data available
  * @return  1 : data available
  */
-int frame_buffer_is_data_available( void );
+int frame_buffer_is_data_available(void);
 
 /**
  * Returns 1 if the frame buffer is full.
@@ -41,7 +41,7 @@ int frame_buffer_is_data_available( void );
  * @return 0 : not full
  * @return 1 : full
  */
-int frame_buffer_is_full( void );
+int frame_buffer_is_full(void);
 
 /**
  * Pushes a sensor data frame into the frame buffer queue.
@@ -69,6 +69,6 @@ wiced_result_t frame_buffer_pop_frame(sensor_frame* frame);
  * @return    WICED_SUCCESS : on success.
  * @return    WICED_ERROR   : if an error or timeout occurred
  */
-wiced_result_t frame_buffer_clear( void );
+wiced_result_t frame_buffer_clear(void);
 
 #endif
