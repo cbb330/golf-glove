@@ -6,7 +6,6 @@ exports.hello = function(req, res) {
 
 exports.getDiscovers = function(socket) {
   noble.on('stateChange', scan);
-  // TODO: figure out how to res.send the return from FOUNDPERIPHERAL
   noble.on('discover', function(peripheral) {
     socket.send(JSON.stringify(foundPeripheral(peripheral)));
   });
