@@ -3,7 +3,8 @@
 // init
 void init_i2c() {
     wiced_hal_i2c_init();
-
+    sleep(1);
+    lsm_begin();
 }
 
 // Main Loop
@@ -26,15 +27,24 @@ sensor_frame get_sensor_frame() {
     imu_frame imu1 = get_imu_frame(WRIST_IMU_ADDR); // Wrist
     imu_frame imu2 = get_imu_frame(HAND_IMU_ADDR); // Hand
 
-    uint32_t timestamp = 0x69DE;
-    uint16_t pres1 = 0xAD;
-    uint16_t pres2 = 0xBE;
-    uint16_t wrist1 = 0xEF;
-    uint16_t wrist2 = 0xCA;
-    uint16_t wrist3 = 0xFE;
-    uint16_t wrist4 = 0xBA;
-    uint8_t sync = 0xBE;
-    uint8_t avail = 0x11;
+
+    uint32_t timestamp = 0;
+    uint16_t pres1 = 0;
+    uint16_t pres1_v = 0;
+    pres1 = wiced_hal_adc_read_raw_sample( PRES1_PIN );
+    pres1_v = wiced_hal_adc_read_voltage( PRES1_PIN );
+    uint16_t pres2 = 0;
+    uint16_t wrist1 = 0;
+    uint16_t wrist2 = 0;
+    uint16_t wrist3 = 0;
+    uint16_t wrist3_v = 0;
+    wrist3 = wiced_hal_adc_read_raw_sample( WRIST3_PIN );
+    wrist3_v = wiced_hal_adc_read_voltage( WRIST3_PIN );
+    uint16_t wrist4 = 0;
+    wrist4 = wiced_hal_adc_read_raw_sample( WRIST4_PIN );
+    pres1_v = wiced_hal_adc_read_voltage( WRIST4_PIN );
+    uint8_t sync = 0;
+    uint8_t avail = 0;
 
     sensor_frame rec = { timestamp, pres1, pres2, wrist1, wrist2, wrist3, wrist4, imu1, imu2, sync, avail };
 
@@ -42,17 +52,18 @@ sensor_frame get_sensor_frame() {
 }
 
 imu_frame get_imu_frame(uint16_t addr) {
-    // TODO: Poll I2C @ addr for the required values
 
-    uint16_t accX = 0xFE;
-    uint16_t accY = 0xED;
-    uint16_t accZ = 0xDA;
-    uint16_t magX = 0xDE;
-    uint16_t magY = 0xBA;
-    uint16_t magZ = 0xDD;
-    uint16_t gyroX = 0xBE;
-    uint16_t gyroY = 0xAD;
-    uint16_t gyroZ = 0xFA;
+    lsm_read();
+
+    uint16_t accX = accelData.x;
+    uint16_t accY = accelData.y;
+    uint16_t accZ = accelData.z;
+    uint16_t magX = magData.x;
+    uint16_t magY = magData.y;
+    uint16_t magZ = magData.z;
+    uint16_t gyroX = gyroData.x;
+    uint16_t gyroY = gyroData.y;
+    uint16_t gyroZ = gyroData.z;
 
     imu_frame rec = {accX, accY, accZ, magX, magY, magZ, gyroX, gyroY, gyroZ}; //null data
 
