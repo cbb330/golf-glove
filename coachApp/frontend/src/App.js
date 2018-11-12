@@ -4,7 +4,6 @@ import axios from 'axios';
 import TestChart from './TestChart.js';
 import testData from './data/test-data.json';
 
-const ws = new WebSocket("ws://170.253.147.206:8080"); //to access Christian Bush's rsbpi
 
 class App extends Component {
   constructor(props) {
@@ -14,12 +13,13 @@ class App extends Component {
       socket: undefined
     };
   }
-
+  
   componentDidMount() {
     this.getHello();
-    this.getSocket();
+    // this.getSocket();
+    this.sendScan();
   }
-
+  
   getHello() {
     axios.get('http://170.253.147.206:4000/hello') //to access Christian Bush's rsbpi
       .then((response) => {
@@ -27,18 +27,37 @@ class App extends Component {
         // console.log(response.data)
       });
   }
-
+  
   // TODO: fix this
   setHello(e) {
     this.setState({
       response: e
     });
   }
-
+  
   getSocket() {
+    const ws = new WebSocket("ws://170.253.147.206:8080"); //to access Christian Bush's rsbpi
     ws.onmessage = event => {
       this.setState({ socket: JSON.parse(event.data) });
       console.log(this.state.socket);
+    };
+  };
+
+  sendScan() {
+    const ws = new WebSocket("ws://170.253.147.206:8080"); //to access Christian Bush's rsbpi
+    
+    // Send the msg object as a JSON-formatted string.
+    ws.onopen = (event) => {
+      console.log('we open');
+      // Construct a msg object containing the data the server needs to process the message from the chat client.
+      var msg = {
+        type: "scanOn"
+      };
+      console.log(JSON.stringify(msg));
+      ws.send(JSON.stringify(msg));
+    };
+    ws.onmessage = (event) => {
+      console.log(event.data);
     };
   };
 
