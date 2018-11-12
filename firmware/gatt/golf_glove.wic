@@ -133,13 +133,19 @@
             <InitialValue/>
             <Properties>
                 <Read>true</Read>
-                <Notify>true</Notify>
-                <Indicate>true</Indicate>
+                <Notify>false</Notify>
+                <Indicate>false</Indicate>
+                <Write>true</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <SignedWrite>false</SignedWrite>
+                <ReliableWrite>false</ReliableWrite>
+                <WritableAuxiliaries>false</WritableAuxiliaries>
+                <Broadcast>false</Broadcast>
             </Properties>
             <Permissions>
                 <VariableLength>false</VariableLength>
                 <Read>true</Read>
-                <Write>false</Write>
+                <Write>true</Write>
                 <WriteWithoutResponse>false</WriteWithoutResponse>
                 <AuthenticatedRead>false</AuthenticatedRead>
                 <ReliableWrite>false</ReliableWrite>
