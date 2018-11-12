@@ -3,10 +3,6 @@ First make sure you're on npm version 9.11.2 because anything farther than that 
 Then,
 > npm install
 
-or if that doesn't work due to permissions:
-
-> sudo npm install --unsafe-perm
-
 After,
 > npm run start
 
