@@ -7,6 +7,7 @@ APP_SRC += gatt/golf_glove_db.c
 APP_SRC += gatt/wiced_bt_cfg.c
 
 APP_SRC += buffer/frame_buffer.c
+APP_SRC += gatt_hooks.c
 APP_SRC += sensor_polling.c
 
 APP_SRC += main.c

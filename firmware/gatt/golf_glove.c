@@ -31,6 +31,9 @@
 #include "golf_glove_db.h"
 #include "wiced_bt_cfg.h"
 
+#include "gatt_hooks.h"
+#include "sensor_polling.h"
+
 
 /*******************************************************************
  * Transport Configuration
@@ -105,10 +108,10 @@ void gatt_application_start(void)
     //  wiced_set_debug_uart( WICED_ROUTE_DEBUG_NONE );
 
     /* Set Debug UART as WICED_ROUTE_DEBUG_TO_PUART to see debug traces on Peripheral UART (PUART) */
-    //  wiced_set_debug_uart( WICED_ROUTE_DEBUG_TO_PUART );
+    wiced_set_debug_uart( WICED_ROUTE_DEBUG_TO_PUART );
 
     /* Set the Debug UART as WICED_ROUTE_DEBUG_TO_WICED_UART to send debug strings over the WICED debug interface */
-    wiced_set_debug_uart( WICED_ROUTE_DEBUG_TO_WICED_UART );
+    // wiced_set_debug_uart( WICED_ROUTE_DEBUG_TO_WICED_UART );
 #endif
 
     /* Initialize Bluetooth Controller and Host Stack */
@@ -174,7 +177,7 @@ void golf_glove_set_advertisement_data( void )
 /* This function is invoked when advertisements stop */
 void golf_glove_advertisement_stopped( void )
 {
-    WICED_BT_TRACE("Advertisement stopped\n");
+    WICED_BT_TRACE("Advertisement stopped\r\r\n");
 
     /* TODO: Handle when advertisements stop */
 }
@@ -208,14 +211,14 @@ wiced_bt_dev_status_t golf_glove_management_callback( wiced_bt_management_evt_t 
         wiced_bt_dev_register_hci_trace(golf_glove_trace_callback);
 #endif
 
-        WICED_BT_TRACE("Bluetooth Enabled (%s)\n",
+        WICED_BT_TRACE("Bluetooth Enabled (%s)\r\n",
                 ((WICED_BT_SUCCESS == p_event_data->enabled.status) ? "success" : "failure"));
 
         if (WICED_BT_SUCCESS == p_event_data->enabled.status)
         {
             /* Bluetooth is enabled */
             wiced_bt_dev_read_local_addr(bda);
-            WICED_BT_TRACE("Local Bluetooth Address: [%B]\n", bda);
+            WICED_BT_TRACE("Local Bluetooth Address: [%B]\r\n", bda);
 
             /* Perform application-specific initialization */
             golf_glove_app_init();
@@ -223,16 +226,16 @@ wiced_bt_dev_status_t golf_glove_management_callback( wiced_bt_management_evt_t 
         break;
     case BTM_DISABLED_EVT:
         /* Bluetooth Controller and Host Stack Disabled */
-        WICED_BT_TRACE("Bluetooth Disabled\n");
+        WICED_BT_TRACE("Bluetooth Disabled\r\n");
         break;
     case BTM_SECURITY_REQUEST_EVT:
         /* Security Request */
-        WICED_BT_TRACE("Security Request\n");
+        WICED_BT_TRACE("Security Request\r\n");
         wiced_bt_ble_security_grant(p_event_data->security_request.bd_addr, WICED_BT_SUCCESS);
         break;
     case BTM_PAIRING_IO_CAPABILITIES_BLE_REQUEST_EVT:
         /* Request for Pairing IO Capabilities (BLE) */
-        WICED_BT_TRACE("BLE Pairing IO Capabilities Request\n");
+        WICED_BT_TRACE("BLE Pairing IO Capabilities Request\r\n");
         /* No IO Capabilities on this Platform */
         p_event_data->pairing_io_capabilities_ble_request.local_io_cap = BTM_IO_CAPABILITIES_NONE;
         p_event_data->pairing_io_capabilities_ble_request.oob_data = BTM_OOB_NONE;
@@ -244,33 +247,33 @@ wiced_bt_dev_status_t golf_glove_management_callback( wiced_bt_management_evt_t 
     case BTM_PAIRING_COMPLETE_EVT:
         /* Pairing is Complete */
         p_ble_info = &p_event_data->pairing_complete.pairing_complete_info.ble;
-        WICED_BT_TRACE("Pairing Complete %d.\n", p_ble_info->reason);
+        WICED_BT_TRACE("Pairing Complete %d.\r\n", p_ble_info->reason);
         break;
     case BTM_ENCRYPTION_STATUS_EVT:
         /* Encryption Status Change */
-        WICED_BT_TRACE("Encryption Status event: bd ( %B ) res %d\n", p_event_data->encryption_status.bd_addr, p_event_data->encryption_status.result);
+        WICED_BT_TRACE("Encryption Status event: bd ( %B ) res %d\r\n", p_event_data->encryption_status.bd_addr, p_event_data->encryption_status.result);
         break;
     case BTM_PAIRED_DEVICE_LINK_KEYS_REQUEST_EVT:
         /* Paired Device Link Keys Request */
-        WICED_BT_TRACE("Paired Device Link Request Keys Event\n");
+        WICED_BT_TRACE("Paired Device Link Request Keys Event\r\n");
         /* Device/app-specific TODO: HANDLE PAIRED DEVICE LINK REQUEST KEY - retrieve from NVRAM, etc */
 #if 0
         if (golf_glove_read_link_keys( &p_event_data->paired_device_link_keys_request ))
         {
-            WICED_BT_TRACE("Key Retrieval Success\n");
+            WICED_BT_TRACE("Key Retrieval Success\r\n");
         }
         else
 #endif
         /* Until key retrieval implemented above, just fail the request - will cause re-pairing */
         {
-            WICED_BT_TRACE("Key Retrieval Failure\n");
+            WICED_BT_TRACE("Key Retrieval Failure\r\n");
             status = WICED_BT_ERROR;
         }
         break;
     case BTM_BLE_ADVERT_STATE_CHANGED_EVT:
         /* Advertisement State Changed */
         p_adv_mode = &p_event_data->ble_advert_state_changed;
-        WICED_BT_TRACE("Advertisement State Change: %d\n", *p_adv_mode);
+        WICED_BT_TRACE("Advertisement State Change: %d\r\n", *p_adv_mode);
         if ( BTM_BLE_ADVERT_OFF == *p_adv_mode )
         {
             golf_glove_advertisement_stopped();
@@ -278,11 +281,11 @@ wiced_bt_dev_status_t golf_glove_management_callback( wiced_bt_management_evt_t 
         break;
     case BTM_USER_CONFIRMATION_REQUEST_EVT:
         /* Pairing request, TODO: handle confirmation of numeric compare here if desired */
-        WICED_BT_TRACE("numeric_value: %d\n", p_event_data->user_confirmation_request.numeric_value);
+        WICED_BT_TRACE("numeric_value: %d\r\n", p_event_data->user_confirmation_request.numeric_value);
         wiced_bt_dev_confirm_req_reply( WICED_BT_SUCCESS , p_event_data->user_confirmation_request.bd_addr);
         break;
     default:
-        WICED_BT_TRACE("Unhandled Bluetooth Management Event: 0x%x (%d)\n", event, event);
+        WICED_BT_TRACE("Unhandled Bluetooth Management Event: 0x%x (%d)\r\n", event, event);
         break;
     }
 
@@ -306,11 +309,6 @@ wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn
             // Detected a matching handle in the external lookup table
             if (golf_glove_gatt_db_ext_attr_tbl[i].cur_len <= max_len)
             {
-                // Value fits within the supplied buffer; copy over the value
-                *p_len = golf_glove_gatt_db_ext_attr_tbl[i].cur_len;
-                memcpy(p_val, golf_glove_gatt_db_ext_attr_tbl[i].p_data, golf_glove_gatt_db_ext_attr_tbl[i].cur_len);
-                res = WICED_BT_GATT_SUCCESS;
-
                 // TODO: Add code for any action required when this attribute is read
                 switch ( attr_handle )
                 {
@@ -319,16 +317,27 @@ wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn
                 case HDLC_GENERIC_ACCESS_APPEARANCE_VALUE:
                     break;
                 case HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE:
-                    break;
+                    {
+                        uint32_t next_frame = gatt_read_next_frame();
+                        memcpy(golf_glove_gatt_db_ext_attr_tbl[i].p_data, &next_frame, golf_glove_gatt_db_ext_attr_tbl[i].cur_len);
+                    } break;
                 case HDLD_GOLF_GLOVE_NEXT_FRAME_CLIENT_CONFIGURATION:
                     break;
                 case HDLC_GOLF_GLOVE_REALTIME_ENABLED_VALUE:
                     break;
                 case HDLC_GOLF_GLOVE_DATA_AVAILABLE_VALUE:
-                    break;
+                    {
+                        wiced_bool_t is_data_available = gatt_read_data_available();
+                        memcpy(golf_glove_gatt_db_ext_attr_tbl[i].p_data, &is_data_available, golf_glove_gatt_db_ext_attr_tbl[i].cur_len);
+                    } break;
                 case HDLD_GOLF_GLOVE_DATA_AVAILABLE_CLIENT_CONFIGURATION:
                     break;
                 }
+
+                // Value fits within the supplied buffer; copy over the value
+                *p_len = golf_glove_gatt_db_ext_attr_tbl[i].cur_len;
+                memcpy(p_val, golf_glove_gatt_db_ext_attr_tbl[i].p_data, golf_glove_gatt_db_ext_attr_tbl[i].cur_len);
+                res = WICED_BT_GATT_SUCCESS;
             }
             else
             {
@@ -349,7 +358,7 @@ wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn
         {
         default:
             // The read operation was not performed for the indicated handle
-            WICED_BT_TRACE("Read Request to Invalid Handle: 0x%x\n", attr_handle);
+            WICED_BT_TRACE("Read Request to Invalid Handle: 0x%x\r\n", attr_handle);
             res = WICED_BT_GATT_READ_NOT_PERMIT;
             break;
         }
@@ -413,7 +422,7 @@ wiced_bt_gatt_status_t golf_glove_set_value( uint16_t attr_handle, uint16_t conn
         {
         default:
             // The write operation was not performed for the indicated handle
-            WICED_BT_TRACE("Write Request to Invalid Handle: 0x%x\n", attr_handle);
+            WICED_BT_TRACE("Write Request to Invalid Handle: 0x%x\r\n", attr_handle);
             res = WICED_BT_GATT_WRITE_NOT_PERMIT;
             break;
         }
@@ -454,14 +463,14 @@ wiced_bt_gatt_status_t golf_glove_connect_callback( wiced_bt_gatt_connection_sta
         if ( p_conn_status->connected )
         {
             // Device has connected
-            WICED_BT_TRACE("Connected : BDA '%B', Connection ID '%d'\n", p_conn_status->bd_addr, p_conn_status->conn_id );
+            WICED_BT_TRACE("Connected : BDA '%B', Connection ID '%d'\r\n", p_conn_status->bd_addr, p_conn_status->conn_id );
 
             /* TODO: Handle the connection */
         }
         else
         {
             // Device has disconnected
-            WICED_BT_TRACE("Disconnected : BDA '%B', Connection ID '%d', Reason '%d'\n", p_conn_status->bd_addr, p_conn_status->conn_id, p_conn_status->reason );
+            WICED_BT_TRACE("Disconnected : BDA '%B', Connection ID '%d', Reason '%d'\r\n", p_conn_status->bd_addr, p_conn_status->conn_id, p_conn_status->reason );
 
             /* TODO: Handle the disconnection */
 
@@ -526,12 +535,12 @@ uint32_t hci_control_process_rx_cmd( uint8_t* p_data, uint32_t len )
     uint8_t* p_payload_data = NULL;
     uint8_t payload_length = 0;
 
-    WICED_BT_TRACE("hci_control_process_rx_cmd : Data Length '%d'\n", len);
+    WICED_BT_TRACE("hci_control_process_rx_cmd : Data Length '%d'\r\n", len);
 
     // At least 4 bytes are expected in WICED Header
     if ((NULL == p_data) || (len < 4))
     {
-        WICED_BT_TRACE("Invalid Parameters\n");
+        WICED_BT_TRACE("Invalid Parameters\r\n");
         status = HCI_CONTROL_STATUS_INVALID_ARGS;
     }
     else
