@@ -328,24 +328,7 @@ wiced_bt_gatt_status_t golf_glove_get_value(uint16_t attr_handle,
                     frame = get_sensor_frame();
                     memcpy(golf_glove_gatt_db_ext_attr_tbl[i].p_data, &frame,
                             golf_glove_gatt_db_ext_attr_tbl[i].cur_len);
-                    WICED_BT_TRACE(
-                            "frame: { %x, %x, %x, %x, %x, %x, %x, "
-                                    "{ %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x }, "
-                                    "{ %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x }, %x, %x }\r\n",
-                            // other sensor data
-                            frame.timestamp, frame.pres1, frame.pres2,
-                            frame.wrist1, frame.wrist2, frame.wrist3,
-                            frame.wrist4,
-                            // imu1
-                            frame.imu1.accX, frame.imu1.accY, frame.imu1.accZ,
-                            frame.imu1.gyroX, frame.imu1.gyroY,
-                            frame.imu1.gyroZ, frame.imu1.magX, frame.imu1.magY,
-                            frame.imu1.magZ,
-                            // imu2
-                            frame.imu2.accX, frame.imu2.accY, frame.imu2.accZ,
-                            frame.imu2.gyroX, frame.imu2.gyroY,
-                            frame.imu2.gyroZ, frame.imu2.magX, frame.imu2.magY,
-                            frame.imu2.magZ, frame.sync, frame.avail);
+                    print_sensor_frame(frame);
                     break;
                 case HDLD_GOLF_GLOVE_NEXT_FRAME_CLIENT_CONFIGURATION:
                     break;

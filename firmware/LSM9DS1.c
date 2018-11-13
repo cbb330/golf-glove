@@ -1,20 +1,29 @@
 #include "LSM9DS1.h"
 
 int lsm_begin() {
-    WICED_BT_TRACE("lsm_begin\r\n");
+    //wiced_bt_trace("lsm_begin\r\n");
     // soft reset & reboot accel/gyro
     lsm_write8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG8, 0x05);
     // soft reset & reboot magnetometer
     lsm_write8(MAGTYPE, LSM9DS1_REGISTER_CTRL_REG2_M, 0x0C);
-    //sleep(1);
+    wiced_rtos_delay_milliseconds(1000, KEEP_THREAD_ACTIVE);
 
     uint8_t id = lsm_read8(XGTYPE, LSM9DS1_REGISTER_WHO_AM_I_XG);
-    if (id != LSM9DS1_XG_ID)
+    while(id != LSM9DS1_XG_ID)
+        id = lsm_read8(XGTYPE, LSM9DS1_REGISTER_WHO_AM_I_XG);
+
+    if (id != LSM9DS1_XG_ID){
+        WICED_BT_TRACE("ERROR on LSM9DS1_REGISTER_WHO_AM_I_XG : %d %d\r\n", id, LSM9DS1_XG_ID);
         return 0;
+    }
 
     id = lsm_read8(MAGTYPE, LSM9DS1_REGISTER_WHO_AM_I_M);
-    if (id != LSM9DS1_MAG_ID)
+    while(id != LSM9DS1_MAG_ID)
+            id = lsm_read8(XGTYPE, LSM9DS1_REGISTER_WHO_AM_I_XG);
+    if (id != LSM9DS1_MAG_ID) {
+        WICED_BT_TRACE("ERROR on LSM9DS1_REGISTER_WHO_AM_I_M : %d %d\r\n", id, LSM9DS1_MAG_ID);
         return 0;
+    }
 
     // enable gyro continuous
     lsm_write8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG1_G, 0xC0); // on XYZ
@@ -44,7 +53,7 @@ void lsm_read() {
 }
 
 void lsm_readAccel() {
-    WICED_BT_TRACE("lsm_readAccel\r\n");
+    //wiced_bt_trace("lsm_readAccel\r\n");
     // Read the accelerometer
     byte buffer[6];
     lsm_readBuffer(XGTYPE, 0x80 | LSM9DS1_REGISTER_OUT_X_L_XL, 6, buffer);
@@ -69,7 +78,7 @@ void lsm_readAccel() {
 }
 
 void lsm_readMag() {
-    WICED_BT_TRACE("lsm_readMag\r\n");
+    //wiced_bt_trace("lsm_readMag\r\n");
     // Read the magnetometer
     byte buffer[6];
     lsm_readBuffer(MAGTYPE, 0x80 | LSM9DS1_REGISTER_OUT_X_L_M, 6, buffer);
@@ -94,7 +103,7 @@ void lsm_readMag() {
 }
 
 void lsm_readGyro() {
-    WICED_BT_TRACE("lsm_readGyro\r\n");
+    //wiced_bt_trace("lsm_readGyro\r\n");
     // Read gyro
     byte buffer[6];
     lsm_readBuffer(XGTYPE, 0x80 | LSM9DS1_REGISTER_OUT_X_L_G, 6, buffer);
@@ -120,7 +129,7 @@ void lsm_readGyro() {
 }
 
 void lsm_readTemp() {
-    WICED_BT_TRACE("lsm_readTemp\r\n");
+    //wiced_bt_trace("lsm_readTemp\r\n");
     byte buffer[2];
     lsm_readBuffer(XGTYPE, 0x80 | LSM9DS1_REGISTER_TEMP_OUT_L, 2, buffer);
     uint8_t xlo = buffer[0];
@@ -133,7 +142,7 @@ void lsm_readTemp() {
 }
 
 void lsm_setupAccel(lsm9ds1AccelRange_t range) {
-    WICED_BT_TRACE("lsm_setupAccel\r\n");
+    //wiced_bt_trace("lsm_setupAccel\r\n");
     uint8_t reg = lsm_read8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG6_XL);
     reg &= ~(0b00011000);
     reg |= range;
@@ -156,7 +165,7 @@ void lsm_setupAccel(lsm9ds1AccelRange_t range) {
 }
 
 void lsm_setupMag(lsm9ds1MagGain_t gain) {
-    WICED_BT_TRACE("lsm_setupMag\r\n");
+    //wiced_bt_trace("lsm_setupMag\r\n");
     uint8_t reg = lsm_read8(MAGTYPE, LSM9DS1_REGISTER_CTRL_REG2_M);
     reg &= ~(0b01100000);
     reg |= gain;
@@ -179,7 +188,7 @@ void lsm_setupMag(lsm9ds1MagGain_t gain) {
 }
 
 void lsm_setupGyro(lsm9ds1GyroScale_t scale) {
-    WICED_BT_TRACE("lsm_setupGyro\r\n");
+    //wiced_bt_trace("lsm_setupGyro\r\n");
     uint8_t reg = lsm_read8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG1_G);
     reg &= ~(0b00011000);
     reg |= scale;
@@ -199,7 +208,7 @@ void lsm_setupGyro(lsm9ds1GyroScale_t scale) {
 }
 
 void lsm_write8(int type, byte reg, byte value) {
-    WICED_BT_TRACE("lsm_write8\r\n");
+    //wiced_bt_trace("lsm_write8\r\n");
     byte address, _cs;
 
     if (type == MAGTYPE) {
@@ -218,7 +227,7 @@ void lsm_write8(int type, byte reg, byte value) {
 }
 
 byte lsm_read8(int type, byte reg) {
-    WICED_BT_TRACE("lsm_read8\r\n");
+    //wiced_bt_trace("lsm_read8\r\n");
     uint8_t value;
 
     lsm_readBuffer(type, reg, 1, &value);
@@ -227,7 +236,7 @@ byte lsm_read8(int type, byte reg) {
 }
 
 byte lsm_readBuffer(int type, byte reg, byte len, uint8_t *buffer) {
-    WICED_BT_TRACE("lsm_readBuffer\r\n");
+    //wiced_bt_trace("lsm_readBuffer\r\n");
     byte address, _cs;
 
     if (type == MAGTYPE) {
@@ -238,18 +247,17 @@ byte lsm_readBuffer(int type, byte reg, byte len, uint8_t *buffer) {
         _cs = _csxg;
     }
 
-
     res = wiced_hal_i2c_write(&reg, 1, address);
     if(res == 1) WICED_BT_TRACE("ERROR: i2c write Error.\r\n");
 
-    byte rlen = 0;
-    res = wiced_hal_i2c_read(&rlen, 1, address);
-    if(res == 1) WICED_BT_TRACE("ERROR: i2c read Error.\r\n");
+    //byte rlen = 0;
+    //res = wiced_hal_i2c_read(&rlen, 1, address);
+    //if(res == 1) WICED_BT_TRACE("ERROR: i2c read Error. result=%d val=%d\r\n", res, rlen);
 
-    if ( rlen != len) {
-        WICED_BT_TRACE("ERROR: Register Length Mismatch. %d != %d\r\n", len, rlen);
-        return 0;
-    }
+    //if ( rlen != len) {
+    //    WICED_BT_TRACE("ERROR: Register Length Mismatch. %d != %d\r\n", len, rlen);
+    //    return 0;
+    //}
 
     res = wiced_hal_i2c_read(buffer, len, address);
     if(res == 1) WICED_BT_TRACE("ERROR: i2c read Error.\r\n");

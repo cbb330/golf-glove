@@ -4,6 +4,7 @@
 #include "wiced.h"
 #include "wiced_bt_trace.h"
 #include "wiced_bt_types.h"
+#include "wiced_memory.h"
 #include "sparcommon.h"
 #include "wiced_hal_i2c.h"
 #include "wiced_hal_adc.h"
@@ -60,6 +61,7 @@ void init_i2c();
 
 // Main loop (contains process states)
 void sensor_loop();
+void print_sensor_frame(sensor_frame rec);
 
 // Sensor polling logic
 sensor_frame get_sensor_frame();

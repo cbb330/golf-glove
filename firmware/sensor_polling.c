@@ -53,6 +53,38 @@ sensor_frame get_sensor_frame() {
     return rec;
 }
 
+void print_sensor_frame(sensor_frame rec) {
+  WICED_BT_TRACE("timestamp %u\r\n", rec.timestamp);
+  WICED_BT_TRACE("pres1     %u\r\n", rec.pres1);
+  WICED_BT_TRACE("pres2     %u\r\n", rec.pres2);
+  WICED_BT_TRACE("wrist1    %u\r\n", rec.wrist1);
+  WICED_BT_TRACE("wrist2    %u\r\n", rec.wrist2);
+  WICED_BT_TRACE("wrist3    %u\r\n", rec.wrist3);
+  WICED_BT_TRACE("wrist4    %u\r\n", rec.wrist3);
+  WICED_BT_TRACE("imu1        \r\n");
+  WICED_BT_TRACE("    accX  %u\r\n", rec.imu1.accX);
+  WICED_BT_TRACE("    accY  %u\r\n", rec.imu1.accY);
+  WICED_BT_TRACE("    accZ  %u\r\n", rec.imu1.accZ);
+  WICED_BT_TRACE("    magX  %u\r\n", rec.imu1.magX);
+  WICED_BT_TRACE("    magY  %u\r\n", rec.imu1.magY);
+  WICED_BT_TRACE("    magZ  %u\r\n", rec.imu1.magZ);
+  WICED_BT_TRACE("    gyroX %u\r\n", rec.imu1.gyroX);
+  WICED_BT_TRACE("    gyroY %u\r\n", rec.imu1.gyroY);
+  WICED_BT_TRACE("    gyroZ %u\r\n", rec.imu1.gyroZ);
+  WICED_BT_TRACE("imu2        \r\n");
+  WICED_BT_TRACE("    accX  %u\r\n", rec.imu2.accX);
+  WICED_BT_TRACE("    accY  %u\r\n", rec.imu2.accY);
+  WICED_BT_TRACE("    accZ  %u\r\n", rec.imu2.accZ);
+  WICED_BT_TRACE("    magX  %u\r\n", rec.imu2.magX);
+  WICED_BT_TRACE("    magY  %u\r\n", rec.imu2.magY);
+  WICED_BT_TRACE("    magZ  %u\r\n", rec.imu2.magZ);
+  WICED_BT_TRACE("    gyroX %u\r\n", rec.imu2.gyroX);
+  WICED_BT_TRACE("    gyroY %u\r\n", rec.imu2.gyroY);
+  WICED_BT_TRACE("    gyroZ %u\r\n", rec.imu2.gyroZ);
+  WICED_BT_TRACE("sync      %u\r\n", rec.sync);
+  WICED_BT_TRACE("avail     %u\r\n", rec.avail);
+}
+
 imu_frame get_imu_frame(uint16_t addr) {
 
     lsm_read();

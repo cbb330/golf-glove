@@ -3,6 +3,7 @@
 
 #include "wiced_bt_trace.h"
 #include "wiced_bt_types.h"
+#include "wiced_rtos.h"
 #include "sparcommon.h"
 #include "wiced_hal_i2c.h"
 #include <unistd.h>
@@ -139,7 +140,7 @@ typedef struct vector_s {
 lsm9ds1Vector_t accelData; // Last read accelerometer data will be available here
 lsm9ds1Vector_t magData;   // Last read magnetometer data will be available here
 lsm9ds1Vector_t gyroData;     // Last read gyroscope data will be available here
-int16_t temperature; // Last read temperzture data will be available here
+int16_t temperature; // Last read temperature data will be available here
 
 int lsm_begin(void);
 void lsm_read(void);
