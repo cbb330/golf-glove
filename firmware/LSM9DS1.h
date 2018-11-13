@@ -8,7 +8,7 @@
 #include "wiced_hal_i2c.h"
 #include <unistd.h>
 
-typedef unsigned char byte;
+typedef unsigned char UINT8;
 
 #define LSM9DS1_ADDRESS_ACCELGYRO          (0x6B)
 #define LSM9DS1_ADDRESS_MAG                (0x1E)
@@ -151,10 +151,10 @@ void lsm_readTemp(void);
 void lsm_setupAccel(lsm9ds1AccelRange_t range);
 void lsm_setupMag(lsm9ds1MagGain_t gain);
 void lsm_setupGyro(lsm9ds1GyroScale_t scale);
-void lsm_write8(int type, byte reg, byte value);
-byte lsm_read8(int type, byte reg);
-byte lsm_readBuffer(int type, byte reg, byte len, uint8_t *buffer);
-//uint8_t spixfer(uint8_t data);
+void lsm_write8(int type, UINT8 reg, UINT8 value);
+UINT8 lsm_read8(int type, UINT8 reg);
+UINT8 lsm_readBuffer(int type, UINT8 reg, UINT8 len, UINT8 *buffer);
+//UINT8 spixfer(UINT8 data);
 
 int8_t _csm, _csxg, _mosi, _miso, _clk;
 float _accel_mg_lsb;

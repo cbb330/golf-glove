@@ -8,7 +8,7 @@ int lsm_begin() {
     lsm_write8(MAGTYPE, LSM9DS1_REGISTER_CTRL_REG2_M, 0x0C);
     wiced_rtos_delay_milliseconds(1000, KEEP_THREAD_ACTIVE);
 
-    uint8_t id = lsm_read8(XGTYPE, LSM9DS1_REGISTER_WHO_AM_I_XG);
+    UINT8 id = lsm_read8(XGTYPE, LSM9DS1_REGISTER_WHO_AM_I_XG);
     while(id != LSM9DS1_XG_ID)
         id = lsm_read8(XGTYPE, LSM9DS1_REGISTER_WHO_AM_I_XG);
 
@@ -55,17 +55,17 @@ void lsm_read() {
 void lsm_readAccel() {
     //wiced_bt_trace("lsm_readAccel\r\n");
     // Read the accelerometer
-    byte buffer[6];
+    UINT8 buffer[6];
     lsm_readBuffer(XGTYPE, 0x80 | LSM9DS1_REGISTER_OUT_X_L_XL, 6, buffer);
 
-    uint8_t xlo = buffer[0];
+    UINT8 xlo = buffer[0];
     int16_t xhi = buffer[1];
-    uint8_t ylo = buffer[2];
+    UINT8 ylo = buffer[2];
     int16_t yhi = buffer[3];
-    uint8_t zlo = buffer[4];
+    UINT8 zlo = buffer[4];
     int16_t zhi = buffer[5];
 
-    // Shift values to create properly formed integer (low byte first)
+    // Shift values to create properly formed integer (low UINT8 first)
     xhi <<= 8;
     xhi |= xlo;
     yhi <<= 8;
@@ -80,17 +80,17 @@ void lsm_readAccel() {
 void lsm_readMag() {
     //wiced_bt_trace("lsm_readMag\r\n");
     // Read the magnetometer
-    byte buffer[6];
+    UINT8 buffer[6];
     lsm_readBuffer(MAGTYPE, 0x80 | LSM9DS1_REGISTER_OUT_X_L_M, 6, buffer);
 
-    uint8_t xlo = buffer[0];
+    UINT8 xlo = buffer[0];
     int16_t xhi = buffer[1];
-    uint8_t ylo = buffer[2];
+    UINT8 ylo = buffer[2];
     int16_t yhi = buffer[3];
-    uint8_t zlo = buffer[4];
+    UINT8 zlo = buffer[4];
     int16_t zhi = buffer[5];
 
-    // Shift values to create properly formed integer (low byte first)
+    // Shift values to create properly formed integer (low UINT8 first)
     xhi <<= 8;
     xhi |= xlo;
     yhi <<= 8;
@@ -105,17 +105,17 @@ void lsm_readMag() {
 void lsm_readGyro() {
     //wiced_bt_trace("lsm_readGyro\r\n");
     // Read gyro
-    byte buffer[6];
+    UINT8 buffer[6];
     lsm_readBuffer(XGTYPE, 0x80 | LSM9DS1_REGISTER_OUT_X_L_G, 6, buffer);
 
-    uint8_t xlo = buffer[0];
+    UINT8 xlo = buffer[0];
     int16_t xhi = buffer[1];
-    uint8_t ylo = buffer[2];
+    UINT8 ylo = buffer[2];
     int16_t yhi = buffer[3];
-    uint8_t zlo = buffer[4];
+    UINT8 zlo = buffer[4];
     int16_t zhi = buffer[5];
 
-    // Shift values to create properly formed integer (low byte first)
+    // Shift values to create properly formed integer (low UINT8 first)
     xhi <<= 8;
     xhi |= xlo;
     yhi <<= 8;
@@ -130,9 +130,9 @@ void lsm_readGyro() {
 
 void lsm_readTemp() {
     //wiced_bt_trace("lsm_readTemp\r\n");
-    byte buffer[2];
+    UINT8 buffer[2];
     lsm_readBuffer(XGTYPE, 0x80 | LSM9DS1_REGISTER_TEMP_OUT_L, 2, buffer);
-    uint8_t xlo = buffer[0];
+    UINT8 xlo = buffer[0];
     int16_t xhi = buffer[1];
 
     xhi <<= 8;
@@ -143,7 +143,7 @@ void lsm_readTemp() {
 
 void lsm_setupAccel(lsm9ds1AccelRange_t range) {
     //wiced_bt_trace("lsm_setupAccel\r\n");
-    uint8_t reg = lsm_read8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG6_XL);
+    UINT8 reg = lsm_read8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG6_XL);
     reg &= ~(0b00011000);
     reg |= range;
     lsm_write8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG6_XL, reg);
@@ -166,7 +166,7 @@ void lsm_setupAccel(lsm9ds1AccelRange_t range) {
 
 void lsm_setupMag(lsm9ds1MagGain_t gain) {
     //wiced_bt_trace("lsm_setupMag\r\n");
-    uint8_t reg = lsm_read8(MAGTYPE, LSM9DS1_REGISTER_CTRL_REG2_M);
+    UINT8 reg = lsm_read8(MAGTYPE, LSM9DS1_REGISTER_CTRL_REG2_M);
     reg &= ~(0b01100000);
     reg |= gain;
     lsm_write8(MAGTYPE, LSM9DS1_REGISTER_CTRL_REG2_M, reg);
@@ -189,7 +189,7 @@ void lsm_setupMag(lsm9ds1MagGain_t gain) {
 
 void lsm_setupGyro(lsm9ds1GyroScale_t scale) {
     //wiced_bt_trace("lsm_setupGyro\r\n");
-    uint8_t reg = lsm_read8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG1_G);
+    UINT8 reg = lsm_read8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG1_G);
     reg &= ~(0b00011000);
     reg |= scale;
     lsm_write8(XGTYPE, LSM9DS1_REGISTER_CTRL_REG1_G, reg);
@@ -207,9 +207,9 @@ void lsm_setupGyro(lsm9ds1GyroScale_t scale) {
     }
 }
 
-void lsm_write8(int type, byte reg, byte value) {
+void lsm_write8(int type, UINT8 reg, UINT8 value) {
     //wiced_bt_trace("lsm_write8\r\n");
-    byte address, _cs;
+    UINT8 address, _cs;
 
     if (type == MAGTYPE) {
         address = LSM9DS1_ADDRESS_MAG;
@@ -226,18 +226,18 @@ void lsm_write8(int type, byte reg, byte value) {
 
 }
 
-byte lsm_read8(int type, byte reg) {
+UINT8 lsm_read8(int type, UINT8 reg) {
     //wiced_bt_trace("lsm_read8\r\n");
-    uint8_t value;
+    UINT8 value;
 
     lsm_readBuffer(type, reg, 1, &value);
 
     return value;
 }
 
-byte lsm_readBuffer(int type, byte reg, byte len, uint8_t *buffer) {
+UINT8 lsm_readBuffer(int type, UINT8 reg, UINT8 len, UINT8 *buffer) {
     //wiced_bt_trace("lsm_readBuffer\r\n");
-    byte address, _cs;
+    UINT8 address, _cs;
 
     if (type == MAGTYPE) {
         address = LSM9DS1_ADDRESS_MAG;
@@ -250,7 +250,7 @@ byte lsm_readBuffer(int type, byte reg, byte len, uint8_t *buffer) {
     res = wiced_hal_i2c_write(&reg, 1, address);
     if(res == 1) WICED_BT_TRACE("ERROR: i2c write Error.\r\n");
 
-    //byte rlen = 0;
+    //UINT8 rlen = 0;
     //res = wiced_hal_i2c_read(&rlen, 1, address);
     //if(res == 1) WICED_BT_TRACE("ERROR: i2c read Error. result=%d val=%d\r\n", res, rlen);
 
@@ -261,6 +261,12 @@ byte lsm_readBuffer(int type, byte reg, byte len, uint8_t *buffer) {
 
     res = wiced_hal_i2c_read(buffer, len, address);
     if(res == 1) WICED_BT_TRACE("ERROR: i2c read Error.\r\n");
+    else {
+        WICED_BT_TRACE("I2C READ ");
+        int i;
+        for (i=0; i<len; i++) WICED_BT_TRACE("%x ", buffer[0]);
+        WICED_BT_TRACE("\r\n");
+    }
 
     return len;
 }
