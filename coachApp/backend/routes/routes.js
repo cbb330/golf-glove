@@ -1,22 +1,22 @@
 'use strict';
+const Controller = require('./coachAppController');
 
 module.exports = function(app) {
-  const controller = require('./coachAppController');
   const wss = app.get('wss');
 
   wss.on('connection', socket => {
-    console.log("Socket connected.");
+    console.log("Socket connected at port: " + wss.options.port);
+    const controller = new Controller(socket);
 
     socket.on('message', (data) => {
       var msg = JSON.parse(data);
-      console.log(msg.type);
+      console.log("Recieved message: " + msg.type);
 
       switch(msg.type) {
-        case "scanOn":
-          //controller.getDiscovers(socket);
-          socket.send(JSON.stringify({ data: "hello" }));
+        case "scanAndConnect":
+          controller.getDiscovers();
           break;
-        case "scanOff":
+        case "disconnect":
           break;
       }
 
@@ -24,12 +24,9 @@ module.exports = function(app) {
 
     socket.on('close', () => {
       // TODO: do this on the frontend
+      // TODO: close down noble adapter
       console.log("WebSocket was closed");
 
     });
   });
-
-  app.route('/hello')
-    .get(controller.hello);
-
 };
