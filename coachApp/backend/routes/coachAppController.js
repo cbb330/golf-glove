@@ -14,6 +14,7 @@ class Controller {
 
     noble.on('discover', peripheral => {
       this.sendDiscovers(peripheral);
+      this.noblePeripheral = peripheral;
     });
   }
 
@@ -25,14 +26,43 @@ class Controller {
   getDiscovers() {
     //console.log("get discovers: " + this.nobleState);
     this.scan();
+    if (this.noblePeripheral) {
+      this.noblePeripheral.connect(err => {
+        if (err) this.socket.send(JSON.stringify({ err: "Error Connecting!" }));
+        else {
+          this.getServices();
+        }
+      });
+    }
+  }
+
+  // TODO: make less forEach's and just lock to ggServiceUuid
+  getServices() {
+    this.noblePeripheral.discoverServices([ggServiceUuid], (err, services) => {
+      if (err) this.socket.send(JSON.stringify({ err: "Error Discovering Services!" }));
+      else {
+        services.forEach(service => {
+          console.log("found service: " + service.uuid);
+          service.discoverCharacteristics([], (err, characteristics) => {
+            if (err) this.socket.send(JSON.stringify({err: "Error Discovering Characteristics!"}));
+            else {
+              characteristics.forEach(characteristic => {
+                console.log("found characteristic: " + characteristic.uuid);
+                //TODO: continue filling out the characteristic read here
+              })
+            }
+          });
+        });
+      }
+    });
   }
 
   sendDiscovers(peripheral) {
 
     noble.stopScanning();
-    this.noblePeripheral = this.getPeripheral(peripheral);
+    var peripheralInfo = this.getPeripheral(peripheral);
     //console.log(this.noblePeripheral);
-    this.socket.send(JSON.stringify(this.noblePeripheral));
+    this.socket.send(JSON.stringify(peripheralInfo));
 
   }
 
