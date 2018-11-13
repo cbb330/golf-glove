@@ -1,6 +1,7 @@
 #ifndef __LSM9DS1_H__
 #define __LSM9DS1_H__
 
+#include "wiced_bt_trace.h"
 #include "wiced_bt_types.h"
 #include "sparcommon.h"
 #include "wiced_hal_i2c.h"
@@ -162,5 +163,6 @@ int32_t _lsm9dso_sensorid_accel;
 int32_t _lsm9dso_sensorid_mag;
 int32_t _lsm9dso_sensorid_gyro;
 int32_t _lsm9dso_sensorid_temp;
+UINT8 res;
 
 #endif

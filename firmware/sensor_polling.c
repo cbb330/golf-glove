@@ -2,8 +2,10 @@
 
 // init
 void init_i2c() {
+    WICED_BT_TRACE("init_i2c()\r\n");
     wiced_hal_i2c_init();
-    sleep(1);
+    wiced_hal_i2c_set_speed(I2CM_SPEED_400KHZ);
+    //sleep(1);
     lsm_begin();
 }
 

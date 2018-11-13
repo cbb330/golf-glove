@@ -2,6 +2,7 @@
 #define __SENSOR_POLLING_H
 
 #include "wiced.h"
+#include "wiced_bt_trace.h"
 #include "wiced_bt_types.h"
 #include "sparcommon.h"
 #include "wiced_hal_i2c.h"

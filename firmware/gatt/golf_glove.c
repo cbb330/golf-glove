@@ -79,21 +79,22 @@ uint8_t golf_glove_golf_glove_data_available_client_configuration[] = {
 gatt_db_lookup_table golf_glove_gatt_db_ext_attr_tbl[] = {
 /* { attribute handle,                                  maxlen, curlen, attribute data } */
 { HDLC_GENERIC_ACCESS_DEVICE_NAME_VALUE, 10, 10,
-        golf_glove_generic_access_device_name }, {
+        golf_glove_generic_access_device_name },
+        {
         HDLC_GENERIC_ACCESS_APPEARANCE_VALUE, 2, 2,
-        golf_glove_generic_access_appearance }, {
+                golf_glove_generic_access_appearance }, {
         HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE, 54, 54,
-        golf_glove_golf_glove_next_frame }, {
+                golf_glove_golf_glove_next_frame }, {
         HDLD_GOLF_GLOVE_NEXT_FRAME_CLIENT_CONFIGURATION, 2, 2,
-        golf_glove_golf_glove_next_frame_client_configuration }, {
+                golf_glove_golf_glove_next_frame_client_configuration }, {
         HDLC_GOLF_GLOVE_REALTIME_ENABLED_VALUE, 1, 1,
-        golf_glove_golf_glove_realtime_enabled }, {
+                golf_glove_golf_glove_realtime_enabled }, {
         HDLD_GOLF_GLOVE_REALTIME_ENABLED_CLIENT_CONFIGURATION, 2, 2,
-        golf_glove_golf_glove_realtime_enabled_client_configuration }, {
+                golf_glove_golf_glove_realtime_enabled_client_configuration }, {
         HDLC_GOLF_GLOVE_DATA_AVAILABLE_VALUE, 1, 1,
-        golf_glove_golf_glove_data_available }, {
+                golf_glove_golf_glove_data_available }, {
         HDLD_GOLF_GLOVE_DATA_AVAILABLE_CLIENT_CONFIGURATION, 2, 2,
-        golf_glove_golf_glove_data_available_client_configuration }, };
+                golf_glove_golf_glove_data_available_client_configuration }, };
 
 // Number of Lookup Table Entries
 const uint16_t golf_glove_gatt_db_ext_attr_tbl_size =
@@ -114,16 +115,7 @@ void gatt_application_start(void) {
 
     /* Initialize Transport Buffer Pool */
     transport_pool = wiced_transport_create_buffer_pool( TRANS_UART_BUFFER_SIZE,
-            TRANS_UART_BUFFER_COUNT);
-
-#if ((defined WICED_BT_TRACE_ENABLE) || (defined HCI_TRACE_OVER_TRANSPORT))
-    /* Set the Debug UART as WICED_ROUTE_DEBUG_NONE to get rid of prints */
-    //  wiced_set_debug_uart( WICED_ROUTE_DEBUG_NONE );
-    /* Set Debug UART as WICED_ROUTE_DEBUG_TO_PUART to see debug traces on Peripheral UART (PUART) */
-    wiced_set_debug_uart( WICED_ROUTE_DEBUG_TO_PUART );
-    /* Set the Debug UART as WICED_ROUTE_DEBUG_TO_WICED_UART to send debug strings over the WICED debug interface */
-    //wiced_set_debug_uart( WICED_ROUTE_DEBUG_TO_WICED_UART );
-#endif
+    TRANS_UART_BUFFER_COUNT);
 
     /* Initialize Bluetooth Controller and Host Stack */
     wiced_bt_stack_init(golf_glove_management_callback, &wiced_bt_cfg_settings,
@@ -502,7 +494,7 @@ wiced_bt_gatt_status_t golf_glove_connect_callback(
 
             /* restart the advertisements */
             wiced_bt_start_advertisements(BTM_BLE_ADVERT_UNDIRECTED_HIGH, 0,
-                    NULL);
+            NULL);
         }
         status = WICED_BT_GATT_SUCCESS;
     }
