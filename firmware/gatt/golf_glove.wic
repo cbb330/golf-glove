@@ -107,7 +107,7 @@
             <Uuid>5a 41 42 57 d5 13 4c 6f b8 ab 53 43 8a 86 35 6c</Uuid>
             <Description>Vendor Specific Characteristic: next_frame</Description>
             <DataType/>
-            <Size>54</Size>
+            <Size>56</Size>
             <InitialValue/>
             <Properties>
                 <Read>true</Read>
@@ -133,13 +133,19 @@
             <InitialValue/>
             <Properties>
                 <Read>true</Read>
-                <Notify>true</Notify>
-                <Indicate>true</Indicate>
+                <Notify>false</Notify>
+                <Indicate>false</Indicate>
+                <Write>true</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <SignedWrite>false</SignedWrite>
+                <ReliableWrite>false</ReliableWrite>
+                <WritableAuxiliaries>false</WritableAuxiliaries>
+                <Broadcast>false</Broadcast>
             </Properties>
             <Permissions>
                 <VariableLength>false</VariableLength>
                 <Read>true</Read>
-                <Write>false</Write>
+                <Write>true</Write>
                 <WriteWithoutResponse>false</WriteWithoutResponse>
                 <AuthenticatedRead>false</AuthenticatedRead>
                 <ReliableWrite>false</ReliableWrite>

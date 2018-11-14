@@ -80,22 +80,22 @@ const wiced_bt_cfg_settings_t wiced_bt_cfg_settings =
 
         .high_duty_min_interval =           WICED_BT_CFG_DEFAULT_HIGH_DUTY_ADV_MIN_INTERVAL,            /**< High Duty Undirected Connectable Minimum Advertising Interval */
         .high_duty_max_interval =           WICED_BT_CFG_DEFAULT_HIGH_DUTY_ADV_MAX_INTERVAL,            /**< High Duty Undirected Connectable Maximum Advertising Interval */
-        .high_duty_duration =               30,                                                         /**< High Duty Undirected Connectable Advertising Duration in seconds (0 for infinite) */
+        .high_duty_duration =               0,                                                          /**< High Duty Undirected Connectable Advertising Duration in seconds (0 for infinite) */
 
         .low_duty_min_interval =            WICED_BT_CFG_DEFAULT_LOW_DUTY_ADV_MIN_INTERVAL,             /**< Low Duty Undirected Connectable Minimum Advertising Interval */
         .low_duty_max_interval =            WICED_BT_CFG_DEFAULT_LOW_DUTY_ADV_MAX_INTERVAL,             /**< Low Duty Undirected Connectable Maximum Advertising Interval */
-        .low_duty_duration =                60,                                                         /**< Low Duty Undirected Connectable Advertising Duration in seconds (0 for infinite) */
+        .low_duty_duration =                0,                                                          /**< Low Duty Undirected Connectable Advertising Duration in seconds (0 for infinite) */
 
         .high_duty_directed_min_interval =  WICED_BT_CFG_DEFAULT_HIGH_DUTY_DIRECTED_ADV_MIN_INTERVAL,   /**< High Duty Directed Minimum Advertising Interval */
         .high_duty_directed_max_interval =  WICED_BT_CFG_DEFAULT_HIGH_DUTY_DIRECTED_ADV_MAX_INTERVAL,   /**< High Duty Directed Maximum Advertising Interval */
 
         .low_duty_directed_min_interval =   WICED_BT_CFG_DEFAULT_LOW_DUTY_DIRECTED_ADV_MIN_INTERVAL,    /**< Low Duty Directed Minimum Advertising Interval */
         .low_duty_directed_max_interval =   WICED_BT_CFG_DEFAULT_LOW_DUTY_DIRECTED_ADV_MAX_INTERVAL,    /**< Low Duty Directed Maximum Advertising Interval */
-        .low_duty_directed_duration =       30,                                                         /**< Low Duty Directed Advertising Duration in seconds (0 for infinite) */
+        .low_duty_directed_duration =       0,                                                          /**< Low Duty Directed Advertising Duration in seconds (0 for infinite) */
 
         .high_duty_nonconn_min_interval =   WICED_BT_CFG_DEFAULT_HIGH_DUTY_NONCONN_ADV_MIN_INTERVAL,    /**< High Duty Non-Connectable Minimum Advertising Interval */
         .high_duty_nonconn_max_interval =   WICED_BT_CFG_DEFAULT_HIGH_DUTY_NONCONN_ADV_MAX_INTERVAL,    /**< High Duty Non-Connectable Maximum Advertising Interval */
-        .high_duty_nonconn_duration =       30,                                                         /**< High Duty Non-Connectable Advertising Duration in seconds (0 for infinite) */
+        .high_duty_nonconn_duration =       0,                                                          /**< High Duty Non-Connectable Advertising Duration in seconds (0 for infinite) */
 
         .low_duty_nonconn_min_interval =    WICED_BT_CFG_DEFAULT_LOW_DUTY_NONCONN_ADV_MIN_INTERVAL,     /**< Low Duty Non-Connectable Minimum Advertising Interval */
         .low_duty_nonconn_max_interval =    WICED_BT_CFG_DEFAULT_LOW_DUTY_NONCONN_ADV_MAX_INTERVAL,     /**< Low Duty Non-Connectable Maximum Advertising Interval */
