@@ -14,6 +14,6 @@ void application_start(void) {
     // Setup BLE stack/broadcasting
     gatt_application_start();
 
-    //Initialize buffers
+    // Init frame buffer
     frame_buffer_init();
 }

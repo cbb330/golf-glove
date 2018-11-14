@@ -28,8 +28,8 @@ The data returned by reading this characteristic is a **54-byte** value with the
 | 14-15 | Ulnar Deviation | Unsigned 16-bit integer representing the angle of ulnar deviation (turning of the right hand to the right, or vice versa) as indicated by the inside soft robotic sensor. |
 | 16-33 | Wrist IMU | Inertial data as indicated by wrist-mounted IMU [See table below for details] |
 | 34-51 | Hand IMU | Inertial data as indicated by hand-mounted IMU [See table below for details] |
-| 52 | Swing Sync | 0 = middle of swing or real-time mode data point, 1 = beginning of swing, 2 = end of swing |
-| 53 | Data Available | 0 = no more frames to fetch in frame buffer, 1 = more frames to fetch in frame buffer |
+| 52-53 | Swing Sync | 0 = middle of swing or real-time mode data point, 1 = beginning of swing, 2 = end of swing |
+| 54-55 | Data Available | 0 = no more frames to fetch in frame buffer, 1 = more frames to fetch in frame buffer |
 
 IMU Data Format:
 
