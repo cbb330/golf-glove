@@ -1,11 +1,17 @@
 const noble = require('noble');
-const ggServiceUuid = '3ac598d61b7e422eb5f134fe4889837c';
+const ggServiceUuid = '7c838948fe34f1b52e427e1bd698c53a';
+const ggNextFrameChar = '6c35868a4353abb86f4c13d55742415a';
+const ggRealTimeEnable = '72e48cb3fa2227ba78416d1b7e539259';
+const ggDataEnable = 'bdf7ae339873ab95d04bcec6aa349390';
 
 class Controller {
   constructor(socket) {
     this.socket = socket;
     this.nobleState = undefined;
     this.noblePeripheral = {};
+    this.ggNextFrame = {};
+    this.ggRealTimeEnable = {};
+    this.ggDataEnable = {};
 
     noble.on('stateChange', newState => {
       //console.log("this is the new state: " + newState);
@@ -15,6 +21,16 @@ class Controller {
     noble.on('discover', peripheral => {
       this.sendDiscovers(peripheral);
       this.noblePeripheral = peripheral;
+      if (!this.isEmpty(this.noblePeripheral)) {
+        noble.stopScanning();
+        console.log("Trying to connect.");
+        peripheral.connect(err => {
+          if (!this.isEmpty(err)) this.socket.send(JSON.stringify({ err: err }));
+          else {
+            this.getServices();
+          }
+        });
+      }
     });
   }
 
@@ -26,18 +42,12 @@ class Controller {
   getDiscovers() {
     //console.log("get discovers: " + this.nobleState);
     this.scan();
-    if (this.noblePeripheral) {
-      this.noblePeripheral.connect(err => {
-        if (err) this.socket.send(JSON.stringify({ err: "Error Connecting!" }));
-        else {
-          this.getServices();
-        }
-      });
-    }
   }
 
   // TODO: make less forEach's and just lock to ggServiceUuid
   getServices() {
+    console.log("Trying to get services.");
+    //console.log(this.noblePeripheral);
     this.noblePeripheral.discoverServices([ggServiceUuid], (err, services) => {
       if (err) this.socket.send(JSON.stringify({ err: "Error Discovering Services!" }));
       else {
@@ -49,7 +59,15 @@ class Controller {
               characteristics.forEach(characteristic => {
                 console.log("found characteristic: " + characteristic.uuid);
                 //TODO: continue filling out the characteristic read here
-              })
+                this.ggNextFrame = characteristic;
+                if (this.ggNextFrame.uuid == ggNextFrameChar) {
+                  console.log("this happens");
+                  this.ggNextFrame.read(function (error, data) {
+                    console.log('DATA READ: ' + data.toString('utf8'));
+                  });
+                }
+              });
+              //this.noblePeripheral.disconnect();
             }
           });
         });
@@ -59,7 +77,7 @@ class Controller {
 
   sendDiscovers(peripheral) {
 
-    noble.stopScanning();
+    //noble.stopScanning();
     var peripheralInfo = this.getPeripheral(peripheral);
     //console.log(this.noblePeripheral);
     this.socket.send(JSON.stringify(peripheralInfo));
@@ -68,7 +86,8 @@ class Controller {
 
   scan() {
     if (this.nobleState === 'poweredOn') {
-      noble.startScanning([ggServiceUuid], false); // false - no duplicates
+      //noble.startScanning([ggServiceUuid], false); // false - no duplicates
+      noble.startScanning([ggServiceUuid], false);
       console.log("Started scanning");
     } else {
       //noble.stopScanning();
@@ -116,6 +135,10 @@ class Controller {
     }
 
     return periphObj;
+  }
+
+  isEmpty(obj) {
+    return !obj || Object.keys(obj).length === 0;
   }
 };
 
