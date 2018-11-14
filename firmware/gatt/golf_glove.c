@@ -135,24 +135,13 @@ const uint16_t golf_glove_gatt_db_ext_attr_tbl_size = ( sizeof ( golf_glove_gatt
  * stack initialization.  The actual application initialization will happen
  * when stack reports that BT device is ready
  */
-void application_start(void)
+void gatt_application_start(void)
 {
     /* Initialize the transport configuration */
     wiced_transport_init( &transport_cfg );
 
     /* Initialize Transport Buffer Pool */
     transport_pool = wiced_transport_create_buffer_pool ( TRANS_UART_BUFFER_SIZE, TRANS_UART_BUFFER_COUNT );
-
-#if ((defined WICED_BT_TRACE_ENABLE) || (defined HCI_TRACE_OVER_TRANSPORT))
-    /* Set the Debug UART as WICED_ROUTE_DEBUG_NONE to get rid of prints */
-    //  wiced_set_debug_uart( WICED_ROUTE_DEBUG_NONE );
-
-    /* Set Debug UART as WICED_ROUTE_DEBUG_TO_PUART to see debug traces on Peripheral UART (PUART) */
-    wiced_set_debug_uart( WICED_ROUTE_DEBUG_TO_PUART );
-
-    /* Set the Debug UART as WICED_ROUTE_DEBUG_TO_WICED_UART to send debug strings over the WICED debug interface */
-    //  wiced_set_debug_uart( WICED_ROUTE_DEBUG_TO_WICED_UART );
-#endif
 
     /* Initialize Bluetooth Controller and Host Stack */
     wiced_bt_stack_init(golf_glove_management_callback, &wiced_bt_cfg_settings, wiced_bt_cfg_buf_pools);
