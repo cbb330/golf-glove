@@ -19,18 +19,10 @@ class TestChart extends Component {
 
     this.testData.forEach(point => {
       point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
-      this.state.allData.push({time: point.time, x: point.accel_x, y: point.accel_y, z: point.accel_z, type: "all"});
-      this.state.xData.push({time: point.time, data: point.accel_x, type: "x"});
-      this.state.yData.push({time: point.time, data: point.accel_y, type: "y"});
-      this.state.zData.push({time: point.time, data: point.accel_z, type: "z"});
-
-      // this.setState({ allData: [...this.state.allData, {time: point.time, x: point.accel_x, y: point.accel_y, z: point.accel_z, type: "all"}]})
-      // this.setState({ xData: [...this.state.xData, {time: point.time, data: point.accel_x, type: "x"}]})
-      // this.setState({ yData: [...this.state.yData, {time: point.time, data: point.accel_y, type: "y"}]})
-      // this.setState({ zData: [...this.state.zData, {time: point.time, data: point.accel_z, type: "z"}]})
-      // xData.push({time: point.time, data: point.accel_x, type: "x"})
-      // yData.push({time: point.time, data: parseFloat((point.accel_y + k).toFixed(2)), type: "y"})
-      // zData.push({time: point.time, data: point.accel_z, type: "z"})
+      this.state.allData.push({time: point.time, x: point.imu1.accel_x, y: point.imu1.accel_y, z: point.imu1.accel_z, type: "all"});
+      this.state.xData.push({time: point.time, data: point.imu1.accel_x, type: "x"});
+      this.state.yData.push({time: point.time, data: point.imu1.accel_y, type: "y"});
+      this.state.zData.push({time: point.time, data: point.imu1.accel_z, type: "z"});
     });
   }
 
@@ -41,23 +33,10 @@ class TestChart extends Component {
   }
 
   render() {
-    // let xData = []
-    // let yData = []
-    // let zData = []
-    // let k = 0
-
-    // this.testData.forEach(point => {
-    //   // console.log(point)
-    //   // point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
-    //   xData.push({time: point.time, data: point.accel_x, type: "x"})
-    //   yData.push({time: point.time, data: parseFloat((point.accel_y + k).toFixed(2)), type: "y"})
-    //   zData.push({time: point.time, data: point.accel_z, type: "z"})
-    //   k += 0.02
-    // });
     return (
       <VictoryChart
-        width={1000}
         height={600}
+        width={1000}
         theme={VictoryTheme.material}
         scale={{ x: "time" }}
         domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
