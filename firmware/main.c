@@ -5,10 +5,12 @@
  */
 
 #include "wiced_bt_trace.h"
-
+#include "wiced_rtos.h"
 #include "buffer/frame_buffer.h"
 #include "gatt/golf_glove.h"
 #include "sensor_polling.h"
+
+//static wiced_thread_t* sensor_loop_handle;
 
 /**
  * Application entry point. Initializes BLE subsystem and application logic.
@@ -31,5 +33,14 @@ void application_start(void) {
     gatt_application_start();
 
     // Init frame buffer
-    frame_buffer_init();
+    //frame_buffer_init();
+
+    //WICED_BT_TRACE("Main Sensor Loop\r\n");
+    /*
+    //new thread sensor_loop();
+    sensor_loop_handle = wiced_rtos_create_thread();
+    wiced_rtos_init_thread(sensor_loop_handle, THREAD_PRIORITY_MAX, "sensor_loop", sensor_loop, 512, NULL);
+    */
 }
+
+

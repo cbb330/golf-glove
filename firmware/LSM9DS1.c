@@ -262,10 +262,12 @@ UINT8 lsm_readBuffer(int type, UINT8 reg, UINT8 len, UINT8 *buffer) {
     res = wiced_hal_i2c_read(buffer, len, address);
     if(res == 1) WICED_BT_TRACE("ERROR: i2c read Error.\r\n");
     else {
+        /*
         WICED_BT_TRACE("I2C READ ");
         int i;
         for (i=0; i<len; i++) WICED_BT_TRACE("%x ", buffer[0]);
         WICED_BT_TRACE("\r\n");
+        */
     }
 
     return len;
