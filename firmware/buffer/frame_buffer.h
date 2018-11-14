@@ -7,17 +7,11 @@
 #ifndef __FRAME_BUFFER_H
 #define __FRAME_BUFFER_H
 
-#include "wiced_rtos.h"
+#include "wiced.h"
+#include "wiced_bt_types.h"
+#include "wiced_result.h"
 
 #include "sensor_polling.h"
-
-#define FRAME_BUFFER_SIZE 1536 // 12.8s of data @120Hz, 82944 bytes of frames
-#define FRAME_BUFFER_TIMEOUT 1000 / POLL_RATE // time out before we need to read a new frame
-
-/**
- * WICED queue used to store unsent sensor data for the client.
- */
-wiced_queue_t* _frame_buffer;
 
 /**
  * Allocates and initializes the frame buffer.
@@ -33,7 +27,7 @@ wiced_result_t frame_buffer_init(void);
  * @return  0 : no data available
  * @return  1 : data available
  */
-int frame_buffer_is_data_available(void);
+wiced_bool_t frame_buffer_is_data_available(void);
 
 /**
  * Returns 1 if the frame buffer is full.
@@ -41,7 +35,7 @@ int frame_buffer_is_data_available(void);
  * @return 0 : not full
  * @return 1 : full
  */
-int frame_buffer_is_full(void);
+wiced_bool_t frame_buffer_is_full(void);
 
 /**
  * Pushes a sensor data frame into the frame buffer queue.

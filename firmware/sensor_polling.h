@@ -39,8 +39,8 @@ typedef struct {
     uint16_t wrist4; // ulnar deviation         //14-15
     imu_frame imu1; // Wrist                    //16-33
     imu_frame imu2; // Hand                     //34-51
-    uint8_t sync;                               //52
-    uint8_t avail;                              //53
+    uint16_t sync;                               //52-53
+    uint16_t avail;                              //54-55
 } sensor_frame;
 
 // init

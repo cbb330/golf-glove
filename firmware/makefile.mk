@@ -14,7 +14,7 @@ APP_SRC += main.c
 C_FLAGS += -DWICED_BT_TRACE_ENABLE
 
 # If defined, HCI traces are sent over transport/WICED HCI interface
-C_FLAGS += -DHCI_TRACE_OVER_TRANSPORT
+# C_FLAGS += -DHCI_TRACE_OVER_TRANSPORT
 
 ########################################################################
 ################ DO NOT MODIFY FILE BELOW THIS LINE ####################
