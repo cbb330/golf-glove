@@ -5,8 +5,8 @@ const ggRealTimeEnable = '72e48cb3fa2227ba78416d1b7e539259';
 const ggDataEnable = 'bdf7ae339873ab95d04bcec6aa349390';
 
 class Controller {
-  constructor(socket) {
-    this.socket = socket;
+  constructor() {
+    this.socket = {};
     this.nobleState = undefined;
     this.noblePeripheral = {};
     this.ggNextFrame = {};
@@ -49,8 +49,9 @@ class Controller {
     console.log("Trying to get services.");
     //console.log(this.noblePeripheral);
     this.noblePeripheral.discoverServices([ggServiceUuid], (err, services) => {
-      if (err) this.socket.send(JSON.stringify({ err: "Error Discovering Services!" }));
+      if (!this.isEmpty(err)) this.clientSend({ err: err });
       else {
+        console.log(services);
         services.forEach(service => {
           console.log("found service: " + service.uuid);
           service.discoverCharacteristics([], (err, characteristics) => {
@@ -63,11 +64,10 @@ class Controller {
                 if (this.ggNextFrame.uuid == ggNextFrameChar) {
                   console.log("this happens");
                   this.ggNextFrame.read(function (error, data) {
-                    console.log('DATA READ: ' + data.toString('utf8'));
+                    console.log('DATA READ: ' + data.toString('hex'));
                   });
                 }
               });
-              //this.noblePeripheral.disconnect();
             }
           });
         });
@@ -76,22 +76,35 @@ class Controller {
   }
 
   sendDiscovers(peripheral) {
-
     //noble.stopScanning();
     var peripheralInfo = this.getPeripheral(peripheral);
     //console.log(this.noblePeripheral);
-    this.socket.send(JSON.stringify(peripheralInfo));
-
+    this.clientSend(peripheralInfo);
   }
 
   scan() {
     if (this.nobleState === 'poweredOn') {
-      //noble.startScanning([ggServiceUuid], false); // false - no duplicates
+      //noble.startScanning();
       noble.startScanning([ggServiceUuid], false);
       console.log("Started scanning");
     } else {
       //noble.stopScanning();
       console.log("Is Bluetooth on?");
+    }
+  }
+
+  disconnectPeripheral() {
+    noble.stopScanning();
+    if (!this.isEmpty(this.noblePeripheral)) {
+      this.noblePeripheral.disconnect(err => {
+        if (!this.isEmpty(err)) {
+          this.clientSend({ err: err });
+        }
+        else this.clientSend({ success: "Peripheral Disconnected." });
+      });
+    }
+    else {
+      this.clientSend({ err: "No device connected." });
     }
   }
 
@@ -139,6 +152,26 @@ class Controller {
 
   isEmpty(obj) {
     return !obj || Object.keys(obj).length === 0;
+  }
+
+  clientSend(obj) {
+    // not sure if below is the correct way to check if socket is alive, especially if ./routes closes it.
+    // TODO: make this a listener???
+    if (this.socket.isAlive === false) {
+      this.socket.terminate();
+      console.log("Socket terminated, not sending.");
+      return;
+    }
+    try {
+      this.socket.send(JSON.stringify(obj));
+    }
+    catch(err) {
+      console.log("Message not sent! " + err);
+    }
+  }
+
+  setSocket(socket) {
+    this.socket = socket;
   }
 };
 
