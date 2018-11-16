@@ -28,8 +28,12 @@ module.exports = function(app) {
         case "disconnect":
           controller.disconnectPeripheral();
           break;
+        case "startData":
+          controller.getData();
+          break;
+        case "stopData":
+          controller.stopData();
       }
-
     });
 
     socket.on('close', () => {
