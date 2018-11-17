@@ -6,7 +6,7 @@ void init_i2c() {
     wiced_hal_i2c_init();
     wiced_hal_i2c_set_speed(I2CM_SPEED_400KHZ);
     //sleep(1);
-    lsm_begin();
+    lsm_begin(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_INTERNAL_ADDRESS_MAG);
 }
 
 // Main Loop

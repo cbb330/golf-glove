@@ -10,6 +10,18 @@
 
 typedef unsigned char UINT8;
 
+#define SENSORS_GRAVITY_EARTH             (9.80665F)              /**< Earth's gravity in m/s^2 */
+#define SENSORS_GRAVITY_MOON              (1.6F)                  /**< The moon's gravity in m/s^2 */
+#define SENSORS_GRAVITY_SUN               (275.0F)                /**< The sun's gravity in m/s^2 */
+#define SENSORS_GRAVITY_STANDARD          (SENSORS_GRAVITY_EARTH)
+#define SENSORS_MAGFIELD_EARTH_MAX        (60.0F)                 /**< Maximum magnetic field on Earth's surface */
+#define SENSORS_MAGFIELD_EARTH_MIN        (30.0F)                 /**< Minimum magnetic field on Earth's surface */
+#define SENSORS_PRESSURE_SEALEVELHPA      (1013.25F)              /**< Average sea level pressure is 1013.25 hPa */
+#define SENSORS_DPS_TO_RADS               (0.017453293F)          /**< Degrees/s to rad/s multiplier */
+#define SENSORS_GAUSS_TO_MICROTESLA       (100)                   /**< Gauss to micro-Tesla multiplier */
+
+#define LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO (0x6A) /*Motion sensor slave address*/
+#define LSM9DS1_INTERNAL_ADDRESS_MAG       (0x1C)
 #define LSM9DS1_ADDRESS_ACCELGYRO          (0x6B)
 #define LSM9DS1_ADDRESS_MAG                (0x1E)
 #define LSM9DS1_XG_ID                      (0b01101000)
@@ -142,18 +154,19 @@ lsm9ds1Vector_t magData;   // Last read magnetometer data will be available here
 lsm9ds1Vector_t gyroData;     // Last read gyroscope data will be available here
 int16_t temperature; // Last read temperature data will be available here
 
-int lsm_begin(void);
+int lsm_begin(UINT8 address_accelgyro, UINT8 address_mag);
 void lsm_read(void);
-void lsm_readAccel(void);
-void lsm_readMag(void);
-void lsm_readGyro(void);
-void lsm_readTemp(void);
-void lsm_setupAccel(lsm9ds1AccelRange_t range);
-void lsm_setupMag(lsm9ds1MagGain_t gain);
-void lsm_setupGyro(lsm9ds1GyroScale_t scale);
-void lsm_write8(int type, UINT8 reg, UINT8 value);
-UINT8 lsm_read8(int type, UINT8 reg);
-UINT8 lsm_readBuffer(int type, UINT8 reg, UINT8 len, UINT8 *buffer);
+void lsm_read_internal(void);
+void lsm_readAccel(UINT8 address);
+void lsm_readMag(UINT8 address);
+void lsm_readGyro(UINT8 address);
+void lsm_readTemp(UINT8 address);
+void lsm_setupAccel(UINT8 address, lsm9ds1AccelRange_t range);
+void lsm_setupMag(UINT8 address, lsm9ds1MagGain_t gain);
+void lsm_setupGyro(UINT8 address, lsm9ds1GyroScale_t scale);
+void lsm_write8(UINT8 addr, UINT8 reg, UINT8 value);
+UINT8 lsm_read8(UINT8 addr, UINT8 reg);
+UINT8 lsm_readBuffer(UINT8 addr, UINT8 reg, UINT8 len, UINT8 *buffer);
 //UINT8 spixfer(UINT8 data);
 
 int8_t _csm, _csxg, _mosi, _miso, _clk;
