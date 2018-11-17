@@ -1,5 +1,11 @@
 #include "sensor_polling.h"
 
+//need these for setup
+#define LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO (0x6A) /*Motion sensor slave address*/
+#define LSM9DS1_INTERNAL_ADDRESS_MAG       (0x1C)
+#define LSM9DS1_ADDRESS_ACCELGYRO          (0x6B)
+#define LSM9DS1_ADDRESS_MAG                (0x1E)
+
 // init
 void init_i2c() {
     WICED_BT_TRACE("init_i2c()\r\n");
@@ -35,18 +41,18 @@ sensor_frame get_sensor_frame() {
     imu_frame imu2 = get_imu_frame(HAND_IMU_ADDR); // Hand
 
     uint32_t timestamp = 0;
-    uint16_t pres1 = 0;
-    uint16_t pres1_v = 0;
+    UINT16 pres1 = 0;
+    UINT16 pres1_v = 0;
     pres1 = wiced_hal_adc_read_raw_sample( PRES1_PIN);
     pres1_v = wiced_hal_adc_read_voltage( PRES1_PIN);
-    uint16_t pres2 = 0;
-    uint16_t wrist1 = 0;
-    uint16_t wrist2 = 0;
-    uint16_t wrist3 = 0;
-    uint16_t wrist3_v = 0;
+    UINT16 pres2 = 0;
+    UINT16 wrist1 = 0;
+    UINT16 wrist2 = 0;
+    UINT16 wrist3 = 0;
+    UINT16 wrist3_v = 0;
     wrist3 = wiced_hal_adc_read_raw_sample( WRIST3_PIN);
     wrist3_v = wiced_hal_adc_read_voltage( WRIST3_PIN);
-    uint16_t wrist4 = 0;
+    UINT16 wrist4 = 0;
     wrist4 = wiced_hal_adc_read_raw_sample( WRIST4_PIN);
     pres1_v = wiced_hal_adc_read_voltage( WRIST4_PIN);
     uint8_t sync = 0;
@@ -90,19 +96,19 @@ void print_sensor_frame(sensor_frame rec) {
     WICED_BT_TRACE("avail     %u\r\n", rec.avail);
 }
 
-imu_frame get_imu_frame(uint16_t addr) {
+imu_frame get_imu_frame(UINT16 addr) {
 
-    lsm_read();
+    lsm_read_internal();
 
-    uint16_t accX = accelData.x;
-    uint16_t accY = accelData.y;
-    uint16_t accZ = accelData.z;
-    uint16_t magX = magData.x;
-    uint16_t magY = magData.y;
-    uint16_t magZ = magData.z;
-    uint16_t gyroX = gyroData.x;
-    uint16_t gyroY = gyroData.y;
-    uint16_t gyroZ = gyroData.z;
+    UINT16 accX = accelData.x;
+    UINT16 accY = accelData.y;
+    UINT16 accZ = accelData.z;
+    UINT16 magX = magData.x;
+    UINT16 magY = magData.y;
+    UINT16 magZ = magData.z;
+    UINT16 gyroX = gyroData.x;
+    UINT16 gyroY = gyroData.y;
+    UINT16 gyroZ = gyroData.z;
 
     imu_frame rec = { accX, accY, accZ, magX, magY, magZ, gyroX, gyroY, gyroZ }; //null data
 

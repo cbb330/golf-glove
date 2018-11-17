@@ -30,30 +30,30 @@ int real_time = 0;
 
 // 9-way IMU sensor data
 typedef struct {
-    uint16_t accX;
-    uint16_t accY;
-    uint16_t accZ;
-    uint16_t magX;
-    uint16_t magY;
-    uint16_t magZ;
-    uint16_t gyroX;
-    uint16_t gyroY;
-    uint16_t gyroZ;
+    UINT16 accX;
+    UINT16 accY;
+    UINT16 accZ;
+    UINT16 magX;
+    UINT16 magY;
+    UINT16 magZ;
+    UINT16 gyroX;
+    UINT16 gyroY;
+    UINT16 gyroZ;
 } imu_frame;
 
 // Total Sensor data
 typedef struct {
     uint32_t timestamp;                         //0-3
-    uint16_t pres1;                             //4-5
-    uint16_t pres2;                             //6-7
-    uint16_t wrist1; // deflection              //8-9
-    uint16_t wrist2; // extension               //10-11
-    uint16_t wrist3; // radial deviation        //12-13
-    uint16_t wrist4; // ulnar deviation         //14-15
+    UINT16 pres1;                             //4-5
+    UINT16 pres2;                             //6-7
+    UINT16 wrist1; // deflection              //8-9
+    UINT16 wrist2; // extension               //10-11
+    UINT16 wrist3; // radial deviation        //12-13
+    UINT16 wrist4; // ulnar deviation         //14-15
     imu_frame imu1; // Wrist                    //16-33
     imu_frame imu2; // Hand                     //34-51
-    uint16_t sync;                               //52-53
-    uint16_t avail;                              //54-55
+    UINT16 sync;                               //52-53
+    UINT16 avail;                              //54-55
 } sensor_frame;
 
 // init
@@ -65,7 +65,7 @@ void print_sensor_frame(sensor_frame rec);
 
 // Sensor polling logic
 sensor_frame get_sensor_frame();
-imu_frame get_imu_frame(uint16_t addr);
+imu_frame get_imu_frame(UINT16 addr);
 
 // Swing Detection/frameing
 int detect_swing(sensor_frame current, sensor_frame last);
