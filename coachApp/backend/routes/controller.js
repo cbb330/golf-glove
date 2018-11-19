@@ -1,10 +1,13 @@
-/*
-    Author: Christian Bush
-    Date: 10-31-18
-    Description: Controller class needed for Websocket/Noble asynch integration
+/**
+ * Author: Christian Bush
+ * Date: 10-31-18
+ * Description: Controller class needed for Websocket/Noble asynch integration
  */
 
 const noble = require('noble');
+const NextFrame = require('./nextframe.js');
+
+// golf glove constants
 const ggServiceUuid = '7c838948fe34f1b52e427e1bd698c53a'; // make big endian / little endian converter function
 const ggNextFrameChar = '6c35868a4353abb86f4c13d55742415a';
 //const ggNextFrameChar = '4e38bed209594602a0af9b6bcb3b7b0e';
@@ -38,6 +41,9 @@ class Controller {
             this.clientSend(peripheralInfo);
             this.ggPeripheral.once('disconnect', () => {
               console.log("disconnect once happened");
+              this.ggPeripheral = {};
+              this.ggService = {};
+              this.ggNextFrame = {};
               this.disconnectPeripheral();
             });
           }
@@ -89,7 +95,6 @@ class Controller {
       this.ggService.discoverCharacteristics([charUuid], (err, characteristics) => {
         if (err) this.socket.send(JSON.stringify({err: "Error Discovering Characteristics!"}));
         else {
-          console.log(characteristics);
           console.log("found characteristic: " + characteristics[0].uuid);
           this.ggNextFrame = characteristics[0];
         }
@@ -106,6 +111,12 @@ class Controller {
   }
 
   read() {
+    this.ggNextFrame.read((err, data) => {
+      var frame = new NextFrame(data);
+      this.clientSend(frame);
+    });
+
+    /*
     // TODO: Check if these changes work https://github.com/noble/noble/blob/master/examples/echo.js
     this.ggNextFrame.on('data', (data, isNotification) => {
       console.log('Received: "' + data + '"');
@@ -120,6 +131,7 @@ class Controller {
         console.log('Subscribed to NextFrame Characteristic');
       }
     });
+    */
 
   }
 
@@ -128,11 +140,7 @@ class Controller {
       this.ggPeripheral.disconnect(err => {
         if (!this.isEmpty(err)) this.clientSend({ err: err });
         else {
-          console.log("success happened");
           this.clientSend({ success : "Peripheral Disconnected"});
-          this.ggPeripheral = {};
-          this.ggService = {};
-          this.ggNextFrame = {};
         }
       });
     }
@@ -156,7 +164,6 @@ class Controller {
   set ggNextFrame(obj) {
     this._ggNextFrame = obj;
     if (!this.isEmpty(this._ggNextFrame)) {
-      this.isScanOn = true;
       this.read();
     }
   }
@@ -204,6 +211,7 @@ class Controller {
       console.log('\t TX power level: ' + peripheral.advertisement.txPowerLevel);
     }
 
+    console.log('');
     return periphObj;
   }
 
