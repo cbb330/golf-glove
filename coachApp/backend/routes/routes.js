@@ -22,16 +22,16 @@ module.exports = function(app) {
       console.log("Recieved message: " + msg.type);
 
       switch(msg.type) {
-        case "scanAndConnect":
+        case "connect":
           controller.getDiscovers();
           break;
         case "disconnect":
           controller.disconnectPeripheral();
           break;
-        case "startData":
+        case "start":
           controller.getData();
           break;
-        case "stopData":
+        case "stop":
           controller.stopData();
       }
     });
