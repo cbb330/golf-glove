@@ -1,5 +1,5 @@
 'use strict';
-const Controller = require('./coachAppController');
+const Controller = require('./controller');
 const controller = new Controller();
 
 module.exports = function(app) {

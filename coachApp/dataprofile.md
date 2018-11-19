@@ -8,31 +8,31 @@
   pressure2: number,
   deflection: number,
   extension: number,
-  radial_deviation: number,
-  ulnar_deviation: number,
+  radialDeviation: number,
+  ulnarDeviation: number,
   imu1: {
-    accel_x: number,
-    accel_y: number,
-    accel_z: number,
-    mag_x: number,
-    mag_y: number,
-    mag_z: number,
-    rot_x: number,
-    rot_y: number,
-    rot_z: number
+    accelX: number,
+    accelY: number,
+    accelZ: number,
+    magX: number,
+    magY: number,
+    magZ: number,
+    gyroX: number,
+    gyroY: number,
+    gyroZ: number
   },
   imu2: {
-    accel_x: number,
-    accel_y: number,
-    accel_z: number,
-    mag_x: number,
-    mag_y: number,
-    mag_z: number,
-    rot_x: number,
-    rot_y: number,
-    rot_z: number
+    accelX: number,
+    accelY: number,
+    accelZ: number,
+    magX: number,
+    magY: number,
+    magZ: number,
+    gyroX: number,
+    gyroY: number,
+    gyroZ: number
   },
-  swing_sync: ['0', '1', '2'],
-  data_available: boolean
+  swingSync: ['0', '1', '2'],
+  dataAvailable: boolean
 }
 ```
