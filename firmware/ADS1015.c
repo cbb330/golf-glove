@@ -142,7 +142,7 @@ INT16 ads_readADC_Differential_2_3() {
   i2c_write16(m_i2cAddress, ADS1015_REG_POINTER_CONFIG, config);
 
   // Wait for the conversion to complete
-  delay(m_conversionDelay);
+  wiced_rtos_delay_milliseconds(m_conversionDelay, KEEP_THREAD_ACTIVE);
 
   // Read the conversion results
   UINT16 res = i2c_read16(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift;
