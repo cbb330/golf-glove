@@ -6,6 +6,7 @@
 
 const noble = require('noble');
 const NextFrame = require('./nextframe.js');
+const db = require('../db/db.js');
 
 // golf glove constants
 const ggServiceUuid = '7c838948fe34f1b52e427e1bd698c53a'; // make big endian / little endian converter function
@@ -13,6 +14,7 @@ const ggNextFrameChar = '6c35868a4353abb86f4c13d55742415a';
 //const ggNextFrameChar = '4e38bed209594602a0af9b6bcb3b7b0e';
 const ggRealTimeEnable = '72e48cb3fa2227ba78416d1b7e539259';
 const ggDataEnable = 'bdf7ae339873ab95d04bcec6aa349390';
+const SAMPLE_RATE = 120; // in hertz
 
 class Controller {
   constructor() {
@@ -23,6 +25,9 @@ class Controller {
     this._ggNextFrame = {};
     this.ggRealTimeEnable = {};
     this.ggDataEnable = {};
+
+    this.currSwingNum = 0;
+    this.currSwingTime = 0;
 
     noble.on('stateChange', newState => {
       //console.log("this is the new state: " + newState);
@@ -113,6 +118,7 @@ class Controller {
   read() {
     this.ggNextFrame.read((err, data) => {
       var frame = new NextFrame(data);
+      this.storeFrame(frame);
       this.clientSend(frame);
     });
 
@@ -133,6 +139,34 @@ class Controller {
     });
     */
 
+  }
+
+  // TODO: take all storage logic to its own file
+  storeFrame(frame) {
+    this.setSwingData(frame);
+    db.run('INSERT INTO frame (timestamp, swingNum, offset, frame) VALUES (?, ?, ?, ?)',
+        frame['timestamp'], frame['swingNum'], frame['offset'], frame, (err) =>
+    {
+      console.error(err);
+    });
+  }
+
+  setSwingData(frame) {
+    switch(frame.swingSync) {
+        case 0:
+          frame['swingNum'] = -1;
+          frame['offset'] = 0;
+          break;
+        case 1:
+          frame['swingNum'] = ++this.currSwingNum;
+          frame['offset'] = 0;
+          this.currSwingTime = frame['timestamp'];
+          break;
+        case 2:
+          frame['swingNum'] = this.currSwingNum;
+          frame['offset'] = (frame['timestamp'] - this.currSwingTime) / SAMPLE_RATE;
+          break;
+      }
   }
 
   disconnectPeripheral() {

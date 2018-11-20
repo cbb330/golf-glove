@@ -1,7 +1,7 @@
 const app = require('express')();
 const cors = require('cors');
-const WebSocket = require('ws');
 const bodyParser = require('body-parser');
+const WebSocket = require('ws');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

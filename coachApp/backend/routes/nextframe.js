@@ -10,6 +10,8 @@ class NextFrame {
       throw "Bad Frame! Length is: " + buf.length;
     }
     this.raw = buf; // buffer object
+
+    /* Parse the bytearray buffer into variables */
     this.timestamp = buf.readUInt32LE(0);
     this.pressure1 = buf.readUInt16LE(4);
     this.pressure2 = buf.readUInt16LE(6);
