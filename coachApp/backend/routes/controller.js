@@ -116,20 +116,14 @@ class Controller {
   }
 
   read() {
-    this.ggNextFrame.read((err, data) => {
-      var frame = new NextFrame(data);
-      this.storeFrame(frame);
-      this.clientSend(frame);
-    });
-
     //var testbuf = Buffer.from('000000007c4600000000000b1ab7dab0' +
     //    '0000000000006904870f00003807a801a1010000000000006904870f00003807a801a10100000000', 'hex');
 
-    /*
     // TODO: Check if these changes work https://github.com/noble/noble/blob/master/examples/echo.js
     this.ggNextFrame.on('data', (data, isNotification) => {
-      console.log('Received: "' + data + '"');
-      this.clientSend(data);
+      var frame = new NextFrame(data);
+      this.storeFrame(frame);
+      this.clientSend(frame);
     });
 
     this.ggNextFrame.subscribe(error => {
@@ -140,7 +134,6 @@ class Controller {
         console.log('Subscribed to NextFrame Characteristic');
       }
     });
-    */
 
   }
 
