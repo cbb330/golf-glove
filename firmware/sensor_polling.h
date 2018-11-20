@@ -65,7 +65,8 @@ void print_sensor_frame(sensor_frame rec);
 
 // Sensor polling logic
 sensor_frame get_sensor_frame();
-imu_frame get_imu_frame(UINT16 addr);
+imu_frame get_imu_frame();
+imu_frame get_imu_frame_internal();
 
 // Swing Detection/frameing
 int detect_swing(sensor_frame current, sensor_frame last);

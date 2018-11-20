@@ -3,14 +3,14 @@
 int lsm_begin(UINT8 address_accelgyro, UINT8 address_mag) {
     //WICED_BT_TRACE("lsm_begin\r\n");
     // soft reset & reboot accel/gyro
-    lsm_write8(address_accelgyro, LSM9DS1_REGISTER_CTRL_REG8, 0x05);
+    i2c_write8(address_accelgyro, LSM9DS1_REGISTER_CTRL_REG8, 0x05);
     // soft reset & reboot magnetometer
-    lsm_write8(address_mag, LSM9DS1_REGISTER_CTRL_REG2_M, 0x0C);
+    i2c_write8(address_mag, LSM9DS1_REGISTER_CTRL_REG2_M, 0x0C);
     wiced_rtos_delay_milliseconds(1000, KEEP_THREAD_ACTIVE);
 
-    UINT8 id = lsm_read8(address_accelgyro, LSM9DS1_REGISTER_WHO_AM_I_XG);
+    UINT8 id = i2c_read8(address_accelgyro, LSM9DS1_REGISTER_WHO_AM_I_XG);
     while (id != LSM9DS1_XG_ID)
-        id = lsm_read8(address_accelgyro, LSM9DS1_REGISTER_WHO_AM_I_XG);
+        id = i2c_read8(address_accelgyro, LSM9DS1_REGISTER_WHO_AM_I_XG);
 
     if (id != LSM9DS1_XG_ID) {
         WICED_BT_TRACE("ERROR on LSM9DS1_REGISTER_WHO_AM_I_XG : %d %d\r\n", id,
@@ -18,9 +18,9 @@ int lsm_begin(UINT8 address_accelgyro, UINT8 address_mag) {
         return 0;
     }
 
-    id = lsm_read8(address_mag, LSM9DS1_REGISTER_WHO_AM_I_M);
+    id = i2c_read8(address_mag, LSM9DS1_REGISTER_WHO_AM_I_M);
     while (id != LSM9DS1_MAG_ID)
-        id = lsm_read8(address_accelgyro, LSM9DS1_REGISTER_WHO_AM_I_XG);
+        id = i2c_read8(address_accelgyro, LSM9DS1_REGISTER_WHO_AM_I_XG);
     if (id != LSM9DS1_MAG_ID) {
         WICED_BT_TRACE("ERROR on LSM9DS1_REGISTER_WHO_AM_I_M : %d %d\r\n", id,
         LSM9DS1_MAG_ID);
@@ -28,16 +28,16 @@ int lsm_begin(UINT8 address_accelgyro, UINT8 address_mag) {
     }
 
     // enable gyro continuous
-    lsm_write8(address_accelgyro, LSM9DS1_REGISTER_CTRL_REG1_G, 0xC0); //0b11000000 ;on XYZ
+    i2c_write8(address_accelgyro, LSM9DS1_REGISTER_CTRL_REG1_G, 0xC0); //0b11000000 ;on XYZ
 
     // Enable the accelerometer continous
-    lsm_write8(address_accelgyro, LSM9DS1_REGISTER_CTRL_REG5_XL, 0x38); // enable X Y and Z axis
-    //lsm_write8(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_REGISTER_CTRL_REG6_XL, 0xC0); // 1 KHz out data rate, BW set by ODR, 408Hz anti-aliasing
+    i2c_write8(address_accelgyro, LSM9DS1_REGISTER_CTRL_REG5_XL, 0x38); // enable X Y and Z axis
+    //i2c_write8(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_REGISTER_CTRL_REG6_XL, 0xC0); // 1 KHz out data rate, BW set by ODR, 408Hz anti-aliasing
 
     // enable mag continuous
-    //lsm_write8(LSM9DS1_INTERNAL_ADDRESS_MAG, LSM9DS1_REGISTER_CTRL_REG1_M, 0xFC); // high perf XY, 80 Hz ODR
-    lsm_write8(address_mag, LSM9DS1_REGISTER_CTRL_REG3_M, 0x00); // continuous mode
-    //lsm_write8(LSM9DS1_INTERNAL_ADDRESS_MAG, LSM9DS1_REGISTER_CTRL_REG4_M, 0x0C); // high perf Z mode
+    //i2c_write8(LSM9DS1_INTERNAL_ADDRESS_MAG, LSM9DS1_REGISTER_CTRL_REG1_M, 0xFC); // high perf XY, 80 Hz ODR
+    i2c_write8(address_mag, LSM9DS1_REGISTER_CTRL_REG3_M, 0x00); // continuous mode
+    //i2c_write8(LSM9DS1_INTERNAL_ADDRESS_MAG, LSM9DS1_REGISTER_CTRL_REG4_M, 0x0C); // high perf Z mode
 
     // Set default ranges for the various sensors
     lsm_setupAccel(address_accelgyro, LSM9DS1_ACCELRANGE_2G);
@@ -69,7 +69,7 @@ void lsm_readAccel(UINT8 address) {
     //WICED_BT_TRACE("lsm_readAccel\r\n");
     // Read the accelerometer
     UINT8 buffer[6];
-    lsm_readBuffer(address, 0x80 | LSM9DS1_REGISTER_OUT_X_L_XL, 6, buffer);
+    i2c_readBuffer(address, 0x80 | LSM9DS1_REGISTER_OUT_X_L_XL, 6, buffer);
 
     UINT8 xlo = buffer[0];
     int16_t xhi = buffer[1];
@@ -95,7 +95,7 @@ void lsm_readMag(UINT8 address) {
     //WICED_BT_TRACE("lsm_readMag\r\n");
     // Read the magnetometer
     UINT8 buffer[6];
-    lsm_readBuffer(address, 0x80 | LSM9DS1_REGISTER_OUT_X_L_M, 6, buffer);
+    i2c_readBuffer(address, 0x80 | LSM9DS1_REGISTER_OUT_X_L_M, 6, buffer);
 
     UINT8 xlo = buffer[0];
     int16_t xhi = buffer[1];
@@ -122,7 +122,7 @@ void lsm_readGyro(UINT8 address) {
     //WICED_BT_TRACE("lsm_readGyro\r\n");
     // Read gyro
     UINT8 buffer[6];
-    lsm_readBuffer(address, 0x80 | LSM9DS1_REGISTER_OUT_X_L_G, 6, buffer);
+    i2c_readBuffer(address, 0x80 | LSM9DS1_REGISTER_OUT_X_L_G, 6, buffer);
 
     UINT8 xlo = buffer[0];
     int16_t xhi = buffer[1];
@@ -147,7 +147,7 @@ void lsm_readGyro(UINT8 address) {
 void lsm_readTemp(UINT8 address) {
     //WICED_BT_TRACE("lsm_readTemp\r\n");
     UINT8 buffer[2];
-    lsm_readBuffer(address, 0x80 | LSM9DS1_REGISTER_TEMP_OUT_L, 2, buffer);
+    i2c_readBuffer(address, 0x80 | LSM9DS1_REGISTER_TEMP_OUT_L, 2, buffer);
     UINT8 xlo = buffer[0];
     int16_t xhi = buffer[1];
 
@@ -159,10 +159,10 @@ void lsm_readTemp(UINT8 address) {
 
 void lsm_setupAccel(UINT8 address, lsm9ds1AccelRange_t range) {
     //WICED_BT_TRACE("lsm_setupAccel\r\n");
-    UINT8 reg = lsm_read8(address, LSM9DS1_REGISTER_CTRL_REG6_XL);
+    UINT8 reg = i2c_read8(address, LSM9DS1_REGISTER_CTRL_REG6_XL);
     reg &= ~(0b00011000);
     reg |= range;
-    lsm_write8(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_REGISTER_CTRL_REG6_XL, reg);
+    i2c_write8(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_REGISTER_CTRL_REG6_XL, reg);
 
     switch (range) {
     case LSM9DS1_ACCELRANGE_2G:
@@ -182,10 +182,10 @@ void lsm_setupAccel(UINT8 address, lsm9ds1AccelRange_t range) {
 
 void lsm_setupMag(UINT8 address, lsm9ds1MagGain_t gain) {
     //WICED_BT_TRACE("lsm_setupMag\r\n");
-    UINT8 reg = lsm_read8(address, LSM9DS1_REGISTER_CTRL_REG2_M);
+    UINT8 reg = i2c_read8(address, LSM9DS1_REGISTER_CTRL_REG2_M);
     reg &= ~(0b01100000);
     reg |= gain;
-    lsm_write8(address, LSM9DS1_REGISTER_CTRL_REG2_M, reg);
+    i2c_write8(address, LSM9DS1_REGISTER_CTRL_REG2_M, reg);
 
     switch (gain) {
     case LSM9DS1_MAGGAIN_4GAUSS:
@@ -205,10 +205,10 @@ void lsm_setupMag(UINT8 address, lsm9ds1MagGain_t gain) {
 
 void lsm_setupGyro(UINT8 address, lsm9ds1GyroScale_t scale) {
     //WICED_BT_TRACE("lsm_setupGyro\r\n");
-    UINT8 reg = lsm_read8(address, LSM9DS1_REGISTER_CTRL_REG1_G);
+    UINT8 reg = i2c_read8(address, LSM9DS1_REGISTER_CTRL_REG1_G);
     reg &= ~(0b00011000);
     reg |= scale;
-    lsm_write8(address, LSM9DS1_REGISTER_CTRL_REG1_G, reg);
+    i2c_write8(address, LSM9DS1_REGISTER_CTRL_REG1_G, reg);
 
     switch (scale) {
     case LSM9DS1_GYROSCALE_245DPS:
@@ -223,42 +223,4 @@ void lsm_setupGyro(UINT8 address, lsm9ds1GyroScale_t scale) {
     }
 }
 
-void lsm_write8(UINT8 address, UINT8 reg, UINT8 value) {
-    //WICED_BT_TRACE("lsm_write8\r\n");
-
-    UINT8 data[2] = {reg, value};
-    res = wiced_hal_i2c_write(data, 2, address);
-    if (res == 1)
-        WICED_BT_TRACE("ERROR: i2c write Error.\r\n");
-
-}
-
-UINT8 lsm_read8(UINT8 address, UINT8 reg) {
-    //WICED_BT_TRACE("lsm_read8\r\n");
-    UINT8 value;
-
-    lsm_readBuffer(address, reg, 1, &value);
-
-    return value;
-}
-
-UINT8 lsm_readBuffer(UINT8 address, UINT8 reg, UINT8 len, UINT8 *buffer) {
-    //WICED_BT_TRACE("lsm_readBuffer\r\n");
-
-    res = wiced_hal_i2c_combined_read(&reg, 1, buffer, sizeof(buffer), address);
-    if (res == 1)
-        WICED_BT_TRACE("ERROR: i2c combined read Error.\r\n");
-    else {
-        /*
-         WICED_BT_TRACE("I2C READ ");
-         int i;
-         for (i = 0; i < len; i++)
-         WICED_BT_TRACE("0x%x ", buffer[0]);
-         WICED_BT_TRACE("\r\n");
-         */
-    }
-
-
-    return res;
-}
 

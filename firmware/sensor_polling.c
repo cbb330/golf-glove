@@ -13,6 +13,7 @@ void init_i2c() {
     wiced_hal_i2c_set_speed(I2CM_SPEED_400KHZ);
     //sleep(1);
     lsm_begin(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_INTERNAL_ADDRESS_MAG);
+    lsm_begin(LSM9DS1_ADDRESS_ACCELGYRO, LSM9DS1_ADDRESS_MAG);
 }
 
 // Main Loop
@@ -37,8 +38,8 @@ void sensor_loop(uint32_t arg) {
 
 // Sensor polling logic
 sensor_frame get_sensor_frame() {
-    imu_frame imu1 = get_imu_frame(WRIST_IMU_ADDR); // Wrist
-    imu_frame imu2 = get_imu_frame(HAND_IMU_ADDR); // Hand
+    imu_frame imu1 = get_imu_frame_internal(); // Wrist
+    imu_frame imu2 = get_imu_frame(); // Hand
 
     uint32_t timestamp = 0;
     UINT16 pres1 = 0;
@@ -96,7 +97,25 @@ void print_sensor_frame(sensor_frame rec) {
     WICED_BT_TRACE("avail     %u\r\n", rec.avail);
 }
 
-imu_frame get_imu_frame(UINT16 addr) {
+imu_frame get_imu_frame() {
+    lsm_read();
+
+    UINT16 accX = accelData.x;
+    UINT16 accY = accelData.y;
+    UINT16 accZ = accelData.z;
+    UINT16 magX = magData.x;
+    UINT16 magY = magData.y;
+    UINT16 magZ = magData.z;
+    UINT16 gyroX = gyroData.x;
+    UINT16 gyroY = gyroData.y;
+    UINT16 gyroZ = gyroData.z;
+
+    imu_frame rec = { accX, accY, accZ, magX, magY, magZ, gyroX, gyroY, gyroZ }; //null data
+
+    return rec;
+}
+
+imu_frame get_imu_frame_internal() {
 
     lsm_read_internal();
 

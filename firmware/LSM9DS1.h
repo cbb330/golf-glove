@@ -6,6 +6,7 @@
 #include "wiced_rtos.h"
 #include "sparcommon.h"
 #include "wiced_hal_i2c.h"
+#include "i2c_operations.h"
 #include <unistd.h>
 
 typedef unsigned char UINT8;
@@ -164,9 +165,7 @@ void lsm_readTemp(UINT8 address);
 void lsm_setupAccel(UINT8 address, lsm9ds1AccelRange_t range);
 void lsm_setupMag(UINT8 address, lsm9ds1MagGain_t gain);
 void lsm_setupGyro(UINT8 address, lsm9ds1GyroScale_t scale);
-void lsm_write8(UINT8 addr, UINT8 reg, UINT8 value);
-UINT8 lsm_read8(UINT8 addr, UINT8 reg);
-UINT8 lsm_readBuffer(UINT8 addr, UINT8 reg, UINT8 len, UINT8 *buffer);
+
 //UINT8 spixfer(UINT8 data);
 
 int8_t _csm, _csxg, _mosi, _miso, _clk;
