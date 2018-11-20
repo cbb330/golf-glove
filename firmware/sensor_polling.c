@@ -14,6 +14,7 @@ void init_i2c() {
     //sleep(1);
     lsm_begin(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_INTERNAL_ADDRESS_MAG);
     lsm_begin(LSM9DS1_ADDRESS_ACCELGYRO, LSM9DS1_ADDRESS_MAG);
+    ads_setup();
 }
 
 // Main Loop
@@ -42,20 +43,12 @@ sensor_frame get_sensor_frame() {
     imu_frame imu2 = get_imu_frame(); // Hand
 
     uint32_t timestamp = 0;
-    UINT16 pres1 = 0;
-    UINT16 pres1_v = 0;
-    pres1 = wiced_hal_adc_read_raw_sample( PRES1_PIN);
-    pres1_v = wiced_hal_adc_read_voltage( PRES1_PIN);
-    UINT16 pres2 = 0;
-    UINT16 wrist1 = 0;
-    UINT16 wrist2 = 0;
-    UINT16 wrist3 = 0;
-    UINT16 wrist3_v = 0;
-    wrist3 = wiced_hal_adc_read_raw_sample( WRIST3_PIN);
-    wrist3_v = wiced_hal_adc_read_voltage( WRIST3_PIN);
-    UINT16 wrist4 = 0;
-    wrist4 = wiced_hal_adc_read_raw_sample( WRIST4_PIN);
-    pres1_v = wiced_hal_adc_read_voltage( WRIST4_PIN);
+    UINT16 pres1 =          wiced_hal_adc_read_raw_sample(PRES1_PIN);
+    UINT16 pres2 =          wiced_hal_adc_read_raw_sample(PRES2_PIN);
+    UINT16 wrist1 =         ads_readADC_SingleEnded(0);
+    UINT16 wrist2 =         ads_readADC_SingleEnded(1);
+    UINT16 wrist3 =         ads_readADC_SingleEnded(2);
+    UINT16 wrist4 =         ads_readADC_SingleEnded(3);
     uint8_t sync = 0;
     uint8_t avail = 0;
 

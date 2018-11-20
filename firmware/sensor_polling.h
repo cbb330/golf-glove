@@ -11,6 +11,7 @@
 #include "wiced_rtos.h"
 #include "string.h"
 #include "LSM9DS1.h"
+#include "ADS1015.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>

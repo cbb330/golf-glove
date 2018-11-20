@@ -1,9 +1,9 @@
 #include "ADS1015.h"
 
-ads_setup()
+void ads_setup()
 {
    m_i2cAddress = ADS1015_ADDRESS;
-   m_conversionDelay = ADS1115_CONVERSIONDELAY;
+   m_conversionDelay = 1; //ADS1115_CONVERSIONDELAY;
    m_bitShift = 0;
    m_gain = GAIN_TWOTHIRDS; /* +/- 6.144V range (limited to VDD +0.3V max!) */
 }
@@ -54,7 +54,7 @@ UINT16 ads_readADC_SingleEnded(UINT8 channel) {
   i2c_write16(m_i2cAddress, ADS1015_REG_POINTER_CONFIG, config);
 
   // Wait for the conversion to complete
-  wiced_rtos_delay(m_conversionDelay, KEEP_THREAD_ACTIVE);
+  wiced_rtos_delay_milliseconds(m_conversionDelay, KEEP_THREAD_ACTIVE);
 
   // Read the conversion results
   // Shift 12-bit results right 4 bits for the ADS1015
@@ -91,10 +91,10 @@ INT16 ads_readADC_Differential_0_1() {
   i2c_write16(m_i2cAddress, ADS1015_REG_POINTER_CONFIG, config);
 
   // Wait for the conversion to complete
-  delay(m_conversionDelay);
+  wiced_rtos_delay_milliseconds(m_conversionDelay, KEEP_THREAD_ACTIVE);
 
   // Read the conversion results
-  UINT16 res = readRegister(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift;
+  UINT16 res = i2c_read16(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift;
   if (m_bitShift == 0)
   {
     return (INT16)res;
@@ -139,7 +139,7 @@ INT16 ads_readADC_Differential_2_3() {
   config |= ADS1015_REG_CONFIG_OS_SINGLE;
 
   // Write config register to the ADC
-  writeRegister(m_i2cAddress, ADS1015_REG_POINTER_CONFIG, config);
+  i2c_write16(m_i2cAddress, ADS1015_REG_POINTER_CONFIG, config);
 
   // Wait for the conversion to complete
   delay(m_conversionDelay);
@@ -220,7 +220,7 @@ void ads_startComparator_SingleEnded(UINT8 channel, INT16 threshold)
 INT16 ads_getLastConversionResults()
 {
   // Wait for the conversion to complete
-  wiced_rtos_delay(m_conversionDelay);
+  wiced_rtos_delay_milliseconds(m_conversionDelay, KEEP_THREAD_ACTIVE);
 
   // Read the conversion results
   UINT16 res = i2c_read16(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift;

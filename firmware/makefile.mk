@@ -9,6 +9,7 @@ APP_SRC += gatt/wiced_bt_cfg.c
 APP_SRC += buffer/frame_buffer.c
 APP_SRC += sensor_polling.c
 APP_SRC += LSM9DS1.c
+APP_SRC += ADS1015.c
 APP_SRC += i2c_operations.c
 
 APP_SRC += main.c

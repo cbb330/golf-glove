@@ -3,6 +3,7 @@
 #include "wiced_rtos.h"
 #include "sparcommon.h"
 #include "wiced_hal_i2c.h"
+#include "i2c_operations.h"
 #include <unistd.h>
 
 /*=========================================================================
@@ -100,6 +101,7 @@ UINT8 m_conversionDelay;
 UINT8 m_bitShift;
 adsGain_t m_gain;
 
+void ads_setup();
 UINT16 ads_readADC_SingleEnded(UINT8 channel);
 INT16 ads_readADC_Differential_0_1(void);
 INT16 ads_readADC_Differential_2_3(void);
