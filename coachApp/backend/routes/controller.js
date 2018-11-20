@@ -122,6 +122,9 @@ class Controller {
       this.clientSend(frame);
     });
 
+    //var testbuf = Buffer.from('000000007c4600000000000b1ab7dab0' +
+    //    '0000000000006904870f00003807a801a1010000000000006904870f00003807a801a10100000000', 'hex');
+
     /*
     // TODO: Check if these changes work https://github.com/noble/noble/blob/master/examples/echo.js
     this.ggNextFrame.on('data', (data, isNotification) => {
@@ -144,10 +147,11 @@ class Controller {
   // TODO: take all storage logic to its own file
   storeFrame(frame) {
     this.setSwingData(frame);
-    db.run('INSERT INTO frame (timestamp, swingNum, offset, frame) VALUES (?, ?, ?, ?)',
-        frame['timestamp'], frame['swingNum'], frame['offset'], frame, (err) =>
+    console.log(frame);
+    db.run('INSERT INTO frames (timestamp, swingNum, offset, frame) VALUES (?, ?, ?, ?)',
+        frame['timestamp'], frame['swingNum'], frame['offset'], frame.toString(), (err) =>
     {
-      console.error(err);
+      if (err) console.error(err);
     });
   }
 
