@@ -3,7 +3,6 @@ var path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(path.join(__dirname, '..', 'db', 'Frames.db'), (err) => {
   if (err) console.error(err);
-  console.log('^fuck you')
 });
 
 // new table each run

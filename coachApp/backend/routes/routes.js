@@ -32,6 +32,10 @@ module.exports = function(app) {
           break;
         case "stop":
           controller.stopData();
+          break;
+        case "test":
+          controller.testDB();
+          break;
       }
     });
 

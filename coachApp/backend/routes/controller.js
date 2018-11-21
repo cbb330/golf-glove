@@ -115,11 +115,23 @@ class Controller {
   stopData() {
   }
 
+  // needs time delta of less than 8.3333 ms in db
+  testDB() {
+    while(true) {
+      var time = Date.now();
+      var testbuf = Buffer.from('ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
+      var frame = new NextFrame(testbuf);
+      db.run('INSERT INTO frames (timestamp, swingNum, offset, frame) VALUES (?, ?, ?, ?)',
+          time, 0, 0, frame.toString(), (err) => {
+            if (err) console.error(err);
+          });
+    }
+  }
+
   read() {
     //var testbuf = Buffer.from('000000007c4600000000000b1ab7dab0' +
     //    '0000000000006904870f00003807a801a1010000000000006904870f00003807a801a10100000000', 'hex');
 
-    // TODO: Check if these changes work https://github.com/noble/noble/blob/master/examples/echo.js
     this.ggNextFrame.on('data', (data, isNotification) => {
       var frame = new NextFrame(data);
       this.storeFrame(frame);
