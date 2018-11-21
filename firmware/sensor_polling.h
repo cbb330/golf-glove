@@ -20,12 +20,9 @@
 #define HAND_IMU_ADDR 0x0000 // hand IMU I2C Addr
 #define POLL_RATE 120 // hertz
 
-#define PRES1_PIN ADC_INPUT_P10
-#define PRES2_PIN ADC_INPUT_P10
-#define WRIST1_PIN ADC_INPUT_P10
-#define WRIST2_PIN ADC_INPUT_P10
-#define WRIST3_PIN ADC_INPUT_P16
-#define WRIST4_PIN ADC_INPUT_P17
+#define PRES1_PIN ADC_INPUT_P16
+#define PRES2_PIN ADC_INPUT_P17
+
 
 int real_time = 0;
 
