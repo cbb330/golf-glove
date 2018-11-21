@@ -13,7 +13,7 @@ void i2c_write8(UINT8 address, UINT8 reg, UINT8 value) {
 void i2c_write16(UINT8 address, UINT8 reg, UINT16 value) {
     UINT8 res;
     UINT8 data[3] = {reg, value>>8, value & 0xFF};
-    res = wiced_hal_i2c_write(data, 2, address);
+    res = wiced_hal_i2c_write(data, 3, address);
     if (res == 1)
         WICED_BT_TRACE("ERROR: i2c write Error.\r\n");
 }

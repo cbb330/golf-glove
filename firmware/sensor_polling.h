@@ -23,7 +23,6 @@
 #define PRES1_PIN ADC_INPUT_P16
 #define PRES2_PIN ADC_INPUT_P17
 
-
 int real_time = 0;
 
 // 9-way IMU sensor data
