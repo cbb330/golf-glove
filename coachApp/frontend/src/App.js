@@ -21,9 +21,22 @@ class App extends Component {
     this.socket.onmessage = (event) => {
       // TODO: handle responses from server
       // TODO: responses include data, errors with connection, and general updates
-      const response = JSON.parse(event.data);
-      console.log(response);
-      this.setState({response});
+      const message = JSON.parse(event.data);
+      console.log(message);
+      this.setState({message});
+      switch (message.type) {
+        case 'data':
+          // TODO: handle data (append to structure or whatever)
+          this.data = message.data;
+          break;
+        case 'error':
+          // TODO: handle error
+          console.log(message.error);
+          break;
+        default:
+          console.log(`Client received unknown message type (${message.type}) from the server`);
+          console.log(message);
+      }
     };
   }
 
