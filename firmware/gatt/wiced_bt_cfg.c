@@ -10,12 +10,13 @@
  *
  */
 
+#include "wiced_bt_cfg.h"
+
 #include "wiced_bt_dev.h"
 #include "wiced_bt_ble.h"
 #include "wiced_bt_uuid.h"
 #include "wiced_bt_gatt.h"
 #include "wiced_bt_avrc.h"
-#include "wiced_bt_cfg.h"
 
 /* Null-Terminated Local Device Name */
 uint8_t BT_LOCAL_NAME[] = { 'g','o','l','f','_','g','l','o','v','e','\0' };

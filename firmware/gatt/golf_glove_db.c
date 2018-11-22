@@ -6,9 +6,10 @@
 
 // golf_glove_db.c
 
+#include "golf_glove_db.h"
+
 #include "wiced_bt_uuid.h"
 #include "wiced_bt_gatt.h"
-#include "golf_glove_db.h"
 
 /*************************************************************************************
 ** GATT server definitions

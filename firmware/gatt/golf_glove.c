@@ -8,6 +8,8 @@
  * pls don't autoformat this file it makes it hard to read
  */
 
+#include "gatt/golf_glove.h"
+
 #include "wiced.h"
 #include "wiced_bt_dev.h"
 #include "wiced_bt_ble.h"
@@ -31,7 +33,6 @@
 
 #include "buffer/frame_buffer.h"
 #include "gatt/golf_glove_db.h"
-#include "gatt/golf_glove.h"
 
 
 /*******************************************************************
@@ -44,8 +45,8 @@ const uint8_t golf_glove_uuid[16] = { __UUID_GOLF_GLOVE };
 /*******************************************************************
  * Variable Definitions
  ******************************************************************/
-extern const wiced_bt_cfg_settings_t wiced_bt_cfg_settings;
-extern const wiced_bt_cfg_buf_pool_t wiced_bt_cfg_buf_pools[WICED_BT_CFG_NUM_BUF_POOLS];
+// extern const wiced_bt_cfg_settings_t wiced_bt_cfg_settings;
+// extern const wiced_bt_cfg_buf_pool_t wiced_bt_cfg_buf_pools[WICED_BT_CFG_NUM_BUF_POOLS];
 // Transport pool for sending RFCOMM data to host
 static wiced_transport_buffer_pool_t* transport_pool = NULL;
 
@@ -53,7 +54,6 @@ static wiced_transport_buffer_pool_t* transport_pool = NULL;
  * Function Prototypes
  ******************************************************************/
 static void                   golf_glove_app_init               ( void );
-static wiced_bt_dev_status_t  golf_glove_management_callback    ( wiced_bt_management_evt_t event, wiced_bt_management_evt_data_t *p_event_data );
 static void                   golf_glove_set_advertisement_data ( void );
 static void                   golf_glove_advertisement_stopped  ( void );
 static void                   golf_glove_reset_device           ( void );
@@ -144,7 +144,8 @@ void gatt_application_start(void)
     transport_pool = wiced_transport_create_buffer_pool ( TRANS_UART_BUFFER_SIZE, TRANS_UART_BUFFER_COUNT );
 
     /* Initialize Bluetooth Controller and Host Stack */
-    wiced_bt_stack_init(golf_glove_management_callback, &wiced_bt_cfg_settings, wiced_bt_cfg_buf_pools);
+    // *Moved to main.c*
+    // wiced_bt_stack_init(golf_glove_management_callback, &wiced_bt_cfg_settings, wiced_bt_cfg_buf_pools);
 }
 
 /*

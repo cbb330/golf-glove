@@ -11,7 +11,7 @@
 #include "wiced_bt_types.h"
 #include "wiced_result.h"
 
-#include "sensor_polling.h"
+#include "sensor/sensor_frame.h"
 
 /**
  * Allocates and initializes the frame buffer.

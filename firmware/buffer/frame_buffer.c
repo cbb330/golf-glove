@@ -4,13 +4,14 @@
  * Definitions for functions used in managing the global sensor data frame buffer.
  */
 
+#include "frame_buffer.h"
+
 #include "wiced.h"
 #include "wiced_bt_trace.h"
 #include "wiced_bt_types.h"
 #include "wiced_result.h"
 
-#include "buffer/frame_buffer.h"
-#include "sensor_polling.h"
+#include "sensor/sensor_frame.h"
 
 // Temporary "frame buffer"
 static sensor_frame current_frame;
