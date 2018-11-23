@@ -117,15 +117,26 @@ class Controller {
 
   // needs time delta of less than 8.3333 ms in db
   testDB() {
-    while(true) {
-      var time = Date.now();
-      var testbuf = Buffer.from('ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
-      var frame = new NextFrame(testbuf);
-      db.run('INSERT INTO frames (timestamp, swingNum, offset, frame) VALUES (?, ?, ?, ?)',
-          time, 0, 0, frame.toString(), (err) => {
-            if (err) console.error(err);
-          });
-    }
+    var i = 0;
+    db.run("BEGIN TRANSACTION");
+    db.serialize(() => {
+      while (i < 10000) {
+        var testbuf = Buffer.from('ffffffffffffffffffffffffffffffffffffffffffffffffffffffff' +
+            'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
+
+        var frame = new NextFrame(testbuf);
+
+        var time = Date.now();
+        db.run('INSERT INTO frames (timestamp, swingNum, offset, frame) VALUES (?, ?, ?, ?)',
+            time, 0, 0, frame.toString(), (err) => {
+              if (err) console.error(err);
+            });
+        ++i;
+      }
+    });
+    db.run("END");
+    db.close();
+    console.log("written");
   }
 
   read() {
