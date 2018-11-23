@@ -26,7 +26,7 @@ class Controller {
 
     noble.on('stateChange', newState => {
       //console.log("this is the new state: " + newState);
-      this.setState(newState);
+      this.setNobleState(newState);
     });
 
     noble.on('discover', peripheral => {
@@ -34,11 +34,14 @@ class Controller {
       if (!this.isEmpty(this.ggPeripheral)) {
         noble.stopScanning();
         console.log("Trying to connect.");
-        peripheral.connect(err => {
-          if (!this.isEmpty(err)) this.socket.send(JSON.stringify({ err: err }));
+        peripheral.connect(error => {
+          if (error) {
+            const message = {type: 'error', data: error};
+            this.sendClient(message);
+          }
           else {
             var peripheralInfo = this.getPeripheral(peripheral);
-            this.clientSend(peripheralInfo);
+            this.sendClient(peripheralInfo);
             this.ggPeripheral.once('disconnect', () => {
               console.log("disconnect once happened");
               this.ggPeripheral = {};
@@ -56,9 +59,9 @@ class Controller {
     this.socket = socket;
   }
 
-  setState(newState) {
+  setNobleState(newState) {
     this.nobleState = newState;
-  };
+  }
 
   getDiscovers() {
     if (!this.isEmpty(this.ggPeripheral)) this.disconnectPeripheral();
@@ -78,8 +81,11 @@ class Controller {
   getService(servUuid) {
     console.log("Trying to get services.");
     if (!this.isEmpty(this.ggPeripheral)) {
-      this.ggPeripheral.discoverServices([servUuid], (err, services) => {
-        if (!this.isEmpty(err)) this.clientSend({err: err});
+      this.ggPeripheral.discoverServices([servUuid], (error, services) => {
+        if (error) {
+          const message = {type: 'error', data: error};
+          this.sendClient(message);
+        }
         else {
           console.log("found service: " + services[0].uuid);
           this.ggService = services[0];
@@ -87,20 +93,29 @@ class Controller {
         }
       });
     }
-    else this.clientSend({ err: "Cannot get service, no device connected." });
+    else {
+      const message = {type: 'error', data: 'Cannot get service, no device connected.'};
+      this.sendClient(message);
+    }
   }
   
   getCharacteristic(charUuid){
     if (!this.isEmpty(this.ggService)) {
-      this.ggService.discoverCharacteristics([charUuid], (err, characteristics) => {
-        if (err) this.socket.send(JSON.stringify({err: "Error Discovering Characteristics!"}));
+      this.ggService.discoverCharacteristics([charUuid], (error, characteristics) => {
+        if (error) {
+          const message = {type: 'error', data: "Error discovering characteristics."};
+          this.sendClient(message);
+        }
         else {
           console.log("found characteristic: " + characteristics[0].uuid);
           this.ggNextFrame = characteristics[0];
         }
       });
     }
-    else this.clientSend({ err: "Cannot get characteristic, no service discovered." });
+    else {
+      const message = {type: 'error', data: "Cannot get characteristic, no service discovered."};
+      this.sendClient(message);
+    }
   }
   
   getData() {
@@ -108,19 +123,20 @@ class Controller {
   }
 
   stopData() {
+    // TODO
   }
 
   read() {
     this.ggNextFrame.read((err, data) => {
       var frame = new NextFrame(data);
-      this.clientSend(frame);
+      this.sendClient(frame);
     });
 
     /*
     // TODO: Check if these changes work https://github.com/noble/noble/blob/master/examples/echo.js
     this.ggNextFrame.on('data', (data, isNotification) => {
       console.log('Received: "' + data + '"');
-      this.clientSend(data);
+      this.sendClient(data);
     });
 
     this.ggNextFrame.subscribe(error => {
@@ -137,10 +153,14 @@ class Controller {
 
   disconnectPeripheral() {
     if (!this.isEmpty(this.ggPeripheral)) {
-      this.ggPeripheral.disconnect(err => {
-        if (!this.isEmpty(err)) this.clientSend({ err: err });
+      this.ggPeripheral.disconnect(error => {
+        if (error) {
+          const message = {type: 'error', data: error};
+          this.sendClient(message);
+        }
         else {
-          this.clientSend({ success : "Peripheral Disconnected"});
+          const message = {type: 'status', data: 'Peripheral Disconnected'};
+          this.sendClient(message);
         }
       });
     }
@@ -219,7 +239,7 @@ class Controller {
     return !obj || Object.keys(obj).length === 0;
   }
 
-  clientSend(obj) {
+  sendClient(message) {
     // not sure if below is the correct way to check if socket is alive, especially if ./routes closes it.
     // TODO: make this a listener???
     if (this.socket.isAlive === false) {
@@ -228,12 +248,12 @@ class Controller {
       return;
     }
     try {
-      this.socket.send(JSON.stringify(obj));
+      this.socket.send(JSON.stringify(message));
     }
-    catch (err) {
-      console.log("Message '" + JSON.stringify(obj) + "' not sent! " + err);
+    catch (error) {
+      console.log("Message '" + JSON.stringify(message) + "' not sent! " + error);
     }
   }
-};
+}
 
 module.exports = Controller;

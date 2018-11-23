@@ -14,7 +14,7 @@ class App extends Component {
       response: undefined
     };
 
-    this.socket = new WebSocket("ws://170.253.147.206:8081");
+    this.socket = new WebSocket("ws://170.253.147.206:8080");
   }
   
   componentDidMount() {
