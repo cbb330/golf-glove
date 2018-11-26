@@ -23,7 +23,7 @@ class GolfGloveDb {
            This is so front end can accurately display real time vs full swing data, without the database knowing state
       * */
       this.db.run("CREATE TABLE IF NOT EXISTS swings (timestamp INTEGER, swingId INTEGER PRIMARY KEY)");
-      this.db.run("CREATE TABLE IF NOT EXISTS frames (frame TEXT, timestamp INTEGER PRIMARY KEY, swingId INTEGER PRIMARY KEY, FOREIGN KEY (swingId) REFERENCES swings(swingId))");
+      this.db.run("CREATE TABLE IF NOT EXISTS frames (frame TEXT, timestamp INTEGER , swingId INTEGER, PRIMARY KEY (timestamp, swingId), FOREIGN KEY (swingId) REFERENCES swings(swingId))");
     });
   }
 

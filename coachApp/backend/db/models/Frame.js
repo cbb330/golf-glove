@@ -4,53 +4,86 @@
  * Description: Parser class for Golf Glove next frame data
  */
 
+/* constants from LSM initialization */
+const SENSORS_GRAVITY_EARTH          = 9.80665;
+const LSM9DS1_ACCEL_MG_LSB_2G        = 0.061;
+const LSM9DS1_MAG_MGAUSS_4GAUSS      = 0.14;
+const LSM9DS1_GYRO_DPS_DIGIT_2000DPS = 0.07000;
+
+
 class Frame {
   constructor(buf, db) {
     if (buf.length != 56) {
       throw "Bad Frame! Length is: " + buf.length;
     }
-    this.raw = buf; // buffer object
+    this.buf = buf; // buffer object
     this.db = db; //golf glove db api
 
-    this.parseBuf(buf, this.storeData);
+    this.parseBuf(this.storeData);
 
   }
 
-  parseBuf(buf, cb) {
+  parseBuf(cb) {
     /* Parse the bytearray buffer into variables */
-    this.timestamp = buf.readUInt32LE(0);
-    this.pressure1 = buf.readUInt16LE(4);
-    this.pressure2 = buf.readUInt16LE(6);
-    this.deflection = buf.readUInt16LE(8);
-    this.extension = buf.readUInt16LE(10);
-    this.radialDeviation = buf.readUInt16LE(12);
-    this.ulnarDeviation = buf.readUInt16LE(14);
+    this.timestamp = this.buf.readUInt32LE(0);
+    this.pressure1 = this.buf.readUInt16LE(4);
+    this.pressure2 = this.buf.readUInt16LE(6);
+    this.deflection = this.buf.readUInt16LE(8);
+    this.extension = this.buf.readUInt16LE(10);
+    this.radialDeviation = this.buf.readUInt16LE(12);
+    this.ulnarDeviation = this.buf.readUInt16LE(14);
     this.imu1 = {
-      accelX: buf.readInt16LE(16),
-      accelY: buf.readInt16LE(18),
-      accelZ: buf.readInt16LE(20),
-      magX: buf.readInt16LE(22),
-      magY: buf.readInt16LE(24),
-      magZ: buf.readInt16LE(26),
-      gyroX: buf.readInt16LE(28),
-      gyroY: buf.readInt16LE(30),
-      gyroZ: buf.readInt16LE(32)
+      accelX: this.parseIMU(16, "accel"),// no native 16 bit read
+      accelY: this.parseIMU(18, "accel"),
+      accelZ: this.parseIMU(20, "accel"),
+      magX: this.parseIMU(22, "mag"),
+      magY: this.parseIMU(24, "mag"),
+      magZ: this.parseIMU(26, "mag"),
+      gyroX: this.parseIMU(28, "gyro"),
+      gyroY: this.parseIMU(30, "gyro"),
+      gyroZ: this.parseIMU(32, "gyro")
     };
     this.imu2 = {
-      accelX: buf.readInt16LE(34),
-      accelY: buf.readInt16LE(36),
-      accelZ: buf.readInt16LE(38),
-      magX: buf.readInt16LE(40),
-      magY: buf.readInt16LE(42),
-      magZ: buf.readInt16LE(44),
-      gyroX: buf.readInt16LE(46),
-      gyroY: buf.readInt16LE(48),
-      gyroZ: buf.readInt16LE(50)
+      accelX: this.parseIMU(34, "accel"),// no native 16 bit read
+      accelY: this.parseIMU(36, "accel"),
+      accelZ: this.parseIMU(38, "accel"),
+      magX: this.parseIMU(40, "mag"),
+      magY: this.parseIMU(42, "mag"),
+      magZ: this.parseIMU(44, "mag"),
+      gyroX: this.parseIMU(46, "gyro"),
+      gyroY: this.parseIMU(48, "gyro"),
+      gyroZ: this.parseIMU(50, "gyro")
     };
-    this.swingSync = buf.readInt16LE(52);
-    this.dataAvailable = buf.readInt16LE(54);
+    this.swingSync = this.buf.readInt16LE(52);
+    this.dataAvailable = this.buf.readInt16LE(54);
 
-    cb();
+    //cb();
+  }
+
+  readFloat16LE(offset) {
+    var zeroBuf = Buffer.alloc(2);
+    var sliceBuf = Buffer.from(this.buf.slice(offset,offset+2));
+    var newBuf = Buffer.concat([sliceBuf, zeroBuf], 4);
+    return newBuf.readFloatLE(0);
+  }
+
+  parseIMU(offset, constant) {
+    var float = this.readFloat16LE(offset);
+    switch (constant) {
+      case "accel":
+        float *= LSM9DS1_ACCEL_MG_LSB_2G;
+        float /= 1000;
+        float *= SENSORS_GRAVITY_EARTH;
+        break;
+      case "mag":
+        float *= LSM9DS1_MAG_MGAUSS_4GAUSS;
+        float /= 1000;
+        break;
+      case "gyro":
+        float *= LSM9DS1_GYRO_DPS_DIGIT_2000DPS;
+        break;
+    }
+    return float;
   }
 
   storeData() {

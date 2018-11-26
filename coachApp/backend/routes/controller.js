@@ -107,15 +107,17 @@ class Controller {
   }
   
   getData() {
-    this.getService(ggServiceUuid);
+    var testbuf = Buffer.from('000000007c4600000000000b1ab7dab0' +
+        'DEAD000000006904870f00003807a801a1010000000000006904870f00003807a801a10100000000', 'hex');
+    var frame = new Frame(testbuf);
+    console.log(frame);
+    //this.getService(ggServiceUuid);
   }
 
   stopData() {
   }
 
   read() {
-    //var testbuf = Buffer.from('000000007c4600000000000b1ab7dab0' +
-    //    '0000000000006904870f00003807a801a1010000000000006904870f00003807a801a10100000000', 'hex');
 
     this.ggFrame.on('data', (data, isNotification) => {
       var frame = new Frame(data);
