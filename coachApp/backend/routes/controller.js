@@ -5,13 +5,13 @@
  */
 
 const noble = require('noble');
-const NextFrame = require('./nextframe.js');
-const db = require('../db/db.js');
+const Frame = require('../db/models/Frame.js');
+const GolfGloveDb = require('../db/db.js');
 
 // golf glove constants
 const ggServiceUuid = '7c838948fe34f1b52e427e1bd698c53a'; // make big endian / little endian converter function
-const ggNextFrameChar = '6c35868a4353abb86f4c13d55742415a';
-//const ggNextFrameChar = '4e38bed209594602a0af9b6bcb3b7b0e';
+const ggFrameChar = '6c35868a4353abb86f4c13d55742415a';
+//const ggFrameChar = '4e38bed209594602a0af9b6bcb3b7b0e';
 const ggRealTimeEnable = '72e48cb3fa2227ba78416d1b7e539259';
 const ggDataEnable = 'bdf7ae339873ab95d04bcec6aa349390';
 const SAMPLE_RATE = 120; // in hertz
@@ -22,12 +22,10 @@ class Controller {
     this.nobleState = undefined;
     this.ggPeripheral = {};
     this._ggService = {};
-    this._ggNextFrame = {};
+    this._ggFrame = {};
     this.ggRealTimeEnable = {};
     this.ggDataEnable = {};
-
-    this.currSwingNum = 0;
-    this.currSwingTime = 0;
+    this.db = new GolfGloveDb();
 
     noble.on('stateChange', newState => {
       //console.log("this is the new state: " + newState);
@@ -48,7 +46,7 @@ class Controller {
               console.log("disconnect once happened");
               this.ggPeripheral = {};
               this.ggService = {};
-              this.ggNextFrame = {};
+              this.ggFrame = {};
               this.disconnectPeripheral();
             });
           }
@@ -101,7 +99,7 @@ class Controller {
         if (err) this.socket.send(JSON.stringify({err: "Error Discovering Characteristics!"}));
         else {
           console.log("found characteristic: " + characteristics[0].uuid);
-          this.ggNextFrame = characteristics[0];
+          this.ggFrame = characteristics[0];
         }
       });
     }
@@ -115,46 +113,22 @@ class Controller {
   stopData() {
   }
 
-  // needs time delta of less than 8.3333 ms in db
-  testDB() {
-    var i = 0;
-    db.run("BEGIN TRANSACTION");
-    db.serialize(() => {
-      while (i < 10000) {
-        var testbuf = Buffer.from('ffffffffffffffffffffffffffffffffffffffffffffffffffffffff' +
-            'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
-
-        var frame = new NextFrame(testbuf);
-
-        var time = Date.now();
-        db.run('INSERT INTO frames (timestamp, swingNum, offset, frame) VALUES (?, ?, ?, ?)',
-            time, 0, 0, frame.toString(), (err) => {
-              if (err) console.error(err);
-            });
-        ++i;
-      }
-    });
-    db.run("END");
-    db.close();
-    console.log("written");
-  }
-
   read() {
     //var testbuf = Buffer.from('000000007c4600000000000b1ab7dab0' +
     //    '0000000000006904870f00003807a801a1010000000000006904870f00003807a801a10100000000', 'hex');
 
-    this.ggNextFrame.on('data', (data, isNotification) => {
-      var frame = new NextFrame(data);
+    this.ggFrame.on('data', (data, isNotification) => {
+      var frame = new Frame(data);
       this.storeFrame(frame);
       this.clientSend(frame);
     });
 
-    this.ggNextFrame.subscribe(error => {
+    this.ggFrame.subscribe(error => {
       if (error) {
-        console.error('Error subscribing to NextFrame Characteristic');
+        console.error('Error subscribing to Frame Characteristic');
       }
       else {
-        console.log('Subscribed to NextFrame Characteristic');
+        console.log('Subscribed to Frame Characteristic');
       }
     });
 
@@ -171,23 +145,6 @@ class Controller {
     });
   }
 
-  setSwingData(frame) {
-    switch(frame.swingSync) {
-        case 0:
-          frame['swingNum'] = -1;
-          frame['offset'] = 0;
-          break;
-        case 1:
-          frame['swingNum'] = ++this.currSwingNum;
-          frame['offset'] = 0;
-          this.currSwingTime = frame['timestamp'];
-          break;
-        case 2:
-          frame['swingNum'] = this.currSwingNum;
-          frame['offset'] = (frame['timestamp'] - this.currSwingTime) / SAMPLE_RATE;
-          break;
-      }
-  }
 
   disconnectPeripheral() {
     if (!this.isEmpty(this.ggPeripheral)) {
@@ -207,17 +164,17 @@ class Controller {
   set ggService(obj) {
     this._ggService = obj;
     if (!this.isEmpty(this._ggService)) {
-      this.getCharacteristic(ggNextFrameChar);
+      this.getCharacteristic(ggFrameChar);
     }
   }
 
-  get ggNextFrame() {
-    return this._ggNextFrame;
+  get ggFrame() {
+    return this._ggFrame;
   }
 
-  set ggNextFrame(obj) {
-    this._ggNextFrame = obj;
-    if (!this.isEmpty(this._ggNextFrame)) {
+  set ggFrame(obj) {
+    this._ggFrame = obj;
+    if (!this.isEmpty(this._ggFrame)) {
       this.read();
     }
   }

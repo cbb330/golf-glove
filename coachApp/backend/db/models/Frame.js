@@ -4,7 +4,7 @@
  * Description: Parser class for Golf Glove next frame data
  */
 
-class NextFrame {
+class Frame {
   constructor(buf) {
     if (buf.length != 56) {
       throw "Bad Frame! Length is: " + buf.length;
@@ -44,6 +44,25 @@ class NextFrame {
     this.swingSync = buf.readInt16LE(52);
     this.dataAvailable = buf.readInt16LE(54);
   }
+
+  /*
+   switch(frame.swingSync) {
+-        case 0:
+-          frame['swingNum'] = -1;
+-          frame['offset'] = 0;
+-          break;
+-        case 1:
+-          frame['swingNum'] = ++this.currSwingNum;
+-          frame['offset'] = 0;
+-          this.currSwingTime = frame['timestamp'];
+-          break;
+-        case 2:
+-          frame['swingNum'] = this.currSwingNum;
+-          frame['offset'] = (frame['timestamp'] - this.currSwingTime) / SAMPLE_RATE;
+-          break;
+-      }
+
+   */
 }
 
-module.exports = NextFrame;
+module.exports = Frame;

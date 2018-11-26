@@ -1,18 +1,35 @@
-// sqlite3 database
+// sqlite3 database init, export db connection
 var path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database(path.join(__dirname, '..', 'db', 'Frames.db'), (err) => {
-  if (err) console.error(err);
-});
 
-// new table each run
-db.serialize(function() {
-  db.run("CREATE TABLE IF NOT EXISTS frames (id INTEGER PRIMARY KEY, timestamp INTEGER, " +
-      "swingNum INTEGER, offset INTEGER, frame TEXT)");
-});
+class GolfGloveDb {
+  constructor() {
+    this.db = new sqlite3.Database(path.join(__dirname, '..', 'db', 'GolfGlove.db'), (err) => {
+      if (err) console.error(err);
+      else console.log("GolfGlove db created");
+    });
 
-process.on('SIGINT', () => {
-  db.close();
-});
+    this.makeTables();
 
-module.exports = db;
+    process.on('SIGINT', () => {
+      db.close();
+    });
+
+  }
+
+  makeTables() {
+    this.db.serialize(() => {
+      // offet is microcontroller timestamp - swingParent timestamp
+      this.db.run("CREATE TABLE IF NOT EXISTS frames (offset INTEGER, frame TEXT, timestamp INTEGER, FOREIGN KEY (timestamp) REFERENCES swings(timestamp))");
+      this.db.run("CREATE TABLE IF NOT EXISTS swings (timestamp INTEGER PRIMARY KEY, swingNum INTEGER, isRealTime BOOLEAN)");
+    });
+  }
+
+
+}
+
+
+
+
+
+module.exports = GolfGloveDb;
