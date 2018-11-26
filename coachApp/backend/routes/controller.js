@@ -111,27 +111,22 @@ class Controller {
   }
 
   read() {
-    this.ggNextFrame.read((err, data) => {
+    //var testbuf = Buffer.from('000000007c4600000000000b1ab7dab0' +
+    //    '0000000000006904870f00003807a801a1010000000000006904870f00003807a801a10100000000', 'hex');
+
+    this.ggNextFrame.on('data', (data, isNotification) => {
       var frame = new NextFrame(data);
       this.clientSend(frame);
     });
 
-    /*
-    // TODO: Check if these changes work https://github.com/noble/noble/blob/master/examples/echo.js
-    this.ggNextFrame.on('data', (data, isNotification) => {
-      console.log('Received: "' + data + '"');
-      this.clientSend(data);
-    });
-
     this.ggNextFrame.subscribe(error => {
       if (error) {
-        console.error('Error subscribing to NextFrame Characteristic');
+        console.error('Error subscribing to Frame Characteristic');
       }
       else {
-        console.log('Subscribed to NextFrame Characteristic');
+        console.log('Subscribed to Frame Characteristic');
       }
     });
-    */
 
   }
 
