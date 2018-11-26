@@ -19,9 +19,11 @@ class GolfGloveDb {
 
   makeTables() {
     this.db.serialize(() => {
-      // offet is microcontroller timestamp - swingParent timestamp
-      this.db.run("CREATE TABLE IF NOT EXISTS frames (offset INTEGER, frame TEXT, timestamp INTEGER, FOREIGN KEY (timestamp) REFERENCES swings(timestamp))");
-      this.db.run("CREATE TABLE IF NOT EXISTS swings (timestamp INTEGER PRIMARY KEY, swingNum INTEGER, isRealTime BOOLEAN)");
+      /* * MODE TRANSITION: only send real time enable signal when microcontroller buffer is full.
+           This is so front end can accurately display real time vs full swing data, without the database knowing state
+      * */
+      this.db.run("CREATE TABLE IF NOT EXISTS swings (timestamp INTEGER, swingId INTEGER PRIMARY KEY)");
+      this.db.run("CREATE TABLE IF NOT EXISTS frames (frame TEXT, timestamp INTEGER PRIMARY KEY, swingId INTEGER PRIMARY KEY, FOREIGN KEY (swingId) REFERENCES swings(swingId))");
     });
   }
 

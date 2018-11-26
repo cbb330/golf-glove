@@ -5,12 +5,18 @@
  */
 
 class Frame {
-  constructor(buf) {
+  constructor(buf, db) {
     if (buf.length != 56) {
       throw "Bad Frame! Length is: " + buf.length;
     }
     this.raw = buf; // buffer object
+    this.db = db; //golf glove db api
 
+    this.parseBuf(buf, this.storeData);
+
+  }
+
+  parseBuf(buf, cb) {
     /* Parse the bytearray buffer into variables */
     this.timestamp = buf.readUInt32LE(0);
     this.pressure1 = buf.readUInt16LE(4);
@@ -43,26 +49,26 @@ class Frame {
     };
     this.swingSync = buf.readInt16LE(52);
     this.dataAvailable = buf.readInt16LE(54);
+
+    cb();
   }
 
-  /*
-   switch(frame.swingSync) {
--        case 0:
--          frame['swingNum'] = -1;
--          frame['offset'] = 0;
--          break;
--        case 1:
--          frame['swingNum'] = ++this.currSwingNum;
--          frame['offset'] = 0;
--          this.currSwingTime = frame['timestamp'];
--          break;
--        case 2:
--          frame['swingNum'] = this.currSwingNum;
--          frame['offset'] = (frame['timestamp'] - this.currSwingTime) / SAMPLE_RATE;
--          break;
--      }
-
-   */
+  storeData() {
+    switch (this.swingSync) {
+      case 0:
+        //* use a combination of the db.js's class to create a buffer with this class to lower amount of sqlite queries
+        // select last_insert_rowid();
+        // (new time, currSwingId) <- frame table
+        break;
+      case 1:
+        // (new time, currSwingId + 1) <- swing table
+        // (new time, currSwingId + 1) <- frame table
+        break;
+      case 2:
+        // end of swing, not used
+        break;
+    }
+  }
 }
 
 module.exports = Frame;
