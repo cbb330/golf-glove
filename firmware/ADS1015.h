@@ -1,3 +1,5 @@
+#ifndef __ADS1015_h
+#define __ADS1015_h
 #include "wiced_bt_trace.h"
 #include "wiced_bt_types.h"
 #include "wiced_rtos.h"
@@ -9,7 +11,10 @@
 /*=========================================================================
  I2C ADDRESS/BITS
  -----------------------------------------------------------------------*/
-#define ADS1015_ADDRESS                 (0x48)    // 1001 000 (ADDR = GND)
+#define ADS1015_1_ADDRESS                 (0x48)    // 1001 000 (ADDR = GND)
+#define ADS1015_2_ADDRESS                 (0x49)    
+#define ADS1015_3_ADDRESS                 (0x4A)
+#define ADS1015_4_ADDRESS                 (0x4B)
 /*=========================================================================*/
 
 /*=========================================================================
@@ -95,15 +100,11 @@ typedef enum {
     GAIN_SIXTEEN = ADS1015_REG_CONFIG_PGA_0_256V
 } adsGain_t;
 
-// Instance-specific properties
-UINT8 m_i2cAddress;
 UINT8 m_conversionDelay;
 UINT8 m_bitShift;
 adsGain_t m_gain;
 
 void ads_setup();
-UINT16 ads_readADC_SingleEnded(UINT8 channel);
-INT16 ads_readADC_Differential_0_1(void);
-INT16 ads_readADC_Differential_2_3(void);
-void ads_startComparator_SingleEnded(UINT8 channel, INT16 threshold);
-INT16 ads_getLastConversionResults();
+void ads_configureADC(UINT8 address, UINT8 channel);
+UINT16 ads_readADC_SingleEnded(UINT8 address);
+#endif

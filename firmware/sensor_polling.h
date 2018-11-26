@@ -9,6 +9,7 @@
 #include "wiced_hal_i2c.h"
 #include "wiced_hal_adc.h"
 #include "wiced_rtos.h"
+#include "rtc.h"
 #include "string.h"
 #include "LSM9DS1.h"
 #include "ADS1015.h"
