@@ -54,21 +54,14 @@ class Frame {
       gyroY: this.parseIMU(48, "gyro"),
       gyroZ: this.parseIMU(50, "gyro")
     };
-    this.swingSync = this.buf.readInt16LE(52);
-    this.dataAvailable = this.buf.readInt16LE(54);
+    this.swingSync = this.buf.readUInt16LE(52);
+    this.dataAvailable = this.buf.readUInt16LE(54);
 
     //cb();
   }
 
-  readFloat16LE(offset) {
-    var zeroBuf = Buffer.alloc(2);
-    var sliceBuf = Buffer.from(this.buf.slice(offset,offset+2));
-    var newBuf = Buffer.concat([sliceBuf, zeroBuf], 4);
-    return newBuf.readFloatLE(0);
-  }
-
   parseIMU(offset, constant) {
-    var float = this.readFloat16LE(offset);
+    var float = this.buf.readInt16LE(offset);
     switch (constant) {
       case "accel":
         float *= LSM9DS1_ACCEL_MG_LSB_2G;

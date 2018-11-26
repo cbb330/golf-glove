@@ -107,11 +107,7 @@ class Controller {
   }
   
   getData() {
-    var testbuf = Buffer.from('000000007c4600000000000b1ab7dab0' +
-        'DEAD000000006904870f00003807a801a1010000000000006904870f00003807a801a10100000000', 'hex');
-    var frame = new Frame(testbuf);
-    console.log(frame);
-    //this.getService(ggServiceUuid);
+    this.getService(ggServiceUuid);
   }
 
   stopData() {
@@ -120,8 +116,8 @@ class Controller {
   read() {
 
     this.ggFrame.on('data', (data, isNotification) => {
-      var frame = new Frame(data);
-      this.storeFrame(frame);
+      var frame = new Frame(data, this.db);
+      console.log(frame);
       this.clientSend(frame);
     });
 
@@ -135,18 +131,6 @@ class Controller {
     });
 
   }
-
-  // TODO: take all storage logic to its own file
-  storeFrame(frame) {
-    this.setSwingData(frame);
-    console.log(frame);
-    db.run('INSERT INTO frames (timestamp, swingNum, offset, frame) VALUES (?, ?, ?, ?)',
-        frame['timestamp'], frame['swingNum'], frame['offset'], frame.toString(), (err) =>
-    {
-      if (err) console.error(err);
-    });
-  }
-
 
   disconnectPeripheral() {
     if (!this.isEmpty(this.ggPeripheral)) {
