@@ -107,7 +107,12 @@ class Controller {
   }
   
   getData() {
-    this.getService(ggServiceUuid);
+    var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
+        'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
+    var frame = new Frame(testbuf, this.db);
+    this.clientSend(frame);
+
+    //this.getService(ggServiceUuid);
   }
 
   stopData() {
