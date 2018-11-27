@@ -137,11 +137,11 @@ class Controller {
   }
 
   read() {
-
     this.ggFrame.on('data', (data, isNotification) => {
       var frame = new Frame(data, this.db);
       console.log(frame);
-      this.sendClient(frame);
+      const message = {type: 'data', frame};
+      this.sendClient(message);
     });
 
     this.ggFrame.subscribe(error => {
@@ -152,7 +152,6 @@ class Controller {
         console.log('Subscribed to Frame Characteristic');
       }
     });
-
   }
 
   disconnectPeripheral() {
