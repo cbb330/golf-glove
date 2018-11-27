@@ -28,7 +28,7 @@ class Frame {
 
   parseBuf(cb) {
     /* Parse the bytearray buffer into variables */
-    this.timestamp = this.buf.readUInt32LE(0);
+    this.timestamp = Date.now();
     this.pressure1 = this.buf.readUInt16LE(4);
     this.pressure2 = this.buf.readUInt16LE(6);
     this.deflection = this.buf.readUInt16LE(8);
@@ -60,7 +60,7 @@ class Frame {
     this.swingSync = this.buf.readUInt16LE(52);
     this.dataAvailable = this.buf.readUInt16LE(54);
 
-    this.swingSync ? this.db.storeSwing(this) : this.db.storeFrame(this);
+    //this.swingSync ? this.db.storeSwing(this) : this.db.storeFrame(this);
   }
 
   parseIMU(offset, constant) {
