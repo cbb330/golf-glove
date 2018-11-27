@@ -18,15 +18,15 @@ class TestChart extends Component {
     this.yData = [];
     this.zData = [];
 
-    this.testData = this.state.data;
+    // this.testData = this.state.data;
 
-    this.testData.forEach(point => {
-      point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
-      this.state.allData.push({time: point.time, x: point.imu1.accel_x, y: point.imu1.accel_y, z: point.imu1.accel_z, type: "all"});
-      this.state.xData.push({time: point.time, data: point.imu1.accel_x, type: "x"});
-      this.state.yData.push({time: point.time, data: point.imu1.accel_y, type: "y"});
-      this.state.zData.push({time: point.time, data: point.imu1.accel_z, type: "z"});
-    });
+    // this.testData.forEach(point => {
+    //   point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
+    //   this.state.allData.push({time: point.time, x: point.imu1.accel_x, y: point.imu1.accel_y, z: point.imu1.accel_z, type: "all"});
+    //   this.state.xData.push({time: point.time, data: point.imu1.accel_x, type: "x"});
+    //   this.state.yData.push({time: point.time, data: point.imu1.accel_y, type: "y"});
+    //   this.state.zData.push({time: point.time, data: point.imu1.accel_z, type: "z"});
+    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,14 +37,15 @@ class TestChart extends Component {
   }
 
   formatData(data) {
-    this.xData = [];
-    this.yData = [];
-    this.zData = [];
+    const xData = [];
+    const yData = [];
+    const zData = [];
     data.forEach(point => {
-      this.xData.push({time: point.time, data: point.imu1.accelX, type: "x"});
-      this.yData.push({time: point.time, data: point.imu1.accelY, type: "y"});
-      this.zData.push({time: point.time, data: point.imu1.accelZ, type: "z"});
+      xData.push({time: point.time, data: point.imu1.accelX, type: "x"});
+      yData.push({time: point.time, data: point.imu1.accelY, type: "y"});
+      zData.push({time: point.time, data: point.imu1.accelZ, type: "z"});
     });
+    this.setState({xData, yData, zData});
   }
 
   render() {
@@ -99,21 +100,21 @@ class TestChart extends Component {
           // tickFormat={(x) => (`$${x / 1000}k`)}
         />
         <VictoryLine
-          data={this.xData}
+          data={this.state.xData}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#92c050", strokeWidth: 2 }}}
         />
         <VictoryLine
-          data={this.yData}
+          data={this.state.yData}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#00A090" }}}
         />
         <VictoryLine
-          data={this.zData}
+          data={this.state.zData}
           x={'time'}
           y={'data'}
           interpolation="basis"
