@@ -15,6 +15,7 @@ class App extends Component {
     // this.socket = new WebSocket("ws://170.253.147.206:8081");
     this.socket = new WebSocket("ws://localhost:8080");
     this.data = [];
+    this.holdingData = [];
   }
   
   componentDidMount() {
@@ -28,7 +29,13 @@ class App extends Component {
         case 'data':
           // TODO: handle data (append to structure or whatever)
           message.frame.time = new Date(message.frame.timestamp);
-          this.data.push(message.frame);
+          this.holdingData.push(message.frame);
+          if (this.holdingData.length >= 25) {
+            this.data = [...this.data.slice(-500), ...this.holdingData];
+            this.holdingData = [];
+            // console.log('found 10 frames');
+            this.setState(message);
+          }
           break;
         case 'error':
           // TODO: handle other error

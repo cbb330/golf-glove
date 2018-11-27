@@ -33,23 +33,40 @@ class TestChart extends Component {
     this.setState({
       data: nextProps.data
     });
-    this.formatData(nextProps.data);
+    // console.log(nextProps.data);
+    if (nextProps.data.length > 0) {
+      this.formatData(nextProps.data);
+    }
   }
 
   formatData(data) {
     const xData = [];
     const yData = [];
     const zData = [];
-    data.forEach(point => {
-      xData.push({time: point.time, data: point.imu1.accelX, type: "x"});
-      yData.push({time: point.time, data: point.imu1.accelY, type: "y"});
-      zData.push({time: point.time, data: point.imu1.accelZ, type: "z"});
+    // data.forEach(point => {
+    //   this.xData.push({time: point.time, data: point.imu1.accelX, type: "x"});
+    //   this.yData.push({time: point.time, data: point.imu1.accelY, type: "y"});
+    //   this.zData.push({time: point.time, data: point.imu1.accelZ, type: "z"});
+    // });
+    // console.log('adding points');
+    for (let i = 0; i < 25; i++) {
+      const point = data[data.length - (25 - i)];
+      const xDatum = {time: point.time, data: point.imu1.accelX, type: 'x'};
+      xData.push(xDatum);
+      const yDatum = {time: point.time, data: point.imu1.accelY, type: 'y'};
+      yData.push(yDatum);
+      const zDatum = {time: point.time, data: point.imu1.accelZ, type: 'z'};
+      zData.push(zDatum);
+    }
+    this.setState({
+      xData: [...this.state.xData.slice(-500), ...xData],
+      yData: [...this.state.yData.slice(-500), ...yData],
+      zData: [...this.state.zData.slice(-500), ...zData]
     });
-    this.setState({xData, yData, zData});
   }
 
   render() {
-    console.log(this.state.data);
+    // console.log(this.state.data);
     return (
       <VictoryChart
         height={400}
