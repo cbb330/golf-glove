@@ -145,9 +145,9 @@ typedef enum {
 } lsm9ds1GyroScale_t;
 
 typedef struct vector_s {
-    float x;
-    float y;
-    float z;
+    UINT16 x;
+    UINT16 y;
+    UINT16 z;
 } lsm9ds1Vector_t;
 
 lsm9ds1Vector_t accelData; // Last read accelerometer data will be available here

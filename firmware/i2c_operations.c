@@ -38,10 +38,11 @@ UINT8 i2c_readBuffer(UINT8 address, UINT8 reg, UINT8 len, UINT8 *buffer) {
     //WICED_BT_TRACE("i2c_readBuffer\r\n");
 
     UINT8 res;
-    res = wiced_hal_i2c_combined_read(&reg, 1, buffer, sizeof(buffer), address);
-    if (res == 1)
-        WICED_BT_TRACE("ERROR: i2c combined read Error.\r\n");
-    else {
+    
+    res = wiced_hal_i2c_combined_read(&reg, 1, buffer, len, address);
+    if (res == 1) {
+        WICED_BT_TRACE("ERROR: i2c combined read Error. addr=%x reg=%x\r\n", address, reg);
+    } else {
         /*
          WICED_BT_TRACE("I2C READ ");
          int i;

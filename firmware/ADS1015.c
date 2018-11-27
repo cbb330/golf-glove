@@ -4,7 +4,7 @@ void ads_setup()
 {
    m_conversionDelay = /*1;*/ ADS1115_CONVERSIONDELAY;
    m_bitShift = 0;
-   m_gain = GAIN_TWOTHIRDS; /* +/- 6.144V range (limited to VDD +0.3V max!) */
+   m_gain = GAIN_SIXTEEN; /* +/- 6.144V range (limited to VDD +0.3V max!) */
 }
 
 /**************************************************************************/

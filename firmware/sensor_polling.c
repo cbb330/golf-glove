@@ -15,10 +15,10 @@ void init_i2c() {
     lsm_begin(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_INTERNAL_ADDRESS_MAG);
     lsm_begin(LSM9DS1_ADDRESS_ACCELGYRO, LSM9DS1_ADDRESS_MAG);
     ads_setup();
-    ads_configureADC(ADS1015_1_ADDRESS, 0);
-    ads_configureADC(ADS1015_2_ADDRESS, 0);
-    ads_configureADC(ADS1015_3_ADDRESS, 0);
-    ads_configureADC(ADS1015_4_ADDRESS, 0);
+    ads_configureADC(ADS1015_1_ADDRESS, 3);
+    ads_configureADC(ADS1015_2_ADDRESS, 3);
+    ads_configureADC(ADS1015_3_ADDRESS, 3);
+    ads_configureADC(ADS1015_4_ADDRESS, 3);
 }
 
 // Main Loop
@@ -50,9 +50,9 @@ sensor_frame get_sensor_frame() {
     UINT16 pres1 =          wiced_hal_adc_read_raw_sample(PRES1_PIN);
     UINT16 pres2 =          wiced_hal_adc_read_raw_sample(PRES2_PIN);
     UINT16 wrist1 =         ads_readADC_SingleEnded(ADS1015_1_ADDRESS);
-    UINT16 wrist2 =         ads_readADC_SingleEnded(ADS1015_1_ADDRESS);
-    UINT16 wrist3 =         ads_readADC_SingleEnded(ADS1015_1_ADDRESS);
-    UINT16 wrist4 =         ads_readADC_SingleEnded(ADS1015_1_ADDRESS);
+    UINT16 wrist2 =         ads_readADC_SingleEnded(ADS1015_2_ADDRESS);
+    UINT16 wrist3 =         ads_readADC_SingleEnded(ADS1015_3_ADDRESS);
+    UINT16 wrist4 =         ads_readADC_SingleEnded(ADS1015_4_ADDRESS);
     uint8_t sync = 0;
     uint8_t avail = 0;
 
@@ -63,6 +63,7 @@ sensor_frame get_sensor_frame() {
 }
 
 void print_sensor_frame(sensor_frame rec) {
+    /*
     WICED_BT_TRACE("timestamp %u\r\n", rec.timestamp);
     WICED_BT_TRACE("pres1     %u\r\n", rec.pres1);
     WICED_BT_TRACE("pres2     %u\r\n", rec.pres2);
@@ -92,6 +93,12 @@ void print_sensor_frame(sensor_frame rec) {
     WICED_BT_TRACE("    gyroZ %u\r\n", rec.imu2.gyroZ);
     WICED_BT_TRACE("sync      %u\r\n", rec.sync);
     WICED_BT_TRACE("avail     %u\r\n", rec.avail);
+    */
+
+   WICED_BT_TRACE("{ %x %x %x %x %x %x }\r\n", rec.pres1, rec.pres2, rec.wrist1, rec.wrist2, rec.wrist3, rec.wrist4);
+   WICED_BT_TRACE("{ %x %x %x %x %x %x %x %x %x }\r\n", rec.imu1.accX, rec.imu1.accY, rec.imu1.accZ, rec.imu1.magX, rec.imu1.magY, rec.imu1.magZ, rec.imu1.gyroX, rec.imu1.gyroY, rec.imu1.gyroZ);
+   WICED_BT_TRACE("{ %x %x %x %x %x %x %x %x %x }\r\n\r\n", rec.imu2.accX, rec.imu2.accY, rec.imu2.accZ, rec.imu2.magX, rec.imu2.magY, rec.imu2.magZ, rec.imu2.gyroX, rec.imu2.gyroY, rec.imu2.gyroZ);
+
 }
 
 imu_frame get_imu_frame() {
