@@ -1,7 +1,6 @@
 'use strict';
 const Controller = require('./controller');
 const controller = new Controller();
-
 module.exports = function(app) {
   const wss = app.get('wss');
 
@@ -33,6 +32,10 @@ module.exports = function(app) {
           break;
         case "stop":
           controller.stopData();
+          break;
+        case "test":
+          controller.testDB();
+          break;
       }
     });
 
