@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-// import axios from 'axios'; // http request package
 
 import TestChart from './TestChart.js';
-import testData from './data/test-data.json';
 
 
 class App extends Component {
@@ -14,7 +12,9 @@ class App extends Component {
       response: undefined
     };
 
-    this.socket = new WebSocket("ws://170.253.147.206:8080");
+    // this.socket = new WebSocket("ws://170.253.147.206:8081");
+    this.socket = new WebSocket("ws://localhost:8080");
+    this.data = [];
   }
   
   componentDidMount() {
@@ -22,16 +22,23 @@ class App extends Component {
       // TODO: handle responses from server
       // TODO: responses include data, errors with connection, and general updates
       const message = JSON.parse(event.data);
-      console.log(message);
-      this.setState({message});
+      // console.log(message);
+      // this.setState({message});
       switch (message.type) {
         case 'data':
           // TODO: handle data (append to structure or whatever)
-          this.data = message.data;
+          message.frame.time = new Date(message.frame.timestamp);
+          this.data.push(message.frame);
           break;
         case 'error':
-          // TODO: handle error
-          console.log(message.error);
+          // TODO: handle other error
+          console.log(message.data);
+          // TODO: fix sending stop message on backend, just update state
+          this.handleStopAcceptingData();
+          break;
+        case 'status':
+          // handle status updates
+          console.log(message.data);
           break;
         default:
           console.log(`Client received unknown message type (${message.type}) from the server`);
@@ -40,20 +47,9 @@ class App extends Component {
     };
   }
 
-  // http request for future needs
-  // getHello() {
-  //   axios.get('http://170.253.147.206:4000/hello') //to access Christian Bush's rsbpi
-  //     .then((response) => {
-  //       this.setHello(response.data.time);
-  //       // console.log(response.data)
-  //     });
-  // }
-
-  // setHello(e) {
-  //   this.setState({
-  //     response: e
-  //   });
-  // }
+  analyzeData() {
+    console.log(this.data);
+  }
   
   handleConnect() {
     this.connectDevice();
@@ -81,6 +77,10 @@ class App extends Component {
     this.setState({
       isAcceptingData: false
     });
+  }
+
+  handleClearData() {
+    this.data = [];
   }
 
   connectDevice() {
@@ -121,7 +121,7 @@ class App extends Component {
 
   render() {
     return (
-        <div style={{height: 600, width: 1000}}>
+        <div style={{height: 400, width: 1000}}>
           <button onClick={(e) => this.handleConnect(e)} disabled={this.state.isConnectedToDevice}>
             Connect
           </button>
@@ -134,6 +134,12 @@ class App extends Component {
           <button onClick={(e) => this.handleStopAcceptingData(e)} disabled={!this.state.isAcceptingData}>
             Stop
           </button>
+          <button onClick={(e) => this.analyzeData(e)}>
+            Analyze
+          </button>
+          <button onClick={(e) => this.handleClearData(e)}>
+            Clear Data
+          </button>
           {/* <p>{`Socket state: ${this.socket.readyState ? "connected" : "disconnected"}`}</p> */}
           <p>{`Connection state: ${this.state.isConnectedToDevice ? "connected" : "disconnected"}`}.</p>
           <p>{`Data state: ${this.state.isAcceptingData ? "accepting" : "not accepting"}`}.</p>
@@ -144,7 +150,7 @@ class App extends Component {
               <h2>{`Uuid: ${this.state.response.uuid}`}</h2>
             </div>
           }
-          <TestChart data={testData} />
+          <TestChart data={this.data} />
         </div>
     );
   }

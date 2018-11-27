@@ -14,6 +14,9 @@ class TestChart extends Component {
       yData: [],
       zData: []
     };
+    this.xData = [];
+    this.yData = [];
+    this.zData = [];
 
     this.testData = this.state.data;
 
@@ -30,16 +33,29 @@ class TestChart extends Component {
     this.setState({
       data: nextProps.data
     });
+    this.formatData(nextProps.data);
+  }
+
+  formatData(data) {
+    this.xData = [];
+    this.yData = [];
+    this.zData = [];
+    data.forEach(point => {
+      this.xData.push({time: point.time, data: point.imu1.accelX, type: "x"});
+      this.yData.push({time: point.time, data: point.imu1.accelY, type: "y"});
+      this.zData.push({time: point.time, data: point.imu1.accelZ, type: "z"});
+    });
   }
 
   render() {
+    console.log(this.state.data);
     return (
       <VictoryChart
-        height={600}
+        height={400}
         width={1000}
         theme={VictoryTheme.material}
         scale={{ x: "time" }}
-        domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
+        // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
 
         // domainPadding will add space to each side of VictoryBar to
         // prevent it from overlapping the axis
@@ -49,7 +65,7 @@ class TestChart extends Component {
         containerComponent={
           <VictoryVoronoiContainer voronoiDimension='x'
             labels={function (d) {
-              // console.log(d)
+              // console.log(d);
               let s = "";
               if (d.type === "x")
                 s = `t: ${d._x.getMinutes()}:${d._x.getSeconds().toString().padStart(2, '0')}:${d._x.getMilliseconds().toString().padStart(3, '0')}\n`;
@@ -83,21 +99,21 @@ class TestChart extends Component {
           // tickFormat={(x) => (`$${x / 1000}k`)}
         />
         <VictoryLine
-          data={this.state.xData}
+          data={this.xData}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#92c050", strokeWidth: 2 }}}
         />
         <VictoryLine
-          data={this.state.yData}
+          data={this.yData}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#00A090" }}}
         />
         <VictoryLine
-          data={this.state.zData}
+          data={this.zData}
           x={'time'}
           y={'data'}
           interpolation="basis"
