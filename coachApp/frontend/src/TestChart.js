@@ -1,42 +1,48 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { VictoryChart, VictoryAxis, VictoryLine, VictoryTheme, VictoryTooltip, VictoryVoronoiContainer } from 'victory';
 // import moment from 'moment'
 
 
 
-class TestChart extends Component {
+class TestChart extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      data: props.data,
+      data: {        
+        x: props.x,
+        y: props.y,
+        z: props.z
+      },
+      size: props.size,
       allData: [],
-      xData: [],
-      yData: [],
-      zData: []
     };
-    this.xData = [];
-    this.yData = [];
-    this.zData = [];
+    // this.xData = [];
+    // this.yData = [];
+    // this.zData = [];
 
     // this.testData = this.state.data;
 
-    // this.testData.forEach(point => {
-    //   point.time = new Date(2018, 10, 6, point.time.substr(0, 2), point.time.substr(3, 2), point.time.substr(6, 2), point.time.substr(9, 3));
-    //   this.state.allData.push({time: point.time, x: point.imu1.accel_x, y: point.imu1.accel_y, z: point.imu1.accel_z, type: "all"});
-    //   this.state.xData.push({time: point.time, data: point.imu1.accel_x, type: "x"});
-    //   this.state.yData.push({time: point.time, data: point.imu1.accel_y, type: "y"});
-    //   this.state.zData.push({time: point.time, data: point.imu1.accel_z, type: "z"});
+    // this.testData.forEach(d => {
+    //   // d.time = new Date(2018, 10, 6, d.time.substr(0, 2), d.time.substr(3, 2), d.time.substr(6, 2), d.time.substr(9, 3));
+    //   this.state.xData.push({time: d.time, data: d.accelX, type: "x"});
+    //   this.state.yData.push({time: d.time, data: d.accelY, type: "y"});
+    //   this.state.zData.push({time: d.time, data: d.accelZ, type: "z"});
     // });
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      data: nextProps.data
+      data: {        
+        x: nextProps.x,
+        y: nextProps.y,
+        z: nextProps.z
+      }, 
+      size: nextProps.size,
     });
     // console.log(nextProps.data);
-    if (nextProps.data.length > 0) {
-      this.formatData(nextProps.data);
-    }
+    // if (nextProps.data.length > 0) {
+    //   this.formatData(nextProps.data);
+    // }
   }
 
   formatData(data) {
@@ -69,10 +75,14 @@ class TestChart extends Component {
     // console.log(this.state.data);
     return (
       <VictoryChart
-        height={400}
-        width={1000}
+        height={300}
+        // eslint-disable-next-line no-restricted-globals
+        width={parent.innerWidth * 0.45}
         theme={VictoryTheme.material}
+        padding={{top: 0, bottom: 0, left: 50, right: 0}}
+        style={{flex: '0 0 100%'}}
         scale={{ x: "time" }}
+        domain={{y: [-10, 10]}}
         // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
 
         // domainPadding will add space to each side of VictoryBar to
@@ -81,13 +91,14 @@ class TestChart extends Component {
         domainPadding={{y: [10, 10]}}
 
         containerComponent={
-          <VictoryVoronoiContainer voronoiDimension='x'
+          <VictoryVoronoiContainer
+            voronoiDimension='x'
             labels={function (d) {
               // console.log(d);
               let s = "";
               if (d.type === "x")
                 s = `t: ${d._x.getMinutes()}:${d._x.getSeconds().toString().padStart(2, '0')}:${d._x.getMilliseconds().toString().padStart(3, '0')}\n`;
-              return `${s}${d.type}: ${d._y}`;
+              return `${s}${d.type}: ${d._y.toFixed(2)}`;
             }}
             labelComponent={<VictoryTooltip cornerRadius={0} flyoutStyle={{fill: "white"}}/>}
           />
@@ -98,13 +109,15 @@ class TestChart extends Component {
           // they are placed on the axis
           // tickValues={[1, 2, 3, 4]}
           // tickFormat={['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4']}
-          label="Time (m:s:ms)"
-          tickFormat={(x) => `${x.getMinutes()}:${x.getSeconds().toString().padStart(2, '0')}:${x.getMilliseconds().toString().padStart(3, '0')}`}
+          label="time (m:s)"
+          tickFormat={(x) => `${x.getMinutes()}:${x.getSeconds().toString().padStart(2, '0')}`}
           style={{
             axisLabel: {fontSize: 20, padding: 30},
             ticks: {stroke: "grey", size: 5},
-            // grid: {stroke: (t) => "lightgrey", fill: "none"}
+            grid: {stroke: "#c0c39a", strokeDasharray: 0}
           }}
+          orientation='bottom'
+          // crossAxis={true}
         />
         <VictoryAxis
           dependentAxis={true}
@@ -112,26 +125,27 @@ class TestChart extends Component {
           style={{
             axisLabel: {fontSize: 20, padding: 30},
             ticks: {stroke: "grey", size: 5},
+            grid: {stroke: "#c0c39a", strokeDasharray: 0}
           }}
           // tickFormat specifies how ticks should be displayed
           // tickFormat={(x) => (`$${x / 1000}k`)}
         />
         <VictoryLine
-          data={this.state.xData}
+          data={this.state.data.x}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#92c050", strokeWidth: 2 }}}
         />
         <VictoryLine
-          data={this.state.yData}
+          data={this.state.data.y}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#00A090" }}}
         />
         <VictoryLine
-          data={this.state.zData}
+          data={this.state.data.z}
           x={'time'}
           y={'data'}
           interpolation="basis"
