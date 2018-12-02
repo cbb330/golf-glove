@@ -13,7 +13,7 @@ class GolfGloveDb {
       this.db.close();
     });
 
-    this.currSwingId = 0;
+    this.currSwingID = undefined;
     this.makeTables();
 
   }
@@ -23,23 +23,24 @@ class GolfGloveDb {
       /* * MODE TRANSITION: only send real time enable signal when microcontroller buffer is full.
            This is so front end can accurately display real time vs full swing data, without the database knowing state
       * */
-      this.db.run("CREATE TABLE IF NOT EXISTS swings (timestamp INTEGER, swingId INTEGER PRIMARY KEY)");
-      this.db.run("CREATE TABLE IF NOT EXISTS frames (frame TEXT, timestamp INTEGER , swingId INTEGER, PRIMARY KEY (timestamp, swingId), FOREIGN KEY (swingId) REFERENCES swings(swingId))");
-      this.db.get('SELECT swingId FROM swings ORDER BY swingId DESC LIMIT 1', (err, row) => {
+      this.db.run("CREATE TABLE IF NOT EXISTS swings (timestamp INTEGER, swingID INTEGER PRIMARY KEY)");
+      this.db.run("CREATE TABLE IF NOT EXISTS frames (frame TEXT, timestamp INTEGER , swingID INTEGER, PRIMARY KEY (timestamp, swingID), FOREIGN KEY (swingID) REFERENCES swings(swingID))");
+      this.db.get('SELECT swingID FROM swings ORDER BY swingID DESC LIMIT 1', (err, row) => {
         if (err) console.error(err);
-        else if (row) this.currSwingId = row;
+        else if (row) this.currSwingID = row;
       });
     });
   }
 
   storeFrame(frame) {
     // for debugging only, in case microcontroller doesn't send first real time swing
-    if (!this.currSwingId) {
+    if (!this.currSwingID) {
       this.storeSwing(frame);
     }
     else {
-      this.db.run('INSERT INTO frames (frame, timestamp, swingId) VALUES (?, ?, ?)',
-          frame, frame.timestamp, this.currSwingId, (err) => {
+	    console.log(frame.timestamp, this.currSwingID);
+      this.db.run('INSERT INTO frames (frame, timestamp, swingID) VALUES (?, ?, ?)',
+          [JSON.stringify(frame), frame.timestamp, this.currSwingID], (err) => {
             if (err) console.error("Frame Table ", err);
             else console.log("Frame stored");
           });
@@ -47,13 +48,14 @@ class GolfGloveDb {
   }
 
   storeSwing(frame) {
-    this.currSwingId++;
-    this.db.run('INSERT INTO swings (timestamp, swingId) VALUES (?, ?)',
-        frame.timestamp, this.currSwingId, (err) => {
+    var self = this;
+    this.db.run('INSERT INTO swings (timestamp, swingID) VALUES (?, ?)',
+        [frame.timestamp], function (err) {
           if (err) console.error(err);
           else {
             console.log("swing stored");
-            this.storeFrame(frame);
+            self.currSwingID = this.lastID;
+            self.storeFrame(frame);
           }
         });
   }

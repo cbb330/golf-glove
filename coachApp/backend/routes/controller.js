@@ -117,12 +117,10 @@ class Controller {
   }
   
   getData() {
-    /*
-    var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
+    /*var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
         'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
     var frame = new Frame(testbuf, this.db);
-    this.sendClient('object', frame);
-    */
+    this.sendClient('object', frame);*/
 
     this.getService(ggServiceUuid);
   }

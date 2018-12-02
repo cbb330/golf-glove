@@ -60,7 +60,7 @@ class Frame {
     this.swingSync = this.buf.readUInt16LE(52);
     this.dataAvailable = this.buf.readUInt16LE(54);
 
-    //this.swingSync ? this.db.storeSwing(this) : this.db.storeFrame(this);
+    this.swingSync ? this.db.storeFrame(this) : this.db.storeSwing(this);
   }
 
   parseIMU(offset, constant) {
