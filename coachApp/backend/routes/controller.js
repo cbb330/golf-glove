@@ -128,13 +128,14 @@ class Controller {
   }
 
   stopData() {
+    this.ggFrame.removeAllListeners();
     this.ggFrame = {};
   }
 
   read() {
     this.ggFrame.on('data', (data, isNotification) => {
       var frame = new Frame(data, this.db);
-      console.log(frame);
+      //console.log(frame);
       this.sendClient('object', frame);
     });
 
