@@ -25,11 +25,11 @@ class App extends Component {
       const message = JSON.parse(event.data);
       // console.log(message);
       // this.setState({message});
-      switch (message.serverMessageType) {
+      switch (message.type) {
         case 'data':
           // TODO: handle data (append to structure or whatever)
-          message.frame.time = new Date(message.frame.timestamp);
-          this.holdingData.push(message.frame);
+          message.data.time = new Date(message.data.timestamp);
+          this.holdingData.push(message.data);
           if (this.holdingData.length >= 25) {
             this.data = [...this.data.slice(-500), ...this.holdingData];
             this.holdingData = [];

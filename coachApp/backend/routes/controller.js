@@ -234,7 +234,7 @@ class Controller {
     return !obj || Object.keys(obj).length === 0;
   }
 
-  sendClient(type, message) {
+  sendClient(type, data) {
     // not sure if below is the correct way to check if socket is alive, especially if ./routes closes it.
     // TODO: make this a listener???
     if (this.socket.isAlive === false) {
@@ -243,7 +243,7 @@ class Controller {
       return;
     }
     try {
-      message['serverMessageType'] = type;
+      const message = {type, data};
       this.socket.send(JSON.stringify(message));
     }
     catch (error) {
