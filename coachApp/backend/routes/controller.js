@@ -39,12 +39,11 @@ class Controller {
         console.log("Trying to connect.");
         peripheral.connect(error => {
           if (error) {
-            const message = {type: 'error', data: error};
-            this.sendClient(message);
+            this.sendClient('error', error);
           }
           else {
             var peripheralInfo = this.getPeripheral(peripheral);
-            this.sendClient(peripheralInfo);
+            this.sendClient('object', peripheralInfo);
             this.ggPeripheral.once('disconnect', () => {
               console.log("disconnect once happened");
               this.ggPeripheral = {};
@@ -86,8 +85,7 @@ class Controller {
     if (!this.isEmpty(this.ggPeripheral)) {
       this.ggPeripheral.discoverServices([servUuid], (error, services) => {
         if (error) {
-          const message = {type: 'error', data: error};
-          this.sendClient(message);
+          this.sendClient('error', error);
         }
         else {
           console.log("found service: " + services[0].uuid);
@@ -97,8 +95,7 @@ class Controller {
       });
     }
     else {
-      const message = {type: 'error', data: 'Cannot get service, no device connected.'};
-      this.sendClient(message);
+      this.sendClient('error', "Cannot get service, no device connected.");
     }
   }
   
@@ -106,8 +103,7 @@ class Controller {
     if (!this.isEmpty(this.ggService)) {
       this.ggService.discoverCharacteristics([charUuid], (error, characteristics) => {
         if (error) {
-          const message = {type: 'error', data: "Error discovering characteristics."};
-          this.sendClient(message);
+          this.sendClient('error', "Error discovering characteristics.");
         }
         else {
           console.log("found characteristic: " + characteristics[0].uuid);
@@ -116,8 +112,7 @@ class Controller {
       });
     }
     else {
-      const message = {type: 'error', data: "Cannot get characteristic, no service discovered."};
-      this.sendClient(message);
+      this.sendClient('error', "Cannot get characteristic, no service discovered.");
     }
   }
   
@@ -126,22 +121,21 @@ class Controller {
     var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
         'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
     var frame = new Frame(testbuf, this.db);
-    this.sendClient(frame);
+    this.sendClient('object', frame);
     */
 
     this.getService(ggServiceUuid);
   }
 
   stopData() {
-    // TODO
+    this.ggFrame = {};
   }
 
   read() {
     this.ggFrame.on('data', (data, isNotification) => {
       var frame = new Frame(data, this.db);
       console.log(frame);
-      const message = {type: 'data', frame};
-      this.sendClient(message);
+      this.sendClient('object', frame);
     });
 
     this.ggFrame.subscribe(error => {
@@ -158,12 +152,10 @@ class Controller {
     if (!this.isEmpty(this.ggPeripheral)) {
       this.ggPeripheral.disconnect(error => {
         if (error) {
-          const message = {type: 'error', data: error};
-          this.sendClient(message);
+          this.sendClient('error', error);
         }
         else {
-          const message = {type: 'status', data: 'Peripheral Disconnected'};
-          this.sendClient(message);
+          this.sendClient('status', "Peripheral disconnected.");
         }
       });
     }
@@ -242,7 +234,7 @@ class Controller {
     return !obj || Object.keys(obj).length === 0;
   }
 
-  sendClient(message) {
+  sendClient(type, message) {
     // not sure if below is the correct way to check if socket is alive, especially if ./routes closes it.
     // TODO: make this a listener???
     if (this.socket.isAlive === false) {
@@ -251,6 +243,7 @@ class Controller {
       return;
     }
     try {
+      message['serverMessageType'] = type;
       this.socket.send(JSON.stringify(message));
     }
     catch (error) {

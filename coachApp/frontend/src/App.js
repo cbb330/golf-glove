@@ -25,7 +25,7 @@ class App extends Component {
       const message = JSON.parse(event.data);
       // console.log(message);
       // this.setState({message});
-      switch (message.type) {
+      switch (message.serverMessageType) {
         case 'data':
           // TODO: handle data (append to structure or whatever)
           message.frame.time = new Date(message.frame.timestamp);
