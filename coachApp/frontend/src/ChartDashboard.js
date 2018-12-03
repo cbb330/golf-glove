@@ -114,7 +114,7 @@ class ChartDashboard extends Component {
     const pressure1 = [];
     const pressure2 = [];
 
-    const FRAME_SIZE = 50;
+    const FRAME_SIZE = 40;
     // nextData.forEach(point => {
     //   this.xData.push({time: point.time, data: point.imu1.accelX, type: "x"});
     //   this.yData.push({time: point.time, data: point.imu1.accelY, type: "y"});
@@ -147,12 +147,12 @@ class ChartDashboard extends Component {
         radialDeviation.push({time: d.time, data: d.radialDeviation, type: 'radial deviation'});
         ulnarDeviation.push({time: d.time, data: d.ulnarDeviation, type: 'ulnar deviation'});
       }
-      if (this.state.visibleGraphs.stretch) {
+      if (this.state.visibleGraphs.pressure) {
         pressure1.push({time: d.time, data: d.pressure1, type: 'index-side'});
         pressure2.push({time: d.time, data: d.pressure2, type: 'pinky-side'});
       }
     }
-    const BUFFER_SIZE = 200;
+    const BUFFER_SIZE = 100;
     this.setState({
       imu1: {
         accelX: [...this.state.imu1.accelX.slice(-BUFFER_SIZE), ...imu1.accelX],

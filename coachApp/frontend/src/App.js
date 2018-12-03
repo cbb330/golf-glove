@@ -37,17 +37,18 @@ class App extends Component {
       switch (message.type) {
         case 'data':
           // TODO: handle data (append to structure or whatever)
-          console.log(message.data.timestamp);
-          // message.data.time = new Date(message.data.timestamp);
-          // this.holdingData.push(message.data);
+          // console.log(new Date(message.data.timestamp));
+          // message.data.timestamp = new Date(message.data.timestamp);
+          message.data.time = new Date(message.data.timestamp);
+          this.holdingData.push(message.data);
           // console.log(message.data.time);
-          // const FRAME_SIZE = 50;
-          // if (this.holdingData.length >= FRAME_SIZE) {
-          //   this.data = [...this.data.slice(-200), ...this.holdingData];
-          //   this.holdingData = [];
-          //   // console.log('found 10 frames');
-          //   this.setState(message);
-          // }
+          const FRAME_SIZE = 40;
+          if (this.holdingData.length >= FRAME_SIZE) {
+            this.data = [...this.data.slice(-100), ...this.holdingData];
+            this.holdingData = [];
+            // console.log('found 10 frames');
+            this.setState(message);
+          }
           break;
         case 'error':
           // TODO: handle other error
@@ -188,9 +189,9 @@ class App extends Component {
             pressure
             <Checkbox name='pressure' checked={this.state.visibleGraphs.pressure} onChange={this.handleGraphDisplayChange} />
           </label>
-          {/* <div style={{height: 1000, width: '100%', display: 'flex'}}>
+          <div style={{height: 1000, width: '100%', display: 'flex'}}>
             <ChartDashboard data={this.data} overlay={false} visibleGraphs={this.state.visibleGraphs} />
-          </div> */}
+          </div>
         </div>
     );
   }

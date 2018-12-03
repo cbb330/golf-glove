@@ -41,7 +41,7 @@ class RotationChart extends Component {
         theme={VictoryTheme.material}
         padding={{top: 0, bottom: 0, left: 50, right: 0}}
         scale={{ x: "time" }}
-        domain={{y: [-100, 100]}}
+        domain={{y: [-200, 200]}}
         // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
 
         // domainPadding will add space to each side of VictoryBar to

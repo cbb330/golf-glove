@@ -30,13 +30,14 @@ class PressureChart extends Component {
   }
 
   render() {
+    // console.log(this.state.data.pressure1);
     return (
       <VictoryChart
         height={200}
         // eslint-disable-next-line no-restricted-globals
         width={parent.innerWidth * 0.9}
         theme={VictoryTheme.material}
-        padding={{top: 0, bottom: 0, left: 50, right: 0}}
+        padding={{top: 0, bottom: 50, left: 50, right: 0}}
         scale={{ x: "time" }}
         domain={{y: [0, 100000]}}
         // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}

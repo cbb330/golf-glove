@@ -55,7 +55,7 @@ class TestChart extends PureComponent {
         padding={{top: 0, bottom: 0, left: 50, right: 0}}
         style={{flex: '0 0 100%'}}
         scale={{ x: "time" }}
-        domain={{y: [-10, 10]}}
+        domain={{y: [-15, 15]}}
         // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
 
         // domainPadding will add space to each side of VictoryBar to
