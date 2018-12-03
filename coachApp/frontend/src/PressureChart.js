@@ -5,30 +5,40 @@ class PressureChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: props.data,
-      pressure1: [],
-      pressure2: []
+      data: {
+        pressure1: [],
+        pressure2: []
+      }
     };
 
     // this.testData = JSON.parse(JSON.stringify(this.state.data)); // TODO: unghetto this
-    this.testData = this.state.data;
+    // this.testData = this.state.data;
 
-    this.testData.forEach(d => {
-      this.state.pressure1.push({time: d.time, data: d.pressure1, type: 'index-side'});
-      this.state.pressure2.push({time: d.time, data: d.pressure2, type: 'pinky-side'});
+    // this.testData.forEach(d => {
+    //   this.state.pressure1.push({time: d.time, data: d.pressure1, type: 'index-side'});
+    //   this.state.pressure2.push({time: d.time, data: d.pressure2, type: 'pinky-side'});
+    // });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      data: {        
+        pressure1: nextProps.index,
+        pressure2: nextProps.pinky
+      }
     });
   }
 
   render() {
     return (
       <VictoryChart
-        height={300}
+        height={200}
         // eslint-disable-next-line no-restricted-globals
         width={parent.innerWidth * 0.9}
         theme={VictoryTheme.material}
         padding={{top: 0, bottom: 0, left: 50, right: 0}}
         scale={{ x: "time" }}
-        domain={{y: [-10, 10]}}
+        domain={{y: [0, 100000]}}
         // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
 
         // domainPadding will add space to each side of VictoryBar to
@@ -66,16 +76,17 @@ class PressureChart extends Component {
             ticks: {stroke: "grey", size: 5},
             grid: {stroke: "#c8c8c8", strokeDasharray: 0}
           }}
+          tickFormat={(x) => (`${x / 1000}k`)}
         />
         <VictoryLine
-          data={this.state.pressure1}
+          data={this.state.data.pressure1}
           x={'time'}
           y={'data'}
           interpolation="basis"
-          style={{data: { stroke: "#92c050", strokeWidth: 2 }}}
+          style={{data: { stroke: "#00A090", strokeWidth: 2 }}}
         />
         <VictoryLine
-          data={this.state.pressure2}
+          data={this.state.data.pressure2}
           x={'time'}
           y={'data'}
           interpolation="basis"

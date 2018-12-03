@@ -38,11 +38,11 @@ class GolfGloveDb {
       this.storeSwing(frame);
     }
     else {
-	    console.log(frame.timestamp, this.currSwingID);
+	    // console.log(frame.timestamp, this.currSwingID);
       this.db.run('INSERT INTO frames (frame, timestamp, swingID) VALUES (?, ?, ?)',
           [JSON.stringify(frame), frame.timestamp, this.currSwingID], (err) => {
             if (err) console.error("Frame Table ", err);
-            else console.log("Frame stored");
+            // else console.log("Frame stored");
           });
     }
   }
@@ -53,7 +53,7 @@ class GolfGloveDb {
         [frame.timestamp], function (err) {
           if (err) console.error(err);
           else {
-            console.log("swing stored");
+            // console.log("swing stored");
             self.currSwingID = this.lastID;
             self.storeFrame(frame);
           }

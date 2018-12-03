@@ -5,32 +5,43 @@ class RotationChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: props.data,
-      xData: [],
-      yData: [],
-      zData: []
+      data: {        
+        x: props.x,
+        y: props.y,
+        z: props.z
+      }
     };
 
     // this.testData = JSON.parse(JSON.stringify(this.state.data)); // TODO: unghetto this
-    this.testData = this.state.data;
+    // this.testData = this.state.data;
 
-    this.testData.forEach(d => {
-      this.state.xData.push({time: d.time, data: d.gyroX, type: "x"});
-      this.state.yData.push({time: d.time, data: d.gyroY, type: "y"});
-      this.state.zData.push({time: d.time, data: d.gyroZ, type: "z"});
+    // this.testData.forEach(d => {
+    //   this.state.xData.push({time: d.time, data: d.gyroX, type: "x"});
+    //   this.state.yData.push({time: d.time, data: d.gyroY, type: "y"});
+    //   this.state.zData.push({time: d.time, data: d.gyroZ, type: "z"});
+    // });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      data: {        
+        x: nextProps.x,
+        y: nextProps.y,
+        z: nextProps.z
+      }
     });
   }
 
   render() {
     return (
       <VictoryChart
-        height={300}
+        height={200}
         // eslint-disable-next-line no-restricted-globals
         width={parent.innerWidth * 0.45}
         theme={VictoryTheme.material}
         padding={{top: 0, bottom: 0, left: 50, right: 0}}
         scale={{ x: "time" }}
-        domain={{y: [-10, 10]}}
+        domain={{y: [-100, 100]}}
         // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
 
         // domainPadding will add space to each side of VictoryBar to
@@ -77,21 +88,21 @@ class RotationChart extends Component {
           // tickFormat={(x) => (`$${x / 1000}k`)}
         />
         <VictoryLine
-          data={this.state.xData}
+          data={this.state.data.x}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#92c050", strokeWidth: 2 }}}
         />
         <VictoryLine
-          data={this.state.yData}
+          data={this.state.data.y}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#00A090" }}}
         />
         <VictoryLine
-          data={this.state.zData}
+          data={this.state.data.z}
           x={'time'}
           y={'data'}
           interpolation="basis"
