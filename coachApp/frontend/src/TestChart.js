@@ -36,8 +36,7 @@ class TestChart extends PureComponent {
         x: nextProps.x,
         y: nextProps.y,
         z: nextProps.z
-      }, 
-      size: nextProps.size,
+      }
     });
     // console.log(nextProps.data);
     // if (nextProps.data.length > 0) {
@@ -45,44 +44,18 @@ class TestChart extends PureComponent {
     // }
   }
 
-  formatData(data) {
-    const xData = [];
-    const yData = [];
-    const zData = [];
-    // data.forEach(point => {
-    //   this.xData.push({time: point.time, data: point.imu1.accelX, type: "x"});
-    //   this.yData.push({time: point.time, data: point.imu1.accelY, type: "y"});
-    //   this.zData.push({time: point.time, data: point.imu1.accelZ, type: "z"});
-    // });
-    // console.log('adding points');
-    for (let i = 0; i < 25; i++) {
-      const point = data[data.length - (25 - i)];
-      const xDatum = {time: point.time, data: point.imu1.accelX, type: 'x'};
-      xData.push(xDatum);
-      const yDatum = {time: point.time, data: point.imu1.accelY, type: 'y'};
-      yData.push(yDatum);
-      const zDatum = {time: point.time, data: point.imu1.accelZ, type: 'z'};
-      zData.push(zDatum);
-    }
-    this.setState({
-      xData: [...this.state.xData.slice(-500), ...xData],
-      yData: [...this.state.yData.slice(-500), ...yData],
-      zData: [...this.state.zData.slice(-500), ...zData]
-    });
-  }
-
   render() {
     // console.log(this.state.data);
     return (
       <VictoryChart
-        height={300}
+        height={200}
         // eslint-disable-next-line no-restricted-globals
         width={parent.innerWidth * 0.45}
         theme={VictoryTheme.material}
         padding={{top: 0, bottom: 0, left: 50, right: 0}}
         style={{flex: '0 0 100%'}}
         scale={{ x: "time" }}
-        domain={{y: [-10, 10]}}
+        domain={{y: [-15, 15]}}
         // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
 
         // domainPadding will add space to each side of VictoryBar to

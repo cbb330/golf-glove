@@ -9,7 +9,7 @@ app.options('*', cors());
 app.use(cors());
 
 const port = 4000;
-const sockport = 8080;
+const sockport = 8000;
 app.listen(process.env.port || port);
 
 const wss = new WebSocket.Server({ port: sockport });

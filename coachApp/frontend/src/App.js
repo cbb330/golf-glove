@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-// import TestChart from './TestChart.js';
-import testData from './data/test-data.json';
+// import testData from './data/test-data.json';
 import ChartDashboard from './ChartDashboard.js';
 import Checkbox from './Checkbox.js';
 
@@ -23,7 +22,7 @@ class App extends Component {
     this.handleGraphDisplayChange = this.handleGraphDisplayChange.bind(this);
 
     // this.socket = new WebSocket("ws://170.253.147.206:8081");
-    this.socket = new WebSocket("ws://localhost:8080");
+    this.socket = new WebSocket("ws://localhost:8000");
     this.data = [];
     this.holdingData = [];
   }
@@ -38,10 +37,14 @@ class App extends Component {
       switch (message.type) {
         case 'data':
           // TODO: handle data (append to structure or whatever)
+          // console.log(new Date(message.data.timestamp));
+          // message.data.timestamp = new Date(message.data.timestamp);
           message.data.time = new Date(message.data.timestamp);
           this.holdingData.push(message.data);
-          if (this.holdingData.length >= 25) {
-            this.data = [...this.data.slice(-500), ...this.holdingData];
+          // console.log(message.data.time);
+          const FRAME_SIZE = 40;
+          if (this.holdingData.length >= FRAME_SIZE) {
+            this.data = [...this.data.slice(-100), ...this.holdingData];
             this.holdingData = [];
             // console.log('found 10 frames');
             this.setState(message);
@@ -170,13 +173,6 @@ class App extends Component {
           {/* <p>{`Socket state: ${this.socket.readyState ? "connected" : "disconnected"}`}</p> */}
           <p>{`Connection state: ${this.state.isConnectedToDevice ? "connected" : "disconnected"}`}.</p>
           <p>{`Data state: ${this.state.isAcceptingData ? "accepting" : "not accepting"}`}.</p>
-          {/* {this.state.response === undefined ?
-            <h1>Still fetching data</h1> :
-            <div>
-              <h1>{`Name: ${this.state.response.name}`}</h1>
-              <h2>{`Uuid: ${this.state.response.uuid}`}</h2>
-            </div>
-          } */}
           <label>
             accel
             <Checkbox name='accel' checked={this.state.visibleGraphs.accel} onChange={this.handleGraphDisplayChange} />
@@ -194,7 +190,7 @@ class App extends Component {
             <Checkbox name='pressure' checked={this.state.visibleGraphs.pressure} onChange={this.handleGraphDisplayChange} />
           </label>
           <div style={{height: 1000, width: '100%', display: 'flex'}}>
-            <ChartDashboard data={testData} overlay={false} visibleGraphs={this.state.visibleGraphs} />
+            <ChartDashboard data={this.data} overlay={false} visibleGraphs={this.state.visibleGraphs} />
           </div>
         </div>
     );

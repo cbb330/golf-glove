@@ -43,7 +43,7 @@ class Controller {
           }
           else {
             var peripheralInfo = this.getPeripheral(peripheral);
-            this.sendClient('object', peripheralInfo);
+            this.sendClient('status', peripheralInfo);
             this.ggPeripheral.once('disconnect', () => {
               console.log("disconnect once happened");
               this.ggPeripheral = {};
@@ -120,7 +120,7 @@ class Controller {
     /*var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
         'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
     var frame = new Frame(testbuf, this.db);
-    this.sendClient('object', frame);*/
+    this.sendClient('data', frame);*/
 
     this.getService(ggServiceUuid);
   }
@@ -134,7 +134,7 @@ class Controller {
     this.ggFrame.on('data', (data, isNotification) => {
       var frame = new Frame(data, this.db);
       //console.log(frame);
-      this.sendClient('object', frame);
+      this.sendClient('data', frame);
     });
 
     this.ggFrame.subscribe(error => {
@@ -241,8 +241,8 @@ class Controller {
       console.log("Socket terminated, not sending.");
       return;
     }
+    const message = {type, data};
     try {
-      const message = {type, data};
       this.socket.send(JSON.stringify(message));
     }
     catch (error) {
