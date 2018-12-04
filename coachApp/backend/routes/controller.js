@@ -126,8 +126,13 @@ class Controller {
   }
 
   stopData() {
-    this.ggFrame.removeAllListeners();
-    this.ggFrame = {};
+    if (!this.isEmpty(this.ggFrame)) {
+      this.ggFrame.removeAllListeners();
+      this.ggFrame = {};
+    }
+    else {
+      console.log("no device connected");
+    }
   }
 
   read() {
