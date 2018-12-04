@@ -148,11 +148,11 @@ class ChartDashboard extends Component {
         ulnarDeviation.push({time: d.time, data: d.ulnarDeviation, type: 'ulnar deviation'});
       }
       if (this.state.visibleGraphs.pressure) {
-        pressure1.push({time: d.time, data: d.pressure1, type: 'index-side'});
-        pressure2.push({time: d.time, data: d.pressure2, type: 'pinky-side'});
+        pressure1.push({time: d.time, data: d.pressure1, type: 'pinky-side'});
+        pressure2.push({time: d.time, data: d.pressure2, type: 'index-side'});
       }
     }
-    const BUFFER_SIZE = 100;
+    const BUFFER_SIZE = 120;
     this.setState({
       imu1: {
         accelX: [...this.state.imu1.accelX.slice(-BUFFER_SIZE), ...imu1.accelX],
@@ -193,7 +193,7 @@ class ChartDashboard extends Component {
               <h2>Glove IMU</h2>
             </div>
             {this.state.visibleGraphs.accel ?
-              <div style={{display: 'flex', flex: '0 0 100%', justifyContent: 'space-evenly', backgroundColor: '#ada975'}}>
+              <div style={{display: 'flex', flex: '0 0 100%', justifyContent: 'space-evenly', backgroundColor: '#a0a0a0'}}>
                 <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
                   <TestChart x={this.state.imu1.accelX} y={this.state.imu1.accelY} z={this.state.imu1.accelZ} />
                 </div>
@@ -216,7 +216,7 @@ class ChartDashboard extends Component {
             }
             {this.state.visibleGraphs.stretch ?
               // <div style={{display: 'flex', flex: '0 0 100%', justifyContent: 'space-evenly', backgroundColor: '#70a090'}}>
-              <div style={{display: 'flex', flex: '0 0 100%', justifyContent: 'space-evenly', backgroundColor: '#adb084'}}>
+              <div style={{display: 'flex', flex: '0 0 100%', justifyContent: 'space-evenly', backgroundColor: '#a0a0a0'}}>
                 <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
                   <StretchChart deflection={this.state.deflection} extension={this.state.extension} isExtension />
                 </div>

@@ -83,11 +83,15 @@ class TestChart extends PureComponent {
           // tickValues={[1, 2, 3, 4]}
           // tickFormat={['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4']}
           label="time (m:s)"
-          tickFormat={(x) => `${x.getMinutes()}:${x.getSeconds().toString().padStart(2, '0')}`}
+          tickFormat={(x) => {
+            if (x.getMilliseconds() === 0) {
+              return `${x.getMinutes()}:${x.getSeconds().toString().padStart(2, '0')}`;
+            }
+          }}
           style={{
             axisLabel: {fontSize: 20, padding: 30},
             ticks: {stroke: "grey", size: 5},
-            grid: {stroke: "#c0c39a", strokeDasharray: 0}
+            grid: {stroke: "#c8c8c8", strokeDasharray: 0}
           }}
           orientation='bottom'
           // crossAxis={true}
@@ -98,7 +102,7 @@ class TestChart extends PureComponent {
           style={{
             axisLabel: {fontSize: 20, padding: 30},
             ticks: {stroke: "grey", size: 5},
-            grid: {stroke: "#c0c39a", strokeDasharray: 0}
+            grid: {stroke: "#c8c8c8", strokeDasharray: 0}
           }}
           // tickFormat specifies how ticks should be displayed
           // tickFormat={(x) => (`$${x / 1000}k`)}

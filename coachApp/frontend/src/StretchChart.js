@@ -53,7 +53,7 @@ class StretchChart extends Component {
         theme={VictoryTheme.material}
         padding={{top: 0, bottom: 50, left: 50, right: 0}}
         scale={{ x: "time" }}
-        domain={{y: [13000, 15000]}}
+        // domain={{y: [1000, 10000]}}
         // domain={{ x: [new Date(2018, 10, 6, 17, 31), new Date(2018, 10, 6, 17, 33)], y: [-2, 12] }}
 
         // domainPadding will add space to each side of VictoryBar to
@@ -79,7 +79,7 @@ class StretchChart extends Component {
           style={{
             axisLabel: {fontSize: 20, padding: 30},
             ticks: {stroke: "grey", size: 5},
-            grid: {stroke: '#90a4ae', strokeDasharray: 0}
+            grid: {stroke: '#c8c8c8', strokeDasharray: 0}
           }}
           orientation='bottom'
         />
@@ -89,7 +89,7 @@ class StretchChart extends Component {
           style={{
             axisLabel: {fontSize: 20, padding: 30},
             ticks: {stroke: "grey", size: 5},
-            grid: {stroke: '#90a4ae', strokeDasharray: 0}
+            grid: {stroke: '#c8c8c8', strokeDasharray: 0}
           }}
           tickFormat={(x) => (`${x / 1000}k`)}
         />

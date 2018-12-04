@@ -35,6 +35,10 @@ class Frame {
     this.extension = this.buf.readUInt16LE(10);
     this.radialDeviation = this.buf.readUInt16LE(12);
     this.ulnarDeviation = this.buf.readUInt16LE(14);
+    // this.deflection = this.buf.readUInt16LE(8) - 8000;
+    // this.extension = this.buf.readUInt16LE(10);
+    // this.radialDeviation = this.buf.readUInt16LE(12) - 8000;
+    // this.ulnarDeviation = this.buf.readUInt16LE(14) - 15000;
     this.imu1 = {
       accelX: this.parseIMU(16, "accel"),
       accelY: this.parseIMU(18, "accel"),
@@ -63,6 +67,7 @@ class Frame {
     // this.swingSync ? this.db.storeFrame(this) : this.db.storeSwing(this);
     this.db = undefined;
     this.buf = undefined;
+    console.log(this);
   }
 
   parseIMU(offset, constant) {
@@ -72,6 +77,7 @@ class Frame {
         float *= LSM9DS1_ACCEL_MG_LSB_2G;
         float /= 1000;
         float *= SENSORS_GRAVITY_EARTH;
+        float = +float.toFixed(3);
         break;
       case "mag":
         float *= LSM9DS1_MAG_MGAUSS_4GAUSS;
@@ -79,6 +85,7 @@ class Frame {
         break;
       case "gyro":
         float *= LSM9DS1_GYRO_DPS_DIGIT_2000DPS;
+        float = +float.toFixed(3);
         break;
     }
     return float;
