@@ -496,15 +496,11 @@ wiced_bt_gatt_status_t golf_glove_connect_callback( wiced_bt_gatt_connection_sta
         {
             // Device has connected
             WICED_BT_TRACE("Connected : BDA '%B', Connection ID '%d'\r\n", p_conn_status->bd_addr, p_conn_status->conn_id );
-
-            /* TODO: Handle the connection */
         }
         else
         {
             // Device has disconnected
             WICED_BT_TRACE("Disconnected : BDA '%B', Connection ID '%d', Reason '%d'\r\n", p_conn_status->bd_addr, p_conn_status->conn_id, p_conn_status->reason );
-
-            /* TODO: Handle the disconnection */
 
             /* restart the advertisements */
             wiced_bt_start_advertisements(BTM_BLE_ADVERT_UNDIRECTED_HIGH, 0, NULL);

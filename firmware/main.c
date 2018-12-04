@@ -14,16 +14,23 @@
 #include "wiced_timer.h"
 #include "sparcommon.h"
 
+#include "wiced_bt_gatt.h"
+
 #include "buffer/frame_buffer.h"
 #include "gatt/golf_glove.h"
-#include "sensor/sensor_frame.h"
+#include "sensor/sensor_polling.h"
+
+#define DEFAULT_STACK_SIZE 256
 
 /* Function Declarations */
 wiced_bt_dev_status_t bt_management_callback( wiced_bt_management_evt_t event, wiced_bt_management_evt_data_t *p_event_data );
+void frame_push_exec(uint32_t arg);
 
 /* Constant Declarations */
 extern const wiced_bt_cfg_settings_t wiced_bt_cfg_settings;
 extern const wiced_bt_cfg_buf_pool_t wiced_bt_cfg_buf_pools[WICED_BT_CFG_NUM_BUF_POOLS];
+
+static wiced_thread_t* frame_push_thread;
 
 /**
  * Application entry point. Initializes BLE subsystem and application logic.
@@ -49,8 +56,28 @@ void application_start(void) {
 wiced_bt_dev_status_t bt_management_callback( wiced_bt_management_evt_t event, wiced_bt_management_evt_data_t *p_event_data ) {
     // Perform on Bluetooth setup complete
     if (event == BTM_ENABLED_EVT) {
-        // TODO
+        // Start thread to regularly push data frames to client
+        frame_push_thread = wiced_rtos_create_thread();
+        if (wiced_rtos_init_thread(frame_push_thread, 6, "Frame Push Thread", frame_push_exec, DEFAULT_STACK_SIZE, NULL) != WICED_SUCCESS)  {
+            WICED_BT_TRACE("FrameThread: Failed to initialize.\r\n");
+        }
     }
     
     return golf_glove_management_callback(event, p_event_data);
+}
+
+void frame_push_exec(uint32_t arg) {
+    WICED_BT_TRACE("FrameThread: Started.\r\n");
+
+    // Setup Frame Pushing Timer/Callback
+    sensor_polling_frame_push_init();
+}
+
+void frame_push_cb(uint32_t arg) {
+    //WICED_BT_TRACE("TIMER CALLBACK\r\n");
+    sensor_frame frame = {0};
+    wiced_hal_rand_gen_num_array(&frame, sizeof(sensor_frame) / 4);
+    frame_buffer_push_frame(&frame);
+    wiced_bt_gatt_send_notification(1, 0x002A, 0, NULL);
+    //WICED_BT_TRACE("Sent frame.\r\n");
 }

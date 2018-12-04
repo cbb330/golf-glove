@@ -12,7 +12,8 @@
 /**
  * imu_frame Struct
  * 
- * Stores one instant of data from a 9-axis 16-bit inertial measurement unit. */
+ * Stores one instant of data from a 9-axis 16-bit inertial measurement unit. 
+ */
 typedef struct {
     uint16_t accX;                          // 0-1
     uint16_t accY;                          // 2-3
@@ -28,7 +29,8 @@ typedef struct {
 /**
  * sensor_frame Struct
  * 
- * Stores one instant of data for the golf glove application. */
+ * Stores one instant of data for the golf glove application. 
+ */
 typedef struct {
     uint32_t timestamp;                      // 0-3
     uint16_t pres1;                          // 4-5
