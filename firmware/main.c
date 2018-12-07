@@ -51,7 +51,7 @@ void application_start(void) {
     wiced_rtos_delay_milliseconds(3000, KEEP_THREAD_ACTIVE);
 
     thread = wiced_rtos_create_thread();
-    wiced_rtos_init_thread(thread, 6, "DZ NUTZ", do_thread, 256, NULL);
+    wiced_rtos_init_thread(thread, 6, "Main Thread", do_thread, 256, NULL);
 }
 
 void do_thread(uint32_t arg) {
