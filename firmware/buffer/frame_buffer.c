@@ -16,6 +16,7 @@
 static sensor_frame current_frame;
 
 wiced_result_t frame_buffer_init(void) {
+    WICED_BT_TRACE("frame_buffer_init()\r\n");
     memset(&current_frame, 0xFFFFFFFF, sizeof(sensor_frame));
     return WICED_SUCCESS;
 }

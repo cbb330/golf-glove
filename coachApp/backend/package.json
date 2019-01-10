@@ -28,6 +28,7 @@
     "express": "^4.16.4",
     "noble": "^1.9.1",
     "nodemon": "^1.18.5",
+    "sqlite3": "^4.0.4",
     "ws": "^6.1.0"
   },
   "eslintConfig": {

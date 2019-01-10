@@ -5,14 +5,16 @@
  */
 
 const noble = require('noble');
-const NextFrame = require('./nextframe.js');
+const Frame = require('../db/models/Frame.js');
+const GolfGloveDb = require('../db/db.js');
 
 // golf glove constants
 const ggServiceUuid = '7c838948fe34f1b52e427e1bd698c53a'; // make big endian / little endian converter function
-const ggNextFrameChar = '6c35868a4353abb86f4c13d55742415a';
-//const ggNextFrameChar = '4e38bed209594602a0af9b6bcb3b7b0e';
+const ggFrameChar = '6c35868a4353abb86f4c13d55742415a';
+//const ggFrameChar = '4e38bed209594602a0af9b6bcb3b7b0e';
 const ggRealTimeEnable = '72e48cb3fa2227ba78416d1b7e539259';
 const ggDataEnable = 'bdf7ae339873ab95d04bcec6aa349390';
+const SAMPLE_RATE = 120; // in hertz
 
 class Controller {
   constructor() {
@@ -20,13 +22,14 @@ class Controller {
     this.nobleState = undefined;
     this.ggPeripheral = {};
     this._ggService = {};
-    this._ggNextFrame = {};
+    this._ggFrame = {};
     this.ggRealTimeEnable = {};
     this.ggDataEnable = {};
+    this.db = new GolfGloveDb();
 
     noble.on('stateChange', newState => {
       //console.log("this is the new state: " + newState);
-      this.setState(newState);
+      this.setNobleState(newState);
     });
 
     noble.on('discover', peripheral => {
@@ -34,16 +37,18 @@ class Controller {
       if (!this.isEmpty(this.ggPeripheral)) {
         noble.stopScanning();
         console.log("Trying to connect.");
-        peripheral.connect(err => {
-          if (!this.isEmpty(err)) this.socket.send(JSON.stringify({ err: err }));
+        peripheral.connect(error => {
+          if (error) {
+            this.sendClient('error', error);
+          }
           else {
             var peripheralInfo = this.getPeripheral(peripheral);
-            this.clientSend(peripheralInfo);
+            this.sendClient('status', peripheralInfo);
             this.ggPeripheral.once('disconnect', () => {
               console.log("disconnect once happened");
               this.ggPeripheral = {};
               this.ggService = {};
-              this.ggNextFrame = {};
+              this.ggFrame = {};
               this.disconnectPeripheral();
             });
           }
@@ -56,9 +61,9 @@ class Controller {
     this.socket = socket;
   }
 
-  setState(newState) {
+  setNobleState(newState) {
     this.nobleState = newState;
-  };
+  }
 
   getDiscovers() {
     if (!this.isEmpty(this.ggPeripheral)) this.disconnectPeripheral();
@@ -78,8 +83,10 @@ class Controller {
   getService(servUuid) {
     console.log("Trying to get services.");
     if (!this.isEmpty(this.ggPeripheral)) {
-      this.ggPeripheral.discoverServices([servUuid], (err, services) => {
-        if (!this.isEmpty(err)) this.clientSend({err: err});
+      this.ggPeripheral.discoverServices([servUuid], (error, services) => {
+        if (error) {
+          this.sendClient('error', error);
+        }
         else {
           console.log("found service: " + services[0].uuid);
           this.ggService = services[0];
@@ -87,60 +94,72 @@ class Controller {
         }
       });
     }
-    else this.clientSend({ err: "Cannot get service, no device connected." });
+    else {
+      this.sendClient('error', "Cannot get service, no device connected.");
+    }
   }
   
   getCharacteristic(charUuid){
     if (!this.isEmpty(this.ggService)) {
-      this.ggService.discoverCharacteristics([charUuid], (err, characteristics) => {
-        if (err) this.socket.send(JSON.stringify({err: "Error Discovering Characteristics!"}));
+      this.ggService.discoverCharacteristics([charUuid], (error, characteristics) => {
+        if (error) {
+          this.sendClient('error', "Error discovering characteristics.");
+        }
         else {
           console.log("found characteristic: " + characteristics[0].uuid);
-          this.ggNextFrame = characteristics[0];
+          this.ggFrame = characteristics[0];
         }
       });
     }
-    else this.clientSend({ err: "Cannot get characteristic, no service discovered." });
+    else {
+      this.sendClient('error', "Cannot get characteristic, no service discovered.");
+    }
   }
   
   getData() {
+    /*var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
+        'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
+    var frame = new Frame(testbuf, this.db);
+    this.sendClient('data', frame);*/
+
     this.getService(ggServiceUuid);
   }
 
   stopData() {
+    if (!this.isEmpty(this.ggFrame)) {
+      this.ggFrame.removeAllListeners();
+      this.ggFrame = {};
+    }
+    else {
+      console.log("no device connected");
+    }
   }
 
   read() {
-    this.ggNextFrame.read((err, data) => {
-      var frame = new NextFrame(data);
-      this.clientSend(frame);
+    this.ggFrame.on('data', (data, isNotification) => {
+      var frame = new Frame(data, this.db);
+      //console.log(frame);
+      this.sendClient('data', frame);
     });
 
-    /*
-    // TODO: Check if these changes work https://github.com/noble/noble/blob/master/examples/echo.js
-    this.ggNextFrame.on('data', (data, isNotification) => {
-      console.log('Received: "' + data + '"');
-      this.clientSend(data);
-    });
-
-    this.ggNextFrame.subscribe(error => {
+    this.ggFrame.subscribe(error => {
       if (error) {
-        console.error('Error subscribing to NextFrame Characteristic');
+        console.error('Error subscribing to Frame Characteristic');
       }
       else {
-        console.log('Subscribed to NextFrame Characteristic');
+        console.log('Subscribed to Frame Characteristic');
       }
     });
-    */
-
   }
 
   disconnectPeripheral() {
     if (!this.isEmpty(this.ggPeripheral)) {
-      this.ggPeripheral.disconnect(err => {
-        if (!this.isEmpty(err)) this.clientSend({ err: err });
+      this.ggPeripheral.disconnect(error => {
+        if (error) {
+          this.sendClient('error', error);
+        }
         else {
-          this.clientSend({ success : "Peripheral Disconnected"});
+          this.sendClient('status', "Peripheral disconnected.");
         }
       });
     }
@@ -153,17 +172,17 @@ class Controller {
   set ggService(obj) {
     this._ggService = obj;
     if (!this.isEmpty(this._ggService)) {
-      this.getCharacteristic(ggNextFrameChar);
+      this.getCharacteristic(ggFrameChar);
     }
   }
 
-  get ggNextFrame() {
-    return this._ggNextFrame;
+  get ggFrame() {
+    return this._ggFrame;
   }
 
-  set ggNextFrame(obj) {
-    this._ggNextFrame = obj;
-    if (!this.isEmpty(this._ggNextFrame)) {
+  set ggFrame(obj) {
+    this._ggFrame = obj;
+    if (!this.isEmpty(this._ggFrame)) {
       this.read();
     }
   }
@@ -219,7 +238,7 @@ class Controller {
     return !obj || Object.keys(obj).length === 0;
   }
 
-  clientSend(obj) {
+  sendClient(type, data) {
     // not sure if below is the correct way to check if socket is alive, especially if ./routes closes it.
     // TODO: make this a listener???
     if (this.socket.isAlive === false) {
@@ -227,13 +246,14 @@ class Controller {
       console.log("Socket terminated, not sending.");
       return;
     }
+    const message = {type, data};
     try {
-      this.socket.send(JSON.stringify(obj));
+      this.socket.send(JSON.stringify(message));
     }
-    catch (err) {
-      console.log("Message '" + JSON.stringify(obj) + "' not sent! " + err);
+    catch (error) {
+      console.log("Message '" + JSON.stringify(message) + "' not sent! " + error);
     }
   }
-};
+}
 
 module.exports = Controller;

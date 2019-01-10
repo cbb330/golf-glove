@@ -1,89 +1,197 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
-import TestChart from './TestChart.js';
-import testData from './data/test-data.json';
+// import testData from './data/test-data.json';
+import ChartDashboard from './ChartDashboard.js';
+import Checkbox from './Checkbox.js';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      response: undefined,
-      socket: undefined
+      isAcceptingData: false,
+      isConnectedToDevice: false,
+      visibleGraphs: {
+        accel: true,
+        gyro: true,
+        stretch: true,
+        pressure: true
+      },
+      response: undefined
     };
+    this.handleGraphDisplayChange = this.handleGraphDisplayChange.bind(this);
+
+    // this.socket = new WebSocket("ws://170.253.147.206:8081");
+    this.socket = new WebSocket("ws://localhost:8000");
+    this.data = [];
+    this.holdingData = [];
   }
   
   componentDidMount() {
-    this.getHello();
-    // this.getSocket();
-    this.sendScan();
+    this.socket.onmessage = (event) => {
+      // TODO: handle responses from server
+      // TODO: responses include data, errors with connection, and general updates
+      const message = JSON.parse(event.data);
+      // console.log(message);
+      // this.setState({message});
+      switch (message.type) {
+        case 'data':
+          // TODO: handle data (append to structure or whatever)
+          // console.log(message.data.timestamp);
+          // message.data.timestamp = new Date(message.data.timestamp);
+          message.data.time = new Date(message.data.timestamp);
+          this.holdingData.push(message.data);
+          // console.log(message.data.time);
+          const FRAME_SIZE = 40;
+          if (this.holdingData.length >= FRAME_SIZE) {
+            this.data = [...this.data.slice(-120), ...this.holdingData];
+            this.holdingData = [];
+            // console.log('found 10 frames');
+            this.setState(message);
+          }
+          break;
+        case 'error':
+          // TODO: handle other error
+          console.log(message.data);
+          // TODO: fix sending stop message on backend, just update state
+          this.handleStopAcceptingData();
+          break;
+        case 'status':
+          // handle status updates
+          console.log(message.data);
+          break;
+        default:
+          console.log(`Client received unknown message type (${message.type}) from the server`);
+          console.log(message);
+      }
+    };
+  }
+
+  analyzeData() {
+    console.log(this.data);
   }
   
-  getHello() {
-    axios.get('http://170.253.147.206:4000/hello') //to access Christian Bush's rsbpi
-      .then((response) => {
-        this.setHello(response.data.time);
-        // console.log(response.data)
-      });
-  }
-  
-  // TODO: fix this
-  setHello(e) {
+  handleConnect() {
+    this.connectDevice();
     this.setState({
-      response: e
+      isConnectedToDevice: true
     });
   }
-  
-  getSocket() {
-    const ws = new WebSocket("ws://170.253.147.206:8080"); //to access Christian Bush's rsbpi
-    ws.onmessage = event => {
-      this.setState({ socket: JSON.parse(event.data) });
-      console.log(this.state.socket);
-    };
-  };
 
-  sendScan() {
-    const ws = new WebSocket("ws://170.253.147.206:8080"); //to access Christian Bush's rsbpi
-    
-    // Send the msg object as a JSON-formatted string.
-    ws.onopen = (event) => {
-      console.log('we open');
-      // Construct a msg object containing the data the server needs to process the message from the chat client.
-      var msg = {
-        type: "scanOn"
-      };
-      console.log(JSON.stringify(msg));
-      ws.send(JSON.stringify(msg));
-    };
-    ws.onmessage = (event) => {
-      console.log(event.data);
-    };
-  };
+  handleDisconnect() {
+    this.disconnectDevice();
+    this.setState({
+      isConnectedToDevice: false
+    });
+  }
 
+  handleStartAcceptingData() {
+    this.startDataReception();
+    this.setState({
+      isAcceptingData: true
+    });
+  }
+
+  handleStopAcceptingData() {
+    this.stopDataReception();
+    this.setState({
+      isAcceptingData: false
+    });
+  }
+
+  handleClearData() {
+    this.data = [];
+  }
+
+  connectDevice() {
+    // construct connect message object
+    const message = {type: "connect"};
+    console.log('sending following connect message to backend:');
+    console.log(message);
+    // send message as a JSON-formatted string
+    this.socket.send(JSON.stringify(message));
+  }
+
+  disconnectDevice() {
+    // construct disconnect message object
+    const message = {type: "disconnect"};
+    console.log('sending following disconnect message to backend:');
+    console.log(message);
+    // send message as a JSON-formatted string
+    this.socket.send(JSON.stringify(message));
+  }
+
+  startDataReception() {
+    // construct start message object
+    const message = {type: "start"};
+    console.log('sending following start message to backend:');
+    console.log(message);
+    // send message as a JSON-formatted string
+    this.socket.send(JSON.stringify(message));
+  }
+
+  stopDataReception() {
+    // construct stop message object
+    const message = {type: "stop"};
+    console.log('sending following start message to backend:');
+    console.log(message);
+    // send message as a JSON-formatted string
+    this.socket.send(JSON.stringify(message));
+  }
+
+  handleGraphDisplayChange(e) {
+    const item = e.target.name;
+    const isChecked = e.target.checked;
+    this.setState(prevState => {
+      const vg = prevState.visibleGraphs;
+      vg[item] = isChecked;
+      return {visibleGraphs: vg};
+    });
+  }
 
   render() {
-
-    // if ((this.state.response === undefined) && (this.state.socket === undefined)) {
-    //   return (
-    //       <div style={{height: 600, width: 1000}}>
-    //         <h1>Still fetching data</h1>
-    //         <TestChart data={testData} />
-    //       </div>
-    //   )
-    // }
-    // else {
     return (
-        <div style={{height: 600, width: 1000}}>
-          {this.state.response === undefined && this.state.socket === undefined ?
-            <h1>Still fetching data</h1> :
-            <div>
-              <h1>{this.state.response}</h1>
-              <h1>{this.state.socket["name"]}</h1> {/* name is conditionally set in backend */}
-              <h2>{this.state.socket.uuid}</h2>
-            </div>
-          }
-          <TestChart data={testData} />
+        <div>
+          <button onClick={(e) => this.handleConnect(e)} disabled={this.state.isConnectedToDevice}>
+            Connect
+          </button>
+          <button onClick={(e) => this.handleDisconnect(e)} disabled={!this.state.isConnectedToDevice}>
+            Disconnect
+          </button>
+          <button onClick={(e) => this.handleStartAcceptingData(e)} disabled={this.state.isAcceptingData}>
+            Start
+          </button>
+          <button onClick={(e) => this.handleStopAcceptingData(e)} disabled={!this.state.isAcceptingData}>
+            Stop
+          </button>
+          <button onClick={(e) => this.analyzeData(e)}>
+            Analyze
+          </button>
+          <button onClick={(e) => this.handleClearData(e)}>
+            Clear Data
+          </button>
+          {/* <p>{`Socket state: ${this.socket.readyState ? "connected" : "disconnected"}`}</p> */}
+          <p>{`Connection state: ${this.state.isConnectedToDevice ? "connected" : "disconnected"}`}.</p>
+          <p>{`Data state: ${this.state.isAcceptingData ? "accepting" : "not accepting"}`}.</p>
+          <label>
+            accel
+            <Checkbox name='accel' checked={this.state.visibleGraphs.accel} onChange={this.handleGraphDisplayChange} />
+          </label>
+          <label>
+            gyro
+            <Checkbox name='gyro' checked={this.state.visibleGraphs.gyro} onChange={this.handleGraphDisplayChange} />
+          </label>
+          <label>
+            stretch
+            <Checkbox name='stretch' checked={this.state.visibleGraphs.stretch} onChange={this.handleGraphDisplayChange} />
+          </label>
+          <label>
+            pressure
+            <Checkbox name='pressure' checked={this.state.visibleGraphs.pressure} onChange={this.handleGraphDisplayChange} />
+          </label>
+          <div style={{height: 1000, width: '100%', display: 'flex'}}>
+            <ChartDashboard data={this.data} overlay={false} visibleGraphs={this.state.visibleGraphs} />
+          </div>
         </div>
     );
   }
