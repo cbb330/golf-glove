@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP CD4011BM96
+D CMOS Quad 2-Input NAND Gate
+K
+F http://www.ti.com/lit/gpn/cd4011b
+$ENDCMP
+#
+#End Doc Library
