@@ -1,4 +1,4 @@
-update=1/20/2019 10:32:03 PM
+update=1/25/2019 5:43:55 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -23,8 +23,6 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [eeschema]
 version=1
 LibDir=
@@ -68,3 +66,5 @@ LibName36=D:/Em-Board/Ki-Cad/Parts/TPS63001DRCT/TPS63001DRCT
 LibName37=D:/Em-Board/Ki-Cad/Parts/MCP78731/MCP73831T-2ACI_OT
 LibName38=D:/Em-Board/Ki-Cad/Parts/A-1JB/A-1JB
 LibName39=D:/Em-Board/Ki-Cad/Parts/XC6119N16A7R-G/XC6119N16A7R-G
+[general]
+version=1
