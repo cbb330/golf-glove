@@ -373,58 +373,6 @@ Wire Wire Line
 Wire Wire Line
 	9475 4625 9925 4625
 $Comp
-L EMI_Filter_LCL FL1
-U 1 1 5C45A66F
-P 7075 4625
-F 0 "FL1" H 7075 4900 50  0000 C CNN
-F 1 "EMI_Filter_LCL" H 7075 4825 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 7075 4625 50  0001 C CNN
-F 3 "" V 7075 4625 50  0001 C CNN
-	1    7075 4625
-	1    0    0    -1  
-$EndComp
-$Comp
-L C C21
-U 1 1 5C45A88F
-P 6775 4225
-F 0 "C21" H 6800 4325 50  0000 L CNN
-F 1 "C" H 6800 4125 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0402" H 6813 4075 50  0001 C CNN
-F 3 "" H 6775 4225 50  0001 C CNN
-	1    6775 4225
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6775 4375 6775 4525
-Text GLabel 7075 4775 0    60   Input ~ 0
-GND
-$Comp
-L A-1JB J10
-U 1 1 5C45ABF7
-P 6475 4000
-F 0 "J10" H 6175 4300 50  0000 L BNN
-F 1 "A-1JB" H 6174 3399 50  0000 L BNN
-F 2 "A-1JB:AMPHENOL_A-1JB" H 6475 4000 50  0001 L BNN
-F 3 "None" H 6475 4000 50  0001 L BNN
-F 4 "Amphenol RF" H 6475 4000 50  0001 L BNN "Field4"
-F 5 "None" H 6475 4000 50  0001 L BNN "Field5"
-F 6 "Unavailable" H 6475 4000 50  0001 L BNN "Field6"
-F 7 "Connector; RF; AMC; PCB Jack; Surface Mnt; 50 Ohm; Solder" H 6475 4000 50  0001 L BNN "Field7"
-F 8 "A-1JB" H 6475 4000 50  0001 L BNN "Field8"
-	1    6475 4000
-	1    0    0    -1  
-$EndComp
-Text GLabel 6475 4525 3    60   Input ~ 0
-GND
-Wire Wire Line
-	6475 4400 6475 4525
-Wire Wire Line
-	6775 4000 6775 4075
-Text Notes 6900 4275 0    60   ~ 0
-8.2pf
-Wire Wire Line
-	7075 4725 7075 4775
-$Comp
 L C C24
 U 1 1 5C45B773
 P 7625 4525
@@ -435,8 +383,6 @@ F 3 "" H 7625 4525 50  0001 C CNN
 	1    7625 4525
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	7375 4525 7475 4525
 Wire Wire Line
 	7775 4525 7850 4525
 Text Notes 7525 4400 0    60   ~ 0
@@ -915,12 +861,6 @@ Wire Wire Line
 	3825 2550 3875 2550
 Wire Wire Line
 	3875 2650 3825 2650
-Wire Wire Line
-	6775 4425 7400 4425
-Wire Wire Line
-	7400 4425 7400 4525
-Connection ~ 7400 4525
-Connection ~ 6775 4425
 $Sheet
 S 1475 7300 775  350 
 U 5C4970FF
