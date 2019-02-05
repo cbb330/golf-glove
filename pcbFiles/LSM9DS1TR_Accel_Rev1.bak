@@ -31,6 +31,7 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:2450AT42B100E
 LIBS:GolfGloveMainBoardV1.0.0-cache
 EELAYER 25 0
 EELAYER END

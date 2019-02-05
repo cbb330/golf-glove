@@ -1,4 +1,4 @@
-update=2/5/2019 10:36:54 AM
+update=2/5/2019 11:10:59 AM
 version=1
 last_client=kicad
 [pcbnew]
@@ -66,5 +66,6 @@ LibName36=D:/Em-Board/Ki-Cad/Parts/TPS63001DRCT/TPS63001DRCT
 LibName37=D:/Em-Board/Ki-Cad/Parts/MCP78731/MCP73831T-2ACI_OT
 LibName38=D:/Em-Board/Ki-Cad/Parts/A-1JB/A-1JB
 LibName39=D:/Em-Board/Ki-Cad/Parts/XC6119N16A7R-G/XC6119N16A7R-G
+LibName40=NecessaryParts/2450AT42B100E/2450AT42B100E
 [general]
 version=1
