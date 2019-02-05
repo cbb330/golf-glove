@@ -1,8 +1,45 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 2
 LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
 LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ADS1115IDGST
+LIBS:CYW20719B1KUMLG
+LIBS:LSM9DS1TR
+LIBS:TPS63001DRCT
+LIBS:MCP73831T-2ACI_OT
+LIBS:A-1JB
+LIBS:XC6119N16A7R-G
 LIBS:GolfGloveMainBoardV1.0.0-cache
-EELAYER 26 0
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -18,13 +55,13 @@ Comment4 ""
 $EndDescr
 $Comp
 L LSM9DS1TR U?
-U 1 1 5C4A2352
+U 1 1 5C59A358
 P 5375 3325
-AR Path="/5C4A2290/5C4A2352" Ref="U?"  Part="1" 
-AR Path="/5C4A8BAE/5C4A2352" Ref="U?"  Part="1" 
-F 0 "U?" H 4874 4352 50  0000 L BNN
+AR Path="/5C4A2290/5C59A358" Ref="U?"  Part="1" 
+AR Path="/5C4A8BAE/5C59A358" Ref="U5"  Part="1" 
+F 0 "U5" H 4874 4352 50  0000 L BNN
 F 1 "LSM9DS1TR" H 4874 2323 50  0000 L BNN
-F 2 "PQFN43P300X350X102-24N" H 5375 3325 50  0001 L BNN
+F 2 "LSM9DS1TR:PQFN43P300X350X102-24N" H 5375 3325 50  0001 L BNN
 F 3 "TFLGA-24 STMicroelectronics" H 5375 3325 50  0001 L BNN
 F 4 "LSM9DS1TR" H 5375 3325 50  0001 L BNN "Field4"
 F 5 "https://www.digikey.com/product-detail/en/stmicroelectronics/LSM9DS1TR/497-14946-1-ND/4988079?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 5375 3325 50  0001 L BNN "Field5"
@@ -39,23 +76,23 @@ L C C?
 U 1 1 5C4A23DC
 P 6325 3825
 AR Path="/5C4A2290/5C4A23DC" Ref="C?"  Part="1" 
-AR Path="/5C4A8BAE/5C4A23DC" Ref="C?"  Part="1" 
-F 0 "C?" V 6275 3875 50  0000 L CNN
+AR Path="/5C4A8BAE/5C4A23DC" Ref="C16"  Part="1" 
+F 0 "C16" V 6275 3875 50  0000 L CNN
 F 1 "C" V 6275 3700 50  0000 L CNN
-F 2 "" H 6363 3675 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0402" H 6363 3675 50  0001 C CNN
 F 3 "" H 6325 3825 50  0001 C CNN
 	1    6325 3825
 	0    1    1    0   
 $EndComp
 $Comp
 L C C?
-U 1 1 5C4A24C3
+U 1 1 5C59A35A
 P 6325 3925
-AR Path="/5C4A2290/5C4A24C3" Ref="C?"  Part="1" 
-AR Path="/5C4A8BAE/5C4A24C3" Ref="C?"  Part="1" 
-F 0 "C?" V 6375 3975 50  0000 L CNN
+AR Path="/5C4A2290/5C59A35A" Ref="C?"  Part="1" 
+AR Path="/5C4A8BAE/5C59A35A" Ref="C17"  Part="1" 
+F 0 "C17" V 6375 3975 50  0000 L CNN
 F 1 "C" V 6375 3800 50  0000 L CNN
-F 2 "" H 6363 3775 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0402" H 6363 3775 50  0001 C CNN
 F 3 "" H 6325 3925 50  0001 C CNN
 	1    6325 3925
 	0    1    1    0   
@@ -65,10 +102,10 @@ L C C?
 U 1 1 5C4A251C
 P 6150 2225
 AR Path="/5C4A2290/5C4A251C" Ref="C?"  Part="1" 
-AR Path="/5C4A8BAE/5C4A251C" Ref="C?"  Part="1" 
-F 0 "C?" H 6175 2325 50  0000 L CNN
+AR Path="/5C4A8BAE/5C4A251C" Ref="C12"  Part="1" 
+F 0 "C12" H 6175 2325 50  0000 L CNN
 F 1 "C" H 6175 2125 50  0000 L CNN
-F 2 "" H 6188 2075 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0402" H 6188 2075 50  0001 C CNN
 F 3 "" H 6150 2225 50  0001 C CNN
 	1    6150 2225
 	1    0    0    -1  
@@ -78,23 +115,23 @@ L C C?
 U 1 1 5C4A258F
 P 6375 2225
 AR Path="/5C4A2290/5C4A258F" Ref="C?"  Part="1" 
-AR Path="/5C4A8BAE/5C4A258F" Ref="C?"  Part="1" 
-F 0 "C?" H 6400 2325 50  0000 L CNN
+AR Path="/5C4A8BAE/5C4A258F" Ref="C18"  Part="1" 
+F 0 "C18" H 6400 2325 50  0000 L CNN
 F 1 "C" H 6400 2125 50  0000 L CNN
-F 2 "" H 6413 2075 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0402" H 6413 2075 50  0001 C CNN
 F 3 "" H 6375 2225 50  0001 C CNN
 	1    6375 2225
 	-1   0    0    1   
 $EndComp
 $Comp
 L C C?
-U 1 1 5C4A25B2
+U 1 1 5C59A35D
 P 6150 2725
-AR Path="/5C4A2290/5C4A25B2" Ref="C?"  Part="1" 
-AR Path="/5C4A8BAE/5C4A25B2" Ref="C?"  Part="1" 
-F 0 "C?" H 6175 2825 50  0000 L CNN
+AR Path="/5C4A2290/5C59A35D" Ref="C?"  Part="1" 
+AR Path="/5C4A8BAE/5C59A35D" Ref="C15"  Part="1" 
+F 0 "C15" H 6175 2825 50  0000 L CNN
 F 1 "C" H 6175 2625 50  0000 L CNN
-F 2 "" H 6188 2575 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0402" H 6188 2575 50  0001 C CNN
 F 3 "" H 6150 2725 50  0001 C CNN
 	1    6150 2725
 	1    0    0    -1  

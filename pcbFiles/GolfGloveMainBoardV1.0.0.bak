@@ -351,25 +351,14 @@ Text GLabel 10575 3500 2    60   Input ~ 0
 Sensor1
 Text GLabel 10575 3875 2    60   Input ~ 0
 Sensor4
-$Comp
-L Conn_01x04_Female J2
-U 1 1 5C4513F8
-P 7375 3825
-F 0 "J2" H 7275 4000 50  0000 C CNN
-F 1 "BT_UART" H 7525 3775 50  0000 C CNN
-F 2 "Socket_Strips:Socket_Strip_Straight_1x04_Pitch2.54mm" H 7375 3825 50  0001 C CNN
-F 3 "" H 7375 3825 50  0001 C CNN
-	1    7375 3825
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
-	7575 3625 7850 3625
+	7825 3625 7850 3625
 Wire Wire Line
-	7850 3725 7575 3725
+	7850 3725 7825 3725
 Wire Wire Line
-	7575 3825 7850 3825
+	7825 3825 7850 3825
 Wire Wire Line
-	7850 3925 7575 3925
+	7850 3925 7825 3925
 Text GLabel 9925 5125 2    60   Input ~ 0
 GND
 Wire Wire Line
@@ -635,7 +624,7 @@ Text GLabel 10400 2775 2    60   Input ~ 0
 Wire Wire Line
 	9850 2025 9900 2025
 Wire Wire Line
-	9900 2025 9900 1375
+	9900 1375 9900 2025
 Wire Wire Line
 	9450 1375 9950 1375
 $Comp
@@ -752,7 +741,7 @@ Wire Wire Line
 	10475 1850 10475 1875
 Connection ~ 10425 1875
 Wire Wire Line
-	10400 1575 10400 1550
+	10400 1550 10400 1575
 Connection ~ 10400 1550
 Connection ~ 10400 1575
 Wire Wire Line
@@ -851,9 +840,9 @@ Wire Wire Line
 Wire Wire Line
 	10375 3800 10100 3800
 Wire Wire Line
-	10100 3800 10100 3525
+	10100 3525 10100 3800
 Wire Wire Line
-	10100 3525 9475 3525
+	9475 3525 10100 3525
 Wire Wire Line
 	9475 4525 10400 4525
 Wire Wire Line
@@ -867,9 +856,9 @@ Wire Wire Line
 Wire Wire Line
 	10575 4125 10475 4125
 Wire Wire Line
-	10475 4125 10475 4925
+	10475 4925 10475 4125
 Wire Wire Line
-	10475 4925 9475 4925
+	9475 4925 10475 4925
 $Comp
 L Conn_01x16_Male J11
 U 1 1 5C4824CB
@@ -902,8 +891,6 @@ Wire Wire Line
 	9850 4425 9475 4425
 Connection ~ 9850 4525
 Connection ~ 9850 4625
-Connection ~ 9850 4725
-Connection ~ 9850 4825
 Connection ~ 9850 4925
 Text GLabel 7775 2825 0    60   Input ~ 0
 RST_N
@@ -1180,4 +1167,46 @@ Wire Wire Line
 	5825 7375 5900 7375
 Wire Wire Line
 	5825 6900 5900 6900
+$Comp
+L Connector_Generic:Conn_01x06 J2
+U 1 1 5C5A2335
+P 5550 3150
+F 0 "J2" H 5470 2625 50  0000 C CNN
+F 1 "Conn_01x06" H 5470 2716 50  0000 C CNN
+F 2 "" H 5550 3150 50  0001 C CNN
+F 3 "~" H 5550 3150 50  0001 C CNN
+	1    5550 3150
+	-1   0    0    1   
+$EndComp
+Text Label 7825 3625 2    50   ~ 0
+BT_UART_RX
+Text Label 7825 3725 2    50   ~ 0
+BT_UART_TX
+Text Label 7825 3825 2    50   ~ 0
+BT_UART_RTS
+Text Label 7825 3925 2    50   ~ 0
+BT_UART_CTS
+Text GLabel 5800 3400 3    60   Input ~ 0
+GND
+Wire Wire Line
+	5750 3350 5800 3350
+Wire Wire Line
+	5800 3350 5800 3400
+Text Label 5800 3250 0    50   ~ 0
+BT_UART_RTS
+Text Label 5800 3050 0    50   ~ 0
+BT_UART_RX
+Text Label 5800 2950 0    50   ~ 0
+BT_UART_TX
+Text Label 5800 2850 0    50   ~ 0
+BT_UART_CTS
+Wire Wire Line
+	5750 2850 5800 2850
+Wire Wire Line
+	5750 2950 5800 2950
+Wire Wire Line
+	5750 3050 5800 3050
+Wire Wire Line
+	5750 3250 5800 3250
+NoConn ~ 5750 3150
 $EndSCHEMATC

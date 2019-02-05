@@ -1,8 +1,45 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 2
 LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
 LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ADS1115IDGST
+LIBS:CYW20719B1KUMLG
+LIBS:LSM9DS1TR
+LIBS:TPS63001DRCT
+LIBS:MCP73831T-2ACI_OT
+LIBS:A-1JB
+LIBS:XC6119N16A7R-G
 LIBS:GolfGloveMainBoardV1.0.0-cache
-EELAYER 26 0
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -130,7 +167,7 @@ U 1 1 5C44E005
 P 7375 2575
 F 0 "R4" V 7455 2575 50  0000 C CNN
 F 1 "R" V 7375 2575 50  0000 C CNN
-F 2 "Capacitors_SMD:C_0603" V 7305 2575 50  0001 C CNN
+F 2 "Resistors_SMD:R_0402" V 7305 2575 50  0001 C CNN
 F 3 "" H 7375 2575 50  0001 C CNN
 	1    7375 2575
 	1    0    0    -1  
@@ -174,7 +211,7 @@ Wire Wire Line
 Wire Wire Line
 	3900 2050 3825 2050
 Wire Wire Line
-	2925 3875 3025 3875
+	2925 3875 3400 3875
 Wire Wire Line
 	3325 3875 3325 3850
 Wire Wire Line
@@ -190,9 +227,9 @@ Wire Wire Line
 	2925 3875 2925 3850
 Connection ~ 3025 3875
 Wire Wire Line
-	1925 1825 1950 1825
+	1925 1825 2000 1825
 Wire Wire Line
-	1925 1925 1950 1925
+	1925 1925 2000 1925
 Wire Wire Line
 	1950 1925 1950 2025
 Wire Wire Line
@@ -204,7 +241,7 @@ Wire Wire Line
 	1950 1725 1925 1725
 Connection ~ 1950 1825
 Wire Wire Line
-	1950 825  1950 925 
+	1950 825  1950 1225
 Wire Wire Line
 	1950 925  1925 925 
 Wire Wire Line
@@ -217,7 +254,7 @@ Wire Wire Line
 	1950 1225 1925 1225
 Connection ~ 1950 1125
 Wire Wire Line
-	1025 3850 1125 3850
+	1025 3850 1475 3850
 Wire Wire Line
 	1425 3850 1425 3825
 Wire Wire Line
@@ -255,9 +292,9 @@ Wire Wire Line
 Wire Wire Line
 	7375 2375 7375 2425
 Wire Wire Line
-	7375 2425 7575 2425
+	7375 2425 7850 2425
 Wire Wire Line
-	7375 2725 7575 2725
+	7375 2725 7850 2725
 Connection ~ 7575 2725
 Connection ~ 7575 2425
 Wire Wire Line
@@ -305,7 +342,7 @@ Wire Wire Line
 Text GLabel 10300 2125 2    60   Input ~ 0
 GND
 Wire Wire Line
-	10300 1825 10300 1875
+	10300 1825 10300 2425
 Text GLabel 10575 3750 2    60   Input ~ 0
 Sensor3
 Text GLabel 10575 3625 2    60   Input ~ 0
@@ -339,9 +376,9 @@ SCLK
 Text GLabel 9925 4625 2    60   Input ~ 0
 SDA
 Wire Wire Line
-	9475 4325 9850 4325
+	9475 4325 9925 4325
 Wire Wire Line
-	9475 4625 9850 4625
+	9475 4625 9925 4625
 $Comp
 L EMI_Filter_LCL FL1
 U 1 1 5C45A66F
@@ -365,7 +402,7 @@ F 3 "" H 6775 4225 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6775 4375 6775 4425
+	6775 4375 6775 4525
 Text GLabel 7075 4775 0    60   Input ~ 0
 GND
 $Comp
@@ -406,7 +443,7 @@ F 3 "" H 7625 4525 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	7375 4525 7400 4525
+	7375 4525 7475 4525
 Wire Wire Line
 	7775 4525 7850 4525
 Text Notes 7525 4400 0    60   ~ 0
@@ -467,7 +504,7 @@ GND
 Wire Wire Line
 	7650 4775 7550 4775
 Wire Wire Line
-	7375 5275 7650 5275
+	7375 5275 7900 5275
 Wire Wire Line
 	7650 5275 7650 5175
 Connection ~ 7650 5275
@@ -489,7 +526,7 @@ GND
 Wire Wire Line
 	7225 3525 7175 3525
 Wire Wire Line
-	7150 3225 7225 3225
+	7150 3225 7850 3225
 Connection ~ 7225 3225
 Text Notes 6900 3400 0    60   ~ 0
 10uf
@@ -522,7 +559,7 @@ F 3 "" H 10200 3325 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	10200 3100 10200 3125
+	10200 3100 10200 3175
 Wire Wire Line
 	10200 3100 7850 3100
 Wire Wire Line
@@ -540,7 +577,7 @@ F 3 "" H 10375 3325 50  0001 C CNN
 $EndComp
 Connection ~ 10200 3125
 Wire Wire Line
-	10200 3125 10375 3125
+	10200 3125 10450 3125
 Wire Wire Line
 	10375 3125 10375 3175
 Text GLabel 10200 3525 3    60   Input ~ 0
@@ -566,7 +603,7 @@ $EndComp
 Wire Wire Line
 	10025 3025 9850 3025
 Wire Wire Line
-	10025 2875 10025 2950
+	10025 2875 10025 3025
 Text Notes 9925 3350 0    60   ~ 0
 1uf
 Text Notes 10475 3350 0    60   ~ 0
@@ -589,7 +626,7 @@ Wire Wire Line
 Wire Wire Line
 	9900 2025 9900 1375
 Wire Wire Line
-	9450 1375 9550 1375
+	9450 1375 9950 1375
 $Comp
 L C C26
 U 1 1 5C467919
@@ -614,7 +651,7 @@ U 1 1 5C467E15
 P 10100 1375
 F 0 "R11" V 10180 1375 50  0000 C CNN
 F 1 "R" V 10100 1375 50  0000 C CNN
-F 2 "Capacitors_SMD:C_0603" V 10030 1375 50  0001 C CNN
+F 2 "Resistors_SMD:R_0402" V 10030 1375 50  0001 C CNN
 F 3 "" H 10100 1375 50  0001 C CNN
 	1    10100 1375
 	0    1    1    0   
@@ -688,23 +725,23 @@ Wire Wire Line
 Wire Wire Line
 	9925 2125 9925 1575
 Wire Wire Line
-	9925 1575 10400 1575
+	9925 1575 10425 1575
 Wire Wire Line
-	10300 1875 10425 1875
+	10300 1875 10475 1875
 Connection ~ 10300 1875
 Wire Wire Line
 	9850 2325 9950 2325
 Wire Wire Line
 	9950 2325 9950 1550
 Wire Wire Line
-	9950 1550 10400 1550
+	9950 1550 10625 1550
 Wire Wire Line
 	10625 1850 10475 1850
 Wire Wire Line
 	10475 1850 10475 1875
 Connection ~ 10425 1875
 Wire Wire Line
-	10400 1575 10400 1550
+	10400 1550 10400 1575
 Connection ~ 10400 1550
 Connection ~ 10400 1575
 Wire Wire Line
@@ -713,10 +750,10 @@ Connection ~ 10450 1550
 Wire Wire Line
 	10325 1375 10325 1325
 Wire Wire Line
-	10325 1325 10450 1325
+	10325 1325 10825 1325
 Connection ~ 10450 1325
 Wire Wire Line
-	9975 1525 10825 1525
+	9975 1525 10850 1525
 Wire Wire Line
 	9975 1525 9975 2225
 Wire Wire Line
@@ -787,7 +824,7 @@ Text Notes 7500 2425 0    60   ~ 0
 Text Notes 7825 4900 0    60   ~ 0
 24.000Mhz
 Wire Wire Line
-	9475 3425 9850 3425
+	9475 3425 10125 3425
 Wire Wire Line
 	10125 3425 10125 3775
 Wire Wire Line
@@ -805,9 +842,9 @@ Wire Wire Line
 Wire Wire Line
 	10100 3800 10100 3525
 Wire Wire Line
-	10100 3525 9850 3525
+	10100 3525 9475 3525
 Wire Wire Line
-	9475 4525 9850 4525
+	9475 4525 10400 4525
 Wire Wire Line
 	10400 4525 10400 3750
 Wire Wire Line
@@ -821,7 +858,7 @@ Wire Wire Line
 Wire Wire Line
 	10475 4125 10475 4925
 Wire Wire Line
-	10475 4925 9850 4925
+	10475 4925 9475 4925
 $Comp
 L Conn_01x16_Male J11
 U 1 1 5C4824CB
@@ -846,9 +883,9 @@ Wire Wire Line
 Wire Wire Line
 	9475 4025 9850 4025
 Wire Wire Line
-	9475 4125 9850 4125
+	9475 4125 9925 4125
 Wire Wire Line
-	9475 4225 9850 4225
+	9475 4225 10000 4225
 Connection ~ 9850 4325
 Wire Wire Line
 	9850 4425 9475 4425
@@ -1130,95 +1167,6 @@ Wire Wire Line
 	5825 7375 5900 7375
 Wire Wire Line
 	5825 6900 5900 6900
-Wire Wire Line
-	3325 3875 3400 3875
-Wire Wire Line
-	3225 3875 3325 3875
-Wire Wire Line
-	3125 3875 3225 3875
-Wire Wire Line
-	3025 3875 3125 3875
-Wire Wire Line
-	1950 1925 2000 1925
-Wire Wire Line
-	1950 1825 2000 1825
-Wire Wire Line
-	1950 925  1950 1025
-Wire Wire Line
-	1950 1025 1950 1125
-Wire Wire Line
-	1950 1125 1950 1225
-Wire Wire Line
-	1425 3850 1475 3850
-Wire Wire Line
-	1325 3850 1425 3850
-Wire Wire Line
-	1225 3850 1325 3850
-Wire Wire Line
-	1125 3850 1225 3850
-Wire Wire Line
-	7575 2725 7850 2725
-Wire Wire Line
-	7575 2425 7850 2425
-Wire Wire Line
-	7650 5275 7900 5275
-Wire Wire Line
-	7225 3225 7850 3225
-Wire Wire Line
-	10200 3125 10200 3175
-Wire Wire Line
-	10375 3125 10450 3125
-Wire Wire Line
-	10025 2950 10025 3025
-Wire Wire Line
-	9550 1375 9900 1375
-Wire Wire Line
-	9900 1375 9950 1375
-Wire Wire Line
-	10300 1875 10300 2425
-Wire Wire Line
-	10425 1875 10475 1875
-Wire Wire Line
-	10400 1550 10450 1550
-Wire Wire Line
-	10400 1575 10425 1575
-Wire Wire Line
-	10450 1550 10625 1550
-Wire Wire Line
-	10450 1325 10825 1325
-Wire Wire Line
-	10825 1525 10850 1525
-Wire Wire Line
-	9850 3425 10125 3425
-Wire Wire Line
-	9850 3525 9475 3525
-Wire Wire Line
-	9850 4325 9925 4325
-Wire Wire Line
-	9850 4525 10400 4525
-Wire Wire Line
-	9850 4625 9925 4625
-Wire Wire Line
-	9850 4925 9475 4925
-Wire Wire Line
-	9850 4225 10000 4225
-Wire Wire Line
-	9850 4125 9925 4125
-Wire Wire Line
-	7400 4525 7475 4525
-Wire Wire Line
-	6775 4425 6775 4525
-$Comp
-L Connector_Generic:Conn_01x06 J2
-U 1 1 5C5A2335
-P 5550 3150
-F 0 "J2" H 5470 2625 50  0000 C CNN
-F 1 "Conn_01x06" H 5470 2716 50  0000 C CNN
-F 2 "" H 5550 3150 50  0001 C CNN
-F 3 "~" H 5550 3150 50  0001 C CNN
-	1    5550 3150
-	-1   0    0    1   
-$EndComp
 Text Label 7825 3625 2    50   ~ 0
 BT_UART_RX
 Text Label 7825 3725 2    50   ~ 0
@@ -1250,4 +1198,32 @@ Wire Wire Line
 Wire Wire Line
 	5750 3250 5800 3250
 NoConn ~ 5750 3150
+$Comp
+L Conn_01x06 J2
+U 1 1 5C598653
+P 5550 3150
+F 0 "J2" H 5550 3450 50  0000 C CNN
+F 1 "Conn_01x06" H 5550 2750 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm" H 5550 3150 50  0001 C CNN
+F 3 "" H 5550 3150 50  0001 C CNN
+	1    5550 3150
+	-1   0    0    1   
+$EndComp
+Text GLabel 6600 6650 0    60   Input ~ 0
+GND
+$Comp
+L GND #PWR?
+U 1 1 5C59B296
+P 6775 6700
+F 0 "#PWR?" H 6775 6450 50  0001 C CNN
+F 1 "GND" H 6775 6550 50  0000 C CNN
+F 2 "" H 6775 6700 50  0001 C CNN
+F 3 "" H 6775 6700 50  0001 C CNN
+	1    6775 6700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6600 6650 6775 6650
+Wire Wire Line
+	6775 6650 6775 6700
 $EndSCHEMATC

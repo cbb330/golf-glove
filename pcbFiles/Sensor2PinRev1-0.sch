@@ -1,12 +1,49 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 2
 LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
 LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ADS1115IDGST
+LIBS:CYW20719B1KUMLG
+LIBS:LSM9DS1TR
+LIBS:TPS63001DRCT
+LIBS:MCP73831T-2ACI_OT
+LIBS:A-1JB
+LIBS:XC6119N16A7R-G
 LIBS:GolfGloveMainBoardV1.0.0-cache
-EELAYER 26 0
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 7 12
+Sheet 12 12
 Title ""
 Date ""
 Rev ""
@@ -17,35 +54,35 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L R R?
+L R R7
 U 1 1 5C4B94B6
 P 5150 3175
-AR Path="/5C4B9358/5C4B94B6" Ref="R?"  Part="1" 
-AR Path="/5C4BB400/5C4B94B6" Ref="R?"  Part="1" 
-AR Path="/5C4BB725/5C4B94B6" Ref="R?"  Part="1" 
-AR Path="/5C4BB72A/5C4B94B6" Ref="R?"  Part="1" 
-AR Path="/5C4BBBA5/5C4B94B6" Ref="R?"  Part="1" 
-AR Path="/5C4BBBAA/5C4B94B6" Ref="R?"  Part="1" 
-F 0 "R?" V 5230 3175 50  0000 C CNN
+AR Path="/5C4B9358/5C4B94B6" Ref="R7"  Part="1" 
+AR Path="/5C4BB400/5C4B94B6" Ref="R8"  Part="1" 
+AR Path="/5C4BB725/5C4B94B6" Ref="R9"  Part="1" 
+AR Path="/5C4BB72A/5C4B94B6" Ref="R10"  Part="1" 
+AR Path="/5C4BBBA5/5C4B94B6" Ref="R12"  Part="1" 
+AR Path="/5C4BBBAA/5C4B94B6" Ref="R13"  Part="1" 
+F 0 "R7" V 5230 3175 50  0000 C CNN
 F 1 "R" V 5150 3175 50  0000 C CNN
-F 2 "" V 5080 3175 50  0001 C CNN
+F 2 "Resistors_SMD:R_0402" V 5080 3175 50  0001 C CNN
 F 3 "" H 5150 3175 50  0001 C CNN
 	1    5150 3175
 	0    1    1    0   
 $EndComp
 $Comp
-L Conn_01x02 J?
+L Conn_01x02 J7
 U 1 1 5C4B9547
 P 4700 3175
-AR Path="/5C4B9358/5C4B9547" Ref="J?"  Part="1" 
-AR Path="/5C4BB400/5C4B9547" Ref="J?"  Part="1" 
-AR Path="/5C4BB725/5C4B9547" Ref="J?"  Part="1" 
-AR Path="/5C4BB72A/5C4B9547" Ref="J?"  Part="1" 
-AR Path="/5C4BBBA5/5C4B9547" Ref="J?"  Part="1" 
-AR Path="/5C4BBBAA/5C4B9547" Ref="J?"  Part="1" 
-F 0 "J?" H 4700 3275 50  0000 C CNN
+AR Path="/5C4B9358/5C4B9547" Ref="J7"  Part="1" 
+AR Path="/5C4BB400/5C4B9547" Ref="J8"  Part="1" 
+AR Path="/5C4BB725/5C4B9547" Ref="J9"  Part="1" 
+AR Path="/5C4BB72A/5C4B9547" Ref="J14"  Part="1" 
+AR Path="/5C4BBBA5/5C4B9547" Ref="J15"  Part="1" 
+AR Path="/5C4BBBAA/5C4B9547" Ref="J16"  Part="1" 
+F 0 "J7" H 4700 3275 50  0000 C CNN
 F 1 "Conn_01x02" H 4700 2975 50  0000 C CNN
-F 2 "" H 4700 3175 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 4700 3175 50  0001 C CNN
 F 3 "" H 4700 3175 50  0001 C CNN
 	1    4700 3175
 	-1   0    0    1   
