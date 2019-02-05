@@ -6,7 +6,7 @@
     (area 65.924999 45.924999 76.575001 60.075001)
     (thickness 1.6)
     (drawings 11)
-    (tracks 139)
+    (tracks 141)
     (zones 0)
     (modules 79)
     (nets 97)
@@ -15,6 +15,8 @@
   (page A4)
   (layers
     (0 F.Cu signal)
+    (1 In1.Cu signal)
+    (2 In2.Cu signal)
     (31 B.Cu signal)
     (32 B.Adhes user)
     (33 F.Adhes user)
@@ -39,7 +41,7 @@
   (setup
     (last_trace_width 0.25)
     (trace_clearance 0.15)
-    (zone_clearance 0.508)
+    (zone_clearance 0.25)
     (zone_45_only no)
     (trace_min 0.2)
     (segment_width 0.2)
@@ -2870,7 +2872,7 @@
   )
 
   (module Pin_Headers:Pin_Header_Straight_1x01_Pitch2.54mm (layer F.Cu) (tedit 59650532) (tstamp 5C47F1AE)
-    (at 162.7 65.25)
+    (at 168.125 56.025)
     (descr "Through hole straight pin header, 1x01, 2.54mm pitch, single row")
     (tags "Through hole pin header THT 1x01 2.54mm single row")
     (path /5C475EAA)
@@ -3650,5 +3652,7 @@
   (via (at 68.7 58.175) (size 0.6) (drill 0.4) (layers F.Cu B.Cu) (net 57))
   (segment (start 68.99 58.365) (end 68.7 58.175) (width 0.25) (layer F.Cu) (net 57) (tstamp 5C48108F))
   (segment (start 71.65 54.125) (end 71.65 53.81) (width 0.25) (layer B.Cu) (net 57) (tstamp 5C48109A))
+  (segment (start 168.125 56.025) (end 168.25 55.9) (width 0.25) (layer B.Cu) (net 88))
+  (segment (start 168.125 56.025) (end 169 55.15) (width 0.25) (layer In1.Cu) (net 88))
 
 )

@@ -52,7 +52,7 @@ U 1 1 5C49B798
 P 5225 3250
 F 0 "U1" H 5063 3647 50  0000 L BNN
 F 1 "MCP73831T-2ACI/OT" H 4991 2573 50  0000 L BNN
-F 2 "MCP73831T-2ACI_OT:SOT95P280X145-5N" H 5225 3250 50  0001 L BNN
+F 2 "Buttons_Switches_SMD:SW_DIP_x1_W8.61mm_Slide_LowProfile" H 5225 3250 50  0001 L BNN
 F 3 "SOT-23 Microchip" H 5225 3250 50  0001 L BNN
 F 4 "MCP73831T-2ACI/OT" H 5225 3250 50  0001 L BNN "Field4"
 F 5 "https://www.digikey.com/product-detail/en/microchip-technology/MCP73831T-2ACI-OT/MCP73831T-2ACI-OTCT-ND/1979802?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 5225 3250 50  0001 L BNN "Field5"

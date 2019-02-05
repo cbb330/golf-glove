@@ -3020,7 +3020,7 @@
   )
 
   (module AAAA_XC6119_USPN-4:DFN-4 (layer F.Cu) (tedit 5C47F07E) (tstamp 5C47F1D7)
-    (at 64.85 130.6 90)
+    (at 68.5 135 90)
     (descr "CRYSTAL 24MHZ 18PF SMD")
     (path /5C485E21)
     (attr smd)
