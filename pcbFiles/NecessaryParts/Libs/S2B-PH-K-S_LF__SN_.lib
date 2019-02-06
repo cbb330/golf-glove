@@ -1,0 +1,30 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# S2B-PH-K-S(LF)(SN)
+#
+DEF S2B-PH-K-S(LF)(SN) P 0 40 Y Y 1 L N
+F0 "P" 0 150 50 H V L BNN
+F1 "S2B-PH-K-S(LF)(SN)" 0 -200 50 H V L BNN
+F2 "JST_S2B-PH-K-S(LF)(SN)" 0 0 50 H I L BNN
+F3 "0.07 USD" 0 0 50 H I L BNN
+F4 "S2B-PH-K-S_LF__SN_" 0 0 50 H I L BNN
+F5 "PH Series 2 Position 2.0 mm Through Hole Side Entry Shrouded Header" 0 0 50 H I L BNN
+F6 "Good" 0 0 50 H I L BNN
+F7 "FakePackage u" 0 0 50 H I L BNN
+F8 "JST" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 30 0 50 100 50 N
+P 2 0 0 30 0 -50 100 -50 N
+P 2 0 0 10 0 150 0 -150 N
+P 2 0 0 10 0 -150 250 -150 N
+P 2 0 0 10 250 -150 250 150 N
+P 2 0 0 10 250 150 0 150 N
+X 1 1 -200 50 200 R 40 40 0 0 P 
+X 2 2 -200 -50 200 R 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library

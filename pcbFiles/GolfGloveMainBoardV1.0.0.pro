@@ -1,4 +1,4 @@
-update=2/5/2019 11:10:59 AM
+update=2/6/2019 3:44:13 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -67,5 +67,17 @@ LibName37=D:/Em-Board/Ki-Cad/Parts/MCP78731/MCP73831T-2ACI_OT
 LibName38=D:/Em-Board/Ki-Cad/Parts/A-1JB/A-1JB
 LibName39=D:/Em-Board/Ki-Cad/Parts/XC6119N16A7R-G/XC6119N16A7R-G
 LibName40=NecessaryParts/2450AT42B100E/2450AT42B100E
+LibName41=NecessaryParts/Libs/2450AT42B100E
+LibName42=NecessaryParts/Libs/A-1JB
+LibName43=NecessaryParts/Libs/ADS1115IDGST
+LibName44=NecessaryParts/Libs/CD4011BM96
+LibName45=NecessaryParts/Libs/CYW20719B1KUMLG
+LibName46=NecessaryParts/Libs/LSM9DS1TR
+LibName47=NecessaryParts/Libs/MCP73831T-2ACI_OT
+LibName48=NecessaryParts/Libs/MMDT3904V-7
+LibName49=NecessaryParts/Libs/MMPQ3904
+LibName50=NecessaryParts/Libs/S2B-PH-K-S_LF__SN_
+LibName51=NecessaryParts/Libs/TPS63001DRCT
+LibName52=NecessaryParts/Libs/XC6119N16A7R-G
 [general]
 version=1

@@ -32,6 +32,17 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:2450AT42B100E
+LIBS:A-1JB
+LIBS:ADS1115IDGST
+LIBS:CD4011BM96
+LIBS:CYW20719B1KUMLG
+LIBS:LSM9DS1TR
+LIBS:MCP73831T-2ACI_OT
+LIBS:MMDT3904V-7
+LIBS:MMPQ3904
+LIBS:S2B-PH-K-S_LF__SN_
+LIBS:TPS63001DRCT
+LIBS:XC6119N16A7R-G
 LIBS:GolfGloveMainBoardV1.0.0-cache
 EELAYER 25 0
 EELAYER END
@@ -105,7 +116,7 @@ U 1 1 5C4455AC
 P 5600 6325
 F 0 "SW1" H 5600 6495 50  0000 C CNN
 F 1 "SW_SPDT" H 5600 6125 50  0000 C CNN
-F 2 "SDPT:SDTPSwitchAmazon" H 5600 6325 50  0001 C CNN
+F 2 "Buttons_Switches_SMD:SW_SPDT_PCM12" H 5600 6325 50  0001 C CNN
 F 3 "" H 5600 6325 50  0001 C CNN
 	1    5600 6325
 	1    0    0    -1  
@@ -361,9 +372,9 @@ Text GLabel 5900 7375 2    60   Input ~ 0
 PSensor2
 Text GLabel 5900 6900 2    60   Input ~ 0
 PSensor1
-Text GLabel 10575 4125 2    60   Input ~ 0
+Text GLabel 3900 2350 2    60   Input ~ 0
 PSensor2
-Text GLabel 10575 4000 2    60   Input ~ 0
+Text GLabel 3900 2250 2    60   Input ~ 0
 PSensor1
 Text GLabel 9925 4325 2    60   Input ~ 0
 SCLK
@@ -469,7 +480,7 @@ U 1 1 5C46268E
 P 10050 3125
 F 0 "L2" V 10000 3125 50  0000 C CNN
 F 1 "L" V 10125 3125 50  0000 C CNN
-F 2 "Inductors_SMD:L_0805" H 10050 3125 50  0001 C CNN
+F 2 "Inductors_SMD:L_0402" H 10050 3125 50  0001 C CNN
 F 3 "" H 10050 3125 50  0001 C CNN
 	1    10050 3125
 	0    1    1    0   
@@ -780,14 +791,6 @@ Wire Wire Line
 	10400 3750 10575 3750
 Wire Wire Line
 	9925 3875 10575 3875
-Wire Wire Line
-	10000 4000 10575 4000
-Wire Wire Line
-	10575 4125 10475 4125
-Wire Wire Line
-	10475 4125 10475 4925
-Wire Wire Line
-	10475 4925 9475 4925
 $Comp
 L Conn_01x16_Male J11
 U 1 1 5C4824CB
@@ -813,21 +816,15 @@ Wire Wire Line
 	9475 4025 9850 4025
 Wire Wire Line
 	9475 4125 9925 4125
-Wire Wire Line
-	9475 4225 10000 4225
 Connection ~ 9850 4325
 Wire Wire Line
 	9850 4425 9475 4425
 Connection ~ 9850 4525
 Connection ~ 9850 4625
-Connection ~ 9850 4925
 Text GLabel 7775 2825 0    60   Input ~ 0
 RST_N
 Wire Wire Line
 	7775 2825 7850 2825
-Wire Wire Line
-	10000 4225 10000 4000
-Connection ~ 9850 4225
 Wire Wire Line
 	9925 4125 9925 3875
 Connection ~ 9850 4125
@@ -1047,13 +1044,13 @@ Text GLabel 3300 6950 0    60   Input ~ 0
 Text GLabel 3300 7425 0    60   Input ~ 0
 3.3v
 Text GLabel 5050 7000 0    60   Input ~ 0
-GND
+USBGND
 Text GLabel 5050 6900 0    60   Input ~ 0
-3.3v
+USBVCC
 Text GLabel 5050 7475 0    60   Input ~ 0
-GND
+USBGND
 Text GLabel 5050 7375 0    60   Input ~ 0
-3.3v
+USBVCC
 Wire Wire Line
 	3300 6000 3375 6000
 Wire Wire Line
@@ -1134,10 +1131,10 @@ $EndComp
 Text GLabel 6600 6650 0    60   Input ~ 0
 GND
 $Comp
-L GND #PWR1
+L GND #PWR01
 U 1 1 5C59B296
 P 6775 6700
-F 0 "#PWR1" H 6775 6450 50  0001 C CNN
+F 0 "#PWR01" H 6775 6450 50  0001 C CNN
 F 1 "GND" H 6775 6550 50  0000 C CNN
 F 2 "" H 6775 6700 50  0001 C CNN
 F 3 "" H 6775 6700 50  0001 C CNN
@@ -1154,7 +1151,7 @@ U 1 1 5C59DA7F
 P 6500 3350
 F 0 "J17" H 6500 3450 50  0000 C CNN
 F 1 "Conn_01x02" H 6500 3150 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x02_Pitch2.54mm" H 6500 3350 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 6500 3350 50  0001 C CNN
 F 3 "" H 6500 3350 50  0001 C CNN
 	1    6500 3350
 	0    1    1    0   
@@ -1221,4 +1218,20 @@ Wire Wire Line
 Connection ~ 6850 4525
 Wire Wire Line
 	6375 4525 6475 4525
+Wire Wire Line
+	9850 4925 9475 4925
+Wire Wire Line
+	9475 4225 9850 4225
+Text GLabel 3900 2950 2    60   Input ~ 0
+PSensor2
+Text GLabel 3900 2850 2    60   Input ~ 0
+PSensor1
+Wire Wire Line
+	3825 2250 3900 2250
+Wire Wire Line
+	3825 2350 3900 2350
+Wire Wire Line
+	3825 2850 3900 2850
+Wire Wire Line
+	3900 2950 3825 2950
 $EndSCHEMATC
