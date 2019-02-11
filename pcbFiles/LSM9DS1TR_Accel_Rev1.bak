@@ -31,18 +31,18 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:2450AT42B100E
-LIBS:A-1JB
 LIBS:ADS1115IDGST
-LIBS:CD4011BM96
 LIBS:CYW20719B1KUMLG
 LIBS:LSM9DS1TR
+LIBS:TPS63001DRCT
 LIBS:MCP73831T-2ACI_OT
+LIBS:A-1JB
+LIBS:XC6119N16A7R-G
+LIBS:2450AT42B100E
+LIBS:CD4011BM96
 LIBS:MMDT3904V-7
 LIBS:MMPQ3904
 LIBS:S2B-PH-K-S_LF__SN_
-LIBS:TPS63001DRCT
-LIBS:XC6119N16A7R-G
 LIBS:GolfGloveMainBoardV1.0.0-cache
 EELAYER 25 0
 EELAYER END
@@ -145,10 +145,6 @@ Wire Wire Line
 	4600 2725 4675 2725
 Wire Wire Line
 	4675 2825 4600 2825
-Text GLabel 4250 2925 0    60   Input ~ 0
-SDA
-Text GLabel 4250 2625 0    60   Input ~ 0
-SCLK
 Wire Wire Line
 	4250 2625 4625 2625
 Wire Wire Line
@@ -159,8 +155,6 @@ Wire Wire Line
 Wire Wire Line
 	4625 2925 4250 2925
 Connection ~ 4625 2825
-Text GLabel 6200 2475 2    60   Input ~ 0
-3.3v
 Wire Wire Line
 	6075 2375 6075 2575
 Wire Wire Line
@@ -173,17 +167,11 @@ Connection ~ 6150 2375
 Wire Wire Line
 	6075 2575 6150 2575
 Connection ~ 6075 2525
-Text GLabel 6525 2075 2    60   Input ~ 0
-GND
-Text GLabel 6525 2875 2    60   Input ~ 0
-GND
 Wire Wire Line
 	6150 2075 6525 2075
 Connection ~ 6375 2075
 Wire Wire Line
 	6150 2875 6525 2875
-Text GLabel 6475 4125 2    60   Input ~ 0
-GND
 Wire Wire Line
 	6475 3825 6475 4125
 Connection ~ 6475 3925
@@ -201,14 +189,6 @@ Text HLabel 4050 2000 0    60   Input ~ 0
 SDA
 Text HLabel 4050 2100 0    60   Input ~ 0
 GND
-Text GLabel 4125 1900 2    60   Input ~ 0
-SCLK
-Text GLabel 4125 2000 2    60   Input ~ 0
-SDA
-Text GLabel 4125 1800 2    60   Input ~ 0
-3.3v
-Text GLabel 4125 2100 2    60   Input ~ 0
-GND
 Wire Wire Line
 	4050 1800 4125 1800
 Wire Wire Line
@@ -217,8 +197,6 @@ Wire Wire Line
 	4050 2000 4125 2000
 Wire Wire Line
 	4125 2100 4050 2100
-Text GLabel 4275 2775 0    60   Input ~ 0
-3.3v
 Connection ~ 4300 2775
 Wire Wire Line
 	4300 2775 4275 2775
@@ -250,4 +228,26 @@ F 3 "" H 4450 2725 50  0001 C CNN
 	1    4450 2725
 	0    1    1    0   
 $EndComp
+Text Label 4125 1800 0    60   ~ 0
+3.3v
+Text Label 4250 2625 0    60   ~ 0
+SCLK
+Text Label 4125 2000 0    60   ~ 0
+SDA
+Text Label 4125 2100 0    60   ~ 0
+GND
+Text Label 4125 1900 0    60   ~ 0
+SCLK
+Text Label 4275 2775 0    60   ~ 0
+3.3v
+Text Label 4250 2925 0    60   ~ 0
+SDA
+Text Label 6200 2475 0    60   ~ 0
+3.3v
+Text Label 6525 2075 0    60   ~ 0
+GND
+Text Label 6525 2875 0    60   ~ 0
+GND
+Text Label 6475 4125 0    60   ~ 0
+GND
 $EndSCHEMATC

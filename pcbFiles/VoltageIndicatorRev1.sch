@@ -31,18 +31,18 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:2450AT42B100E
-LIBS:A-1JB
 LIBS:ADS1115IDGST
-LIBS:CD4011BM96
 LIBS:CYW20719B1KUMLG
 LIBS:LSM9DS1TR
+LIBS:TPS63001DRCT
 LIBS:MCP73831T-2ACI_OT
+LIBS:A-1JB
+LIBS:XC6119N16A7R-G
+LIBS:2450AT42B100E
+LIBS:CD4011BM96
 LIBS:MMDT3904V-7
 LIBS:MMPQ3904
 LIBS:S2B-PH-K-S_LF__SN_
-LIBS:TPS63001DRCT
-LIBS:XC6119N16A7R-G
 LIBS:GolfGloveMainBoardV1.0.0-cache
 EELAYER 25 0
 EELAYER END
@@ -119,30 +119,14 @@ Text HLabel 3225 1625 0    60   Input ~ 0
 3.3vIn
 Text HLabel 3225 1875 0    60   Input ~ 0
 RST_N
-Text GLabel 3325 1875 2    60   Input ~ 0
-RST_N
-Text GLabel 3325 1750 2    60   Input ~ 0
-GND
-Text GLabel 3325 1625 2    60   Input ~ 0
-3.3v
 Wire Wire Line
 	3225 1625 3325 1625
 Wire Wire Line
 	3325 1750 3225 1750
 Wire Wire Line
 	3225 1875 3325 1875
-Text GLabel 5500 2050 1    60   Input ~ 0
-3.3v
-Text GLabel 4625 3950 3    60   Input ~ 0
-GND
-Text GLabel 4900 2550 0    60   Input ~ 0
-GND
-Text GLabel 6375 3500 2    60   Input ~ 0
-RST_N
 Wire Wire Line
 	6375 3500 6300 3500
-Text GLabel 5500 4350 3    60   Input ~ 0
-GND
 Wire Wire Line
 	5500 4300 5500 4350
 Wire Wire Line
@@ -151,8 +135,6 @@ Wire Wire Line
 	4700 3500 4625 3500
 Wire Wire Line
 	4625 3500 4625 3575
-Text GLabel 6000 2550 2    60   Input ~ 0
-GND
 Wire Wire Line
 	4900 2550 4975 2550
 Wire Wire Line
@@ -183,4 +165,22 @@ Wire Wire Line
 	5225 2350 5375 2350
 Wire Wire Line
 	5375 2350 5375 2550
+Text Label 3325 1625 0    60   ~ 0
+3.3v
+Text Label 3325 1750 0    60   ~ 0
+GND
+Text Label 3325 1875 0    60   ~ 0
+RST_N
+Text Label 4625 3950 0    60   ~ 0
+GND
+Text Label 5500 4350 0    60   ~ 0
+GND
+Text Label 6375 3500 0    60   ~ 0
+RST_N
+Text Label 6000 2550 0    60   ~ 0
+GND
+Text Label 5500 2050 0    60   ~ 0
+3.3v
+Text Label 4900 2550 0    60   ~ 0
+GND
 $EndSCHEMATC
