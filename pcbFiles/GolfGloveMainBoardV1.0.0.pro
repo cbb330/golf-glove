@@ -1,4 +1,4 @@
-update=2/6/2019 3:44:13 PM
+update=2/12/2019 5:23:45 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -81,3 +81,13 @@ LibName51=NecessaryParts/Libs/TPS63001DRCT
 LibName52=NecessaryParts/Libs/XC6119N16A7R-G
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
