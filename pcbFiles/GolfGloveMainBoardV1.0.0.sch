@@ -215,17 +215,6 @@ Text GLabel 9925 4625 2    60   Input ~ 0
 SDA
 Text Notes 7525 4400 0    60   ~ 0
 8.2pf
-$Comp
-L Crystal_GND23 Y2
-U 1 1 5C45C3BB
-P 7650 4975
-F 0 "Y2" H 7775 5175 50  0000 L CNN
-F 1 "Crystal_GND23" H 6675 4975 50  0000 L CNN
-F 2 "Crystals:Crystal_SMD_0603-4pin_6.0x3.5mm_HandSoldering" H 7650 4975 50  0001 C CNN
-F 3 "" H 7650 4975 50  0001 C CNN
-	1    7650 4975
-	-1   0    0    1   
-$EndComp
 Text GLabel 7550 4775 0    60   Input ~ 0
 GND
 $Comp
@@ -257,7 +246,7 @@ Text Notes 7075 5200 0    60   ~ 0
 Text GLabel 7650 5275 3    60   Input ~ 0
 GND
 Text GLabel 7150 3225 0    60   Input ~ 0
-VBAT
+3.3v
 $Comp
 L C C22
 U 1 1 5C46119F
@@ -713,28 +702,6 @@ F 7 "Antenna Chip 2.4ghz" H 6175 4525 50  0001 L BNN "Field7"
 F 8 "None" H 6175 4525 50  0001 L BNN "Field8"
 	1    6175 4525
 	-1   0    0    1   
-$EndComp
-$Comp
-L L L1
-U 1 1 5C59D98B
-P 6625 4525
-F 0 "L1" V 6575 4525 50  0000 C CNN
-F 1 "L" V 6700 4525 50  0000 C CNN
-F 2 "Inductors_SMD:L_0402" H 6625 4525 50  0001 C CNN
-F 3 "" H 6625 4525 50  0001 C CNN
-	1    6625 4525
-	0    1    1    0   
-$EndComp
-$Comp
-L L L6
-U 1 1 5C59DAC4
-P 6850 4325
-F 0 "L6" V 6800 4325 50  0000 C CNN
-F 1 "L" V 6925 4325 50  0000 C CNN
-F 2 "Inductors_SMD:L_0402" H 6850 4325 50  0001 C CNN
-F 3 "" H 6850 4325 50  0001 C CNN
-	1    6850 4325
-	1    0    0    -1  
 $EndComp
 Text GLabel 6775 4100 0    60   Input ~ 0
 GND
@@ -1273,4 +1240,53 @@ Wire Wire Line
 Wire Wire Line
 	8900 4025 9025 4025
 Connection ~ 9850 4925
+$Comp
+L Crystal_GND24 Y3
+U 1 1 5C99C2D0
+P 7650 4975
+F 0 "Y3" H 7775 5175 50  0000 L CNN
+F 1 "Crystal_GND24" H 7775 5100 50  0000 L CNN
+F 2 "Crystals:Crystal_SMD_0603-4pin_6.0x3.5mm_HandSoldering" H 7650 4975 50  0001 C CNN
+F 3 "" H 7650 4975 50  0001 C CNN
+	1    7650 4975
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C19
+U 1 1 5C9FB833
+P 6625 4525
+F 0 "C19" H 6650 4625 50  0000 L CNN
+F 1 "C" H 6650 4425 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" H 6663 4375 50  0001 C CNN
+F 3 "" H 6625 4525 50  0001 C CNN
+	1    6625 4525
+	0    1    1    0   
+$EndComp
+$Comp
+L C C20
+U 1 1 5C9FB984
+P 6850 4325
+F 0 "C20" H 6875 4425 50  0000 L CNN
+F 1 "C" H 6875 4225 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" H 6888 4175 50  0001 C CNN
+F 3 "" H 6850 4325 50  0001 C CNN
+	1    6850 4325
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9850 4725 9850 4650
+Wire Wire Line
+	9850 4650 9375 4650
+Wire Wire Line
+	9375 4650 9375 4575
+Wire Wire Line
+	9375 4575 9325 4575
+Wire Wire Line
+	9325 4725 9550 4725
+Wire Wire Line
+	9550 4725 9550 4800
+Wire Wire Line
+	9550 4800 9850 4800
+Wire Wire Line
+	9850 4800 9850 4825
 $EndSCHEMATC
