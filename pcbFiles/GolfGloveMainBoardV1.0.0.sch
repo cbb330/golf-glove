@@ -121,7 +121,7 @@ U 1 1 5C44DDD3
 P 7575 2575
 F 0 "Y1" H 7575 2725 50  0000 C CNN
 F 1 "Crystal" H 7575 2425 50  0000 C CNN
-F 2 "Crystals:Crystal_SMD_0603-2pin_6.0x3.5mm_HandSoldering" H 7575 2575 50  0001 C CNN
+F 2 "Crystals:Crystal_SMD_3215-2pin_3.2x1.5mm" H 7575 2575 50  0001 C CNN
 F 3 "" H 7575 2575 50  0001 C CNN
 	1    7575 2575
 	0    1    1    0   
@@ -431,17 +431,6 @@ Text Notes 7500 2425 0    60   ~ 0
 32.768Khz
 Text Notes 7825 4900 0    60   ~ 0
 24.000Mhz
-$Comp
-L Conn_01x16_Male J11
-U 1 1 5C4824CB
-P 9125 4125
-F 0 "J11" H 9125 4925 50  0000 C CNN
-F 1 "Conn_01x16_Male" H 9125 3225 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x08_Pitch2.54mm" H 9125 4125 50  0001 C CNN
-F 3 "" H 9125 4125 50  0001 C CNN
-	1    9125 4125
-	1    0    0    -1  
-$EndComp
 Text GLabel 7775 2825 0    60   Input ~ 0
 RST_N
 Text GLabel 1975 2525 2    60   Input ~ 0
@@ -759,7 +748,7 @@ Wire Wire Line
 	1025 3850 1025 3825
 Connection ~ 1125 3850
 Wire Wire Line
-	9425 5600 9650 5600
+	8950 5600 9650 5600
 Wire Wire Line
 	10050 5700 10125 5700
 Wire Wire Line
@@ -810,10 +799,6 @@ Wire Wire Line
 	7850 3925 7825 3925
 Wire Wire Line
 	9850 5125 9925 5125
-Wire Wire Line
-	9400 4325 9925 4325
-Wire Wire Line
-	9450 4625 9925 4625
 Wire Wire Line
 	6775 4525 7850 4525
 Wire Wire Line
@@ -933,8 +918,6 @@ Wire Wire Line
 Wire Wire Line
 	7850 2925 7850 3025
 Wire Wire Line
-	9325 3425 10125 3425
-Wire Wire Line
 	10125 3425 10125 3775
 Wire Wire Line
 	10125 3775 10350 3775
@@ -951,10 +934,6 @@ Wire Wire Line
 Wire Wire Line
 	10100 3800 10100 3525
 Wire Wire Line
-	10100 3525 9325 3525
-Wire Wire Line
-	9425 4525 10400 4525
-Wire Wire Line
 	10400 4525 10400 3750
 Wire Wire Line
 	10400 3750 10575 3750
@@ -962,11 +941,7 @@ Wire Wire Line
 	9925 3875 10575 3875
 Connection ~ 9850 3425
 Connection ~ 9850 3525
-Wire Wire Line
-	9375 4125 9925 4125
 Connection ~ 9850 4325
-Wire Wire Line
-	9850 4425 9475 4425
 Connection ~ 9850 4525
 Connection ~ 9850 4625
 Wire Wire Line
@@ -1083,8 +1058,6 @@ Connection ~ 6850 4525
 Wire Wire Line
 	6375 4525 6475 4525
 Wire Wire Line
-	9375 4225 9950 4225
-Wire Wire Line
 	3825 2250 3900 2250
 Wire Wire Line
 	3825 2350 3900 2350
@@ -1092,72 +1065,8 @@ Wire Wire Line
 	3825 2850 3900 2850
 Wire Wire Line
 	3900 2950 3825 2950
-Wire Wire Line
-	9325 3625 9425 3625
-Wire Wire Line
-	9425 3625 9425 4525
-Wire Wire Line
-	9375 4125 9375 3725
-Wire Wire Line
-	9375 3725 9325 3725
-Wire Wire Line
-	9400 4325 9400 3825
-Wire Wire Line
-	9400 3825 9325 3825
-Wire Wire Line
-	9450 4625 9450 3925
-Wire Wire Line
-	9450 3925 9325 3925
-Wire Wire Line
-	9450 3625 9450 3575
-Wire Wire Line
-	9450 3575 9325 3575
-Wire Wire Line
-	9325 3575 9325 4025
-Wire Wire Line
-	9475 3725 9475 3675
-Wire Wire Line
-	9475 3675 9050 3675
-Wire Wire Line
-	9050 3675 9050 4125
-Wire Wire Line
-	9050 4125 9325 4125
-Wire Wire Line
-	9450 3825 9450 3775
-Wire Wire Line
-	9450 3775 9075 3775
-Wire Wire Line
-	9075 3775 9075 4225
-Wire Wire Line
-	9075 4225 9325 4225
-Wire Wire Line
-	9475 3925 9475 3900
-Wire Wire Line
-	9475 3900 9100 3900
-Wire Wire Line
-	9100 3900 9100 4325
-Wire Wire Line
-	9100 4325 9325 4325
-Wire Wire Line
-	9025 4025 9025 4425
-Wire Wire Line
-	9025 4425 9325 4425
-Wire Wire Line
-	9375 4225 9375 4525
-Wire Wire Line
-	9375 4525 9325 4525
-Wire Wire Line
-	9475 4425 9475 4575
-Wire Wire Line
-	9325 4575 9325 4625
-Text GLabel 8975 4825 0    60   Input ~ 0
+Text GLabel 8850 5425 0    60   Input ~ 0
 GND
-Wire Wire Line
-	9325 4825 8975 4825
-Wire Wire Line
-	9325 4925 9425 4925
-Wire Wire Line
-	9425 4925 9425 5600
 Text GLabel 1975 2925 2    60   Input ~ 0
 PSensor2
 Text GLabel 1975 2825 2    60   Input ~ 0
@@ -1171,42 +1080,12 @@ PSensor2
 Text GLabel 10550 4150 2    60   Input ~ 0
 PSensor1
 Wire Wire Line
-	9475 4925 10225 4925
-Wire Wire Line
 	10225 4925 10225 4950
 Wire Wire Line
 	10550 4150 9950 4150
 Wire Wire Line
 	9950 4150 9950 4225
 Connection ~ 9850 4225
-$Comp
-L CYW20719B1KUMLG U4
-U 1 1 5BE8FF2C
-P 8850 3425
-F 0 "U4" H 8049 5153 50  0000 L BNN
-F 1 "CYW20719B1KUMLG" H 8049 1523 50  0000 L BNN
-F 2 "CYW20719B1KUMLG:QFN40P500X500X60-41N" H 8850 3425 50  0001 L BNN
-F 3 "UFQFN-40 Cypress Semiconductor" H 8850 3425 50  0001 L BNN
-F 4 "CYW20719B1KUMLG" H 8850 3425 50  0001 L BNN "Field4"
-F 5 "https://www.digikey.com/product-detail/en/cypress-semiconductor-corp/CYW20719B1KUMLG/428-4498-ND/8633287?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 8850 3425 50  0001 L BNN "Field5"
-F 6 "Cypress Semiconductor" H 8850 3425 50  0001 L BNN "Field6"
-F 7 "428-4498-ND" H 8850 3425 50  0001 L BNN "Field7"
-F 8 "Single-Chip Bluetooth Transceiver and Baseband Processor" H 8850 3425 50  0001 L BNN "Field8"
-	1    8850 3425
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9475 4925 9475 4775
-Wire Wire Line
-	9475 4775 9025 4775
-Wire Wire Line
-	9025 4775 9025 4500
-Wire Wire Line
-	9025 4500 8900 4500
-Wire Wire Line
-	8900 4500 8900 4025
-Wire Wire Line
-	8900 4025 9025 4025
 Connection ~ 9850 4925
 $Comp
 L Crystal_GND24 Y3
@@ -1214,7 +1093,7 @@ U 1 1 5C99C2D0
 P 7650 4975
 F 0 "Y3" H 7775 5175 50  0000 L CNN
 F 1 "Crystal_GND24" H 7775 5100 50  0000 L CNN
-F 2 "Crystals:Crystal_SMD_0603-4pin_6.0x3.5mm_HandSoldering" H 7650 4975 50  0001 C CNN
+F 2 "Crystals:Crystal_SMD_2016-4pin_2.0x1.6mm" H 7650 4975 50  0001 C CNN
 F 3 "" H 7650 4975 50  0001 C CNN
 	1    7650 4975
 	1    0    0    -1  
@@ -1241,20 +1120,114 @@ F 3 "" H 6850 4325 50  0001 C CNN
 	1    6850 4325
 	1    0    0    -1  
 $EndComp
+$Comp
+L SW_Push_Dual SW3
+U 1 1 5CAD92C9
+P 4975 3100
+F 0 "SW3" H 5025 3200 50  0000 L CNN
+F 1 "SW_Push_Dual" H 4975 2830 50  0000 C CNN
+F 2 "Buttons_Switches_THT:SW_PUSH_6mm" H 4975 3300 50  0001 C CNN
+F 3 "" H 4975 3300 50  0001 C CNN
+	1    4975 3100
+	0    -1   -1   0   
+$EndComp
 Wire Wire Line
-	9850 4725 9850 4650
+	5775 2850 5775 2650
 Wire Wire Line
-	9850 4650 9375 4650
+	5775 2650 5175 2650
 Wire Wire Line
-	9375 4650 9375 4575
+	5175 2650 5175 2900
+Connection ~ 5775 2850
 Wire Wire Line
-	9375 4575 9325 4575
+	5175 3300 5175 3675
 Wire Wire Line
-	9325 4725 9550 4725
+	5175 3675 5675 3675
 Wire Wire Line
-	9550 4725 9550 4800
+	5675 3675 5675 3375
 Wire Wire Line
-	9550 4800 9850 4800
+	5675 3375 5775 3375
 Wire Wire Line
-	9850 4800 9850 4825
+	5775 3375 5775 3350
+Connection ~ 5775 3350
+Wire Wire Line
+	5175 2900 4975 2900
+Wire Wire Line
+	4975 3300 5175 3300
+$Comp
+L CYW20719B1KUMLG U4
+U 1 1 5BE8FF2C
+P 8850 3425
+F 0 "U4" H 8049 5153 50  0000 L BNN
+F 1 "CYW20719B1KUMLG" H 8049 1523 50  0000 L BNN
+F 2 "CYW20719B1KUMLG:QFN40P500X500X60-41N" H 8850 3425 50  0001 L BNN
+F 3 "UFQFN-40 Cypress Semiconductor" H 8850 3425 50  0001 L BNN
+F 4 "CYW20719B1KUMLG" H 8850 3425 50  0001 L BNN "Field4"
+F 5 "https://www.digikey.com/product-detail/en/cypress-semiconductor-corp/CYW20719B1KUMLG/428-4498-ND/8633287?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 8850 3425 50  0001 L BNN "Field5"
+F 6 "Cypress Semiconductor" H 8850 3425 50  0001 L BNN "Field6"
+F 7 "428-4498-ND" H 8850 3425 50  0001 L BNN "Field7"
+F 8 "Single-Chip Bluetooth Transceiver and Baseband Processor" H 8850 3425 50  0001 L BNN "Field8"
+	1    8850 3425
+	1    0    0    -1  
+$EndComp
+$Comp
+L Conn_01x02_Male J6
+U 1 1 5CAE13FE
+P 10850 4575
+F 0 "J6" H 10850 4675 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 10850 4375 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 10850 4575 50  0001 C CNN
+F 3 "" H 10850 4575 50  0001 C CNN
+	1    10850 4575
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9850 4325 10650 4325
+Wire Wire Line
+	10650 4325 10650 4475
+Wire Wire Line
+	9850 4625 10650 4625
+Wire Wire Line
+	10650 4625 10650 4575
+$Comp
+L Conn_01x02_Male J5
+U 1 1 5CAE37EF
+P 10175 4825
+F 0 "J5" H 10175 4925 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 10175 4625 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 10175 4825 50  0001 C CNN
+F 3 "" H 10175 4825 50  0001 C CNN
+	1    10175 4825
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9975 4725 9850 4725
+Wire Wire Line
+	9850 4825 9975 4825
+Wire Wire Line
+	9850 4925 10225 4925
+Wire Wire Line
+	9925 4125 9850 4125
+Wire Wire Line
+	9950 4225 9850 4225
+Wire Wire Line
+	10400 4525 9850 4525
+Wire Wire Line
+	10100 3525 9850 3525
+Wire Wire Line
+	9850 3425 10125 3425
+$Comp
+L Conn_01x02_Male J4
+U 1 1 5CAE6E60
+P 9150 5525
+F 0 "J4" H 9150 5625 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 9150 5325 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 9150 5525 50  0001 C CNN
+F 3 "" H 9150 5525 50  0001 C CNN
+	1    9150 5525
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8950 5600 8950 5525
+Wire Wire Line
+	8850 5425 8950 5425
 $EndSCHEMATC
