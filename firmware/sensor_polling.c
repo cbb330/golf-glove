@@ -14,11 +14,11 @@ void init_i2c() {
     //sleep(1);
     lsm_begin(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_INTERNAL_ADDRESS_MAG);
     lsm_begin(LSM9DS1_ADDRESS_ACCELGYRO, LSM9DS1_ADDRESS_MAG);
-    ads_setup();
-    ads_configureADC(ADS1015_1_ADDRESS, 3);
-    ads_configureADC(ADS1015_2_ADDRESS, 3);
-    ads_configureADC(ADS1015_3_ADDRESS, 3);
-    ads_configureADC(ADS1015_4_ADDRESS, 3);
+    //ads_setup();
+    //ads_configureADC(ADS1015_1_ADDRESS, 3);
+    //ads_configureADC(ADS1015_2_ADDRESS, 3);
+    //ads_configureADC(ADS1015_3_ADDRESS, 3);
+    //ads_configureADC(ADS1015_4_ADDRESS, 3);
 }
 
 // Main Loop
@@ -43,16 +43,16 @@ void sensor_loop(uint32_t arg) {
 
 // Sensor polling logic
 sensor_frame get_sensor_frame() {
-    imu_frame imu1 = get_imu_frame_internal(); // Wrist
+    imu_frame imu1 = get_imu_frame_internal(); //get_imu_frame_internal(); // Wrist
     imu_frame imu2 = get_imu_frame(); // Hand
 
     uint32_t timestamp = 0;
     UINT16 pres1 =          wiced_hal_adc_read_raw_sample(PRES1_PIN);
     UINT16 pres2 =          wiced_hal_adc_read_raw_sample(PRES2_PIN);
-    UINT16 wrist1 =         ads_readADC_SingleEnded(ADS1015_1_ADDRESS);
-    UINT16 wrist2 =         ads_readADC_SingleEnded(ADS1015_2_ADDRESS);
-    UINT16 wrist3 =         ads_readADC_SingleEnded(ADS1015_3_ADDRESS);
-    UINT16 wrist4 =         ads_readADC_SingleEnded(ADS1015_4_ADDRESS);
+    UINT16 wrist1 =         wiced_hal_adc_read_raw_sample(WRIST1_PIN);
+    UINT16 wrist2 =         wiced_hal_adc_read_raw_sample(WRIST2_PIN);
+    UINT16 wrist3 =         wiced_hal_adc_read_raw_sample(WRIST3_PIN);
+    UINT16 wrist4 =         wiced_hal_adc_read_raw_sample(WRIST4_PIN);
     uint8_t sync = 0;
     uint8_t avail = 0;
 
