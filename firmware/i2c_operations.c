@@ -1,7 +1,7 @@
 #include "i2c_operations.h"
 
 void i2c_write8(UINT8 address, UINT8 reg, UINT8 value) {
-    //WICED_BT_TRACE("i2c_write8\r\n");
+    WICED_BT_TRACE("i2c_write8\r\n");
     UINT8 res;
     UINT8 data[2] = {reg, value};
     res = wiced_hal_i2c_write(data, 2, address);
