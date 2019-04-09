@@ -415,28 +415,6 @@ Text Notes 10875 1675 0    60   ~ 0
 10pf\n
 Text GLabel 7850 2925 2    60   Input ~ 0
 CBUCK_OUT
-$Comp
-L Conn_01x01 J13
-U 1 1 5C47519F
-P 10775 1975
-F 0 "J13" H 10775 2075 50  0000 C CNN
-F 1 "TP4" H 10775 1875 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x01_Pitch2.54mm" H 10775 1975 50  0001 C CNN
-F 3 "" H 10775 1975 50  0001 C CNN
-	1    10775 1975
-	1    0    0    -1  
-$EndComp
-$Comp
-L Conn_01x01 J12
-U 1 1 5C475EAA
-P 10075 2650
-F 0 "J12" H 10075 2750 50  0000 C CNN
-F 1 "HOST_WAKE" H 10075 2550 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x01_Pitch2.54mm" H 10075 2650 50  0001 C CNN
-F 3 "" H 10075 2650 50  0001 C CNN
-	1    10075 2650
-	1    0    0    -1  
-$EndComp
 Text Notes 10025 2000 0    60   ~ 0
 .1uf
 Text Notes 10300 2450 0    60   ~ 0
@@ -954,16 +932,6 @@ Wire Wire Line
 	10625 1875 10625 1850
 Wire Wire Line
 	7850 2925 7850 3025
-Wire Wire Line
-	9850 1925 10100 1925
-Wire Wire Line
-	10100 1925 10100 1975
-Wire Wire Line
-	10100 1975 10575 1975
-Wire Wire Line
-	9850 2725 9850 2650
-Wire Wire Line
-	9850 2650 9875 2650
 Wire Wire Line
 	9325 3425 10125 3425
 Wire Wire Line

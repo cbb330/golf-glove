@@ -1273,4 +1273,20 @@ F 3 "" H 6850 4325 50  0001 C CNN
 	1    6850 4325
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	9850 4725 9850 4650
+Wire Wire Line
+	9850 4650 9375 4650
+Wire Wire Line
+	9375 4650 9375 4575
+Wire Wire Line
+	9375 4575 9325 4575
+Wire Wire Line
+	9325 4725 9550 4725
+Wire Wire Line
+	9550 4725 9550 4800
+Wire Wire Line
+	9550 4800 9850 4800
+Wire Wire Line
+	9850 4800 9850 4825
 $EndSCHEMATC
