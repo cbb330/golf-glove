@@ -1263,8 +1263,6 @@ Text GLabel 1975 4400 0    60   Input ~ 0
 3.3v
 Text GLabel 2825 4400 2    60   Input ~ 0
 GND
-Text Notes 3100 4900 0    60   ~ 0
-POOP DICK BALLS\n
 $Comp
 L LED D2
 U 1 1 5CB3D009
