@@ -158,7 +158,7 @@ Wire Wire Line
 Wire Wire Line
 	4550 3450 4550 3350
 Wire Wire Line
-	5950 2550 6525 2550
+	5950 2550 6625 2550
 Connection ~ 6100 2550
 Wire Wire Line
 	6100 2850 6525 2850
@@ -192,7 +192,20 @@ Wire Wire Line
 	4550 2950 5950 2950
 Wire Wire Line
 	5950 2950 5950 2550
-Text HLabel 6525 2550 2    60   Input ~ 0
+Text HLabel 7075 2550 2    60   Input ~ 0
 BuckOut
 Connection ~ 6350 2550
+$Comp
+L Polyfuse F1
+U 1 1 5CAEC441
+P 6775 2550
+F 0 "F1" V 6675 2550 50  0000 C CNN
+F 1 "Polyfuse" V 6875 2550 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" H 6825 2350 50  0001 L CNN
+F 3 "" H 6775 2550 50  0001 C CNN
+	1    6775 2550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7075 2550 6925 2550
 $EndSCHEMATC

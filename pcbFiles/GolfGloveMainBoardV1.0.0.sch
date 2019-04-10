@@ -80,17 +80,11 @@ F 3 "" H 3375 2250 50  0001 C CNN
 	1    3225 2250
 	1    0    0    -1  
 $EndComp
-Text GLabel 3875 3150 2    60   Input ~ 0
-USBVCC
-Text GLabel 3900 1950 2    60   Input ~ 0
-SCLK-USB
-Text GLabel 3900 1850 2    60   Input ~ 0
-SDA-USB
 Text GLabel 3400 3875 2    60   Input ~ 0
 USBGND
-Text GLabel 2000 1925 2    60   Input ~ 0
+Text GLabel 2000 2525 2    60   Input ~ 0
 SCLK
-Text GLabel 2000 1825 2    60   Input ~ 0
+Text GLabel 1975 2225 2    60   Input ~ 0
 SDA
 Text GLabel 1950 825  2    60   Input ~ 0
 ChgVDD
@@ -109,12 +103,8 @@ Text GLabel 10125 5700 2    60   Input ~ 0
 BatteryOutBuck
 Text GLabel 10125 5500 2    60   Input ~ 0
 BatteryOutChg
-Text GLabel 1975 3125 2    60   Input ~ 0
+Text GLabel 2000 3425 2    60   Input ~ 0
 3.3v
-Text GLabel 1975 3225 2    60   Input ~ 0
-3.3v
-Text GLabel 3875 3250 2    60   Input ~ 0
-USBVCC
 $Comp
 L Crystal Y1
 U 1 1 5C44DDD3
@@ -204,10 +194,6 @@ GND
 Text GLabel 5900 7375 2    60   Input ~ 0
 PSensor2
 Text GLabel 5900 6900 2    60   Input ~ 0
-PSensor1
-Text GLabel 3900 2350 2    60   Input ~ 0
-PSensor2
-Text GLabel 3900 2250 2    60   Input ~ 0
 PSensor1
 Text GLabel 9925 4325 2    60   Input ~ 0
 SCLK
@@ -433,14 +419,6 @@ Text Notes 7825 4900 0    60   ~ 0
 24.000Mhz
 Text GLabel 7775 2825 0    60   Input ~ 0
 RST_N
-Text GLabel 1975 2525 2    60   Input ~ 0
-3.3v
-Text GLabel 1975 2625 2    60   Input ~ 0
-3.3v
-Text GLabel 3875 2550 2    60   Input ~ 0
-USBVCC
-Text GLabel 3875 2650 2    60   Input ~ 0
-USBVCC
 $Sheet
 S 1475 7300 775  350 
 U 5C4970FF
@@ -672,22 +650,6 @@ F 8 "None" H 6175 4525 50  0001 L BNN "Field8"
 $EndComp
 Text GLabel 6775 4100 0    60   Input ~ 0
 GND
-Text GLabel 3900 2950 2    60   Input ~ 0
-PSensor2
-Text GLabel 3900 2850 2    60   Input ~ 0
-PSensor1
-Wire Wire Line
-	3900 1850 3825 1850
-Wire Wire Line
-	3900 1850 3900 1750
-Wire Wire Line
-	3900 1750 3825 1750
-Wire Wire Line
-	3900 1950 3825 1950
-Wire Wire Line
-	3900 1950 3900 2050
-Wire Wire Line
-	3900 2050 3825 2050
 Wire Wire Line
 	2925 3875 3400 3875
 Wire Wire Line
@@ -704,20 +666,6 @@ Connection ~ 3125 3875
 Wire Wire Line
 	2925 3875 2925 3850
 Connection ~ 3025 3875
-Wire Wire Line
-	1925 1825 2000 1825
-Wire Wire Line
-	1925 1925 2000 1925
-Wire Wire Line
-	1950 1925 1950 2025
-Wire Wire Line
-	1950 2025 1925 2025
-Connection ~ 1950 1925
-Wire Wire Line
-	1950 1825 1950 1725
-Wire Wire Line
-	1950 1725 1925 1725
-Connection ~ 1950 1825
 Wire Wire Line
 	1950 825  1950 1225
 Wire Wire Line
@@ -754,13 +702,9 @@ Wire Wire Line
 Wire Wire Line
 	10050 5500 10125 5500
 Wire Wire Line
-	1975 3125 1925 3125
+	1925 3125 2000 3125
 Wire Wire Line
-	1925 3225 1975 3225
-Wire Wire Line
-	3825 3150 3875 3150
-Wire Wire Line
-	3875 3250 3825 3250
+	1925 3225 2000 3225
 Wire Wire Line
 	7450 2075 7375 2075
 Wire Wire Line
@@ -950,13 +894,9 @@ Wire Wire Line
 	9925 4125 9925 3875
 Connection ~ 9850 4125
 Wire Wire Line
-	1975 2525 1925 2525
+	1925 2525 2000 2525
 Wire Wire Line
-	1925 2625 1975 2625
-Wire Wire Line
-	3825 2550 3875 2550
-Wire Wire Line
-	3875 2650 3825 2650
+	1925 2625 2000 2625
 Wire Wire Line
 	1350 7375 1475 7375
 Wire Wire Line
@@ -1057,24 +997,12 @@ Wire Wire Line
 Connection ~ 6850 4525
 Wire Wire Line
 	6375 4525 6475 4525
-Wire Wire Line
-	3825 2250 3900 2250
-Wire Wire Line
-	3825 2350 3900 2350
-Wire Wire Line
-	3825 2850 3900 2850
-Wire Wire Line
-	3900 2950 3825 2950
 Text GLabel 8850 5425 0    60   Input ~ 0
 GND
-Text GLabel 1975 2925 2    60   Input ~ 0
-PSensor2
-Text GLabel 1975 2825 2    60   Input ~ 0
-PSensor1
 Wire Wire Line
-	1925 2825 1975 2825
+	1925 2825 2000 2825
 Wire Wire Line
-	1975 2925 1925 2925
+	1925 2925 2000 2925
 Text GLabel 10225 4950 2    60   Input ~ 0
 PSensor2
 Text GLabel 10550 4150 2    60   Input ~ 0
@@ -1230,4 +1158,104 @@ Wire Wire Line
 	8950 5600 8950 5525
 Wire Wire Line
 	8850 5425 8950 5425
+Text GLabel 2000 2625 2    60   Input ~ 0
+PSensor2
+Text GLabel 2000 2925 2    60   Input ~ 0
+PSensor1
+Text GLabel 2000 3525 2    60   Input ~ 0
+3.3v
+Text GLabel 2000 2825 2    60   Input ~ 0
+SDA
+Wire Wire Line
+	1975 2225 1925 2225
+Text GLabel 2000 3125 2    60   Input ~ 0
+SCLK
+Text GLabel 1975 2325 2    60   Input ~ 0
+PSensor1
+Text GLabel 2000 3225 2    60   Input ~ 0
+PSensor2
+Wire Wire Line
+	1975 2325 1925 2325
+Wire Wire Line
+	1925 1525 2075 1525
+Wire Wire Line
+	1925 1425 2075 1425
+Wire Wire Line
+	3900 2950 3825 2950
+Wire Wire Line
+	3825 2850 3900 2850
+Wire Wire Line
+	3825 2350 3900 2350
+Wire Wire Line
+	3825 2250 3900 2250
+Wire Wire Line
+	3875 2650 3825 2650
+Wire Wire Line
+	3825 2550 3875 2550
+Wire Wire Line
+	3875 3250 3825 3250
+Wire Wire Line
+	3825 3150 3875 3150
+Text GLabel 3900 2350 2    60   Input ~ 0
+PSensor1
+Text GLabel 3875 3250 2    60   Input ~ 0
+PSensor2
+Text GLabel 3900 2950 2    60   Input ~ 0
+PSensor1
+Text GLabel 3875 2650 2    60   Input ~ 0
+PSensor2
+Text GLabel 3900 3550 2    60   Input ~ 0
+USBVCC
+Text GLabel 3900 2850 2    60   Input ~ 0
+SDA-USB
+Text GLabel 3875 2550 2    60   Input ~ 0
+SCLK-USB
+Text GLabel 3900 3450 2    60   Input ~ 0
+USBVCC
+Text GLabel 3900 2250 2    60   Input ~ 0
+SDA-USB
+Text GLabel 3875 3150 2    60   Input ~ 0
+SCLK-USB
+Wire Wire Line
+	3825 3450 3900 3450
+Wire Wire Line
+	3900 3550 3825 3550
+Wire Wire Line
+	2000 3525 1925 3525
+Wire Wire Line
+	1925 3425 2000 3425
+$Comp
+L R R14
+U 1 1 5CB0636C
+P 2225 1425
+F 0 "R14" V 2305 1425 50  0000 C CNN
+F 1 "R" V 2225 1425 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" V 2155 1425 50  0001 C CNN
+F 3 "" H 2225 1425 50  0001 C CNN
+	1    2225 1425
+	0    1    1    0   
+$EndComp
+$Comp
+L R R16
+U 1 1 5CB06CF2
+P 2225 1525
+F 0 "R16" V 2305 1525 50  0000 C CNN
+F 1 "R" V 2225 1525 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" V 2155 1525 50  0001 C CNN
+F 3 "" H 2225 1525 50  0001 C CNN
+	1    2225 1525
+	0    1    1    0   
+$EndComp
+Text GLabel 2475 1475 2    60   Input ~ 0
+GND
+Wire Wire Line
+	2375 1425 2475 1425
+Wire Wire Line
+	2475 1425 2475 1525
+Wire Wire Line
+	2475 1525 2375 1525
+Text Notes 2150 1350 0    60   ~ 0
+56k
+Text Notes 2150 1725 0    60   ~ 0
+56k
 $EndSCHEMATC

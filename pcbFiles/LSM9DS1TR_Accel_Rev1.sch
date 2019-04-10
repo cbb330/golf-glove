@@ -141,46 +141,6 @@ F 3 "" H 6150 2725 50  0001 C CNN
 	1    6150 2725
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4600 2725 4675 2725
-Wire Wire Line
-	4675 2825 4600 2825
-Wire Wire Line
-	4250 2625 4625 2625
-Wire Wire Line
-	4625 2625 4625 2725
-Connection ~ 4625 2725
-Wire Wire Line
-	4625 2825 4625 2925
-Wire Wire Line
-	4625 2925 4250 2925
-Connection ~ 4625 2825
-Wire Wire Line
-	6075 2375 6075 2575
-Wire Wire Line
-	6200 2475 6075 2475
-Connection ~ 6075 2475
-Wire Wire Line
-	6075 2375 6375 2375
-Connection ~ 6075 2425
-Connection ~ 6150 2375
-Wire Wire Line
-	6075 2575 6150 2575
-Connection ~ 6075 2525
-Wire Wire Line
-	6150 2075 6525 2075
-Connection ~ 6375 2075
-Wire Wire Line
-	6150 2875 6525 2875
-Wire Wire Line
-	6475 3825 6475 4125
-Connection ~ 6475 3925
-Wire Wire Line
-	6475 4125 6075 4125
-Wire Wire Line
-	6075 3825 6175 3825
-Wire Wire Line
-	6175 3925 6075 3925
 Text HLabel 4050 1800 0    60   Input ~ 0
 3.3v_IN
 Text HLabel 4050 1900 0    60   Input ~ 0
@@ -189,19 +149,6 @@ Text HLabel 4050 2000 0    60   Input ~ 0
 SDA
 Text HLabel 4050 2100 0    60   Input ~ 0
 GND
-Wire Wire Line
-	4050 1800 4125 1800
-Wire Wire Line
-	4125 1900 4050 1900
-Wire Wire Line
-	4050 2000 4125 2000
-Wire Wire Line
-	4125 2100 4050 2100
-Connection ~ 4300 2775
-Wire Wire Line
-	4300 2775 4275 2775
-Wire Wire Line
-	4300 2725 4300 2825
 $Comp
 L R R6
 U 1 1 5C4A2742
@@ -250,4 +197,77 @@ Text Label 6525 2875 0    60   ~ 0
 GND
 Text Label 6475 4125 0    60   ~ 0
 GND
+Wire Wire Line
+	4600 2725 4675 2725
+Wire Wire Line
+	4675 2825 4600 2825
+Wire Wire Line
+	4250 2625 4625 2625
+Wire Wire Line
+	4625 2625 4625 2725
+Connection ~ 4625 2725
+Wire Wire Line
+	4625 2825 4625 2925
+Wire Wire Line
+	4625 2925 4250 2925
+Connection ~ 4625 2825
+Wire Wire Line
+	6075 2375 6075 2575
+Wire Wire Line
+	6200 2475 6075 2475
+Connection ~ 6075 2475
+Wire Wire Line
+	6075 2375 6375 2375
+Connection ~ 6075 2425
+Connection ~ 6150 2375
+Wire Wire Line
+	6075 2575 6150 2575
+Connection ~ 6075 2525
+Wire Wire Line
+	6150 2075 6525 2075
+Connection ~ 6375 2075
+Wire Wire Line
+	6150 2875 6525 2875
+Wire Wire Line
+	6475 3825 6475 4125
+Connection ~ 6475 3925
+Wire Wire Line
+	6475 4125 6075 4125
+Wire Wire Line
+	6075 3825 6175 3825
+Wire Wire Line
+	6175 3925 6075 3925
+Wire Wire Line
+	4050 1800 4125 1800
+Wire Wire Line
+	4125 1900 4050 1900
+Wire Wire Line
+	4050 2000 4125 2000
+Wire Wire Line
+	4125 2100 4050 2100
+Connection ~ 4300 2775
+Wire Wire Line
+	4300 2775 4275 2775
+Wire Wire Line
+	4300 2725 4300 2825
+Text Label 4150 3050 0    60   ~ 0
+3.3v
+Text Label 4175 3500 0    60   ~ 0
+3.3v
+Wire Wire Line
+	4675 3525 4175 3525
+Wire Wire Line
+	4175 3525 4175 3500
+Wire Wire Line
+	4675 3025 4150 3025
+Wire Wire Line
+	4150 3025 4150 3050
+Text Label 6375 3025 0    60   ~ 0
+GND
+Text Label 6375 3425 0    60   ~ 0
+GND
+Wire Wire Line
+	6075 3025 6375 3025
+Wire Wire Line
+	6375 3425 6075 3425
 $EndSCHEMATC

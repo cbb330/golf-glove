@@ -215,4 +215,22 @@ Text Label 6525 2875 0    60   ~ 0
 GND
 Text Label 6475 4125 0    60   ~ 0
 GND
+Text Label 4150 3025 0    60   ~ 0
+3.3v
+Text Label 4150 3500 0    60   ~ 0
+3.3v
+Wire Wire Line
+	4675 3025 4150 3025
+Wire Wire Line
+	4150 3500 4675 3500
+Wire Wire Line
+	4675 3500 4675 3525
+Text Label 6525 3025 0    60   ~ 0
+3.3v
+Text Label 6525 3425 0    60   ~ 0
+3.3v
+Wire Wire Line
+	6075 3025 6525 3025
+Wire Wire Line
+	6075 3425 6525 3425
 $EndSCHEMATC
