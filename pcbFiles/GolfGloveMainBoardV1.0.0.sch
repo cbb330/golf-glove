@@ -1258,4 +1258,39 @@ Text Notes 2150 1350 0    60   ~ 0
 56k
 Text Notes 2150 1725 0    60   ~ 0
 56k
+NoConn ~ 9850 1925
+Text GLabel 1975 4400 0    60   Input ~ 0
+3.3v
+Text GLabel 2825 4400 2    60   Input ~ 0
+GND
+Text Notes 3100 4900 0    60   ~ 0
+POOP DICK BALLS\n
+$Comp
+L LED D2
+U 1 1 5CB3D009
+P 2575 4400
+F 0 "D2" H 2575 4500 50  0000 C CNN
+F 1 "LED" H 2575 4300 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0603" H 2575 4400 50  0001 C CNN
+F 3 "" H 2575 4400 50  0001 C CNN
+	1    2575 4400
+	-1   0    0    1   
+$EndComp
+$Comp
+L R R17
+U 1 1 5CB3D164
+P 2200 4400
+F 0 "R17" V 2280 4400 50  0000 C CNN
+F 1 "R" V 2200 4400 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" V 2130 4400 50  0001 C CNN
+F 3 "" H 2200 4400 50  0001 C CNN
+	1    2200 4400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2825 4400 2725 4400
+Wire Wire Line
+	2425 4400 2350 4400
+Wire Wire Line
+	2050 4400 1975 4400
 $EndSCHEMATC
