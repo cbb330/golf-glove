@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { VictoryChart, VictoryAxis, VictoryLine, VictoryTheme, VictoryTooltip, VictoryVoronoiContainer } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryScatter, VictoryTheme, VictoryTooltip, VictoryVoronoiContainer } from 'victory';
 // import moment from 'moment'
 
 
@@ -107,26 +107,26 @@ class TestChart extends PureComponent {
           // tickFormat specifies how ticks should be displayed
           // tickFormat={(x) => (`$${x / 1000}k`)}
         />
-        <VictoryLine
+        <VictoryScatter
           data={this.state.data.x}
           x={'time'}
           y={'data'}
-          interpolation="basis"
-          style={{data: { stroke: "#92c050", strokeWidth: 2 }}}
+          // interpolation="basis"
+          style={{data: { fill: "#92c050", strokeWidth: 2 }}}
         />
-        <VictoryLine
+        <VictoryScatter
           data={this.state.data.y}
           x={'time'}
           y={'data'}
-          interpolation="basis"
-          style={{data: { stroke: "#00A090" }}}
+          // interpolation="basis"
+          style={{data: { fill: "#00A090" }}}
         />
-        <VictoryLine
+        <VictoryScatter
           data={this.state.data.z}
           x={'time'}
           y={'data'}
-          interpolation="basis"
-          style={{data: { stroke: "#7030a0" }}}
+          // interpolation="basis"
+          style={{data: { fill: "#7030a0" }}}
         />
       </VictoryChart>
       );

@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import ChartDashboard from './ChartDashboard.js';
 import Checkbox from './Checkbox.js';
 
+const FRAME_SIZE = 20;
+const BUFFER_SIZE = 120;
 
 class App extends Component {
   constructor(props) {
@@ -42,9 +44,8 @@ class App extends Component {
           message.data.time = new Date(message.data.timestamp);
           this.holdingData.push(message.data);
           // console.log(message.data.time);
-          const FRAME_SIZE = 40;
           if (this.holdingData.length >= FRAME_SIZE) {
-            this.data = [...this.data.slice(-120), ...this.holdingData];
+            this.data = [...this.data.slice(-(BUFFER_SIZE-FRAME_SIZE)), ...this.holdingData];
             this.holdingData = [];
             // console.log('found 10 frames');
             this.setState(message);
@@ -190,7 +191,7 @@ class App extends Component {
             <Checkbox name='pressure' checked={this.state.visibleGraphs.pressure} onChange={this.handleGraphDisplayChange} />
           </label>
           <div style={{height: 1000, width: '100%', display: 'flex'}}>
-            <ChartDashboard data={this.data} overlay={false} visibleGraphs={this.state.visibleGraphs} />
+            <ChartDashboard data={this.data} frame_size={FRAME_SIZE} buffer_size={BUFFER_SIZE} overlay={false} visibleGraphs={this.state.visibleGraphs} />
           </div>
         </div>
     );

@@ -31,6 +31,8 @@ class ChartDashboard extends Component {
         gyroY: [],
         gyroZ: []
       },
+      buffer_size: props.buffer_size,
+      frame_size: props.frame_size,
       overlay: props.overlay,
       visibleGraphs: props.visibleGraphs
     };
@@ -99,47 +101,47 @@ class ChartDashboard extends Component {
       gyroY: [],
       gyroZ: []
     };
-    const imu2 = {
-      accelX: [],
-      accelY: [],
-      accelZ: [],
-      gyroX: [],
-      gyroY: [],
-      gyroZ: []
-    };
+    // const imu2 = {
+    //   accelX: [],
+    //   accelY: [],
+    //   accelZ: [],
+    //   gyroX: [],
+    //   gyroY: [],
+    //   gyroZ: []
+    // };
     const deflection = [];
     const extension = [];
     const radialDeviation = [];
     const ulnarDeviation = [];
     const pressure1 = [];
     const pressure2 = [];
+    
 
-    const FRAME_SIZE = 40;
     // nextData.forEach(point => {
     //   this.xData.push({time: point.time, data: point.imu1.accelX, type: "x"});
     //   this.yData.push({time: point.time, data: point.imu1.accelY, type: "y"});
     //   this.zData.push({time: point.time, data: point.imu1.accelZ, type: "z"});
     // });
     // console.log('adding points');
-    for (let i = 0; i < FRAME_SIZE; i++) {
-      const d = nextData[nextData.length - (FRAME_SIZE - i)];
+    for (let i = 0; i < this.state.frame_size; i++) {
+      const d = nextData[nextData.length - (this.state.frame_size - i)];
       if (this.state.visibleGraphs.accel) {
         imu1.accelX.push({time: d.time, data: d.imu1.accelX, type: 'x'});
         imu1.accelY.push({time: d.time, data: d.imu1.accelY, type: 'y'});
         imu1.accelZ.push({time: d.time, data: d.imu1.accelZ, type: 'z'});
 
-        imu2.accelX.push({time: d.time, data: d.imu2.accelX, type: 'x'});
-        imu2.accelY.push({time: d.time, data: d.imu2.accelY, type: 'y'});
-        imu2.accelZ.push({time: d.time, data: d.imu2.accelZ, type: 'z'});
+        // imu2.accelX.push({time: d.time, data: d.imu2.accelX, type: 'x'});
+        // imu2.accelY.push({time: d.time, data: d.imu2.accelY, type: 'y'});
+        // imu2.accelZ.push({time: d.time, data: d.imu2.accelZ, type: 'z'});
       }
       if (this.state.visibleGraphs.gyro) {
         imu1.gyroX.push({time: d.time, data: d.imu1.gyroX, type: 'x'});
         imu1.gyroY.push({time: d.time, data: d.imu1.gyroY, type: 'y'});
         imu1.gyroZ.push({time: d.time, data: d.imu1.gyroZ, type: 'z'});
   
-        imu2.gyroX.push({time: d.time, data: d.imu2.gyroX, type: 'x'});
-        imu2.gyroY.push({time: d.time, data: d.imu2.gyroY, type: 'y'});
-        imu2.gyroZ.push({time: d.time, data: d.imu2.gyroZ, type: 'z'});
+        // imu2.gyroX.push({time: d.time, data: d.imu2.gyroX, type: 'x'});
+        // imu2.gyroY.push({time: d.time, data: d.imu2.gyroY, type: 'y'});
+        // imu2.gyroZ.push({time: d.time, data: d.imu2.gyroZ, type: 'z'});
       }
       if (this.state.visibleGraphs.stretch) {
         deflection.push({time: d.time, data: d.deflection, type: 'deflection'});
@@ -152,30 +154,30 @@ class ChartDashboard extends Component {
         pressure2.push({time: d.time, data: d.pressure2, type: 'index-side'});
       }
     }
-    const BUFFER_SIZE = 120;
+    const slice_size = this.state.buffer_size - this.state.frame_size;
     this.setState({
       imu1: {
-        accelX: [...this.state.imu1.accelX.slice(-BUFFER_SIZE), ...imu1.accelX],
-        accelY: [...this.state.imu1.accelY.slice(-BUFFER_SIZE), ...imu1.accelY],
-        accelZ: [...this.state.imu1.accelZ.slice(-BUFFER_SIZE), ...imu1.accelZ],
-        gyroX: [...this.state.imu1.gyroX.slice(-BUFFER_SIZE), ...imu1.gyroX],
-        gyroY: [...this.state.imu1.gyroY.slice(-BUFFER_SIZE), ...imu1.gyroY],
-        gyroZ: [...this.state.imu1.gyroZ.slice(-BUFFER_SIZE), ...imu1.gyroZ]
+        accelX: [...this.state.imu1.accelX.slice(-slice_size), ...imu1.accelX],
+        accelY: [...this.state.imu1.accelY.slice(-slice_size), ...imu1.accelY],
+        accelZ: [...this.state.imu1.accelZ.slice(-slice_size), ...imu1.accelZ],
+        gyroX: [...this.state.imu1.gyroX.slice(-slice_size), ...imu1.gyroX],
+        gyroY: [...this.state.imu1.gyroY.slice(-slice_size), ...imu1.gyroY],
+        gyroZ: [...this.state.imu1.gyroZ.slice(-slice_size), ...imu1.gyroZ]
       },
-      imu2: {
-        accelX: [...this.state.imu2.accelX.slice(-BUFFER_SIZE), ...imu2.accelX],
-        accelY: [...this.state.imu2.accelY.slice(-BUFFER_SIZE), ...imu2.accelY],
-        accelZ: [...this.state.imu2.accelZ.slice(-BUFFER_SIZE), ...imu2.accelZ],
-        gyroX: [...this.state.imu2.gyroX.slice(-BUFFER_SIZE), ...imu2.gyroX],
-        gyroY: [...this.state.imu2.gyroY.slice(-BUFFER_SIZE), ...imu2.gyroY],
-        gyroZ: [...this.state.imu2.gyroZ.slice(-BUFFER_SIZE), ...imu2.gyroZ]
-      },
-      deflection: [...this.state.deflection.slice(-BUFFER_SIZE), ...deflection],
-      extension: [...this.state.extension.slice(-BUFFER_SIZE), ...extension],
-      radialDeviation: [...this.state.radialDeviation.slice(-BUFFER_SIZE), ...radialDeviation],
-      ulnarDeviation: [...this.state.ulnarDeviation.slice(-BUFFER_SIZE), ...ulnarDeviation],
-      pressure1: [...this.state.pressure1.slice(-BUFFER_SIZE), ...pressure1],
-      pressure2: [...this.state.pressure2.slice(-BUFFER_SIZE), ...pressure2]
+      // imu2: {
+      //   accelX: [...this.state.imu2.accelX.slice(-slice_size), ...imu2.accelX],
+      //   accelY: [...this.state.imu2.accelY.slice(-slice_size), ...imu2.accelY],
+      //   accelZ: [...this.state.imu2.accelZ.slice(-slice_size), ...imu2.accelZ],
+      //   gyroX: [...this.state.imu2.gyroX.slice(-slice_size), ...imu2.gyroX],
+      //   gyroY: [...this.state.imu2.gyroY.slice(-slice_size), ...imu2.gyroY],
+      //   gyroZ: [...this.state.imu2.gyroZ.slice(-slice_size), ...imu2.gyroZ]
+      // },
+      deflection: [...this.state.deflection.slice(-slice_size), ...deflection],
+      extension: [...this.state.extension.slice(-slice_size), ...extension],
+      radialDeviation: [...this.state.radialDeviation.slice(-slice_size), ...radialDeviation],
+      ulnarDeviation: [...this.state.ulnarDeviation.slice(-slice_size), ...ulnarDeviation],
+      pressure1: [...this.state.pressure1.slice(-slice_size), ...pressure1],
+      pressure2: [...this.state.pressure2.slice(-slice_size), ...pressure2]
     });
   }
 
@@ -197,9 +199,9 @@ class ChartDashboard extends Component {
                 <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
                   <TestChart x={this.state.imu1.accelX} y={this.state.imu1.accelY} z={this.state.imu1.accelZ} />
                 </div>
-                <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
+                {/* <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
                   <TestChart x={this.state.imu2.accelX} y={this.state.imu2.accelY} z={this.state.imu2.accelZ} />
-                </div>
+                </div> */}
               </div> :
               null
             }
@@ -208,9 +210,9 @@ class ChartDashboard extends Component {
                 <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
                   <RotationChart x={this.state.imu1.gyroX} y={this.state.imu1.gyroY} z={this.state.imu1.gyroZ} />
                 </div>
-                <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
+                {/* <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
                   <RotationChart x={this.state.imu2.gyroX} y={this.state.imu2.gyroY} z={this.state.imu2.gyroZ} />
-                </div>
+                </div> */}
               </div> :
               null
             }
@@ -220,9 +222,9 @@ class ChartDashboard extends Component {
                 <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
                   <StretchChart deflection={this.state.deflection} extension={this.state.extension} isExtension />
                 </div>
-                <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
+                {/* <div style={{height: 200, width: 300, display: 'flex', flex: '0 0 45%'}}>
                   <StretchChart radialDeviation={this.state.radialDeviation} ulnarDeviation={this.state.ulnarDeviation} />
-                </div>
+                </div> */}
               </div> :
               null
             }

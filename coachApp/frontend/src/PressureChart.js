@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryAxis, VictoryLine, VictoryTheme, VictoryTooltip, VictoryVoronoiContainer } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryScatter, VictoryTheme, VictoryTooltip, VictoryVoronoiContainer } from 'victory';
 
 class PressureChart extends Component {
   constructor(props) {
@@ -79,14 +79,14 @@ class PressureChart extends Component {
           }}
           tickFormat={(x) => (`${x / 1000}k`)}
         />
-        <VictoryLine
+        <VictoryScatter
           data={this.state.data.pressure1}
           x={'time'}
           y={'data'}
           interpolation="basis"
           style={{data: { stroke: "#00A090", strokeWidth: 2 }}}
         />
-        <VictoryLine
+        <VictoryScatter
           data={this.state.data.pressure2}
           x={'time'}
           y={'data'}
