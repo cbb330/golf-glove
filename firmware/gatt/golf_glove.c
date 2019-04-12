@@ -351,7 +351,7 @@ wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn
                         //frame_buffer_pop_frame(&next_frame);
                         next_frame = get_sensor_frame();
                         memcpy(golf_glove_gatt_db_ext_attr_tbl[i].p_data, &next_frame, golf_glove_gatt_db_ext_attr_tbl[i].cur_len);
-                        print_sensor_frame(next_frame);
+                        //print_sensor_frame(next_frame);
                     } break;
                 case HDLD_GOLF_GLOVE_NEXT_FRAME_CLIENT_CONFIGURATION:
                     break;
