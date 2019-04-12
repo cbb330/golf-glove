@@ -9,6 +9,8 @@ const SENSORS_GRAVITY_EARTH          = 9.80665;
 const LSM9DS1_ACCEL_MG_LSB_2G        = 0.061;
 const LSM9DS1_MAG_MGAUSS_4GAUSS      = 0.14;
 const LSM9DS1_GYRO_DPS_DIGIT_2000DPS = 0.07000;
+let time_counter = 0;
+let start_time = Date.now();
 
 
 class Frame {
@@ -21,7 +23,9 @@ class Frame {
     if (!this.db) {
       console.error("Undefined db");
     }
-    this.timestamp = Date.now();
+    this.timestamp = start_time + time_counter;
+    // console.log(this.timestamp);
+    time_counter += 10;
 
     this.parseBuf(this.storeData);
 
