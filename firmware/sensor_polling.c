@@ -44,7 +44,7 @@ void sensor_loop(uint32_t arg) {
 // Sensor polling logic
 sensor_frame get_sensor_frame() {
     imu_frame imu1 = get_imu_frame(); //get_imu_frame_internal(); // Wrist
-    imu_frame imu2 = get_imu_frame(); // Hand
+    imu_frame imu2 = {0}; // Hand
 
     uint32_t timestamp = 0;
     UINT16 pres1 =          wiced_hal_adc_read_raw_sample(PRES1_PIN);
