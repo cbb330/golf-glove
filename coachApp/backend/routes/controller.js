@@ -4,7 +4,7 @@
  * Description: Controller class needed for Websocket/Noble asynch integration
  */
 
-const noble = require('noble');
+//const noble = require('noble');
 const Frame = require('../db/models/Frame.js');
 const GolfGloveDb = require('../db/db.js');
 
@@ -27,12 +27,14 @@ class Controller {
     this.ggDataEnable = {};
     this.db = new GolfGloveDb();
 
+    /*
     noble.on('stateChange', newState => {
       //console.log("this is the new state: " + newState);
       this.setNobleState(newState);
     });
+    */
 
-    noble.on('discover', peripheral => {
+    /*noble.on('discover', peripheral => {
       this.ggPeripheral = peripheral;
       if (!this.isEmpty(this.ggPeripheral)) {
         noble.stopScanning();
@@ -54,7 +56,7 @@ class Controller {
           }
         });
       }
-    });
+    });*/
   }
 
   setSocket(socket) {
@@ -117,12 +119,19 @@ class Controller {
   }
   
   getData() {
-    /*var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
+    /*
+    var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
         'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
     var frame = new Frame(testbuf, this.db);
     this.sendClient('data', frame);*/
+    setInterval(() => {
+      var testbuf = Buffer.from('010000000000ffffffffffffffffffffffffffffffffffffffffffff' +
+      'ffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'hex');
+      var frame = new Frame(testbuf, this.db);
+      this.sendClient('data', frame);
+    }, 10);
 
-    this.getService(ggServiceUuid);
+    //this.getService(ggServiceUuid);
   }
 
   stopData() {

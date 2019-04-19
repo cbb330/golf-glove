@@ -46,7 +46,8 @@ class Frame {
       //magX: this.parseIMU(22, "mag"),
       //magY: this.parseIMU(24, "mag"),
       //magZ: this.parseIMU(26, "mag"),
-      gyroX: this.parseIMU(28, "gyro"),
+      //gyroX: this.parseIMU(28, "gyro"),
+      gyroX: Math.random(),
       gyroY: this.parseIMU(30, "gyro"),
       gyroZ: this.parseIMU(32, "gyro")
     };
