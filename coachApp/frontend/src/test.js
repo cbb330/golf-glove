@@ -1,9 +1,10 @@
 const Denque = require('denque');
-const denque = new Denque([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
-var d3 = require("d3");
+const denque = new Denque([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+const Plotly = require('plotly.js-dist');
+const socket = new WebSocket("ws://localhost:8000");
+//var d3 = require("d3");
 
-
-var n = 40,
+/*var n = 40,
   random = d3.randomNormal(0, .2),
   data = d3.range(1).map(random),
   socket = new WebSocket("ws://localhost:8000");
@@ -74,113 +75,163 @@ g.append("g")
     //data.shift();
   
   }
+  */
 
-  function analyzeData() {
-    console.log(this.data);
+var data = [{
+  x: [0],
+  y: [0],
+  mode: 'lines',
+  line: {
+    color: '#80CAF6'
   }
+}];
 
-  function handleConnect() {
-    connectDevice();
-  }
+Plotly.plot('graph', data);
 
-  function handleDisconnect() {
-    disconnectDevice();
-  }
 
-  function handleStartAcceptingData() {
-    startDataReception();
-  }
 
-  function handleStopAcceptingData() {
-    stopDataReception();
-  }
+function startGraph() {
+  var cnt = 0;
+  var interval = setInterval(() => {
+    if (!(denque.isEmpty())) {
+      const newpoint = denque.shift();
+      const time = newpoint.time;
+      const val = newpoint.imu1.gyroX;
+      console.log(time);
+      var update = {
+        x: [
+          [time]
+        ],
+        y: [
+          [val]
+        ]
+      };
 
-  function handleClearData() {
-    data = [];
-  }
+      var olderTime = time.setSeconds(time.getSeconds() - 1);
+      var futureTime = time.setSeconds(time.getSeconds() + 1);
 
-  // todo: connect these functions to buttons
+      var minuteView = {
+        xaxis: {
+          type: 'date',
+          range: [olderTime, futureTime]
+        }
+      };
 
-  // handle data like: socket.onmessage = (event) => {
+      Plotly.relayout('graph', minuteView);
+      Plotly.extendTraces('graph', update, [0]);
 
-  function connectDevice() {
-    // construct connect message object
-    const message = {
-      type: "connect"
-    };
-    console.log('sending following connect message to backend:');
-    console.log(message);
-    // send message as a JSON-formatted string
-    socket.send(JSON.stringify(message));
-  }
-
-  function disconnectDevice() {
-    // construct disconnect message object
-    const message = {
-      type: "disconnect"
-    };
-    console.log('sending following disconnect message to backend:');
-    console.log(message);
-    // send message as a JSON-formatted string
-    socket.send(JSON.stringify(message));
-  }
-
-  function startDataReception() {
-    // construct start message object
-    const message = {
-      type: "start"
-    };
-    console.log('sending following start message to backend:');
-    console.log(message);
-    // send message as a JSON-formatted string
-    socket.send(JSON.stringify(message));
-  }
-
-  function stopDataReception() {
-    // construct stop message object
-    const message = {
-      type: "stop"
-    };
-    console.log('sending following stop message to backend:');
-    console.log(message);
-    // send message as a JSON-formatted string
-    socket.send(JSON.stringify(message));
-  }
-
-  document.getElementById("connect-button").addEventListener("click",handleConnect);
-  document.getElementById("disconnect-button").addEventListener("click",handleDisconnect);
-  document.getElementById("start-button").addEventListener("click",handleStartAcceptingData);
-  document.getElementById("stop-button").addEventListener("click",handleStopAcceptingData);
-  document.getElementById("analyze-button").addEventListener("click",analyzeData);
-  document.getElementById("clear-button").addEventListener("click",handleClearData);
-
-  socket.onmessage = (event) => {
-    // TODO: handle responses from server
-    // TODO: responses include data, errors with connection, and general updates
-    const message = JSON.parse(event.data);
-    // console.log(message);
-    // this.setState({message});
-    switch (message.type) {
-    case 'data':
-        // TODO: handle data (append to structure or whatever)
-        // console.log(message.data.timestamp);
-        // message.data.timestamp = new Date(message.data.timestamp);
-        message.data.time = new Date(message.data.timestamp);
-        denque.push(message.data.imu1.gyroX);
-        // console.log(message.data.time);
-        break;
-    case 'error':
-        // TODO: handle other error
-        console.log(message.data);
-        // TODO: fix sending stop message on backend, just update state
-        handleStopAcceptingData();
-        break;
-    case 'status':
-        // handle status updates
-        console.log(message.data);
-        break;
-    default:
-        console.log('Client received unknown message type', message.type, 'from the server');
-        console.log(message);
+      if (cnt === 100) clearInterval(interval);
     }
+  }, 10);
+}
+
+function analyzeData() {
+  console.log(this.data);
+}
+
+function handleConnect() {
+  connectDevice();
+}
+
+function handleDisconnect() {
+  disconnectDevice();
+}
+
+function handleStartAcceptingData() {
+  startGraph();
+  startDataReception();
+}
+
+function handleStopAcceptingData() {
+  stopDataReception();
+}
+
+function handleClearData() {
+  data = [];
+}
+
+// todo: connect these functions to buttons
+
+// handle data like: socket.onmessage = (event) => {
+
+function connectDevice() {
+  // construct connect message object
+  const message = {
+    type: "connect"
   };
+  console.log('sending following connect message to backend:');
+  console.log(message);
+  // send message as a JSON-formatted string
+  socket.send(JSON.stringify(message));
+}
+
+function disconnectDevice() {
+  // construct disconnect message object
+  const message = {
+    type: "disconnect"
+  };
+  console.log('sending following disconnect message to backend:');
+  console.log(message);
+  // send message as a JSON-formatted string
+  socket.send(JSON.stringify(message));
+}
+
+function startDataReception() {
+  // construct start message object
+  const message = {
+    type: "start"
+  };
+  console.log('sending following start message to backend:');
+  console.log(message);
+  // send message as a JSON-formatted string
+  socket.send(JSON.stringify(message));
+}
+
+function stopDataReception() {
+  // construct stop message object
+  const message = {
+    type: "stop"
+  };
+  console.log('sending following stop message to backend:');
+  console.log(message);
+  // send message as a JSON-formatted string
+  socket.send(JSON.stringify(message));
+}
+
+document.getElementById("connect-button").addEventListener("click", handleConnect);
+document.getElementById("disconnect-button").addEventListener("click", handleDisconnect);
+document.getElementById("start-button").addEventListener("click", handleStartAcceptingData);
+document.getElementById("stop-button").addEventListener("click", handleStopAcceptingData);
+document.getElementById("analyze-button").addEventListener("click", analyzeData);
+document.getElementById("clear-button").addEventListener("click", handleClearData);
+
+socket.onmessage = (event) => {
+  // TODO: handle responses from server
+  // TODO: responses include data, errors with connection, and general updates
+  const message = JSON.parse(event.data);
+  // console.log(message);
+  // this.setState({message});
+  switch (message.type) {
+    case 'data':
+      // TODO: handle data (append to structure or whatever)
+      // console.log(message.data.timestamp);
+      // message.data.timestamp = new Date(message.data.timestamp);
+      message.data.time = new Date(message.data.timestamp);
+      denque.push(message.data);
+      // console.log(message.data.time);
+      break;
+    case 'error':
+      // TODO: handle other error
+      console.log(message.data);
+      // TODO: fix sending stop message on backend, just update state
+      handleStopAcceptingData();
+      break;
+    case 'status':
+      // handle status updates
+      console.log(message.data);
+      break;
+    default:
+      console.log('Client received unknown message type', message.type, 'from the server');
+      console.log(message);
+  }
+};
