@@ -40,10 +40,10 @@ class Frame {
     this.extension = this.buf.readUInt16LE(10);
     this.radialDeviation = this.buf.readUInt16LE(12);
     this.ulnarDeviation = this.buf.readUInt16LE(14);
-    this.deflection = this.buf.readUInt16LE(8) - 8000;
+    this.deflection = this.buf.readUInt16LE(8);
     this.extension = this.buf.readUInt16LE(10);
-    this.radialDeviation = this.buf.readUInt16LE(12) - 8000;
-    this.ulnarDeviation = this.buf.readUInt16LE(14) - 15000;
+    this.radialDeviation = this.buf.readUInt16LE(12);
+    this.ulnarDeviation = this.buf.readUInt16LE(14);
     this.imu1 = {
       accelX: this.parseIMU(16, "accel"),
       accelY: this.parseIMU(18, "accel"),
@@ -69,7 +69,7 @@ class Frame {
     this.swingSync = this.buf.readUInt16LE(52);
     this.dataAvailable = this.buf.readUInt16LE(54);
     
-    this.swingSync ? this.db.storeFrame(this) : this.db.storeSwing(this);
+    //this.swingSync ? this.db.storeFrame(this) : this.db.storeSwing(this);
     this.db = undefined;
     this.buf = undefined;
     console.log(this);
