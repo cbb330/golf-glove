@@ -1,109 +1,95 @@
 const Denque = require('denque');
-const denque = new Denque([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+const denque = new Denque();
 const Plotly = require('plotly.js-dist');
 const socket = new WebSocket("ws://localhost:8000");
-//var d3 = require("d3");
 
-/*var n = 40,
-  random = d3.randomNormal(0, .2),
-  data = d3.range(1).map(random),
-  socket = new WebSocket("ws://localhost:8000");
+// inits array container for each XYZ graph
+function initXYZGraph(x_axis_num, y_axis_num, name) {
+  str_xaxis = (x_axis_num === undefined) ? "x" : "x" + x_axis_num.toString();
+  str_yaxis = (y_axis_num === undefined) ? "y" : "y" + y_axis_num.toString();
 
-var svg = d3.select("svg"),
-  margin = {top: 20, right: 20, bottom: 20, left: 40},
-  width = +svg.attr("width") - margin.left - margin.right,
-  height = +svg.attr("height") - margin.top - margin.bottom,
-  g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var x = {
+    x: [0],
+    y: [0],
+    name: name + 'x',
+    xaxis: str_xaxis,
+    yaxis: str_yaxis,
+    mode: 'line'
+  };
 
-var x = d3.scaleLinear()
-  .domain([0, n - 1])
-  .range([0, width]);
+  var y = {
+    x: [0],
+    y: [0],
+    xaxis: str_xaxis,
+    yaxis: str_yaxis,
+    name: name + 'y',
+    mode: 'line'
+  };
 
-var y = d3.scaleLinear()
-  .domain([-1, 1])
-  .range([height, 0]);
+  var z = {
+    x: [0],
+    y: [0],
+    xaxis: str_xaxis,
+    yaxis: str_yaxis,
+    name: name + 'z',
+    mode: 'line'
+  };
 
-var line = d3.line()
-  .x(function(d, i) { return x(i); })
-  .y(function(d, i) { return y(d); });
+  return [x, y, z];
+}
 
-g.append("defs").append("clipPath")
-  .attr("id", "clip")
-  .append("rect")
-  .attr("width", width)
-  .attr("height", height);
+// inits graph for single source graphs
+function initGraph(x_axis_num, y_axis_num, name) {
+  str_xaxis = (x_axis_num === undefined) ? "x" : "x" + x_axis_num.toString();
+  str_yaxis = (y_axis_num === undefined) ? "y" : "y" + y_axis_num.toString();
 
-g.append("g")
-  .attr("class", "axis axis--x")
-  .attr("transform", "translate(0," + y(0) + ")")
-  .call(d3.axisBottom(x));
+  var trace = {
+    x: [0],
+    y: [0],
+    name: name,
+    xaxis: str_xaxis,
+    yaxis: str_yaxis,
+    mode: 'line'
+  };
 
-g.append("g")
-  .attr("class", "axis axis--y")
-  .call(d3.axisLeft(y));
+  return [trace];
+}
 
-g.append("g")
-  .attr("clip-path", "url(#clip)")
-  .append("path")
-  .datum(data)
-  .attr("class", "line")
-  .transition()
-  .duration(500)
-  .ease(d3.easeLinear)
-  .on("start", tick);
-
-  function tick() {
-
-    // Push a new data point onto the back.
-    for (let i = 0; i < 40; i++) {
-      data[i] = denque.shift();
-    }
-  
-    // Redraw the line.
-    d3.select(this)
-        .attr("d", line)
-        .attr("transform", null);
-  
-    // Slide it to the left.
-    d3.active(this)
-        .attr("transform", "translate(" + x(-1) + ",0)")
-      .transition()
-        .duration(1000)
-        .on("start", tick);
-  
-    // Pop the old data point off the front.
-    //data.shift();
-  
-  }
-  */
-
-var data = [{
-  x: [0],
-  y: [0],
-  mode: 'lines',
-  line: {
-    color: '#80CAF6'
-  }
-}];
-
-Plotly.plot('graph', data);
-
-
-
+// main loop for updating and filling in graph
 function startGraph() {
+
   var cnt = 0;
   var interval = setInterval(() => {
     if (!(denque.isEmpty())) {
       const newpoint = denque.shift();
       const time = newpoint.time;
-      const val = newpoint.imu1.gyroX;
-      console.log(time);
-      var update = {
+      const accel1X = newpoint.imu1.accelX;
+      const accel1Y = newpoint.imu1.accelY;
+      const accel1Z = newpoint.imu1.accelZ;
+      const accel2X = newpoint.imu2.accelX;
+      const accel2Y = newpoint.imu2.accelY;
+      const accel2Z = newpoint.imu2.accelZ;
+      const gyro1X = newpoint.imu1.gyroX;
+      const gyro1Y = newpoint.imu1.gyroY;
+      const gyro1Z = newpoint.imu1.gyroZ;
+      const gyro2X = newpoint.imu2.gyroX;
+      const gyro2Y = newpoint.imu2.gyroY;
+      const gyro2Z = newpoint.imu2.gyroZ;
+      const pressure1 = newpoint.pressure1;
+      const pressure2 = newpoint.pressure2;
+      const deflection = newpoint.deflection;
+      const extension = newpoint.extension;
+      const radialDeviation = newpoint.radialDeviation;
+      const ulnarDeviation = newpoint.ulnarDeviation;
+
+      var updatePlot = {
         x: [
-          [time]
+          [time], [time], [time], [time], [time], [time], [time], [time], [time], [time], [time], [time], [time], [time], [time], [time], [time], [time]
         ],
         y: [
-          [val]
+          [accel1X], [accel1Y], [accel1Z], [accel2X], [accel2Y], [accel2Z], [gyro1X], 
+          [gyro1Y], [gyro1Z], [gyro2X], [gyro2Y], [gyro2Z], [pressure1], [pressure2], [deflection], [extension], [radialDeviation],
+          [ulnarDeviation]
         ]
       };
 
@@ -114,16 +100,56 @@ function startGraph() {
         xaxis: {
           type: 'date',
           range: [olderTime, futureTime]
+        },
+        xaxis2: {
+          type: 'date',
+          range: [olderTime, futureTime]
         }
       };
 
       Plotly.relayout('graph', minuteView);
-      Plotly.extendTraces('graph', update, [0]);
-
+      Plotly.extendTraces('graph', updatePlot, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
+      t
       if (cnt === 100) clearInterval(interval);
     }
   }, 10);
 }
+
+
+var graph_array = []; 
+graph_array = graph_array.concat(initXYZGraph(1,1, 'accel1')); // x,y starting from bottom and left to right
+graph_array = graph_array.concat(initXYZGraph(2,1, 'accel2'));
+graph_array = graph_array.concat(initXYZGraph(1,2, 'gyro1'));
+graph_array = graph_array.concat(initXYZGraph(2,2, 'gyro2'));
+
+graph_array = graph_array.concat(initGraph(1,3, 'pressure1'));
+graph_array = graph_array.concat(initGraph(2,3, 'pressure2'));
+graph_array = graph_array.concat(initGraph(1,4, 'deflection'));
+graph_array = graph_array.concat(initGraph(2,4, 'extension'));
+graph_array = graph_array.concat(initGraph(1,5, 'radialDeviation'));
+graph_array = graph_array.concat(initGraph(2,5, 'ulnarDeviation'));
+
+var layout = {
+  autosize: false,
+  width: 1800,
+  height: 1000,
+  grid: {
+    rows: 5,
+    columns: 2,
+    roworder:'bottom to top'
+  }
+};
+
+
+Plotly.plot('graph', graph_array, layout);
+
+document.getElementById("connect-button").addEventListener("click", handleConnect);
+document.getElementById("disconnect-button").addEventListener("click", handleDisconnect);
+document.getElementById("start-button").addEventListener("click", handleStartAcceptingData);
+document.getElementById("stop-button").addEventListener("click", handleStopAcceptingData);
+document.getElementById("analyze-button").addEventListener("click", analyzeData);
+document.getElementById("clear-button").addEventListener("click", handleClearData);
+
 
 function analyzeData() {
   console.log(this.data);
@@ -147,7 +173,7 @@ function handleStopAcceptingData() {
 }
 
 function handleClearData() {
-  data = [];
+  denque.clear();
 }
 
 // todo: connect these functions to buttons
@@ -194,16 +220,11 @@ function stopDataReception() {
   };
   console.log('sending following stop message to backend:');
   console.log(message);
+  //clear queue
+  denque.clear();
   // send message as a JSON-formatted string
   socket.send(JSON.stringify(message));
 }
-
-document.getElementById("connect-button").addEventListener("click", handleConnect);
-document.getElementById("disconnect-button").addEventListener("click", handleDisconnect);
-document.getElementById("start-button").addEventListener("click", handleStartAcceptingData);
-document.getElementById("stop-button").addEventListener("click", handleStopAcceptingData);
-document.getElementById("analyze-button").addEventListener("click", analyzeData);
-document.getElementById("clear-button").addEventListener("click", handleClearData);
 
 socket.onmessage = (event) => {
   // TODO: handle responses from server
