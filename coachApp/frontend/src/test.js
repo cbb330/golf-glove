@@ -109,7 +109,6 @@ function startGraph() {
 
       Plotly.relayout('graph', minuteView);
       Plotly.extendTraces('graph', updatePlot, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
-      t
       if (cnt === 100) clearInterval(interval);
     }
   }, 10);
@@ -239,6 +238,9 @@ socket.onmessage = (event) => {
       // message.data.timestamp = new Date(message.data.timestamp);
       message.data.time = new Date(message.data.timestamp);
       denque.push(message.data);
+      if (denque.length > 120) {
+        denque.shift();
+      }
       // console.log(message.data.time);
       break;
     case 'error':
