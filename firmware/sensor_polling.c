@@ -12,7 +12,7 @@ void init_i2c() {
     wiced_hal_i2c_init();
     wiced_hal_i2c_set_speed(I2CM_SPEED_400KHZ);
     //sleep(1);
-    //lsm_begin(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_INTERNAL_ADDRESS_MAG);
+    lsm_begin(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_INTERNAL_ADDRESS_MAG);
     lsm_begin(LSM9DS1_ADDRESS_ACCELGYRO, LSM9DS1_ADDRESS_MAG);
     //ads_setup();
     //ads_configureADC(ADS1015_1_ADDRESS, 3);
@@ -43,8 +43,8 @@ void sensor_loop(uint32_t arg) {
 
 // Sensor polling logic
 sensor_frame get_sensor_frame() {
-    imu_frame imu1 = get_imu_frame(); //get_imu_frame_internal(); // Wrist
-    imu_frame imu2 = {0}; // Hand
+    imu_frame imu1 = get_imu_frame_internal(); //get_imu_frame_internal(); // Wrist
+    imu_frame imu2 = get_imu_frame(); // Hand
 
     uint32_t timestamp = 0;
     UINT16 pres1 =          wiced_hal_adc_read_raw_sample(PRES1_PIN);
