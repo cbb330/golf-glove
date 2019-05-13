@@ -75,9 +75,6 @@ void print_sensor_frame(sensor_frame rec) {
     WICED_BT_TRACE("    accX  %u\r\n", rec.imu1.accX);
     WICED_BT_TRACE("    accY  %u\r\n", rec.imu1.accY);
     WICED_BT_TRACE("    accZ  %u\r\n", rec.imu1.accZ);
-    WICED_BT_TRACE("    magX  %u\r\n", rec.imu1.magX);
-    WICED_BT_TRACE("    magY  %u\r\n", rec.imu1.magY);
-    WICED_BT_TRACE("    magZ  %u\r\n", rec.imu1.magZ);
     WICED_BT_TRACE("    gyroX %u\r\n", rec.imu1.gyroX);
     WICED_BT_TRACE("    gyroY %u\r\n", rec.imu1.gyroY);
     WICED_BT_TRACE("    gyroZ %u\r\n", rec.imu1.gyroZ);
@@ -85,9 +82,6 @@ void print_sensor_frame(sensor_frame rec) {
     WICED_BT_TRACE("    accX  %u\r\n", rec.imu2.accX);
     WICED_BT_TRACE("    accY  %u\r\n", rec.imu2.accY);
     WICED_BT_TRACE("    accZ  %u\r\n", rec.imu2.accZ);
-    WICED_BT_TRACE("    magX  %u\r\n", rec.imu2.magX);
-    WICED_BT_TRACE("    magY  %u\r\n", rec.imu2.magY);
-    WICED_BT_TRACE("    magZ  %u\r\n", rec.imu2.magZ);
     WICED_BT_TRACE("    gyroX %u\r\n", rec.imu2.gyroX);
     WICED_BT_TRACE("    gyroY %u\r\n", rec.imu2.gyroY);
     WICED_BT_TRACE("    gyroZ %u\r\n", rec.imu2.gyroZ);
@@ -96,8 +90,8 @@ void print_sensor_frame(sensor_frame rec) {
     */
 
    WICED_BT_TRACE("{ %x %x %x %x %x %x }\r\n", rec.pres1, rec.pres2, rec.wrist1, rec.wrist2, rec.wrist3, rec.wrist4);
-   WICED_BT_TRACE("{ %x %x %x %x %x %x %x %x %x }\r\n", rec.imu1.accX, rec.imu1.accY, rec.imu1.accZ, rec.imu1.magX, rec.imu1.magY, rec.imu1.magZ, rec.imu1.gyroX, rec.imu1.gyroY, rec.imu1.gyroZ);
-   WICED_BT_TRACE("{ %x %x %x %x %x %x %x %x %x }\r\n\r\n", rec.imu2.accX, rec.imu2.accY, rec.imu2.accZ, rec.imu2.magX, rec.imu2.magY, rec.imu2.magZ, rec.imu2.gyroX, rec.imu2.gyroY, rec.imu2.gyroZ);
+   WICED_BT_TRACE("{ %x %x %x %x %x %x }\r\n", rec.imu1.accX, rec.imu1.accY, rec.imu1.accZ, rec.imu1.gyroX, rec.imu1.gyroY, rec.imu1.gyroZ);
+   WICED_BT_TRACE("{ %x %x %x %x %x %x }\r\n\r\n", rec.imu2.accX, rec.imu2.accY, rec.imu2.accZ, rec.imu2.gyroX, rec.imu2.gyroY, rec.imu2.gyroZ);
 
 }
 
@@ -107,14 +101,11 @@ imu_frame get_imu_frame() {
     UINT16 accX = accelData.x;
     UINT16 accY = accelData.y;
     UINT16 accZ = accelData.z;
-    UINT16 magX = magData.x;
-    UINT16 magY = magData.y;
-    UINT16 magZ = magData.z;
     UINT16 gyroX = gyroData.x;
     UINT16 gyroY = gyroData.y;
     UINT16 gyroZ = gyroData.z;
 
-    imu_frame rec = { accX, accY, accZ, magX, magY, magZ, gyroX, gyroY, gyroZ }; //null data
+    imu_frame rec = { accX, accY, accZ, gyroX, gyroY, gyroZ }; //null data
 
     return rec;
 }
@@ -126,14 +117,11 @@ imu_frame get_imu_frame_internal() {
     UINT16 accX = accelData.x;
     UINT16 accY = accelData.y;
     UINT16 accZ = accelData.z;
-    UINT16 magX = magData.x;
-    UINT16 magY = magData.y;
-    UINT16 magZ = magData.z;
     UINT16 gyroX = gyroData.x;
     UINT16 gyroY = gyroData.y;
     UINT16 gyroZ = gyroData.z;
 
-    imu_frame rec = { accX, accY, accZ, magX, magY, magZ, gyroX, gyroY, gyroZ }; //null data
+    imu_frame rec = { accX, accY, accZ, gyroX, gyroY, gyroZ }; //null data
 
     return rec;
 }
