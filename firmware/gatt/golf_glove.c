@@ -116,7 +116,7 @@ gatt_db_lookup_table golf_glove_gatt_db_ext_attr_tbl[] =
     /* { attribute handle,                                maxlen, curlen, attribute data } */
     {HDLC_GENERIC_ACCESS_DEVICE_NAME_VALUE,               10,     10,     golf_glove_generic_access_device_name},
     {HDLC_GENERIC_ACCESS_APPEARANCE_VALUE,                2,      2,      golf_glove_generic_access_appearance},
-    {HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE,                    56,     56,     golf_glove_golf_glove_next_frame},
+    {HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE,                    44,     44,     golf_glove_golf_glove_next_frame},
     {HDLD_GOLF_GLOVE_NEXT_FRAME_CLIENT_CONFIGURATION,     2,      2,      golf_glove_golf_glove_next_frame_client_configuration},
     {HDLC_GOLF_GLOVE_REALTIME_ENABLED_VALUE,              1,      1,      golf_glove_golf_glove_realtime_enabled},
     {HDLC_GOLF_GLOVE_DATA_AVAILABLE_VALUE,                1,      1,      golf_glove_golf_glove_data_available},

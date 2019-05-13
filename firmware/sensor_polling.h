@@ -30,14 +30,11 @@
 
 int real_time = 0;
 
-// 9-way IMU sensor data
+// 6-way IMU sensor data
 typedef struct {
     UINT16 accX;
     UINT16 accY;
     UINT16 accZ;
-    UINT16 magX;
-    UINT16 magY;
-    UINT16 magZ;
     UINT16 gyroX;
     UINT16 gyroY;
     UINT16 gyroZ;
