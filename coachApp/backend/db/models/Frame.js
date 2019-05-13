@@ -7,13 +7,12 @@
 /* constants from LSM initialization */
 const SENSORS_GRAVITY_EARTH          = 9.80665;
 const LSM9DS1_ACCEL_MG_LSB_2G        = 0.061;
-const LSM9DS1_MAG_MGAUSS_4GAUSS      = 0.14;
 const LSM9DS1_GYRO_DPS_DIGIT_2000DPS = 0.07000;
 
 
 class Frame {
   constructor(buf, db) {
-    if (buf.length != 56) {
+    if (buf.length != 44) {
       throw "Bad Frame! Length is: " + buf.length;
     }
     this.buf = buf; // buffer object
@@ -43,26 +42,20 @@ class Frame {
       accelX: this.parseIMU(16, "accel"),
       accelY: this.parseIMU(18, "accel"),
       accelZ: this.parseIMU(20, "accel"),
-      //magX: this.parseIMU(22, "mag"),
-      //magY: this.parseIMU(24, "mag"),
-      //magZ: this.parseIMU(26, "mag"),
-      gyroX: this.parseIMU(28, "gyro"),
-      gyroY: this.parseIMU(30, "gyro"),
-      gyroZ: this.parseIMU(32, "gyro")
+      gyroX: this.parseIMU(22, "gyro"),
+      gyroY: this.parseIMU(24, "gyro"),
+      gyroZ: this.parseIMU(26, "gyro")
     };
     this.imu2 = {
-      accelX: this.parseIMU(34, "accel"),
-      accelY: this.parseIMU(36, "accel"),
-      accelZ: this.parseIMU(38, "accel"),
-      //magX: this.parseIMU(40, "mag"),
-      //magY: this.parseIMU(42, "mag"),
-      //magZ: this.parseIMU(44, "mag"),
-      gyroX: this.parseIMU(46, "gyro"),
-      gyroY: this.parseIMU(48, "gyro"),
-      gyroZ: this.parseIMU(50, "gyro")
+      accelX: this.parseIMU(28, "accel"),
+      accelY: this.parseIMU(30, "accel"),
+      accelZ: this.parseIMU(32, "accel"),
+      gyroX: this.parseIMU(34, "gyro"),
+      gyroY: this.parseIMU(36, "gyro"),
+      gyroZ: this.parseIMU(38, "gyro")
     };
-    this.swingSync = this.buf.readUInt16LE(52);
-    this.dataAvailable = this.buf.readUInt16LE(54);
+    this.swingSync = this.buf.readUInt16LE(40);
+    this.dataAvailable = this.buf.readUInt16LE(42);
     
     this.swingSync ? this.db.storeFrame(this) : this.db.storeSwing(this);
     this.db = undefined;
@@ -78,10 +71,6 @@ class Frame {
         float /= 1000;
         float *= SENSORS_GRAVITY_EARTH;
         float = +float.toFixed(3);
-        break;
-      case "mag":
-        float *= LSM9DS1_MAG_MGAUSS_4GAUSS;
-        float /= 1000;
         break;
       case "gyro":
         float *= LSM9DS1_GYRO_DPS_DIGIT_2000DPS;
