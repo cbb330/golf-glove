@@ -8,6 +8,7 @@
 #include "wiced_rtos.h"
 #include "wiced_bt_gatt.h"
 #include "wiced_timer.h"
+#include "rtc.h"
 #include "buffer/frame_buffer.h"
 #include "gatt/golf_glove.h"
 #include "sensor_polling.h"
@@ -48,6 +49,11 @@ void application_start(void) {
     sensor_loop_handle = wiced_rtos_create_thread();
     wiced_rtos_init_thread(sensor_loop_handle, THREAD_PRIORITY_MAX, "sensor_loop", sensor_loop, 512, NULL);
     */
+
+    // configure and initialize real time clock
+    rtcConfig.oscillatorFrequencykHz = RTC_REF_CLOCK_SRC_32KHZ;
+    rtc_init();
+
     wiced_rtos_delay_milliseconds(3000, KEEP_THREAD_ACTIVE);
 
     thread = wiced_rtos_create_thread();

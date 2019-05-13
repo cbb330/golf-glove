@@ -43,23 +43,32 @@ void sensor_loop(uint32_t arg) {
 
 // Sensor polling logic
 sensor_frame get_sensor_frame() {
-    imu_frame imu1 = get_imu_frame_internal(); //get_imu_frame_internal(); // Wrist
+    imu_frame imu1 = get_imu_frame_internal(); // Wrist
     imu_frame imu2 = get_imu_frame(); // Hand
 
-    uint32_t timestamp = 0;
-    UINT16 pres1 =          wiced_hal_adc_read_raw_sample(PRES1_PIN);
-    UINT16 pres2 =          wiced_hal_adc_read_raw_sample(PRES2_PIN);
-    UINT16 wrist1 =         wiced_hal_adc_read_raw_sample(WRIST1_PIN);
-    UINT16 wrist2 =         wiced_hal_adc_read_raw_sample(WRIST2_PIN);
-    UINT16 wrist3 =         wiced_hal_adc_read_raw_sample(WRIST3_PIN);
-    UINT16 wrist4 =         wiced_hal_adc_read_raw_sample(WRIST4_PIN);
+    // get the raw real time clock counter and then convert to milliseconds
+    // the magic number 15 comes from the 32.768 kHz crystal:
+    // 2^15 = 32768 so shift to remove that multiplier from the counter
+    tRTC_REAL_TIME_CLOCK rtc;
+    rtc_getRTCRawClock(&rtc);
+    UINT32 t = rtc.rtc64 * 1000 >> 15;
+
+    // read ADCs for pressure and flex sensor values
+    UINT16 pres1 = wiced_hal_adc_read_raw_sample(PRES1_PIN);
+    UINT16 pres2 = wiced_hal_adc_read_raw_sample(PRES2_PIN);
+    UINT16 wrist1 = wiced_hal_adc_read_raw_sample(WRIST1_PIN);
+    UINT16 wrist2 = wiced_hal_adc_read_raw_sample(WRIST2_PIN);
+    UINT16 wrist3 = wiced_hal_adc_read_raw_sample(WRIST3_PIN);
+    UINT16 wrist4 = wiced_hal_adc_read_raw_sample(WRIST4_PIN);
+
+    // TODO: replace these dummy values once swing detection is implemented
     uint8_t sync = 0;
     uint8_t avail = 0;
 
-    sensor_frame rec = { timestamp, pres1, pres2, wrist1, wrist2, wrist3,
-            wrist4, imu1, imu2, sync, avail };
+    sensor_frame rec = { t, pres1, pres2, wrist1, wrist2, wrist3, wrist4, imu1, imu2, sync, avail };
 
     return rec;
+
 }
 
 void print_sensor_frame(sensor_frame rec) {
