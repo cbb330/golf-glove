@@ -9,6 +9,8 @@ const SENSORS_GRAVITY_EARTH          = 9.80665;
 const LSM9DS1_ACCEL_MG_LSB_2G        = 0.061;
 const LSM9DS1_GYRO_DPS_DIGIT_2000DPS = 0.07000;
 
+const start_time = Date.now();
+
 
 class Frame {
   constructor(buf, db) {
@@ -20,14 +22,13 @@ class Frame {
     if (!this.db) {
       console.error("Undefined db");
     }
-    this.timestamp = Date.now();
 
     this.parseBuf(this.storeData);
-
   }
 
   parseBuf(cb) {
     /* Parse the bytearray buffer into variables */
+    this.timestamp = start_time + this.buf.readUInt32LE(0);
     this.pressure1 = this.buf.readUInt16LE(4);
     this.pressure2 = this.buf.readUInt16LE(6);
     this.deflection = this.buf.readUInt16LE(8);
