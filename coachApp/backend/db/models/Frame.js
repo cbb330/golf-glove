@@ -7,6 +7,9 @@
 /* constants from LSM initialization */
 const SENSORS_GRAVITY_EARTH          = 9.80665;
 const LSM9DS1_ACCEL_MG_LSB_2G        = 0.061;
+const LSM9DS1_ACCEL_MG_LSB_4G        = 0.122;
+const LSM9DS1_ACCEL_MG_LSB_8G        = 0.244;
+const LSM9DS1_ACCEL_MG_LSB_16G       = 0.732;
 const LSM9DS1_GYRO_DPS_DIGIT_2000DPS = 0.07000;
 
 const start_time = Date.now();
