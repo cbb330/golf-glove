@@ -71,7 +71,7 @@ class Frame {
     var float = this.buf.readInt16LE(offset);
     switch (constant) {
       case "accel":
-        float *= LSM9DS1_ACCEL_MG_LSB_2G;
+        float *= LSM9DS1_ACCEL_MG_LSB_8G;
         float /= 1000;
         float *= SENSORS_GRAVITY_EARTH;
         float = +float.toFixed(3);

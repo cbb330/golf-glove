@@ -56,7 +56,7 @@ int lsm_begin(UINT8 address_accelgyro, UINT8 address_mag)
     //i2c_write8(LSM9DS1_INTERNAL_ADDRESS_MAG, LSM9DS1_REGISTER_CTRL_REG4_M, 0x0C); // high perf Z mode
 
     // Set default ranges for the various sensors
-    lsm_setupAccel(address_accelgyro, LSM9DS1_ACCELRANGE_2G);
+    lsm_setupAccel(address_accelgyro, LSM9DS1_ACCELRANGE_8G);
     lsm_setupMag(address_mag, LSM9DS1_MAGGAIN_4GAUSS);
     lsm_setupGyro(address_accelgyro, LSM9DS1_GYROSCALE_2000DPS);
 
