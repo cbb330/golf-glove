@@ -137,9 +137,8 @@ class Controller {
 
   read() {
     this.ggFrame.on('data', (data, isNotification) => {
-      var frame = new Frame(data, this.db);
-      //console.log(frame);
-      this.sendClient('data', frame);
+      var frame = new Frame(data);
+      this.db.enqueue(frame);
     });
 
     this.ggFrame.subscribe(error => {
