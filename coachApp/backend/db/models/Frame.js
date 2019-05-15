@@ -13,20 +13,15 @@ const start_time = Date.now();
 
 
 class Frame {
-  constructor(buf, db) {
-    if (buf.length != 44) {
-      throw "Bad Frame! Length is: " + buf.length;
+  constructor(data) {
+    if (data.length != 44) {
+      throw "Bad Frame! Length is: " + data.length;
     }
-    this.buf = buf; // buffer object
-    this.db = db; //golf glove db api
-    if (!this.db) {
-      console.error("Undefined db");
-    }
-
-    this.parseBuf(this.storeData);
+    this.buf = data; // buffer object
+    this.parseBuf();
   }
 
-  parseBuf(cb) {
+  parseBuf() {
     /* Parse the bytearray buffer into variables */
     this.timestamp = start_time + this.buf.readUInt32LE(0);
     this.pressure1 = this.buf.readUInt16LE(4);
@@ -57,11 +52,8 @@ class Frame {
     };
     this.swingSync = this.buf.readUInt16LE(40);
     this.dataAvailable = this.buf.readUInt16LE(42);
-    
-    this.swingSync ? this.db.storeFrame(this) : this.db.storeSwing(this);
-    this.db = undefined;
+
     this.buf = undefined;
-    console.log(this);
   }
 
   parseIMU(offset, constant) {

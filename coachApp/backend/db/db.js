@@ -2,6 +2,8 @@
 var path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 
+const BATCH_SIZE = 50;
+
 class GolfGloveDb {
   constructor() {
     this.db = new sqlite3.Database(path.join(__dirname, '..', 'db', 'GolfGlove.db'), (err) => {
@@ -14,8 +16,8 @@ class GolfGloveDb {
     });
 
     this.currSwingID = undefined;
+    this.queue = [];
     this.makeTables();
-
   }
 
   makeTables() {
@@ -129,6 +131,33 @@ class GolfGloveDb {
             self.storeFrame(frame);
           }
         });
+  }
+
+  enqueue(frame) {
+    this.queue.push(frame);
+    if (this.queue.length >= BATCH_SIZE) {
+      this.insertBatch(this.queue);
+      this.queue = [];
+    }
+  }
+
+  insertCallback() {
+    console.log("Batch insert complete.");
+  }
+
+  insertBatch(frames) {
+    // insert BATCH_SIZE data points at a time inside a transaction
+    //   https://stackoverflow.com/q/1711631
+    this.db.serialize(() => {
+      this.db.run("BEGIN;");
+      frames.forEach((frame) => {
+        this.storeFrame(frame);
+      });
+      this.db.run("COMMIT;", (err) => {
+        if (err) console.log("Error committing SQL transaction:", err);
+        else console.log("Batch insert complete.");
+      });
+    });
   }
 }
 
