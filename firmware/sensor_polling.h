@@ -19,7 +19,8 @@
 
 #define WRIST_IMU_ADDR 0x0000 // wrist IMU I2C Addr
 #define HAND_IMU_ADDR 0x0000 // hand IMU I2C Addr
-#define POLL_RATE 120 // hertz
+#define POLL_RATE 200 // hertz
+#define POLL_PERIOD 5 // milliseconds
 
 #define WRIST1_PIN ADC_INPUT_P0
 #define WRIST2_PIN ADC_INPUT_P1

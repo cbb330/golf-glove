@@ -37,7 +37,7 @@ void sensor_loop(uint32_t arg) {
     while (1) {
         sensor_frame current = get_sensor_frame();
         frame_buffer_push_frame(&current);
-        wiced_rtos_delay_milliseconds(8, KEEP_THREAD_ACTIVE);
+        wiced_rtos_delay_milliseconds(POLL_PERIOD, KEEP_THREAD_ACTIVE);
     }
 }
 

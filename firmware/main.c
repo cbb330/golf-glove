@@ -64,7 +64,7 @@ void do_thread(uint32_t arg) {
     wiced_timer_t timer;
 
     wiced_init_timer(&timer, do_timer, NULL, WICED_MILLI_SECONDS_PERIODIC_TIMER);
-    wiced_start_timer(&timer, 10);
+    wiced_start_timer(&timer, POLL_PERIOD);
 
     while (1) {
         wiced_rtos_delay_milliseconds(1000, ALLOW_THREAD_TO_SLEEP);
