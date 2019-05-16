@@ -54,12 +54,12 @@ sensor_frame get_sensor_frame() {
     UINT32 t = rtc.rtc64 * 1000 >> 15;
 
     // read ADCs for pressure and flex sensor values
-    UINT16 pres1 = wiced_hal_adc_read_raw_sample(PRES1_PIN);
-    UINT16 pres2 = wiced_hal_adc_read_raw_sample(PRES2_PIN);
-    UINT16 wrist1 = wiced_hal_adc_read_raw_sample(WRIST1_PIN);
-    UINT16 wrist2 = wiced_hal_adc_read_raw_sample(WRIST2_PIN);
-    UINT16 wrist3 = wiced_hal_adc_read_raw_sample(WRIST3_PIN);
-    UINT16 wrist4 = wiced_hal_adc_read_raw_sample(WRIST4_PIN);
+    INT16 pres1 = wiced_hal_adc_read_raw_sample(PRES1_PIN);
+    INT16 pres2 = wiced_hal_adc_read_raw_sample(PRES2_PIN);
+    INT16 wrist1 = wiced_hal_adc_read_raw_sample(WRIST1_PIN);
+    INT16 wrist2 = wiced_hal_adc_read_raw_sample(WRIST2_PIN);
+    INT16 wrist3 = wiced_hal_adc_read_raw_sample(WRIST3_PIN);
+    INT16 wrist4 = wiced_hal_adc_read_raw_sample(WRIST4_PIN);
 
     // TODO: replace these dummy values once swing detection is implemented
     uint8_t sync = 0;

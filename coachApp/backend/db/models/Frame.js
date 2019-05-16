@@ -27,12 +27,12 @@ class Frame {
   parseBuf() {
     /* Parse the bytearray buffer into variables */
     this.timestamp = start_time + this.buf.readUInt32LE(0);
-    this.pressure1 = this.buf.readUInt16LE(4);
-    this.pressure2 = this.buf.readUInt16LE(6);
-    this.deflection = this.buf.readUInt16LE(8);
-    this.extension = this.buf.readUInt16LE(10);
-    this.radialDeviation = this.buf.readUInt16LE(12);
-    this.ulnarDeviation = this.buf.readUInt16LE(14);
+    this.pressure1 = this.buf.readInt16LE(4);
+    this.pressure2 = this.buf.readInt16LE(6);
+    this.deflection = this.buf.readInt16LE(8);
+    this.extension = this.buf.readInt16LE(10);
+    this.radialDeviation = this.buf.readInt16LE(12);
+    this.ulnarDeviation = this.buf.readInt16LE(14);
     // this.deflection = this.buf.readUInt16LE(8) - 8000;
     // this.extension = this.buf.readUInt16LE(10);
     // this.radialDeviation = this.buf.readUInt16LE(12) - 8000;
