@@ -11,6 +11,7 @@ void init_i2c() {
     WICED_BT_TRACE("init_i2c()\r\n");
     wiced_hal_i2c_init();
     wiced_hal_i2c_set_speed(I2CM_SPEED_400KHZ);
+    wiced_hal_adc_set_input_range(ADC_RANGE_0_3P6V);
     //sleep(1);
     lsm_begin(LSM9DS1_INTERNAL_ADDRESS_ACCELGYRO, LSM9DS1_INTERNAL_ADDRESS_MAG);
     lsm_begin(LSM9DS1_ADDRESS_ACCELGYRO, LSM9DS1_ADDRESS_MAG);
