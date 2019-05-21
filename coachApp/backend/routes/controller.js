@@ -157,7 +157,7 @@ class Controller {
 
   stopData() {
     if (!this.isEmpty(this.ggFrameCharacteristic)) {
-      this.ggFrameCharacteristic.removeEventListener("data", this.enqueue);
+      this.ggFrameCharacteristic.removeEventListener("data", this.enqueue.bind(this));
       this.ggFrameCharacteristic.unsubscribe(error => {
         if (error) {
           console.log("Error unsubscribing from Frame Characteristic:", error);
@@ -173,7 +173,7 @@ class Controller {
   }
 
   read() {
-    this.ggFrameCharacteristic.on("data", this.enqueue);
+    this.ggFrameCharacteristic.on("data", this.enqueue.bind(this));
 
     this.ggFrameCharacteristic.subscribe(error => {
       if (error) {
