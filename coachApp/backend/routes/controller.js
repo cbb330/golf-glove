@@ -157,7 +157,7 @@ class Controller {
 
   stopData() {
     if (!this.isEmpty(this.ggFrameCharacteristic)) {
-      this.ggFrameCharacteristic.removeEventListener("data", this.enqueue.bind(this));
+      this.ggFrameCharacteristic.removeListener("data", this.enqueue.bind(this));
       this.ggFrameCharacteristic.unsubscribe(error => {
         if (error) {
           console.log("Error unsubscribing from Frame Characteristic:", error);
@@ -192,7 +192,7 @@ class Controller {
 
   disconnectPeripheral() {
     if (!this.isEmpty(this.ggPeripheral)) {
-      this.ggPeripheral.removeEventListener("disconnect", this.logDisconnect);
+      this.ggPeripheral.removeListener("disconnect", this.logDisconnect);
       this.ggPeripheral.disconnect(error => {
         if (error) {
           this.sendClient("error", error);
