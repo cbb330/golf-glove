@@ -12,6 +12,7 @@ const GolfGloveDb = require("../db/db.js");
 const GG_SERVICE_UUID = "7c838948fe34f1b52e427e1bd698c53a"; // make big endian / little endian converter function
 const GG_FRAME_CHARACTERISTIC = "6c35868a4353abb86f4c13d55742415a";
 //const GG_FRAME_CHARACTERISTIC = "4e38bed209594602a0af9b6bcb3b7b0e";
+const GG_SEND_DATA_CHARACTERISTIC = "867e9c5a15d21e83a8466c6477f3deab";
 const ggRealTimeEnable = "72e48cb3fa2227ba78416d1b7e539259";
 const ggDataEnable = "bdf7ae339873ab95d04bcec6aa349390";
 const SAMPLE_RATE = 120; // in hertz
@@ -23,6 +24,7 @@ class Controller {
     this.ggPeripheral = {};
     this._ggService = {};
     this.ggFrameCharacteristic = {};
+    this.ggSendDataCharacteristic = {};
     this.ggRealTimeEnable = {};
     this.ggDataEnable = {};
     this.db = new GolfGloveDb();
@@ -31,28 +33,6 @@ class Controller {
       console.log(`NobleStateChange: ${newState}`);
       this.nobleState = newState;
     });
-
-    // noble.on("discover", peripheral => {
-    //   this.ggPeripheral = peripheral;
-    //   noble.stopScanning();
-    //   console.log("Trying to connect.");
-    //   peripheral.connect(error => {
-    //     if (error) {
-    //       this.sendClient("error", error);
-    //     }
-    //     else {
-    //       var peripheralInfo = this.getPeripheralInfo(peripheral);
-    //       this.sendClient("status", peripheralInfo);
-    //       this.ggPeripheral.once("disconnect", () => {
-    //         console.log("disconnect once happened");
-    //         this.ggPeripheral = {};
-    //         this.ggService = {};
-    //         this.ggFrameCharacteristic = {};
-    //         this.disconnectPeripheral();
-    //       });
-    //     }
-    //   });
-    // });
 
     noble.on("discover", peripheral => {
       noble.stopScanning();
@@ -89,15 +69,15 @@ class Controller {
       this.getPeripheralInfo(peripheral); // logs a lot of info
       console.log("Discovering services & characteristics");
       const serviceUUIDs = [GG_SERVICE_UUID];
-      const characteristicUUIDs = [GG_FRAME_CHARACTERISTIC];
+      const characteristicUUIDs = [GG_FRAME_CHARACTERISTIC, GG_SEND_DATA_CHARACTERISTIC];
       peripheral.discoverSomeServicesAndCharacteristics(
         serviceUUIDs,
         characteristicUUIDs,
         this.onServicesAndCharacteristicsDiscovered.bind(this)
       );
     });
-  
-    peripheral.on("disconnect", this.logDisconnect);
+
+    peripheral.on("disconnect", this.logDisconnect.bind(this));
   }
 
   logDisconnect() {
@@ -109,9 +89,11 @@ class Controller {
       console.log("Error discovering services and characteristics:", error);
       return;
     }
-  
+
     this.ggFrameCharacteristic = characteristics[0];
+    this.ggSendDataCharacteristic = characteristics[1];
     console.log("Discovered services and characteristics.");
+    this.read(GG_SERVICE_UUID);
   }
 
   getService(servUuid) {
@@ -152,11 +134,16 @@ class Controller {
   }
 
   getData() {
-    this.read(GG_SERVICE_UUID);
+    this.sendReady();
   }
 
   stopData() {
     if (!this.isEmpty(this.ggFrameCharacteristic)) {
+      const message = new Buffer(1);
+      message.writeUInt8(0, 0);
+      console.log("Writing buffer: " + message.toString("hex"));
+      this.ggSendDataCharacteristic.write(message);
+
       this.ggFrameCharacteristic.removeListener("data", this.enqueue.bind(this));
       this.ggFrameCharacteristic.unsubscribe(error => {
         if (error) {
@@ -185,6 +172,13 @@ class Controller {
     });
   }
 
+  sendReady() {
+    const message = new Buffer(1);
+    message.writeUInt8(1, 0);
+    console.log("Writing buffer: " + message.toString("hex"));
+    this.ggSendDataCharacteristic.write(message);
+  }
+
   enqueue(data, isNotification) {
     var frame = new Frame(data);
     this.db.enqueue(frame);
@@ -192,7 +186,7 @@ class Controller {
 
   disconnectPeripheral() {
     if (!this.isEmpty(this.ggPeripheral)) {
-      this.ggPeripheral.removeListener("disconnect", this.logDisconnect);
+      this.ggPeripheral.removeListener("disconnect", this.logDisconnect.bind(this));
       this.ggPeripheral.disconnect(error => {
         if (error) {
           this.sendClient("error", error);

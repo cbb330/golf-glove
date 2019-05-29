@@ -29,6 +29,7 @@
 #define PRES1_PIN ADC_INPUT_P17
 #define PRES2_PIN ADC_INPUT_P38
 
+static BOOL8 connected = FALSE;
 int real_time = 0;
 
 // 6-way IMU sensor data
@@ -74,4 +75,9 @@ void frame_swing();
 
 // Data pushing/updating
 void add_swing(sensor_frame* swing);
+
+// Data connection readiness
+void set_readiness(BOOL8 state);
+BOOL8 get_readiness();
+
 #endif

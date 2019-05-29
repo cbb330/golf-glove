@@ -11,6 +11,7 @@
 #include "rtc.h"
 #include "buffer/frame_buffer.h"
 #include "gatt/golf_glove.h"
+#include "gatt/golf_glove_db.h"
 #include "sensor_polling.h"
 
 
@@ -73,5 +74,8 @@ void do_thread(uint32_t arg) {
 
 void do_timer(uint32_t arg) {
     //WICED_BT_TRACE("AAAAAAAAAAAAAAAAA\r\n");
-    wiced_bt_gatt_send_notification(1, 0x002A, 0, NULL);
+    WICED_BT_TRACE("sensor_loop: connected: %02x\r\n", connected);
+    if (get_readiness()) {
+        wiced_bt_gatt_send_notification(1, HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE, 0, NULL);
+    }
 }
