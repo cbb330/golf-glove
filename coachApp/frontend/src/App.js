@@ -121,6 +121,15 @@ class App extends Component {
     this.socket.send(JSON.stringify(message));
   }
 
+  subscribeToData() {
+    // construct start message object
+    const message = {type: "subscribe"};
+    console.log('sending following start message to backend:');
+    console.log(message);
+    // send message as a JSON-formatted string
+    this.socket.send(JSON.stringify(message));
+  }
+
   startDataReception() {
     // construct start message object
     const message = {type: "start"};
@@ -158,10 +167,13 @@ class App extends Component {
           <button onClick={(e) => this.handleDisconnect(e)} disabled={!this.state.isConnectedToDevice}>
             Disconnect
           </button>
+          <button onClick={(e) => this.subscribeToData(e)}>
+            Subscribe
+          </button>
           <button onClick={(e) => this.handleStartAcceptingData(e)} disabled={this.state.isAcceptingData}>
             Start
           </button>
-          <button onClick={(e) => this.handleStopAcceptingData(e)} disabled={!this.state.isAcceptingData}>
+          <button onClick={(e) => this.handleStopAcceptingData(e)}>
             Stop
           </button>
           <button onClick={(e) => this.analyzeData(e)}>

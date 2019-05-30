@@ -29,6 +29,9 @@ class Controller {
     this.ggDataEnable = {};
     this.db = new GolfGloveDb();
 
+    this.enqueue = this.enqueue.bind(this);
+    this.logDisconnect = this.logDisconnect.bind(this);
+
     noble.on("stateChange", newState => {
       console.log(`NobleStateChange: ${newState}`);
       this.nobleState = newState;
@@ -77,7 +80,7 @@ class Controller {
       );
     });
 
-    peripheral.on("disconnect", this.logDisconnect.bind(this));
+    peripheral.on("disconnect", this.logDisconnect);
   }
 
   logDisconnect() {
@@ -93,7 +96,7 @@ class Controller {
     this.ggFrameCharacteristic = characteristics[0];
     this.ggSendDataCharacteristic = characteristics[1];
     console.log("Discovered services and characteristics.");
-    this.read(GG_SERVICE_UUID);
+    // this.read(GG_SERVICE_UUID);
   }
 
   getService(servUuid) {
@@ -124,7 +127,6 @@ class Controller {
         else {
           console.log("found characteristic: " + characteristics[0].uuid);
           this.ggFrameCharacteristic = characteristics[0];
-          this.read();
         }
       });
     }
@@ -134,6 +136,7 @@ class Controller {
   }
 
   getData() {
+    // this.read();
     this.sendReady();
   }
 
@@ -143,16 +146,19 @@ class Controller {
       message.writeUInt8(0, 0);
       console.log("Writing buffer: " + message.toString("hex"));
       this.ggSendDataCharacteristic.write(message);
+      console.log(this.ggFrameCharacteristic);
+      console.log(this.ggPeripheral);
 
-      this.ggFrameCharacteristic.removeListener("data", this.enqueue.bind(this));
-      this.ggFrameCharacteristic.unsubscribe(error => {
-        if (error) {
-          console.log("Error unsubscribing from Frame Characteristic:", error);
-        }
-        else {
-          console.log("Unsubscribed from Frame Characteristic.");
-        }
-      });
+      // this.ggFrameCharacteristic.removeListener("data", this.enqueue);
+      // // this.ggFrameCharacteristic.removeAllListeners("data");
+      // this.ggFrameCharacteristic.unsubscribe(error => {
+      //   if (error) {
+      //     console.log("Error unsubscribing from Frame Characteristic:", error);
+      //   }
+      //   else {
+      //     console.log("Unsubscribed from Frame Characteristic.");
+      //   }
+      // });
     }
     else {
       console.log("no device connected");
@@ -160,7 +166,7 @@ class Controller {
   }
 
   read() {
-    this.ggFrameCharacteristic.on("data", this.enqueue.bind(this));
+    this.ggFrameCharacteristic.on("data", this.enqueue);
 
     this.ggFrameCharacteristic.subscribe(error => {
       if (error) {
@@ -186,16 +192,8 @@ class Controller {
 
   disconnectPeripheral() {
     if (!this.isEmpty(this.ggPeripheral)) {
-      this.ggPeripheral.removeListener("disconnect", this.logDisconnect.bind(this));
-      this.ggPeripheral.disconnect(error => {
-        if (error) {
-          this.sendClient("error", error);
-        }
-        else {
-          console.log("Disconnecting peripheral");
-          this.sendClient("status", "Disconnecting peripheral.");
-        }
-      });
+      this.ggPeripheral.removeListener("disconnect", this.logDisconnect);
+      this.ggPeripheral.disconnect();
     }
   }
 

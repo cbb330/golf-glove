@@ -8,5 +8,6 @@
 #define __GOLF_GLOVE_H
 
 extern void gatt_application_start(void);
+extern void send_next_frame_notification();
 
 #endif

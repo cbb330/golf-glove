@@ -134,6 +134,13 @@ const uint16_t golf_glove_gatt_db_ext_attr_tbl_size = ( sizeof ( golf_glove_gatt
  * Function Definitions
  ******************************************************************/
 
+void send_next_frame_notification() {
+    if (golf_glove_golf_glove_next_frame_client_configuration[0] & GATT_CLIENT_CONFIG_NOTIFICATION) {
+        wiced_bt_gatt_send_notification(1, HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE, sizeof(golf_glove_golf_glove_next_frame), NULL);
+        // WICED_BT_TRACE("Sent frame notification.\r\n");
+    }
+}
+
 /*
  * Entry point to the application. Set device configuration and start BT
  * stack initialization.  The actual application initialization will happen
