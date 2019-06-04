@@ -74,8 +74,9 @@ void do_thread(uint32_t arg) {
 
 void do_timer(uint32_t arg) {
     //WICED_BT_TRACE("AAAAAAAAAAAAAAAAA\r\n");
-    WICED_BT_TRACE("sensor_loop: connected: %02x\r\n", connected);
+    // WICED_BT_TRACE("sensor_loop: connected: %02x\r\n", connected);
     if (get_readiness()) {
-        send_next_frame_notification();
+        wiced_bt_gatt_send_notification(1, HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE, 0, NULL);
+        // send_next_frame_notification();
     }
 }
