@@ -15,6 +15,7 @@
 #include "sensor_polling.h"
 
 
+int count;
 wiced_thread_t* thread;
 void do_thread(uint32_t arg);
 void do_timer(uint32_t arg);
@@ -54,6 +55,7 @@ void application_start(void) {
     // configure and initialize real time clock
     rtcConfig.oscillatorFrequencykHz = RTC_REF_CLOCK_SRC_32KHZ;
     rtc_init();
+    count = 0;
 
     wiced_rtos_delay_milliseconds(3000, KEEP_THREAD_ACTIVE);
 
@@ -75,6 +77,11 @@ void do_thread(uint32_t arg) {
 void do_timer(uint32_t arg) {
     //WICED_BT_TRACE("AAAAAAAAAAAAAAAAA\r\n");
     // WICED_BT_TRACE("sensor_loop: connected: %02x\r\n", connected);
+    count++;
+    if (count >= 200) {
+        count = 0;
+        WICED_BT_TRACE("counted to 200.\r\n");
+    }
     if (get_readiness()) {
         wiced_bt_gatt_send_notification(1, HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE, 0, NULL);
         // send_next_frame_notification();

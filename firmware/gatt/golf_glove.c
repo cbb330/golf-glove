@@ -338,11 +338,16 @@ wiced_bt_dev_status_t golf_glove_management_callback( wiced_bt_management_evt_t 
 
     return status;
 }
-
+int get_value_counter = 0;
 /* Get a Value */
 wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn_id, uint8_t *p_val, uint16_t max_len, uint16_t *p_len )
 {
     int i = 0;
+    get_value_counter++;
+    if (get_value_counter >= 200) {
+        get_value_counter = 0;
+        WICED_BT_TRACE("get_value hit 200 times.\r\n");
+    }
     wiced_bool_t isHandleInTable = WICED_FALSE;
     wiced_bt_gatt_status_t res = WICED_BT_GATT_INVALID_HANDLE;
 
