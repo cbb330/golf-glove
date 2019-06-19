@@ -8,7 +8,7 @@
 #include "wiced_bt_trace.h"
 #include "wiced_bt_types.h"
 #include "wiced_result.h"
-
+#include "frame.h"
 #include "buffer/frame_buffer.h"
 #include "sensor_polling.h"
 

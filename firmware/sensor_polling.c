@@ -35,13 +35,87 @@ void sensor_loop(uint32_t arg) {
      if (detect_swing(current, last) == 1) frame_swing();
      // else sleep
      }*/
+    curr_state = STATE_INIT;
+    // swinging = FALSE;
+
+    // frame_buffer = malloc(BUFFER_SIZE * sizeof(sensor_frame));
+    // cbuffer = circular_buf_init(frame_buffer, BUFFER_SIZE);
+    cbuffer = circular_buf_init();
+
+    INT16 threshold = -50 * 1000 / (LSM9DS1_ACCEL_MG_LSB_8G * SENSORS_GRAVITY_EARTH);
+    WICED_BT_TRACE("threshold: %4d\r\n", threshold);
+    // WICED_BT_TRACE("swinging: %2x\r\n", swinging);
+
     while (1) {
         if (connected) {
-            WICED_BT_TRACE("sensor_loop: connected: %02x\r\n", connected);
+            // WICED_BT_TRACE("sensor_loop: connected: %02x\r\n", connected);
             sensor_frame current = get_sensor_frame();
-            frame_buffer_push_frame(&current);
+            // accel1z = current.imu1.accZ;
+            // frame_buffer_push_frame(&current);
+            // WICED_BT_TRACE("accel1Z: %6d\r\n", (INT16) current.imu1.accZ);
+            // WICED_BT_TRACE("cbuffer size: %4d\r\n", circular_buf_size(cbuffer));
+
+            switch (curr_state) {
+            case STATE_INIT:
+                circular_buf_put(cbuffer, &current);
+                if (circular_buf_size(cbuffer) > PRE_BUFFER_SIZE) {
+                    curr_state = STATE_PRERECORDING;
+                    WICED_BT_TRACE("new state: %02d STATE_PRERECORDING\r\n", curr_state);
+                }
+                break;
+            case STATE_PRERECORDING:
+                circular_buf_preput(cbuffer, &current);
+                if ((INT16) current.imu1.accZ <= threshold) {
+                    curr_state = STATE_RECORDING;
+                    WICED_BT_TRACE("new state: %02d STATE_RECORDING\r\n", curr_state);
+                }
+                break;
+            case STATE_RECORDING:
+                circular_buf_put(cbuffer, &current);
+                if (circular_buf_full(cbuffer)) {
+                    curr_state = STATE_SENDING;
+                    WICED_BT_TRACE("new state: %02d STATE_SENDING\r\n", curr_state);
+                }
+                break;
+            case STATE_SENDING:
+                if (circular_buf_empty(cbuffer)) {
+                    curr_state = STATE_INIT;
+                    WICED_BT_TRACE("new state: %02d STATE_INIT\r\n", curr_state);
+                }
+            default:
+                break;
+            }
+
+            // if (((INT16) current.imu1.accZ) <= (INT16) threshold || swinging) {
+            //     if (circular_buf_full(cbuffer)) {
+            //         swinging = FALSE;
+            //         WICED_BT_TRACE("full cbuffer\r\n");
+            //     }
+            //     else if (swinging) {
+
+            //     }
+            //     else if (circular_buf_empty(cbuffer)) {
+            //         if (!swinging) swinging = TRUE;
+            //     }
+            //     if (circular_buf_empty(cbuffer)) {
+            //         if (!swinging) swinging = TRUE;
+            //         circular_buf_put(cbuffer, current);
+            //     }
+            //     else {
+            //         // process buffer by sending notifications...
+            //     }
+            // }
+            // if (((INT16) current.imu1.accZ) <= (INT16) threshold) {
+            //     if (!swinging && circular_buf_empty(cbuffer)) swinging = TRUE;
+            // }
+            // if (swinging && circular_buf_empty(cbuffer)) {
+            //     circular_buf_put(cbuffer, current);
+            // }
+            // else if (swinging) {
+
+            // }
         }
-        wiced_rtos_delay_milliseconds(POLL_PERIOD, KEEP_THREAD_ACTIVE);
+        wiced_rtos_delay_milliseconds(POLL_PERIOD - 3, ALLOW_THREAD_TO_SLEEP);
     }
 }
 
@@ -174,4 +248,16 @@ void set_readiness(BOOL8 state) {
 
 BOOL8 get_readiness() {
     return connected;
+}
+
+UINT16 get_accel1z() {
+    return accel1z;
+}
+
+void set_accel1z(UINT16* value) {
+    memcpy(&accel1z, value, sizeof(UINT16));
+}
+
+state_t get_state() {
+    return curr_state;
 }
