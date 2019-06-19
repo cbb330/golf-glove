@@ -23,8 +23,8 @@
 #include "wiced_memory.h"
 #include "frame.h"
 
-#define BUFFER_SIZE 1000
-#define PRE_BUFFER_SIZE 500
+#define BUFFER_SIZE 1200
+#define PRE_BUFFER_SIZE 600
 
 typedef sensor_frame buffer_t;
 
