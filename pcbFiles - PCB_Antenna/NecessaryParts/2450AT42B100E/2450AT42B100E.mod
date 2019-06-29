@@ -1,0 +1,60 @@
+PCBNEW-LibModule-V1  
+# encoding utf-8
+Units mm
+$INDEX
+XCVR_2450AT42B100E
+$EndINDEX
+$MODULE XCVR_2450AT42B100E
+Po 0 0 0 15 00000000 00000000 ~~
+Li XCVR_2450AT42B100E
+Cd 
+Sc 00000000
+At SMD
+Op 0 0 0
+.SolderMask 0
+.SolderPaste 0
+T0 -0.66054 -2.03667 1.00082 1.00082 0 0.05 N V 21 "XCVR_2450AT42B100E"
+T1 0 0 1 0.9 0 0.05 N H 21 "VAL**"
+DP 0 0 0 0 4 0 21
+Dl -1.80308 -0.2
+Dl -0.7 -0.2
+Dl -0.7 0.200342
+Dl -1.80308 0.200342
+DS -3.35 -1.45 3.35 -1.45 0.05 26
+DS 3.35 -1.45 3.35 1.45 0.05 26
+DS 3.35 1.45 -3.35 1.45 0.05 26
+DS -3.35 1.45 -3.35 -1.45 0.05 26
+T2 -3.503860 2.702980 1 1 0 .05 N V 27 ">~VALUE"
+$PAD
+Sh "1" R 1 2 0 0 0
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po -2.6 0
+$EndPAD
+$PAD
+Sh "2" R 1 2 0 0 0
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 2.6 0
+$EndPAD
+$PAD
+Sh "4" R 2.8 0.7 0 0 0
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 0 -0.85
+$EndPAD
+$PAD
+Sh "3" R 2.8 0.7 0 0 0
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 0 0.85
+$EndPAD
+$EndMODULE XCVR_2450AT42B100E

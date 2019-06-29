@@ -1,0 +1,45 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# LSM9DS1TR
+#
+DEF LSM9DS1TR U 0 40 Y Y 1 L N
+F0 "U" -501 1027 50 H V L BNN
+F1 "LSM9DS1TR" -501 -1002 50 H V L BNN
+F2 "PQFN43P300X350X102-24N" 0 0 50 H I L BNN
+F3 "TFLGA-24 STMicroelectronics" 0 0 50 H I L BNN
+F4 "LSM9DS1TR" 0 0 50 H I L BNN
+F5 "https://www.digikey.com/product-detail/en/stmicroelectronics/LSM9DS1TR/497-14946-1-ND/4988079?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" 0 0 50 H I L BNN
+F6 "STMicroelectronics" 0 0 50 H I L BNN
+F7 "497-14946-1-ND" 0 0 50 H I L BNN
+F8 "LSM9DS1 Series ±2/±4/±8/±16 g 3D Digital Linear Acceleration Sensor - LGA-24" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 10 500 -900 -500 -900 N
+P 2 0 0 10 -500 -900 -500 1000 N
+P 2 0 0 10 -500 1000 500 1000 N
+P 2 0 0 10 500 1000 500 -900 N
+X VDDIO 1 700 800 200 L 40 40 0 0 W 
+X VDDIO 3 700 800 200 L 40 40 0 0 W 
+X SCL/SPC 2 -700 600 200 R 40 40 0 0 I C
+X SDA/SDI/SDO 4 -700 500 200 R 40 40 0 0 B 
+X SDO_A/G 5 700 300 200 L 40 40 0 0 O 
+X SDO_M 6 700 -100 200 L 40 40 0 0 O 
+X CS_A/G 7 -700 300 200 R 40 40 0 0 I 
+X CS_M 8 -700 -200 200 R 40 40 0 0 I 
+X DRDY_M 9 700 -300 200 L 40 40 0 0 O 
+X INT_M 10 700 -200 200 L 40 40 0 0 O 
+X INT1_A/G 11 700 200 200 L 40 40 0 0 O 
+X INT2_A/G 12 700 100 200 L 40 40 0 0 O 
+X DEN_A/G 13 -700 200 200 R 40 40 0 0 I 
+X GND 19 700 -800 200 L 40 40 0 0 W 
+X GND 20 700 -800 200 L 40 40 0 0 W 
+X CAP 21 700 -600 200 L 40 40 0 0 P 
+X VDD 22 700 900 200 L 40 40 0 0 W 
+X VDD 23 700 900 200 L 40 40 0 0 W 
+X C1 24 700 -500 200 L 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library
