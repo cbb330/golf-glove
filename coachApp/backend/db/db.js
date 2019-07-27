@@ -142,7 +142,8 @@ class GolfGloveDb {
   }
 
   insertCallback() {
-    console.log("Batch insert complete.");
+    const time = new Date().now();
+    console.log(`Batch insert at ${time}`);
   }
 
   insertBatch(frames) {
@@ -155,7 +156,10 @@ class GolfGloveDb {
       });
       this.db.run("COMMIT;", (err) => {
         if (err) console.log("Error committing SQL transaction:", err);
-        else console.log("Batch insert complete.");
+        else {
+          const time = Date.now();
+          console.log(`Batch insert at ${time}`);
+        }
       });
     });
   }
