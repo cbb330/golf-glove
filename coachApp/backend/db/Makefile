@@ -3,15 +3,8 @@ all:
 	@./sqliteToCsv.sh data.csv
 	@mv data.csv $$THESISPATH/data
 	@rm -f GolfGlove.db
-	$$THESISPATH/data/plot.R
-	cd $$THESISPATH/data/
-	feh -q *.png --auto-zoom \
-		--sort filename --borderless \
-		--scale-down --draw-filename \
-		--image-bg black \
-		$$THESISPATH/data
-	#@openimage $$THESISPATH/data/
-	cd $$HOME/workspace/senior-design/golf-glove/coachApp/backend/db
+	# process data into swings
+	#$$THESISPATH/data/process.R
 
 clean:
 	@rm -f GolfGlove.db data.csv
