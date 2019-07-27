@@ -174,5 +174,45 @@
                 <AuthenticatedWrite>false</AuthenticatedWrite>
             </Permissions>
         </Characteristic>
+        <Characteristic mandatory="false" predefined="false">
+            <Name>send_data</Name>
+            <Uuid>ab de f3 77 64 6c 46 a8 83 1e d2 15 5a 9c 7e 86</Uuid>
+            <Description>Vendor Specific Characteristic: golf_glove</Description>
+            <DataType/>
+            <Size>1</Size>
+            <InitialValue>00</InitialValue>
+            <Properties>
+                <Read>true</Read>
+                <Notify>false</Notify>
+                <Indicate>false</Indicate>
+                <Write>true</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <SignedWrite>false</SignedWrite>
+                <ReliableWrite>false</ReliableWrite>
+                <WritableAuxiliaries>false</WritableAuxiliaries>
+                <Broadcast>false</Broadcast>
+            </Properties>
+            <Permissions>
+                <VariableLength>false</VariableLength>
+                <Read>true</Read>
+                <Write>true</Write>
+                <WriteWithoutResponse>false</WriteWithoutResponse>
+                <AuthenticatedRead>false</AuthenticatedRead>
+                <ReliableWrite>false</ReliableWrite>
+                <AuthenticatedWrite>false</AuthenticatedWrite>
+            </Permissions>
+            <UserDescription>
+                <Value>Connection Status</Value>
+                <MaximumLength>512</MaximumLength>
+                <Permissions>
+                    <VariableLength>false</VariableLength>
+                    <Read>true</Read>
+                    <Write>false</Write>
+                    <AuthenticatedRead>false</AuthenticatedRead>
+                    <ReliableWrite>false</ReliableWrite>
+                    <AuthenticatedWrite>false</AuthenticatedWrite>
+                </Permissions>
+            </UserDescription>
+        </Characteristic>
     </Service>
 </BLE_Smart_Designer>

@@ -36,8 +36,11 @@ void sensor_loop(uint32_t arg) {
      // else sleep
      }*/
     while (1) {
-        sensor_frame current = get_sensor_frame();
-        frame_buffer_push_frame(&current);
+        if (connected) {
+            WICED_BT_TRACE("sensor_loop: connected: %02x\r\n", connected);
+            sensor_frame current = get_sensor_frame();
+            frame_buffer_push_frame(&current);
+        }
         wiced_rtos_delay_milliseconds(POLL_PERIOD, KEEP_THREAD_ACTIVE);
     }
 }
@@ -161,4 +164,14 @@ void frame_swing() {
 // Data pushing/updating
 void add_swing(sensor_frame* swing) {
     // TODO: Push swing data to coaching application maybe by updating a global array that the BT side of the program reads from?
+}
+
+// Data connection readiness
+void set_readiness(BOOL8 state) {
+    connected = state;
+    WICED_BT_TRACE("set_readinesss: connected: %02x\r\n", connected);
+}
+
+BOOL8 get_readiness() {
+    return connected;
 }

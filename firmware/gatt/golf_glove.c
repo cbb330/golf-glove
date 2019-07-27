@@ -97,13 +97,15 @@ wiced_transport_cfg_t transport_cfg =
 /*******************************************************************
  * GATT Initial Value Arrays
  ******************************************************************/
-uint8_t golf_glove_generic_access_device_name[]                     = {'g','o','l','f','_','g','l','o','v','e'};
+uint8_t golf_glove_generic_access_device_name[]                     = {'g','g'};
 uint8_t golf_glove_generic_access_appearance[]                      = {BIT16_TO_8(APPEARANCE_WATCH_SPORTS)};
-uint8_t golf_glove_golf_glove_next_frame[]                          = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+uint8_t golf_glove_golf_glove_next_frame[]                          = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 uint8_t golf_glove_golf_glove_next_frame_client_configuration[]     = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
 uint8_t golf_glove_golf_glove_realtime_enabled[]                    = {0x00};
 uint8_t golf_glove_golf_glove_data_available[]                      = {0x00};
 uint8_t golf_glove_golf_glove_data_available_client_configuration[] = {BIT16_TO_8(GATT_CLIENT_CONFIG_NONE)};
+uint8_t golf_glove_golf_glove_send_data[]                           = {0x00};
+uint8_t golf_glove_golf_glove_send_data_user_description[]          = {'C','o','n','n','e','c','t','i','o','n',' ','S','t','a','t','u','s'};
 
 /*******************************************************************
  * GATT Lookup Table
@@ -113,14 +115,16 @@ uint8_t golf_glove_golf_glove_data_available_client_configuration[] = {BIT16_TO_
 /* (attributes externally referenced by GATT server database) */
 gatt_db_lookup_table golf_glove_gatt_db_ext_attr_tbl[] =
 {
-    /* { attribute handle,                                maxlen, curlen, attribute data } */
-    {HDLC_GENERIC_ACCESS_DEVICE_NAME_VALUE,               10,     10,     golf_glove_generic_access_device_name},
-    {HDLC_GENERIC_ACCESS_APPEARANCE_VALUE,                2,      2,      golf_glove_generic_access_appearance},
-    {HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE,                    44,     44,     golf_glove_golf_glove_next_frame},
-    {HDLD_GOLF_GLOVE_NEXT_FRAME_CLIENT_CONFIGURATION,     2,      2,      golf_glove_golf_glove_next_frame_client_configuration},
-    {HDLC_GOLF_GLOVE_REALTIME_ENABLED_VALUE,              1,      1,      golf_glove_golf_glove_realtime_enabled},
-    {HDLC_GOLF_GLOVE_DATA_AVAILABLE_VALUE,                1,      1,      golf_glove_golf_glove_data_available},
-    {HDLD_GOLF_GLOVE_DATA_AVAILABLE_CLIENT_CONFIGURATION, 2,      2,      golf_glove_golf_glove_data_available_client_configuration},
+    /* { attribute handle,                                maxlen,                                                   curlen,                                                   attribute data } */
+    {HDLC_GENERIC_ACCESS_DEVICE_NAME_VALUE,               2,                                                        2,                                                        golf_glove_generic_access_device_name},
+    {HDLC_GENERIC_ACCESS_APPEARANCE_VALUE,                2,                                                        2,                                                        golf_glove_generic_access_appearance},
+    {HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE,                    44,                                                       44,                                                       golf_glove_golf_glove_next_frame},
+    {HDLD_GOLF_GLOVE_NEXT_FRAME_CLIENT_CONFIGURATION,     2,                                                        2,                                                        golf_glove_golf_glove_next_frame_client_configuration},
+    {HDLC_GOLF_GLOVE_REALTIME_ENABLED_VALUE,              1,                                                        1,                                                        golf_glove_golf_glove_realtime_enabled},
+    {HDLC_GOLF_GLOVE_DATA_AVAILABLE_VALUE,                1,                                                        1,                                                        golf_glove_golf_glove_data_available},
+    {HDLD_GOLF_GLOVE_DATA_AVAILABLE_CLIENT_CONFIGURATION, 2,                                                        2,                                                        golf_glove_golf_glove_data_available_client_configuration},
+    {HDLC_GOLF_GLOVE_SEND_DATA_VALUE,                     1,                                                        1,                                                        golf_glove_golf_glove_send_data},
+    {HDLD_GOLF_GLOVE_SEND_DATA_USER_DESCRIPTION,          sizeof(golf_glove_golf_glove_send_data_user_description), sizeof(golf_glove_golf_glove_send_data_user_description), golf_glove_golf_glove_send_data_user_description},
 };
 
 // Number of Lookup Table Entries
@@ -129,6 +133,13 @@ const uint16_t golf_glove_gatt_db_ext_attr_tbl_size = ( sizeof ( golf_glove_gatt
 /*******************************************************************
  * Function Definitions
  ******************************************************************/
+
+void send_next_frame_notification() {
+    if (golf_glove_golf_glove_next_frame_client_configuration[0] & GATT_CLIENT_CONFIG_NOTIFICATION) {
+        wiced_bt_gatt_send_notification(1, HDLC_GOLF_GLOVE_NEXT_FRAME_VALUE, sizeof(golf_glove_golf_glove_next_frame), NULL);
+        // WICED_BT_TRACE("Sent frame notification.\r\n");
+    }
+}
 
 /*
  * Entry point to the application. Set device configuration and start BT
@@ -177,9 +188,16 @@ void golf_glove_app_init(void)
 /* Set Advertisement Data */
 void golf_glove_set_advertisement_data( void )
 {
-    wiced_bt_ble_advert_elem_t adv_elem[3] = { 0 };
+    wiced_bt_ble_advert_elem_t adv_elem[4] = { 0 };
     uint8_t adv_flag = BTM_BLE_GENERAL_DISCOVERABLE_FLAG | BTM_BLE_BREDR_NOT_SUPPORTED;
+    uint8_t adv_appearance[] = { BIT16_TO_8( APPEARANCE_WATCH_SPORTS ) };
     uint8_t num_elem = 0; 
+
+    /* Advertisement Element for Flags */
+    adv_elem[num_elem].advert_type = BTM_BLE_ADVERT_TYPE_FLAG;
+    adv_elem[num_elem].len = sizeof(uint8_t);
+    adv_elem[num_elem].p_data = &adv_flag;
+    num_elem++;
 
     /* Advertisement Element for Name */
     adv_elem[num_elem].advert_type = BTM_BLE_ADVERT_TYPE_NAME_COMPLETE;
@@ -193,10 +211,10 @@ void golf_glove_set_advertisement_data( void )
     adv_elem[num_elem].p_data = (uint8_t*) golf_glove_uuid;
     num_elem++;
 
-    /* Advertisement Element for Flags */
-    adv_elem[num_elem].advert_type = BTM_BLE_ADVERT_TYPE_FLAG;
-    adv_elem[num_elem].len = sizeof(uint8_t);
-    adv_elem[num_elem].p_data = &adv_flag;
+    /* Advertisement Element for Appearance */
+    adv_elem[num_elem].advert_type = BTM_BLE_ADVERT_TYPE_APPEARANCE;
+    adv_elem[num_elem].len = sizeof(adv_appearance);
+    adv_elem[num_elem].p_data = adv_appearance;
     num_elem++;
 
     /* Set Raw Advertisement Data */
@@ -320,11 +338,16 @@ wiced_bt_dev_status_t golf_glove_management_callback( wiced_bt_management_evt_t 
 
     return status;
 }
-
+int get_value_counter = 0;
 /* Get a Value */
 wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn_id, uint8_t *p_val, uint16_t max_len, uint16_t *p_len )
 {
     int i = 0;
+    get_value_counter++;
+    if (get_value_counter >= 200) {
+        get_value_counter = 0;
+        WICED_BT_TRACE("get_value hit 200 times.\r\n");
+    }
     wiced_bool_t isHandleInTable = WICED_FALSE;
     wiced_bt_gatt_status_t res = WICED_BT_GATT_INVALID_HANDLE;
 
@@ -365,6 +388,8 @@ wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn
                         memcpy(golf_glove_gatt_db_ext_attr_tbl[i].p_data, &is_data_available, golf_glove_gatt_db_ext_attr_tbl[i].cur_len);
                     } break;
                 case HDLD_GOLF_GLOVE_DATA_AVAILABLE_CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_SEND_DATA_VALUE:
                     break;
                 }
 
@@ -434,6 +459,11 @@ wiced_bt_gatt_status_t golf_glove_set_value( uint16_t attr_handle, uint16_t conn
                 case HDLC_GOLF_GLOVE_REALTIME_ENABLED_VALUE:
                     break;
                 case HDLD_GOLF_GLOVE_DATA_AVAILABLE_CLIENT_CONFIGURATION:
+                    break;
+                case HDLC_GOLF_GLOVE_SEND_DATA_VALUE:
+                    {
+                        set_readiness(*golf_glove_gatt_db_ext_attr_tbl[i].p_data);
+                    }
                     break;
                 }
             }

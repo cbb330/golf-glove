@@ -27,6 +27,9 @@ module.exports = function(app) {
         case "disconnect":
           controller.disconnectPeripheral();
           break;
+        case "subscribe":
+          controller.read();
+          break;
         case "start":
           controller.getData();
           break;
