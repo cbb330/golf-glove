@@ -13,6 +13,8 @@
 #include "string.h"
 #include "LSM9DS1.h"
 #include "ADS1015.h"
+#include "frame.h"
+#include "buffer/circular_buffer.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
@@ -29,33 +31,22 @@
 #define PRES1_PIN ADC_INPUT_P17
 #define PRES2_PIN ADC_INPUT_P38
 
+typedef enum {
+    STATE_INIT,
+    STATE_PRERECORDING,
+    STATE_RECORDING,
+    STATE_SENDING,
+    NUM_STATES
+} state_t; 
+
+state_t curr_state;
+
+// sensor_frame* frame_buffer;
+cbuf_handle_t cbuffer;
+
 static BOOL8 connected = FALSE;
+static UINT16 accel1z = 14;
 int real_time = 0;
-
-// 6-way IMU sensor data
-typedef struct {
-    UINT16 accX;
-    UINT16 accY;
-    UINT16 accZ;
-    UINT16 gyroX;
-    UINT16 gyroY;
-    UINT16 gyroZ;
-} imu_frame;
-
-// Total Sensor data
-typedef struct {
-    uint32_t timestamp;                         //0-3
-    INT16 pres1;                             //4-5
-    INT16 pres2;                             //6-7
-    INT16 wrist1; // deflection              //8-9
-    INT16 wrist2; // extension               //10-11
-    INT16 wrist3; // radial deviation        //12-13
-    INT16 wrist4; // ulnar deviation         //14-15
-    imu_frame imu1; // Wrist                    //16-33
-    imu_frame imu2; // Hand                     //34-51
-    UINT16 sync;                               //52-53
-    UINT16 avail;                              //54-55
-} sensor_frame;
 
 // init
 void init_i2c();
@@ -79,5 +70,10 @@ void add_swing(sensor_frame* swing);
 // Data connection readiness
 void set_readiness(BOOL8 state);
 BOOL8 get_readiness();
+
+UINT16 get_accel1z();
+void set_accel1z(UINT16* value);
+
+state_t get_state();
 
 #endif

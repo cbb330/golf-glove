@@ -30,6 +30,7 @@
 #include "wiced_bt_cfg.h"
 
 #include "buffer/frame_buffer.h"
+#include "buffer/circular_buffer.h"
 #include "gatt/golf_glove_db.h"
 #include "gatt/golf_glove.h"
 
@@ -372,7 +373,8 @@ wiced_bt_gatt_status_t golf_glove_get_value( uint16_t attr_handle, uint16_t conn
                     {
                         sensor_frame next_frame;
                         //frame_buffer_pop_frame(&next_frame);
-                        next_frame = get_sensor_frame();
+                        // next_frame = get_sensor_frame();
+                        circular_buf_get(cbuffer, &next_frame);
                         memcpy(golf_glove_gatt_db_ext_attr_tbl[i].p_data, &next_frame, golf_glove_gatt_db_ext_attr_tbl[i].cur_len);
                         //print_sensor_frame(next_frame);
                     } break;
